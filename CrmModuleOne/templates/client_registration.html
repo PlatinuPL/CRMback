@@ -1,0 +1,589 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz kontaktowy - Fotowoltaika</title>
+<!--     <link rel="stylesheet" href="http://127.0.0.1:8000/static/css/stylesForm.css" /> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16900113429"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-16900113429'); </script>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-WZFTLN3M');</script>
+<!-- End Google Tag Manager -->
+    <style>
+      * {
+        font-family: "Inter", sans-serif; /* Czcionka Google + zapasowa */
+      }
+    .formLogoImg {
+        width: 6.5rem;
+    }
+            
+    .hidden-input {
+      display: none; /* Ukrywa pole */
+  }
+    .logo {
+        display: flex;
+        justify-content: center; /* Wyśrodkowanie w poziomie */
+        align-items: center; /* Wyśrodkowanie w pionie */
+    }
+    .background {
+        background: url('/static/images/backgroundForm.png') no-repeat center center fixed;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        position: relative; /* Kluczowe dla pseudo-elementu */
+        height: 52rem;
+        background-position: center -14rem;
+    }
+    .form-container {
+        background: transparent !important; /* Usuwa tło formularza */
+        box-shadow: none; /* Usuwa cień */
+        border: none; /* Usuwa obramowanie */
+        max-width: 40rem;
+        margin:  auto;
+        background: transparent;
+        padding: 30px;
+        border-radius: 10px;
+        position: relative;
+        z-index: 2; /* Formularz nad tłem */
+    }
+    body {
+            background: url('https://source.unsplash.com/1600x900/?solar') no-repeat center center;
+            background-size: cover;
+        }
+    .btn-submit {
+            background-color: #00b894;
+            color: white;
+            width: 100%;
+        }
+    
+    
+    /* Dodatkowe poprawki dla placeholderów */
+    input::placeholder {
+        color: rgb(255, 255, 255) !important;
+    }
+    
+    
+    .background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(0 6 15 / 67%);
+        z-index: 1; /* Upewniamy się, że pseudo-element jest pod formularzem */
+    }
+    
+    
+    
+    /* Inputy pozostają jasne */
+    input, select {
+        background: transparent; /* Usuwa tło formularza */
+        border: 1px solid rgb(255, 255, 255);
+        padding: 10px;
+        border: none; ; /* Usunięcie standardowej ramki */
+        border-bottom: 2px solid rgba(255, 255, 255, 0.8); ; /* Biała linia dolna */
+        border-radius: 0 ;
+        color: #333;
+        width: 85%;
+    
+    }
+    
+    .text-center {
+        color:white;
+        width: 40rem;
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 52px;
+        font-weight: 600;
+        line-height: 60px;
+        margin-top: 4rem;
+    }
+    
+    .subtext-center {
+        color: #fff;
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 16px;
+    }
+    
+    label {
+        display: none !important;
+    }
+    
+    form {
+        text-align: center;
+    }
+    
+    .btn-submit {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        background: #0056b3;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        width: 85%;
+    }
+    
+    .checkbox-container {
+        display: flex;
+        align-items: flex-start;
+        font-size: 10.5px;
+        color: white;
+        margin-top: 10px;
+        max-width: 600px; /* Dostosowanie szerokości */
+        line-height: 1.5;
+    }
+    
+    .custom-checkbox {
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        appearance: none;
+        border: 2px solid white;
+        border-radius: 3px;
+        background-color: transparent;
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .custom-checkbox:checked {
+        background-color: white;
+        border: 2px solid white;
+    }
+    
+    .custom-checkbox:checked::after {
+        content: "✔";
+        color: #0044cc;
+        font-size: 12px;
+        font-weight: bold;
+        position: absolute;
+        left: 3px;
+        top: -1px;
+    }
+    
+    .checkbox-container a {
+        color: #0099ff;
+        text-decoration: none;
+    }
+    
+    .checkbox-container a:hover {
+        text-decoration: underline;
+    }
+    
+    .formCheckbox {
+        display: block !important;
+    }
+    
+    .containerBlack {
+      text-align: center;
+      background: #f6f7ff;
+  
+  }
+  .containerBlackFoot {
+      text-align: center;
+      background: #ffffff;
+      padding: 2rem 0;
+  }
+  .containerWhite{
+      margin: 8rem 0 4rem 0;
+      text-align: center;
+      background: #ffffff;
+      padding: 4rem 0;
+  }
+    .text-center-black {
+        font-size: 42px;
+        font-weight: 600;
+        line-height: 60px;
+        margin-top: 4rem;
+    }
+    
+    .text-center-white {
+        font-size: 34px;
+        font-weight: 600;
+        line-height: 55px;
+        margin-top: 4rem;
+        width: 45%;
+        /* text-align: center; */
+        margin: auto;
+        padding: 2rem 0;
+    }
+    .text-center-white2 {
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 60px;
+        margin-top: 4rem;
+        width: 50%;
+        /* text-align: center; */
+        margin: auto;
+        padding: 2rem 0;
+    }
+    
+    .footer-text {
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 20px;
+        width: 30%;
+        margin: auto;
+    }
+    .icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5rem;
+        margin: 5rem;
+    }
+    .seq {
+        display: flex;
+        flex-direction: column; /* Ustawienie elementów w pionie */
+        align-items: center; /* Wyśrodkowanie */
+        justify-content: center; /* Centrowanie */
+        text-align: center; /* Wyrównanie tekstu */
+        gap: 5px; /* Odstęp między ikoną a tekstem */
+    }
+    
+    .first-icon, .arrow {
+        font-size: 5rem;
+        color: #0056b3;
+    }
+    .blueCol {
+        color: #0056b3;
+    }
+    .seq-paragraph {
+            width: 22rem;
+            font-size: 0.9rem;
+    
+                text-align: justify; /* Justowanie tekstu */
+                text-justify: inter-word; /* Lepsze rozłożenie słów */
+                max-width: 80%; /* Opcjonalnie, aby tekst nie był za szeroki */
+                margin: 0 auto; /* Wycentrowanie */
+                line-height: 1.6; /* Poprawienie czytelności */
+            }
+    
+            .modal-content {
+                background-color: #f9f9f9;
+                color: #333;
+                border-radius: 8px;
+                padding: 15px;
+            }
+            
+            .modal-header {
+                background-color: #0056b3;
+                color: #fff;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+            }
+            
+            .modal-section {
+                color: #0056b3;
+                font-weight: bold;
+                margin-top: 20px;
+            }
+            
+            .modal-body ul {
+                padding-left: 20px;
+            }
+            
+            .modal-body ul li {
+                margin-bottom: 8px;
+            }
+            
+            .modal-link {
+                color: #0056b3;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            
+            .modal-link:hover {
+                text-decoration: underline;
+            }
+            
+            .modal-footer-text {
+                font-size: 14px;
+                text-align: center;
+                margin-top: 20px;
+            }
+            @media (max-width: 770px) {
+              .text-center {
+                width: auto;
+                font-size: 28px;
+
+            }
+
+            .text-center-white {
+              font-size: 25px;
+              width: auto;
+              margin-right: 1rem;
+              margin-left: 1rem;
+            }
+
+            .text-center-white2 {
+              font-size: 26px;
+              width: auto;
+              margin-right: 1rem;
+              margin-left: 1rem;
+            }
+            .text-center-black {
+              font-size: 25px;
+              margin-right: 1rem;
+              margin-left: 1rem;
+          }
+          .icon-container {
+            flex-direction: column;
+        }
+        .footer-text {
+          width: auto;
+          margin: 0 2rem;
+      }
+      .arrow {
+        transform: rotate(90deg);
+        transform-origin: center; /* Punkt obrotu */
+    }
+    }
+      @media (max-width: 470px) {
+        .text-center {
+          margin-top:0;
+            width: auto;
+              margin-bottom: 1rem;
+              font-size: 19px;
+              line-height: 35px;
+          }
+        
+          .subtext-center {
+
+              font-size: 13px;
+          }
+        .background {
+          height: 45rem;
+      }
+            }
+          </style>    
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZFTLN3M" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <!-- Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="privacyModalLabel">Klauzula informacyjna</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <h3 class="modal-section">Administrator Danych Osobowych</h3>
+              <p>
+                  Administratorem Pani/Pana danych osobowych jest 
+                  <strong>HSZ GROUP Sp. z o.o.</strong>, z siedzibą w <strong>Poznaniu, ul. Sieradzka 4C, 60-163 Poznań</strong>, 
+                  wpisaną do Rejestru Przedsiębiorców KRS pod numerem: <strong>0000997954</strong>, 
+                  REGON: <strong>523434080</strong>, NIP: <strong>9681006094</strong>.
+              </p>
+
+              <h3 class="modal-section">Kontakt z administratorem</h3>
+              <ul>
+                  <li><strong>Email:</strong> <a href="mailto:biuro@hszgroup.pl" class="modal-link">biuro@hszgroup.pl</a></li>
+                  <li><strong>Adres:</strong> ul. Sieradzka 4C, 60-163 Poznań</li>
+                  <li><strong>Formularz kontaktowy:</strong> <a href="https://www.hszgroup.pl/kontakt" target="_blank" class="modal-link">www.hszgroup.pl/kontakt</a></li>
+              </ul>
+
+              <h3 class="modal-section">Inspektor Ochrony Danych</h3>
+              <ul>
+                  <li><strong>Email:</strong> <a href="mailto:iod@hszgroup.pl" class="modal-link">iod@hszgroup.pl</a></li>
+                  <li><strong>Adres:</strong> ul. Sieradzka 4C, 60-163 Poznań (z dopiskiem „IOD”)</li>
+              </ul>
+
+              <h3 class="modal-section">Podstawa prawna przetwarzania danych</h3>
+              <p>
+                  Pani/Pana dane osobowe przetwarzane są na podstawie:
+              </p>
+              <ul>
+                  <li><strong>art. 6 ust. 1 lit. b) RODO</strong> – wykonanie umowy lub podjęcie działań przed jej zawarciem,</li>
+                  <li><strong>art. 6 ust. 1 lit. a) RODO</strong> – zgoda użytkownika (jeśli została udzielona),</li>
+                  <li><strong>art. 6 ust. 1 lit. f) RODO</strong> – prawnie uzasadnione interesy Spółki, np. marketing, dochodzenie roszczeń.</li>
+              </ul>
+
+              <h3 class="modal-section">Cele przetwarzania danych</h3>
+              <ul>
+                  <li>Realizacja umowy lub kontakt przed jej zawarciem,</li>
+                  <li>Marketing bezpośredni, w tym profilowanie (jeśli wyrażona została zgoda),</li>
+                  <li>Przedstawianie ofert Spółki i podmiotów powiązanych (jeśli wyrażona została zgoda).</li>
+              </ul>
+
+              <h3 class="modal-section">Okres przechowywania danych</h3>
+              <ul>
+                  <li>Do czasu wycofania zgody,</li>
+                  <li>Do czasu wniesienia sprzeciwu wobec przetwarzania w celach marketingowych,</li>
+                  <li>Do czasu przedawnienia roszczeń wynikających z umowy,</li>
+                  <li>Do momentu wygaśnięcia obowiązku przechowywania danych wynikającego z przepisów prawa.</li>
+              </ul>
+
+              <h3 class="modal-section">Przysługujące prawa</h3>
+              <ul>
+                  <li>Prawo dostępu do danych i ich sprostowania,</li>
+                  <li>Prawo żądania usunięcia danych lub ograniczenia ich przetwarzania,</li>
+                  <li>Prawo przenoszenia danych osobowych,</li>
+                  <li>Prawo wniesienia sprzeciwu wobec przetwarzania,</li>
+                  <li>Prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych.</li>
+              </ul>
+
+              <h3 class="modal-section">Dodatkowe informacje</h3>
+              <p>
+                  Podanie danych jest dobrowolne, ale konieczne do zawarcia umowy. 
+                  Spółka nie przekazuje danych poza Europejski Obszar Gospodarczy (EOG) 
+                  i nie stosuje profilowania wywołującego skutki prawne.
+              </p>
+
+              <p class="modal-footer-text">
+                  Więcej informacji znajdziesz w naszej <a href="https://www.hszgroup.pl/polityka-prywatnosci" target="_blank" class="modal-link">polityce prywatności</a>.
+              </p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+          </div>
+      </div>
+  </div>
+</div>
+          <!-- Logo -->
+          <div class="logo">
+            <a class="logoAnc" href="https://www.hszgroup.pl" target="_blank" rel="noopener noreferrer">
+              <img
+              class="formLogoImg"
+              src="{% static 'images/HSZ_logo.png' %}"
+              alt="Logo CRM"
+            />
+            </a>
+          </div>
+          
+    <div class="containerForm background">
+        <div class="form-container">
+            <h2 class="text-center">Zainwestuj w fotowoltaikę z bilansowaniem 80:20!</h2>
+            <p class="subtext-center">Wypełnij formularz, a nasi eksperci skontaktują się z Tobą.</p>
+            <form id="prelead-form" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class=" btn-submit">Wyślij</button>
+                <div class="checkbox-container">
+                  <input type="checkbox" id="agreement" class="custom-checkbox" required> 
+                 <!-- Link, który otwiera modal -->
+                <label class="formCheckbox" for="agreement">
+                  Potwierdzam zapoznanie się z 
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">klauzulą informacyjną</a>
+                  oraz wyrażam zgodę na kontakt telefoniczny w celu przedstawienia oferty.
+                </label>
+              </div>
+            </form>
+        </div>
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="successModalLabel">Dziękujemy!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+          </div>
+          <div class="modal-body">
+              Twoje zgłoszenie zostało wysłane! Skontaktujemy się wkrótce.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+          </div>
+      </div>
+  </div>
+</div>
+      <div class="containerWhite">
+        <div class="black-container">
+          <h2 class="text-center-white">
+            Skorzystaj z dotacji <span class="blueCol">MÓJ PRĄD 6.0</span> w wysokości 
+            <span class="blueCol">23 000 zł</span> na FOTOWOLTAIKĘ + MAGAZYN ENERGII
+        </h2>
+  </div>
+  <h2 class="text-center-white2">
+    Nie zwlekaj – zostaw swoje dane i skorzystaj z wiedzy ekspertów <span class="blueCol">HSZ Group</span>, aby uzyskać dofinansowanie na swoją instalację!</h2>
+
+</div>
+<div class="containerBlack">
+  <div class="black-container">
+      <h2 class="text-center-black">Bilansowanie energii z OZE:</h2>
+      <div class="icon-container">
+        <div class="seq1 seq">
+          <ion-icon class="first-icon" name="wallet-outline"></ion-icon>
+          <h3 class="seq-title">Jak to działa ?</h3>
+          <p class="seq-paragraph">
+            Nadwyżki prądu z Państwa instalacji fotowoltaicznej, czyli niezużyta na bieżąco energia, trafiają do sieci. Dzięki danym z licznika dwukierunkowego, zliczamy jej ilość.
+            
+            Całą energię (100%), która trafiała do sieci energetycznej odkupimy od Państwa po cenach umownych, ustalonych w trakcie zawierania umowy.</p>
+        </div>
+        <p class="arrow"><ion-icon name="chevron-forward-outline"></ion-icon></p>
+          <div class="seq2 seq">
+            <ion-icon class="first-icon" name="trail-sign-outline"></ion-icon>
+            <h3 class="seq-title">Gdzie trafi energia ?</h3>
+            <p class="seq-paragraph">
+              Wyprodukowaną w Państwa instalacji fotowoltaicznej energię sprzedamy do naszych Odbiorców końcowych.
+              Dzięki temu energia będzie w całości zużyta w momencie jej wytworzenia.
+              Odnawialne źródło energii jakim jest słońce to dobro, które pozwala zaoszczędzić miliony ton węgla a przez to czyni nasze otoczenie czystszym. Państwa wkład w ochronę środowiska jest bezcenny.</p>
+          </div>
+          <p class="arrow"><ion-icon name="chevron-forward-outline"></ion-icon></p>
+            <div class="seq3 seq">
+              <ion-icon class="first-icon" name="bar-chart-outline"></ion-icon>
+              <h3 class="seq-title">Bilansowanie</h3>
+              <p class="seq-paragraph">
+                Słońce nie świeci codziennie tak samo. Zdarzają się dni pochmurne i deszczowe. Instalacja fotowoltaiczna nie produkuje też energii w nocy, a bardzo mało produkuje w okresie jesieni i zimy.
+                Dlatego odkupioną od Państwa energię musimy zbilansować, czyli uzupełnić jej brak kiedy jest jej za mało lub odsprzedać na rynku bilansującym, kiedy jest jej za dużo.
+                </p>
+            </div>
+  </div>
+</div>
+<div class="containerBlackFoot">
+<p class="footer-text">HSZ GROUP Spółką z ograniczoną odpowiedzialnością z siedzibą w Poznań 60-163, ul. Sieradzka 4C, wpisaną do Rejestru Przedsiębiorców Krajowego Rejestru Sądowego prowadzonego przez Sąd Rejonowy Poznań Stare Miasto, Wydział Gospodarczy ul, Dożynkowa 9H/3 61-675 Poznań
+
+KRS: 0000997954, REGON: 523434080, NIP: 9681006094
+</p>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("prelead-form").addEventListener("submit", function(event) {
+          event.preventDefault();  // Zapobiega przeładowaniu strony
+  
+          let form = this;
+          let formData = new FormData(form);
+  
+          fetch(form.action, {
+              method: "POST",
+              body: formData,
+              headers: {
+                  "X-Requested-With": "XMLHttpRequest"
+              }
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // Jeśli sukces, otwórz modal
+                  var successModal = new bootstrap.Modal(document.getElementById("successModal"));
+                  successModal.show();
+                  form.reset();  // Wyczyszczenie formularza po wysłaniu
+              } else {
+                  alert("Wystąpił błąd: " + JSON.stringify(data.errors));
+              }
+          })
+          .catch(error => console.error("Błąd:", error));
+      });
+  });
+  </script>
+  
+</body>
+
+</html>

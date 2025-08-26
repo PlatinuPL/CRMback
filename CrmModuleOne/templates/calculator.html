@@ -1,0 +1,1946 @@
+{% extends "base.html" %} {% load custom_filters %} {% block title %}Kalkulator<!-- prettier-ignore -->{% endblock %} 
+{% block content%}
+
+<section class="calculator">
+  <div class="tabs">
+    <button class="button tab-link active" data-tab="tab1">Dane klienta</button>
+    <button class="button tab-link disabled" data-tab="tab2">Produkty</button>
+    <button class="button tab-link disabled" data-tab="tab3">Dofinansowania i płatności</button>
+    <button class="button tab-link disabled" data-tab="tab4">Generowanie oferty</button>
+  </div>
+  <div class="tab-content active" id="tab1">
+    <h3>Dane klienta</h3>
+
+    <button id="toggle-visibility" aria-label="Toggle price visibility">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="eye icon-eye">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="display: none;" class="eye icon-eye-off">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+    </svg>
+
+    </button>
+    
+    <form method="post" id="client-form">
+        {% csrf_token %}
+        {% if not selected_lead %}
+        <div class="form-section">
+          <h3>Wybierz istniejącego leada:</h3>
+          <select id="existing-leads" name="existing-lead">
+            <option value="" selected>Wybierz leada...</option>
+            {% for lead in leads %}
+            <option value="{{ lead.id }}">{{ lead.first_name }} {{ lead.last_name }} ({{ lead.get_potential_display }})</option>
+            {% endfor %}
+          </select>
+          <button type="button" id="load-lead" class="button load-button">Załaduj dane</button>
+        </div>
+        {% endif%}
+      
+        <!-- Formularz -->
+    <!-- Sekcja: Dane osobowe -->
+    <!-- prettier-ignore -->
+    <div class="form-section">
+      <h3>Dane osobowe</h3>
+      <div class="form-row required">{{ form.first_name.label_tag }} {{ form.first_name }}</div>
+      <div class="form-row required">{{ form.last_name.label_tag }} {{ form.last_name }}</div>
+      <div class="form-row required">{{ form.phone.label_tag }} {{ form.phone }}</div>
+      <div class="form-row">{{ form.email.label_tag }} {{ form.email }}</div>
+      <div class="form-row">{{ form.street.label_tag }} {{ form.street }}</div>
+      <div class="form-row">{{ form.house_number.label_tag }} {{ form.house_number }}</div>
+      <div class="form-row">{{ form.city.label_tag }} {{ form.city }}</div>
+      <div class="form-row">{{ form.postal_code.label_tag }} {{ form.postal_code }}</div>
+      <div class="form-row">{{ form.postal.label_tag }} {{ form.postal }}</div>
+      <div class="form-row">{{ form.person_type.label_tag }} {{ form.person_type }}</div>
+    </div>
+    <!-- Sekcja: Adres inwestycji -->
+    <div class="form-section collapsible">
+      <h3 class="toggle-section ">Adres inwestycji (jeżeli jest inny)</h3>
+      <div class="form-content">
+        <div class="form-row">
+          {{ form.has_different_investment_address.label_tag }}
+          {{ form.has_different_investment_address }}
+        </div>
+        <div id="investment-address-fields" style="display: none;">
+          <div class="form-row">
+            {{ form.investment_street.label_tag }} {{ form.investment_street }}
+          </div>
+          <div class="form-row">
+            {{ form.investment_house_number.label_tag }} {{ form.investment_house_number }}
+          </div>
+          <div class="form-row">
+            {{ form.investment_postal_code.label_tag }} {{ form.investment_postal_code }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sekcja: Dane inwestycji -->
+    <!-- prettier-ignore -->
+    <div class="form-section collapsible">
+      <h3 class="toggle-section">Dane dodatkowe</h3>
+      <div class="form-content">
+        <div class="form-row">{{ form.id_card_number.label_tag }} {{ form.id_card_number }}</div>
+        <div class="form-row">{{ form.pesel.label_tag }} {{ form.pesel }}</div>
+        <div class="form-row">{{ form.nip.label_tag }} {{ form.nip }}</div>
+        <div class="form-row">{{ form.income_threshold.label_tag }} {{ form.income_threshold }}</div>
+      </div>
+    </div>
+          
+          <!-- Sekcja: Dane inwestycji -->
+          <!-- prettier-ignore -->
+          <div class="form-section collapsible">
+          <h3 class="toggle-section">Dane inwestycji</h3>
+          <div class="form-content">
+            <div class="form-row">{{ form.current_heating_source.label_tag }} {{ form.current_heating_source }}</div>
+            <div class="form-row">{{ form.construction_permission_year.label_tag }} {{ form.construction_permission_year }}</div>
+            <div class="form-row">{{ form.land_registry_number.label_tag }} {{ form.land_registry_number }}</div>
+            <div class="form-row">{{ form.plot_number.label_tag }} {{ form.plot_number }}</div>
+        
+          </div>
+        </div>
+        
+          <!-- Sekcja: Dane do dotacji -->
+          <!-- prettier-ignore -->
+          <div class="form-section collapsible">
+            <h3 class="toggle-section">Dane do dotacji</h3>
+            <div class="form-content">
+              <div class="form-row">{{ form.household_members.label_tag }} {{ form.household_members }}</div>
+              <div class="form-row">{{ form.farm_conversion_hectares.label_tag }} {{ form.farm_conversion_hectares }}</div>
+              <div class="form-row">{{ form.income_per_person.label_tag }} {{ form.income_per_person }}</div>
+              <div class="form-row">{{ form.marital_status.label_tag }} {{ form.marital_status }}</div>
+              <div class="form-row">{{ form.business_at_investment_address.label_tag }} {{ form.business_at_investment_address }}</div>
+              <div class="form-row">{{ form.is_sole_owner.label_tag }} {{ form.is_sole_owner }}</div>
+              <div class="form-row">{{ form.runs_business.label_tag }} {{ form.runs_business }}</div>
+              <div class="form-row">{{ form.has_joint_property.label_tag }} {{ form.has_joint_property }}</div>
+            </div>
+          </div>
+      
+          <button type="button" class="next-button button" disabled>Dalej</button>
+      </form>
+      
+
+  </div>
+
+ 
+  <div class="tab-content" id="tab2">
+    <h3>Wybór produktów</h3>
+
+    <!-- Lista kategorii -->
+    <div class="categories">
+        {% for category in categories %}
+        <button class="button category-button" data-category-id="{{ category.id }}">{{ category.name }}</button>
+        {% endfor %}
+    </div>
+
+    <!-- Lista produktów w wybranej kategorii -->
+    <div id="products-container">
+    </div>
+
+    <!-- Szczegóły wybranego produktu -->
+    <div id="product-details-container" class="hidden">
+        <h4 id="product-name"></h4>
+        <form id="product-form">
+            <div id="product-attributes">
+                <!-- Atrybuty zostaną załadowane dynamicznie -->
+            </div>
+            <button type="button" id="add-product-button" class="button add-product">Dodaj produkt</button>
+        </form>
+    </div>
+
+    <!-- Wybrane produkty -->
+    <div id="selected-products">
+      <h4>Wybrane produkty:</h4>
+      <ul id="selected-products-list" class="product-list"></ul>
+    </div>
+    <button type="button" class="button next-button2" disabled>Dalej</button>
+</div>
+{% comment %}  {% endcomment %}
+<div class="tab-content" id="tab3">
+    <h3>Dofinansowania i płatności</h3>
+    <div class="subsidy-progress-container">
+      <label for="subsidy-progress-bar">Poziom wykorzystania dotacji:</label>
+      <div class="progress-bar">
+        <div id="subsidy-progress-bar" class="progress" style="width: 0;"></div>
+      </div>
+      <p>
+        Wykorzystano: <span id="subsidy-used-amount">0</span> zł z maksymalnych 
+        <span id="subsidy-max-amount">0</span> zł
+      </p>
+    </div>  
+    <!-- Wybór programu dotacji -->
+    <form id="subsidy-form" method="post">
+      {% csrf_token %}
+      <div class="form-row">
+        <label for="subsidy-program">Wybierz program dotacji:</label>
+        <select id="subsidy-program" name="subsidy-program" required>
+          <option value="">Wybierz program dotacji</option>
+          {% for program in programs %}
+            <option value="{{ program.id }}">{{ program.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+  
+      <!-- Opcje dla wybranego programu -->
+      {% for program in programs %}
+        <div
+          class="program-options"
+          id="program-{{ program.id }}-options"
+          style="display: none;"
+        >
+          <div class="form-row">
+            <label for="option-{{ program.id }}">Opcja dotacyjna:</label>
+            <select id="option-{{ program.id }}" name="subsidy-option">
+              <option value="">Wybierz opcję</option>
+              {% for option in program.options.all %}
+                <option value="{{ option.id }}">{{ option.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      {% endfor %}
+      <div class="price-summary">
+        <p class="net-price"><strong>Cena netto:</strong> <span id="net-price">0,00 zł</span></p>
+        <p class="gross-price"><strong>Cena brutto:</strong> <span id="gross-price">0,00 zł</span></p>
+        <p class="subsidy-amount">
+          <strong>Kwota dopłaty:</strong> <span id="subsidy-amount">0,00 zł</span>
+          <i class="settings-icon" id="adjust-subsidy">
+            ⚙️
+          </i>
+        </p>
+        
+        <!-- Modal -->
+        <div id="subsidy-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h3>Pomniejsz dopłatę</h3>
+            <p>Obecna dopłata: <span id="current-subsidy">0,00 zł</span></p>
+            <p>Obecna marża: <span id="current-margin">0,00 zł</span></p>
+            <label for="reduce-subsidy">Kwota do pomniejszenia:</label>
+            <input type="number" id="reduce-subsidy" min="0" step="0.01">
+            <button id="apply-reduction" class="button">Zastosuj</button>
+          </div>
+        </div>
+        <p>
+          Dotacja: <span id="subsidy-used-amount-2">0</span> zł
+          <button id="settings-button" class="settings-button">
+            ⚙️
+          </button>
+
+        </p>
+        
+        <!-- Modal -->
+        <div id="subsidy-modal2" class="modal2 hidden">
+          <div class="modal-content2">
+            <h3>Ustawienia dotacji</h3>
+            <button class="button" id="stateMaxButton" data-state="off">Wymaksuj dotacje: Wyłączone</button>
+            <p id="modal-heater-subsidy">Pozostało do Źródła ogrzewania: 0 zł</p>
+            <p id="modal-termo-subsidy">Pozostało do Termomodernizacji: 0 zł</p>
+            <button id="close-modal-button" class="button">Zamknij</button>
+          </div>
+        </div>
+
+        <p class="nameSub price-field">Marża całkowita: <span id="value-display" class="value-display">0</span> zł</p>
+      </div>
+
+      <div class="slider-container">
+        
+        <input type="range" class="sliderSub" id="slider" min="0" max="40000" value="0" oninput="updateValue(this.value)" step="1">
+        <input type="number" class="inputSub" id="input-value" min="0" max="40000" value="0" oninput="updateSlider(this.value)">
+        
+
+    </div> 
+
+      <!-- Przyciski akcji -->
+      <button id="update-button" class="button updateButton disabled">Aktualizuj</button>
+      <div class="form-row prefbox">
+        <label class="prefCheckboxText" for="prefinancing-checkbox">Prefinansowanie:</label>
+        <input class="prefCheckbox" type="checkbox" id="prefinancing-checkbox" name="prefinancing" disabled>
+        <label class="custom-checkbox" for="prefinancing-checkbox"></label>
+      </div>
+      
+    </form>
+            <!-- Metoda Płatności -->
+    <div class="payment-container">
+      <label for="payment-method">Forma płatności:</label>
+      <select id="payment-method">
+          <option value="przelew">Przelew</option>
+          <option value="raty">Raty</option>
+          <option value="wplata-raty">Wpłata + Raty</option>
+      </select>
+      <span class="settings-icon" onclick="openModal()">⚙️</span>
+  </div>
+  
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+  
+  <div class="modal" id="payment-modal">
+      <div class="modal-header">
+          <h2>Dodatkowe informacje</h2>
+          <span class="close-modal" onclick="closeModal()">&times;</span>
+      </div>
+      <textarea id="additional-info" placeholder="Wpisz dodatkowe informacje dotyczące płatności..."></textarea>
+      <button class="button" onclick="saveInfo()">Zapisz</button>
+  </div>
+    <div id="productBox"></div>
+
+    <button type="button" class="button next-button3">Dalej</button>
+</div>
+
+  <div class="tab-content" id="tab4">
+    <h3>Generowanie oferty</h3>
+    <div class="form-group">
+      <!-- Checkbox i tekst w jednym połączonym labelu -->
+      <label class="addInfo" for="additional-checkbox" style="display: flex; align-items: center;">
+          <input type="checkbox" id="additional-checkbox" style="display: none;">
+          Dodatkowe ustalenia<span class="custom-checkbox"></span>
+      </label>
+  </div>
+  <div class="form-group">
+      <textarea id="additional-text" rows="4" style="width: 100%;" placeholder="Wpisz dodatkowe ustalenia..."></textarea>
+  </div>
+    <p>Wygeneruj ofertę na podstawie wprowadzonych danych.</p>
+    <button type="submit" class="generate-button button">Generuj ofertę</button>
+    <div id="required-fields-form"></div>
+    <!-- Modal -->
+    <div id="offer-modal" class="modalOffer" style="display: none;">
+      <div class="modal-contentOffer">
+        <h2>Oferta wygenerowana!</h2>
+        <div class="pdf-icon">
+          <svg class="svgOffer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+          </svg>
+          
+        </div>
+        <a id="download-pdf" class="download-link" href="#">Pobierz ofertę</a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+<script>
+  let subsidyData = null;
+  let leadData = null;
+  const genericTab = document.querySelector("button[data-tab='tab4']"); // Zakładka Dofinansowania i płatności
+  const nextButton3 = document.querySelector(".next-button3");
+  const settingsButton = document.getElementById("settings-button");
+  const modal = document.getElementById("subsidy-modal2");
+  const closeModalButton = document.getElementById("close-modal-button");
+  const prefinancingCheckbox = document.getElementById("prefinancing-checkbox");
+  const slider = document.getElementById('slider');
+  const inputValue = document.getElementById('input-value');
+  const valueDisplay = document.getElementById('value-display');
+  const updateButton = document.getElementById("update-button");
+  const generateButton = document.querySelector(".generate-button");
+  // Pobierz wszystkie elementy select, których ID zaczyna się od "option-"
+const subsidyOptionSelects = document.querySelectorAll("select[id^='option-']");
+  // Pobranie przycisku
+const stateButton = document.getElementById("stateMaxButton");
+const paymentContainer = document.querySelector('.payment-container');
+const subsidyAmountElement = document.querySelector('#subsidy-amount');
+
+
+        // Pobierz elementy
+        const additionalCheckbox = document.getElementById('additional-checkbox');
+        const additionalText = document.getElementById('additional-text');
+
+        // Funkcja obsługująca zmianę stanu checkboxa
+        additionalCheckbox.addEventListener('change', () => {
+            if (additionalCheckbox.checked) {
+                additionalText.style.display = 'block'; // Pokaż pole tekstowe
+            } else {
+                additionalText.style.display = 'none'; // Ukryj pole tekstowe
+            }     });
+
+// Funkcja do sprawdzenia wartości i ukrycia elementu
+function checkAndHideContainer() {
+    const subsidyAmount = parseFloat(subsidyAmountElement.textContent) || 0;
+    if (subsidyAmount === 0.00) {
+        paymentContainer.style.display = 'none';
+        paymentContainer.classList.add("noPay");
+    } else {
+        paymentContainer.style.display = ''; // Przywraca widoczność
+        paymentContainer.classList.remove("noPay");
+    }
+}
+
+// Obserwuj zmiany w subsidyAmountElement
+const observer = new MutationObserver(checkAndHideContainer);
+observer.observe(subsidyAmountElement, { childList: true, characterData: true, subtree: true });
+
+// Sprawdź na start
+checkAndHideContainer();
+function openModal() {
+  document.getElementById('payment-modal').style.display = 'block';
+  document.getElementById('modal-overlay').style.display = 'block';
+}
+
+function closeModal() {
+  document.getElementById('payment-modal').style.display = 'none';
+  document.getElementById('modal-overlay').style.display = 'none';
+}
+
+function saveInfo() {
+  const info = document.getElementById('additional-info').value;
+  if (info.trim()) {
+      alert('Dodatkowe informacje zapisane: ' + info);
+  } else {
+      alert('Nie wpisano dodatkowych informacji.');
+  }
+  closeModal();
+}
+
+// Obiekt do przechowywania cen początkowych dla każdego produktu
+let initialPrices = {};
+
+// Obsługa kliknięcia przycisku
+stateButton.addEventListener("click", () => {
+  event.preventDefault();
+  // Przełącz stan przycisku
+  const currentState = stateButton.getAttribute("data-state");
+  const newState = currentState === "off" ? "on" : "off";
+  stateButton.setAttribute("data-state", newState);
+
+  // Zmień widok przycisku (opcjonalne)
+  stateButton.textContent = newState === "on" ? "Wymaksuj dotację: Włączone" : "Wymaksuj dotację: Wyłączone";
+  console.log(`Stan przycisku zmieniony na: ${newState}`);
+  enableUpdateButton()
+});
+
+function updateValue(value) {
+    inputValue.value = value;
+    marginUpdateEachProduct(value);
+    enableUpdateButton()
+}
+
+function updateSlider(value) {
+    if (value > 40000) {
+        value = 40000;
+    }
+    slider.value = value;
+    valueDisplay.textContent = value;
+    marginUpdateEachProduct(value);
+    enableUpdateButton()
+}
+
+
+  
+  let selectedProductsGlobal = [];  
+  
+  document.getElementById("subsidy-program").addEventListener("change", function () {
+    const selectedProgramId = this.value;
+    enableUpdateButton()
+    // Ukryj wszystkie opcje dotacji
+    document.querySelectorAll(".program-options").forEach((element) => {
+      element.style.display = "none";
+      document.querySelectorAll("select[id^='option-']").forEach((select) => {
+        select.value = ""; // Ustaw wartość na pustą
+    })
+    // Pobierz element o klasie "payment-container"
+    const paymentContainer = document.querySelector('.payment-container');
+
+    // Dodaj styl top z wartością 25.2rem
+    if (paymentContainer) {
+        paymentContainer.style.top = '20.2rem';
+    }
+    });
+  
+    // Ukryj opcje prefinansowania (prefbox)
+    const prefBox = document.querySelector(".prefbox");
+    if (prefBox) {
+      prefBox.style.display = "none";
+      const parentElement = prefBox.closest('#subsidy-form'); // Znajduje najbliższego rodzica z klasą 'form-row'
+      if (parentElement) {
+        parentElement.style.paddingBottom = "4.5rem"; // Dodaje styl do rodzica
+      }
+    }
+  
+    // Pokaż tylko opcje dotacji, jeśli wybrano program "Czyste Powietrze" lub "Mój Prąd"
+    if (selectedProgramId === "1" || selectedProgramId === "2") {
+      const selectedOptions = document.getElementById(`program-${selectedProgramId}-options`);
+      if (selectedOptions) {
+        selectedOptions.style.display = "block";
+            // Pobierz element o klasie "payment-container"
+        const paymentContainer = document.querySelector('.payment-container');
+
+        // Dodaj styl top z wartością 25.2rem
+        if (paymentContainer) {
+            paymentContainer.style.top = '25.2rem';
+        }
+      }
+  
+      // Pokaż opcje prefinansowania
+      if (prefBox) {
+        prefBox.style.display = "-webkit-inline-box";
+        const parentElement = prefBox.closest('#subsidy-form'); // Znajduje najbliższego rodzica z klasą 'form-row'
+        if (parentElement) {
+          parentElement.style.paddingBottom = "20px"; // Dodaje styl do rodzica
+        }
+      }
+    } else {
+      // Dodatkowe działania, jeśli inny program jest wybrany (opcjonalne)
+      console.log("Opcja dotacji niedostępna dla wybranego programu.");
+    }
+  
+    // Sprawdź, czy obie opcje są wybrane
+    validateForm();
+  });
+  
+
+// Nasłuchiwanie zmian w select dla progu
+document.addEventListener("DOMContentLoaded", () => {
+  const subsidyOptionSelect = document.getElementById("option-1");
+  const subsidyOptionSelect2 = document.getElementById("option-2");
+  const prefinancingCheckbox = document.getElementById("prefinancing-checkbox"); // Sprawdź, czy checkbox istnieje
+
+  if (!subsidyOptionSelect || !subsidyOptionSelect2 || !prefinancingCheckbox) {
+    console.error("Jeden z wymaganych elementów nie został znaleziony w DOM.");
+    return;
+  }
+
+  subsidyOptionSelect.addEventListener("change", () => {
+    handlePrefinancing(subsidyOptionSelect.value, prefinancingCheckbox);
+  });
+
+  subsidyOptionSelect2.addEventListener("change", () => {
+    handlePrefinancing(subsidyOptionSelect2.value, prefinancingCheckbox);
+  });
+});
+
+// Funkcja do obsługi zmian w selectach
+function handlePrefinancing(selectedValue, prefinancingCheckbox) {
+  if (selectedValue === "" || selectedValue === "1" || selectedValue === "4" || selectedValue === "5") {
+    prefinancingCheckbox.checked = false; // Odznacz checkbox
+    prefinancingCheckbox.disabled = true; // Zablokuj checkbox
+    console.log("Prefinansowanie zostało wyłączone, ponieważ wybrano Próg podstawowy.");
+  } else {
+    prefinancingCheckbox.disabled = false; // Odblokuj checkbox
+    console.log("Prefinansowanie dostępne dla wybranego progu.");
+    disableUpdateButton();
+  }
+}
+
+// Funkcja disableUpdateButton (sprawdź, czy istnieje w Twoim kodzie)
+function disableUpdateButton() {
+  console.log("Przycisk aktualizacji został wyłączony lub odpowiednio zaktualizowany.");
+}
+
+document.addEventListener("change", function (event) {
+  if (event.target.matches("select[id^='option-']")) {
+    // Sprawdź, czy obie opcje są wybrane
+    validateForm();
+  }
+});
+
+// Funkcja walidująca formularz
+function validateForm() {
+  const programSelected = document.getElementById("subsidy-program").value !== "";
+  const optionSelected = [...document.querySelectorAll("select[id^='option-']")].some(
+
+    (select) => select.value !== ""
+  );
+
+}
+
+// Funkcja obsługująca zmiany i wysyłanie danych
+function handleChange() {
+  const options = {};
+  document.querySelectorAll("select[id^='option-']").forEach((select) => {
+      options[select.id] = select.value || null; // Jeśli brak wartości, ustaw null
+
+      console.log("options[select.id] ",options[select.id], select)
+  })
+  function getSelectedOption(options) {
+    // Filtruj opcje, aby znaleźć tę, która ma wartość
+    for (const [key, value] of Object.entries(options)) {
+        if (value !== null) {
+            return value ; // Zwróć pierwszą znalezioną opcję z wartością
+        }
+    }
+    return null; // Jeśli żadna opcja nie ma wartości, zwróć null
+}
+  const selectedOptionId = getSelectedOption(options);
+
+
+    // Pobierz wartości z list rozwijanych
+    const selectedProgramId = document.getElementById("subsidy-program").value;
+
+
+    // Przygotowanie danych do wysłania
+    const isChecked = prefinancingCheckbox.checked;
+    const dataToSend = {
+
+        program: selectedProgramId,
+        slider_value: slider.value,
+        input_value: inputValue.value,
+        displayed_value: valueDisplay.textContent,
+        option: selectedOptionId,
+        products: JSON.stringify(selectedProductsGlobal), // Produkty muszą być zamienione na JSON
+        button_state: stateButton.getAttribute("data-state"), // Dodanie stanu przycisku
+        prefinancing: isChecked,
+    };
+
+    if (stateButton.getAttribute("data-state") === "on") {
+      alert("Opcja 'Wymaksuj dotację' jest włączona."); // Wyświetla komunikat użytkownikowi
+      console.log("Opcja 'Wymaksuj dotację' jest włączona."); // Dodatkowe logowanie do konsoli
+    } else {
+      console.log("Opcja 'Wymaksuj dotację' jest wyłączona."); // Logowanie do konsoli
+    }
+    // Serializuj dane jako parametry URL
+    const queryString = new URLSearchParams(dataToSend).toString();
+
+    fetch(`/calculate-subsidy/?${queryString}`) // Użycie parametrów zapytania w URL
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            if (data && data.subsidy_results && data.subsidy_results.subsidy_distribution) {
+              subsidyData = data; // Zapisz dane do zmiennej globalnej
+                // Aktualizuj pasek postępu dotacji
+                const progressBar = document.getElementById("subsidy-progress-bar");
+                const usedAmountElement = document.getElementById("subsidy-used-amount");
+                const usedAmountElement2 = document.getElementById("subsidy-used-amount-2");
+                const maxAmountElement = document.getElementById("subsidy-max-amount");
+                const maxDotation = data.subsidy_results.subsidy_max_amount;
+                const mustPayment = data.subsidy_results.mustPayment
+                console.log(data.subsidy_results)
+                // Wywołaj funkcję aktualizującą
+                updatePricesFromSelectedProducts()
+                updateProductCards(data.subsidy_results);
+                console.log("nowe", selectedProductsGlobal)
+                
+                // Ustaw szerokość paska
+                const usedAmount = data.subsidy_results.total_subsidy;
+                const percentage = (usedAmount / maxDotation) * 100;
+                if (maxDotation === 0) {
+                  console.log("0dot")
+                  progressBar.style.width = `0%`;
+                } else {
+                progressBar.style.width = `${percentage}%`;
+                }
+                // Aktualizuj tekst
+                usedAmountElement2.textContent = usedAmount;
+                usedAmountElement.textContent = usedAmount;
+                maxAmountElement.textContent = maxDotation;
+                  // Pobierz elementy cen netto i brutto
+                const subsidyAmountElement = document.getElementById("subsidy-amount");
+
+                if (!subsidyAmountElement) {
+                  console.error("Nie znaleziono wymaganych elementów.");
+                  return;
+                }
+
+                // Zaktualizuj wartość w elemencie Kwota dopłaty
+                subsidyAmountElement.textContent = `${mustPayment.toFixed(2).replace(".", ",")} zł`;
+            } else {
+                console.error("Błąd podczas pobierania szczegółów dotacji:", data.error);
+            }
+        })
+        .catch((error) => {
+            console.error("Błąd podczas wysyłania żądania:", error);
+        });
+}
+
+function handleChangeOffer() {
+  const modal = document.getElementById("offer-modal");
+  const closeModal = document.getElementById("close-modal");
+  const downloadLink = document.getElementById("download-pdf");
+  const generateButton = document.getElementById("generate-offer-button");
+  // Pobieranie dynamicznych pól input (wymaganych do generowania oferty)
+const requiredInputs = document.querySelectorAll("#required-fields-form input");
+let requiredFieldsData = {};
+
+// Przetwarzanie dynamicznych inputów
+requiredInputs.forEach((input) => {
+  requiredFieldsData[input.name] = input.value; // Klucz: nazwa pola, wartość: wpisana wartość
+});
+    // **Sprawdzenie czy znaleziono wymagane pola**
+    if (!requiredInputs.length) {
+      console.warn("⚠️ Brak wymaganych pól w formularzu!");
+  } else {
+      requiredInputs.forEach((input) => {
+          requiredFieldsData[input.name] = input.value;
+      });
+  }
+
+  console.log("✅ Zebrane wymagane pola:", requiredFieldsData);
+
+  // 🚀 **Sprawdzenie, czy `requiredFieldsData` nie jest pusty przed walidacją**
+  if (!requiredFieldsData || Object.keys(requiredFieldsData).length === 0) {
+      console.error("❌ Brak wymaganych pól! `requiredFieldsData` jest pusty lub null.");
+      alert("Wystąpił problem: brak wymaganych pól do walidacji!");
+
+  }
+
+  // Walidacja pól przed wysłaniem 🚀
+  let { isValid, validatedData } = validateRequiredFields(requiredFieldsData);
+
+  if (!isValid) {
+      alert("Niektóre pola mają niepoprawny format. Popraw je przed kontynuacją.");
+      return; // Przerywamy wysyłanie jeśli są błędy
+  }
+
+  // Przypisujemy poprawione wartości
+  requiredFieldsData = validatedData;
+
+    // Pobieranie danych z formularza
+    const firstName = document.getElementById("id_first_name").value || "Nieznany";
+    const lastName = document.getElementById("id_last_name").value || "Nieznany";
+    
+    // Generowanie daty
+    const currentDate = new Date();
+    const formattedDate = currentDate
+      .toLocaleDateString("pl-PL", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+      .replaceAll(".", "."); // Formatowanie daty
+
+    // Generowanie nazwy pliku
+    const fileName = `Oferta dla ${firstName} ${lastName} z dnia ${formattedDate}.pdf`;
+
+
+  // Zablokuj przycisk na czas generowania
+  if (generateButton) generateButton.disabled = true;
+
+
+
+  const data = {
+    customer: {
+      first_name: document.getElementById("id_first_name").value,
+      last_name: document.getElementById("id_last_name").value,
+      phone: document.getElementById("id_phone").value,
+      email: document.getElementById("id_email").value,
+      street: document.getElementById("id_street").value,
+      house_number: document.getElementById("id_house_number").value,
+      city: document.getElementById("id_city").value,
+      postal_code: document.getElementById("id_postal_code").value,
+      postal: document.getElementById("id_postal").value,
+      person_type: document.getElementById("id_person_type").value,
+      has_different_investment_address: document.getElementById("id_has_different_investment_address").checked,
+      investment_street: document.getElementById("id_investment_street")?.value || "",
+      investment_house_number: document.getElementById("id_investment_house_number")?.value || "",
+      investment_postal_code: document.getElementById("id_investment_postal_code")?.value || "",
+      id_card_number: document.getElementById("id_id_card_number").value,
+      pesel: document.getElementById("id_pesel").value,
+      nip: document.getElementById("id_nip").value,
+      income_threshold: document.getElementById("id_income_threshold").value,
+      current_heating_source: document.getElementById("id_current_heating_source").value,
+      construction_permission_year: document.getElementById("id_construction_permission_year").value,
+      land_registry_number: document.getElementById("id_land_registry_number").value,
+      plot_number: document.getElementById("id_plot_number").value,
+      household_members: document.getElementById("id_household_members").value,
+      farm_conversion_hectares: document.getElementById("id_farm_conversion_hectares").value,
+      income_per_person: document.getElementById("id_income_per_person").value,
+      marital_status: document.getElementById("id_marital_status").value,
+      business_at_investment_address: document.getElementById("id_business_at_investment_address").checked,
+      is_sole_owner: document.getElementById("id_is_sole_owner").checked,
+      runs_business: document.getElementById("id_runs_business").checked,
+      has_joint_property: document.getElementById("id_has_joint_property").checked,
+      paymentMethod: document.getElementById("payment-method").value,
+      paymentInfo: document.getElementById("additional-info").value,
+      addInfo: document.getElementById("additional-text").value,
+      mustPaymentNew_margin: document.getElementById("subsidy-amount").value,
+      total_margin: parseFloat(document.getElementById("value-display").textContent.trim().replace(/\s/g, '').replace(',', '.')),
+      subsidy_results: subsidyData,
+      leadData: leadData,
+      required_fields: requiredFieldsData, // ✅ Dodanie dynamicznych pól do obiektu
+    },
+  };
+  console.log("Zebrane dane", subsidyData, leadData, data);
+  fetch("/generate-offer/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCsrfToken(), // Pobranie tokena CSRF
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.blob(); // Oczekujemy pliku PDF
+      } else {
+        throw new Error("Błąd podczas generowania PDF");
+      }
+    })
+    .then((blob) => {
+      // Wyświetl modal
+      modal.style.display = "flex";
+
+      // Ustaw link do pobrania PDF
+      const url = window.URL.createObjectURL(blob);
+      downloadLink.href = url;
+    // Nadawanie dynamicznej nazwy plikowi
+    downloadLink.download = fileName;
+    })
+    .catch((error) => {
+      console.error("Błąd:", error);
+      alert("Nie udało się wygenerować oferty.");
+    })
+    .finally(() => {
+      // Odblokuj przycisk
+      if (generateButton) generateButton.disabled = false;
+    });
+
+  // Zamknięcie modala
+  if (closeModal) {
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  // Zamknięcie modala po kliknięciu poza jego obszar
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+}
+
+
+// Nasłuchiwanie na liście opcji dotacyjnych
+document.querySelectorAll("select[id^='option-']").forEach((select) => {
+  select.addEventListener("change", handleChange);
+});
+
+
+// Nasłuchiwanie kliknięcia przycisku
+updateButton.addEventListener("click", (e) => {
+  e.preventDefault(); // Zapobiega domyślnemu działaniu przycisku
+  valueDisplay.textContent = slider.value == 40000 ? 'max' : slider.value;
+  inputValue.value = slider.value;
+  handleChange();
+  disableUpdateButton()
+});
+
+
+// Funkcja aktualizująca karty produktów
+function updateProductCards(data) {
+  let marginTotal = 0;
+  let TotalNetto = 0;
+  let TotalBrutto = 0;
+    data.subsidy_distribution.forEach((product, index) => {
+        const productCard = document.getElementById(`product-${index}`);
+
+        if (productCard) {
+            // Zaktualizuj nazwę produktu
+            const nameElement = productCard.querySelector(".product-card-finanse-name");
+            if (nameElement) {
+                nameElement.textContent = product.product_name;
+            }
+
+
+            // Znajdź pole marży i element ceny
+            const marginInput = productCard.querySelector(`#product-${index} .margin-input`);
+            const priceElement = productCard.querySelector(".product-card-finanse-price");
+            if (product.grossPrice) {
+              TotalBrutto = TotalBrutto + product.grossPrice;
+              TotalNetto = TotalNetto + product.product_price
+            console.log("VatRate",product.grossPrice)
+            };
+            // Sprawdź, czy `marginInput` istnieje
+            if (marginInput) {
+                // Oblicz marżę względem ceny początkowej
+                const margin = product.product_price - product.product_initial_price;
+                marginInput.value = margin >= 0 ? margin.toFixed(2) : "0.00"; // Zapisz marżę w odpowiednim polu
+                marginTotal = marginTotal + parseFloat(marginInput.value)
+            }
+            // Zaktualizuj cenę produktu w widoku
+            if (priceElement) {
+                priceElement.value = `${product.product_price.toFixed(2)}`; // Ustaw obecną cenę produktu
+            }
+
+            // Dodaj element dla dotacji
+            let subsidyElement = productCard.querySelector(".product-card-subsidy");
+            if (!subsidyElement) {
+                subsidyElement = document.createElement("p");
+                subsidyElement.classList.add("product-card-subsidy");
+                productCard.appendChild(subsidyElement);
+            }
+            subsidyElement.textContent = `Dotacja: ${product.subsidy.toFixed(2)} zł`;
+            
+        }
+
+          const subsidyForm = document.getElementById(`subsidy-form`);
+          // Dodaj element dla subsidy_termo
+          let subsidyTermoElement = document.getElementById("modal-termo-subsidy");
+          let termoSubsidy = data.termo_subsidy;
+          if (termoSubsidy < 0) {
+            termoSubsidy = 0; // Ustaw wartość na 0, jeśli jest mniejsza od 0
+          }
+
+          subsidyTermoElement.textContent = `Pozostało do Termomodernizacji: ${termoSubsidy.toFixed(2)} zł`;
+
+
+          // Dodaj element dla subsidy_heeter
+          let subsidyHeeterElement = document.getElementById("modal-heater-subsidy");
+
+          subsidyHeeterElement.textContent = `Pozostało do Żródła ogrzewania: ${data.heeter_subsidy.toFixed(2)} zł`;
+  });
+
+  const inputValueElement = document.getElementById("input-value");
+  const inputSliderElement = document.getElementById("slider");
+  const valueDisplayElement = document.getElementById("value-display");
+  if (inputValueElement && inputSliderElement && valueDisplayElement) {
+    inputValueElement.value = marginTotal.toFixed(2);
+    inputSliderElement.value = marginTotal.toFixed(2);
+    valueDisplayElement.textContent = marginTotal.toFixed(2);
+  }
+                      // Pobierz elementy HTML
+                      const netPriceElement = document.querySelector(".net-price #net-price");
+                      const grossPriceElement = document.querySelector(".gross-price #gross-price");
+          
+                      // Zaktualizuj tekst elementów w interfejsie
+                      if (netPriceElement && TotalNetto > 0) {
+                        netPriceElement.textContent = `${TotalNetto.toFixed(2).replace(".", ",")} zł`;
+                      }
+          
+                      if (grossPriceElement && TotalBrutto > 0) {
+                        grossPriceElement.textContent = `${TotalBrutto.toFixed(2).replace(".", ",")} zł`;
+                      }
+}
+
+function marginUpdateEachProduct(margin) {
+  console.log("uruch",selectedProductsGlobal);
+  // Jeśli `initialPrice` jeszcze nie zostało ustawione, ustaw je na aktualną cenę
+  selectedProductsGlobal.forEach((product) => {
+    if (!product.initialPrice) {
+      product.initialPrice = parseFloat(product.price); // Zachowaj pierwotną cenę
+    }
+  });
+
+  // Oblicz marżę dla każdego produktu
+  const marginForEach = margin / selectedProductsGlobal.length;
+
+  // Aktualizuj pole z klasą `margin-input` i cenę dla każdego produktu
+  selectedProductsGlobal.forEach((product, index) => {
+    // Pobierz początkową cenę
+    let currentPrice = product.initialPrice;
+
+    // Oblicz wartość marży
+    let marginValue = marginForEach;
+
+    // Znajdź odpowiednie pole `margin-input`
+    const marginInputElement = document.querySelector(`#product-${index} .margin-input`);
+    const priceElement = document.querySelector(`#product-${index} .product-card-finanse-price`);
+    const inputValueElement = document.getElementById("input-value");
+    const inputSliderElement = document.getElementById("slider");
+    const valueDisplayElement = document.getElementById("value-display");
+
+
+    // Nasłuchiwanie zmiany w polu ceny
+    if (priceElement) {
+      priceElement.addEventListener("blur", () => {
+        let newPrice = parseFloat(priceElement.value) || 0;
+        // Cofnij zmiany, jeśli cena jest poniżej początkowej
+        console.log("nowa cena",newPrice,currentPrice)
+        enableUpdateButton()
+        if (newPrice < currentPrice) {
+          priceElement.value = `${product.price}`;
+          alert("Cena nie może być niższa niż cena początkowa.");
+          return;
+        }
+        // Oblicz nową marżę
+        const newMargin = newPrice - currentPrice;
+
+        // Zaktualizuj marżę w margin-input
+        if (marginInputElement) {
+          marginInputElement.value = newMargin.toFixed(2);
+        }
+        
+        // Aktualizuj obiekt produktu
+        product.price = newPrice.toFixed(2);
+
+        // Aktualizuj input-value i suwak
+        if (inputValueElement && inputSliderElement && valueDisplayElement) {
+          const allMargins = Array.from(document.querySelectorAll(".margin-input")).reduce(
+            (total, input) => total + (parseFloat(input.value) || 0),
+            0
+          );
+
+          inputValueElement.value = allMargins.toFixed(2);
+          inputSliderElement.value = allMargins.toFixed(2);
+          valueDisplayElement.textContent = allMargins >= 40000 ? "max" : allMargins.toFixed(2);
+        }
+      });
+      
+    }
+
+    // Jeśli element istnieje, ustaw jego wartość na kwotę marży
+    if (marginInputElement) {
+      marginInputElement.value = marginValue.toFixed(2); // Zaokrąglij do 2 miejsc po przecinku
+
+      // Nasłuchiwanie zmiany w polu marży
+      marginInputElement.addEventListener("input", () => {
+        let manualMargin = parseFloat(marginInputElement.value) || 0; // Pobierz wartość z pola, lub 0 jeśli puste
+        const updatedPrice = currentPrice + manualMargin;
+        enableUpdateButton()
+        // Aktualizuj cenę w widoku
+        if (priceElement) {
+          priceElement.value = `${updatedPrice.toFixed(2)}`;
+        }
+
+        // Aktualizuj obiekt produktu
+        product.price = updatedPrice.toFixed(2); // Zaokrąglij do 2 miejsc po przecinku
+
+        // Aktualizuj wartość input-value
+        if (inputValueElement) {
+          // Oblicz całkowitą marżę ze wszystkich pól margin-input
+          const allMargins = Array.from(document.querySelectorAll(".margin-input")).reduce(
+            (total, input) => total + (parseFloat(input.value) || 0),
+            0
+          );
+          inputValueElement.value = allMargins.toFixed(2); // Zaktualizuj input-value
+          // Aktualizuj suwak
+          if (inputSliderElement) {
+            inputSliderElement.value = allMargins.toFixed(2);
+          }
+          // Aktualizuj element wyświetlania wartości
+          if (valueDisplayElement) {
+            valueDisplayElement.textContent = allMargins.toFixed(2) === 40000 ? "max" : allMargins.toFixed(2);
+          }
+        }
+      });
+
+    }
+
+    // Zaktualizuj cenę w `product-card-finanse-price`
+    if (priceElement) {
+      const updatedPrice = currentPrice + marginValue;
+      priceElement.value = `${updatedPrice.toFixed(2)}`;
+    }
+
+    // Zapisz zaktualizowaną cenę w obiekcie `selectedProductsGlobal`
+    product.price = (currentPrice + marginValue).toFixed(2); // Zaokrąglij do 2 miejsc po przecinku
+  });
+
+}
+function updatePricesFromSelectedProducts() {
+  // Oblicz łączną cenę netto i brutto
+  let totalNetPrice = 0;
+  let totalGrossPrice = 0;
+
+  selectedProductsGlobal.forEach((product) => {
+    const netPrice = parseFloat(product.price) || 0;
+    const vatRate = parseFloat(product.vatRate) || 0; // Domyślnie zakładamy, że VAT jest w procentach
+    const grossPrice = netPrice * (1 + vatRate / 100);
+
+    // Aktualizuj sumy
+    totalNetPrice += netPrice;
+    totalGrossPrice += grossPrice;
+
+    // Zaktualizuj cenę brutto w obiekcie produktu
+    product.grossPrice = grossPrice.toFixed(2);
+  });
+
+  // Pobierz elementy HTML
+  const netPriceElement = document.querySelector(".net-price #net-price");
+  const grossPriceElement = document.querySelector(".gross-price #gross-price");
+
+  // Zaktualizuj tekst elementów w interfejsie
+  if (netPriceElement) {
+    netPriceElement.textContent = `${totalNetPrice.toFixed(2).replace(".", ",")} zł`;
+  }
+
+  if (grossPriceElement) {
+    grossPriceElement.textContent = `${totalGrossPrice.toFixed(2).replace(".", ",")} zł`;
+  }
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const subsidyForm = document.getElementById("subsidy-form");
+  const subsidyAmountElement = document.getElementById("subsidy-amount");
+  const marginElement = document.getElementById("value-display");
+  const adjustSubsidyButton = document.getElementById("adjust-subsidy");
+  const modal = document.getElementById("subsidy-modal");
+  const closeModal = document.getElementById("close-modal");
+  const currentSubsidy = document.getElementById("current-subsidy");
+  const currentMargin = document.getElementById("current-margin");
+  const reduceSubsidyInput = document.getElementById("reduce-subsidy");
+  const applyReductionButton = document.getElementById("apply-reduction");
+
+  // Otwórz modal
+  adjustSubsidyButton.addEventListener("click", () => {
+    const currentSubsidyValue = parseFloat(
+      subsidyAmountElement.textContent.replace(",", ".").replace(" zł", "")
+    );
+    const currentMarginValue = parseFloat(
+      marginElement.textContent.replace(",", ".").replace(" zł", "")
+    );
+
+    currentSubsidy.textContent = `${currentSubsidyValue.toFixed(2).replace(".", ",")} zł`;
+    currentMargin.textContent = `${currentMarginValue.toFixed(2).replace(".", ",")} zł`;
+    reduceSubsidyInput.value = "";
+    reduceSubsidyInput.max = currentMarginValue.toFixed(2); // Ustaw maksymalną wartość
+    modal.style.display = "block";
+  });
+
+  // Zamknij modal
+  closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Zastosuj redukcję dopłaty
+  applyReductionButton.addEventListener("click", () => {
+    event.preventDefault()
+    const reductionAmount = parseFloat(reduceSubsidyInput.value);
+    if (isNaN(reductionAmount) || reductionAmount < 0) {
+      alert("Podaj poprawną wartość.");
+      return;
+    }
+
+    const currentSubsidyValue = parseFloat(
+      subsidyAmountElement.textContent.replace(",", ".").replace(" zł", "")
+    );
+    const currentMarginValue = parseFloat(
+      marginElement.textContent.replace(",", ".").replace(" zł", "")
+    );
+
+    if (reductionAmount > currentMarginValue) {
+      alert("Kwota redukcji nie może być większa niż marża.");
+      return;
+    }
+
+    const newSubsidy = Math.max(currentSubsidyValue - reductionAmount, 0);
+    const newMargin = currentMarginValue - reductionAmount;
+
+    // Aktualizuj wartości w interfejsie
+    subsidyAmountElement.textContent = `${newSubsidy.toFixed(2).replace(".", ",")} zł`;
+    marginElement.textContent = `${newMargin.toFixed(2).replace(".", ",")}`;
+
+    // Zamknij modal
+    modal.style.display = "none";
+  });
+});
+
+
+
+
+
+// Funkcja do obsługi zmiany w checkboxie prefinansowania
+function handlePrefinancingCheckboxChange() {
+    subsidyOptionSelects.forEach((subsidyOptionSelect) => {
+        const selectedValue = subsidyOptionSelect.value;
+        
+        // Sprawdź warunki
+        if ((selectedValue === "1" || selectedValue === "4" || selectedValue === "5") && prefinancingCheckbox.checked) {
+            alert("Ta opcja dotacji nie ma prefinansowania");
+            prefinancingCheckbox.checked = false; // Cofnij zaznaczenie
+            console.log("Prefinansowanie zostało wyłączone, ponieważ wybrano niedozwoloną opcję.");
+        } else {
+            enableUpdateButton();
+        }
+    });
+}
+
+// Nasłuchiwanie zmian w checkboxie prefinansowania
+prefinancingCheckbox.addEventListener("change", handlePrefinancingCheckboxChange);
+
+// Nasłuchiwanie kliknięcia w checkboxie prefinansowania
+prefinancingCheckbox.addEventListener("click", handlePrefinancingCheckboxChange);
+
+
+
+
+// Pobierz element select dla programu dotacyjnego
+const subsidyProgramSelect = document.getElementById("subsidy-program");
+
+// Otwórz modal po kliknięciu przycisku koła zębatego, jeśli wybrano opcję dotacji
+settingsButton.addEventListener("click", (event) => {
+  event.preventDefault(); // Zapobiega przeładowaniu strony
+
+  // Sprawdź, czy wybrano opcję dotacyjną
+  const selectedValue = subsidyProgramSelect.value;
+  if (selectedValue === "1" || selectedValue === "2") {
+    modal.classList.remove("hidden"); // Otwórz modal
+  } else {
+    alert("Proszę wybrać opcję dotacyjną, aby otworzyć ustawienia.");
+  }
+});
+
+  // Zamknij modal po kliknięciu przycisku Zamknij
+  closeModalButton.addEventListener("click", (event) => {
+    event.preventDefault(); // Zapobiega przeładowaniu strony
+    modal.classList.add("hidden");
+  });
+
+  // Wyłącz przycisk
+  function disableUpdateButton() {
+    updateButton.classList.add("disabled");
+    nextButton3.disabled = false;
+    nextButton3.classList.remove("disabled");
+    unlockGenericTab()
+  }
+  
+  // Włącz przycisk
+  function enableUpdateButton() {
+
+    updateButton.classList.remove("disabled");
+    nextButton3.disabled = true;
+    generateButton.disabled = false;
+    nextButton3.classList.add("disabled");
+    lockGenericTab()
+  }
+ // Funkcja odblokowująca zakładkę "Generowanie umowy"
+ function unlockGenericTab() {
+  if (genericTab) {
+    genericTab.disabled = false;
+    generateButton.disabled = false;
+    genericTab.classList.remove("disabled");
+    
+  }
+}
+  // Funkcja blokująca zakładkę "Generowanie umowy"
+  function lockGenericTab() {
+    if (genericTab) {
+      genericTab.disabled = true;
+      genericTab.classList.add("disabled");
+    }
+  }
+
+  nextButton3.addEventListener("click", () => {
+    
+    // Przejdź do zakładki "Produkty"
+    tabs.forEach((tab) => tab.classList.remove("active")); // Usuń klasę aktywnej zakładki
+    genericTab.classList.add("active"); // Ustaw zakładkę "Produkty" jako aktywną
+    generateRequiredFieldsForm()
+    // Ukryj zawartość bieżącej zakładki i pokaż zawartość zakładki "Produkty"
+    document.querySelectorAll(".tab-content").forEach((content) => {
+        content.classList.remove("active");
+    });
+    document.querySelector("#tab4").classList.add("active");
+});
+
+
+// Dodaj nasłuchiwanie na kliknięcie przycisku
+document.addEventListener("DOMContentLoaded", function () {
+  const generateButton = document.querySelector(".generate-button");
+
+  if (generateButton) {
+      generateButton.addEventListener("click", function (event) {
+          event.preventDefault(); // Zapobiega domyślnemu działaniu przycisku (np. przeładowaniu strony)
+
+          handleChangeOffer();   // Wywołuje funkcję
+          
+      });
+  } else {
+      console.error("Nie znaleziono przycisku 'generate-button'.");
+  }});
+
+  function getCsrfToken() {
+    const csrfTokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
+    if (csrfTokenElement) {
+        return csrfTokenElement.value; // Zwraca wartość tokena CSRF
+    } else {
+        console.error("CSRF token nie został znaleziony!");
+        return null;
+    }
+}
+
+
+  // Funkcja generująca listę produktów
+  function generateProductList(products) {
+    
+    const productListContainerId = 'product-list-container';
+    const productFinaseBox = document.getElementById('productBox');
+  
+    // Usuń istniejący kontener, jeśli istnieje
+    let existingContainer = document.getElementById(productListContainerId);
+    if (existingContainer) {
+      existingContainer.remove();
+    }
+  
+    // Tworzenie nowego kontenera na listę produktów
+    let productID = 0
+    const productListContainer = document.createElement("div");
+    productListContainer.id = productListContainerId;
+    productListContainer.classList.add("product-list");
+  
+    products.forEach((product,index) => {
+      if (!product.id) {
+        product.idProd = `product-${index}`; // Przypisanie ID
+    }
+    if (!product.vatRate) {
+      product.vatRate = 8; // Przypisanie ID
+  }
+      // Tworzenie elementu produktu
+      const productCard = document.createElement("div");
+      productCard.classList.add("product-card-finanse");
+      productCard.id = `product-${productID}`; // Ustawienie ID z prefiksem
+      productID++; // Inkrementacja wartości ID
+      // Nazwa produktu
+      const productName = document.createElement("h4");
+      productName.classList.add("product-card-finanse-name");
+      productName.textContent = `${product.name}`;
+      productCard.appendChild(productName);
+  
+      // Cena produktu
+      const priceLabel = document.createElement("label");
+      priceLabel.classList.add("price-label");
+      priceLabel.textContent = "Cena netto:";
+      const productPrice = document.createElement("input");
+      productPrice.classList.add("product-card-finanse-price");
+      productPrice.type = "number";
+      productPrice.value = `${product.price}`;
+      productCard.appendChild(priceLabel);
+      productCard.appendChild(productPrice);
+      // Ustaw cenę początkową tylko raz
+      if (!product.initialPrices) {
+        product.initialPrices = parseFloat(productPrice.value); // Ustaw cenę początkową
+        product.grossPrice = product.initialPrices + (product.initialPrices * product.vatRate / 100); // Przypisanie ID
+        console.log("Cena początkowa ustawiona dla produktu:", product, product.initialPrices);
+    }
+    
+    updatePricesFromSelectedProducts();
+    const marginLabel = document.createElement("label");
+    marginLabel.classList.add("margin-label","price-field");
+    marginLabel.textContent = "Marża:";
+      const marginInput = document.createElement("input");
+      marginInput.type = "number";
+      marginInput.id = `margin-${product.name}`;
+      marginInput.placeholder = "Wpisz marżę";
+      marginInput.classList.add("margin-input", "price-field");
+      productCard.appendChild(marginLabel);
+      productCard.appendChild(marginInput);
+  
+      // VAT Checkboxy
+  const vatContainer = document.createElement("div");
+  vatContainer.classList.add("vat-container");
+
+  const vat8Label = document.createElement("label");
+  vat8Label.textContent = "VAT 8%";
+  const vat8Checkbox = document.createElement("input");
+  vat8Checkbox.type = "radio";
+  vat8Checkbox.classList.add("vatCheckbox");
+  vat8Checkbox.name = `vat-${product.idProd}`;
+  vat8Checkbox.checked = product.vatRate === 8;
+  vat8Checkbox.addEventListener("change", () => {
+    if (vat8Checkbox.checked) {
+      product.vatRate = 8;
+    }
+    enableUpdateButton();
+  });
+
+  const vat23Label = document.createElement("label");
+  vat23Label.textContent = "VAT 23%";
+  const vat23Checkbox = document.createElement("input");
+  vat23Checkbox.type = "radio";
+  vat23Checkbox.classList.add("vatCheckbox");
+  vat23Checkbox.name = `vat-${product.idProd}`;
+  vat23Checkbox.checked = product.vatRate === 23;
+  vat23Checkbox.addEventListener("change", () => {
+    if (vat23Checkbox.checked) {
+      product.vatRate = 23;
+    }
+    enableUpdateButton();
+  });
+
+  vatContainer.appendChild(vat8Label);
+  vatContainer.appendChild(vat8Checkbox);
+  vatContainer.appendChild(vat23Label);
+  vatContainer.appendChild(vat23Checkbox);
+  productCard.appendChild(vatContainer);
+
+
+      // Dodanie produktu do kontenera
+      productListContainer.appendChild(productCard);
+    });
+
+    // Dodanie listy produktów do strony
+    productFinaseBox.appendChild(productListContainer);
+  }
+
+  
+document.addEventListener("DOMContentLoaded", () => {
+  const requiredFields = ["id_first_name", "id_last_name", "id_phone"]; // Wymagane pola
+  const nextButton = document.querySelector(".next-button"); // Przycisk "Dalej"
+  const tabs = document.querySelectorAll(".tab-link"); // Wszystkie zakładki
+  const productsTab = document.querySelector("button[data-tab='tab2']"); // Zakładka "Produkty"
+  const clientSelect = document.getElementById("existing-leads"); // Pole wyboru klienta
+  const loadButton = document.getElementById("load-lead"); // Przycisk "Załaduj dane"
+
+    // Sprawdź, czy elementy istnieją w DOM
+    if (!loadButton) {
+
+      return; // Zakończ dalsze działanie skryptu
+    }
+  // Funkcja walidująca wypełnienie wymaganych pól
+  function validateFields() {
+      let allValid = true;
+
+      requiredFields.forEach((fieldId) => {
+          const field = document.getElementById(fieldId);
+          if (!field || field.value.trim() === "") {
+              allValid = false;
+          }
+      });
+
+      // Odblokowanie przycisku i zakładki "Produkty" tylko po uzupełnieniu pól
+      if (allValid) {
+          nextButton.disabled = false;
+          productsTab.classList.remove("disabled");
+      } else {
+          nextButton.disabled = true;
+          productsTab.classList.add("disabled");
+      }
+  }
+
+  // Załaduj dane z wybranego leada
+  loadButton.addEventListener("click", () => {
+      const leadId = clientSelect.value;
+      if (leadId) {   loadLeadData(leadId);
+      } else {
+          alert("Wybierz leada z listy.");
+      }
+  });
+
+  // Nasłuchuj zmian w wymaganych polach
+  requiredFields.forEach((fieldId) => {
+      const field = document.getElementById(fieldId);
+      if (field) {
+          field.addEventListener("input", validateFields);
+      }
+      
+  });
+
+    // Obsługa kliknięcia przycisku "Dalej"
+    nextButton.addEventListener("click", () => {
+      // Przejdź do zakładki "Produkty"
+      tabs.forEach((tab) => tab.classList.remove("active")); // Usuń klasę aktywnej zakładki
+      productsTab.classList.add("active"); // Ustaw zakładkę "Produkty" jako aktywną
+
+      // Ukryj zawartość bieżącej zakładki i pokaż zawartość zakładki "Produkty"
+      document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.remove("active");
+      });
+      document.querySelector("#tab2").classList.add("active");
+      
+  });
+  
+  // Początkowa walidacja pól
+  validateFields();
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const categoryButtons = document.querySelectorAll(".category-button");
+  const productsContainer = document.getElementById("products-container");
+  const productDetailsContainer = document.getElementById("product-details-container");
+  const productAttributesContainer = document.getElementById("product-attributes");
+  const productNameElement = document.getElementById("product-name");
+  const selectedProductsList = document.getElementById("selected-products-list");
+  const addProductButton = document.getElementById("add-product-button");
+  const nextButton2 = document.querySelector(".next-button2");
+
+  const financingTab = document.querySelector("button[data-tab='tab3']"); // Zakładka Dofinansowania i płatności
+
+  // Przechowywanie wybranych produktów
+  let selectedProducts = [];
+  let activeProductButton = null; // Przechowuje aktualnie zaznaczony produkt
+
+
+  // Obsługa kliknięcia kategorii
+  categoryButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      categoryButtons.forEach((btn) => btn.classList.remove("active-category"));
+      button.classList.add("active-category");
+
+      const categoryId = button.dataset.categoryId;
+
+            // Resetuj szczegóły produktu i ukryj kontener
+            productDetailsContainer.classList.add("hidden");
+            productNameElement.textContent = "";
+            productAttributesContainer.innerHTML = "";
+            activeProductButton = null; // Usuń aktywny produkt z poprzedniej kategorii
+      fetch(`/kalkulator/produkty/${categoryId}/`)
+        .then((response) => response.json())
+        .then((data) => {
+          productsContainer.innerHTML = "";
+
+          if (data.products.length > 0) {
+            data.products.forEach((product) => {
+              const productButton = document.createElement("button");
+              productButton.classList.add("product-button","button");
+              productButton.textContent = product.name;
+              productButton.dataset.productId = product.id;
+
+              productButton.addEventListener("click", () => {
+                // Usuń klasę 'active-category' z poprzedniego przycisku
+                if (activeProductButton) {
+                  activeProductButton.classList.remove("active-category");
+                }
+                // Dodaj klasę 'active-category' do aktualnie klikniętego przycisku
+                productButton.classList.add("active-category");
+                activeProductButton = productButton;
+                loadProductDetails(product.id);
+              });
+
+              productsContainer.appendChild(productButton);
+            });
+          } else {
+            productsContainer.innerHTML = "<p>Brak produktów w tej kategorii.</p>";
+          }
+        })
+        .catch((error) => console.error("Błąd podczas ładowania produktów:", error));
+    });
+  });
+
+ // Funkcja odblokowująca zakładkę "Dofinansowania i płatności"
+ function unlockFinancingTab() {
+  if (financingTab) {
+    financingTab.disabled = false;
+    financingTab.classList.remove("disabled");
+    
+  }
+}
+  // Funkcja blokująca zakładkę "Dofinansowania i płatności"
+  function lockFinancingTab() {
+    if (financingTab) {
+      financingTab.disabled = true;
+      financingTab.classList.add("disabled");
+    }
+  }
+
+// Funkcja sprawdzająca stan przycisku "Dalej"
+function checkNextButtonState() {
+  if (selectedProducts.length > 0) {
+    nextButton2.disabled = false;
+    nextButton2.classList.remove("disabled");
+  } else {
+    nextButton2.disabled = true;
+    nextButton2.classList.add("disabled");
+    lockFinancingTab(); // Blokada zakładki, jeśli brak produktów
+  }
+}
+
+// Funkcja do ładowania szczegółów produktu
+function loadProductDetails(productId) {
+  fetch(`/kalkulator/produkt/${productId}/`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        productDetailsContainer.classList.remove("hidden");
+        productNameElement.textContent = data.product.name;
+        productAttributesContainer.innerHTML = "";
+
+        data.attributes.forEach((attribute) => {
+          const attributeRow = document.createElement("div");
+          attributeRow.classList.add("attribute-row");
+
+          const label = document.createElement("label");
+          label.textContent = attribute.name;
+          attributeRow.appendChild(label);
+
+          if (attribute.type === "dropdown") {
+            const select = document.createElement("select");
+            attribute.options.forEach((option) => {
+              const optionElement = document.createElement("option");
+              optionElement.value = option;
+              optionElement.textContent = option;
+              select.appendChild(optionElement);
+            });
+            attributeRow.appendChild(select);
+          } else {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.placeholder = attribute.placeholder || "";
+            attributeRow.appendChild(input);
+          }
+
+          productAttributesContainer.appendChild(attributeRow);
+        });
+      } else {
+        console.error("Nie udało się załadować szczegółów produktu.");
+      }
+    })
+    .catch((error) => console.error("Błąd podczas ładowania szczegółów produktu:", error));
+}
+
+// Obsługa dodawania produktu
+if (addProductButton) {
+  addProductButton.addEventListener("click", function () {
+    enableUpdateButton();
+    // Odczytaj productId z aktywnego przycisku produktu
+    if (!activeProductButton) {
+      console.error("Nie wybrano produktu!");
+      return;
+    }
+
+    const productId = activeProductButton.dataset.productId; // Pobiera ID produktu
+    const productName = productNameElement.textContent;
+    const attributes = {};
+
+    const inputs = productAttributesContainer.querySelectorAll("input, select");
+    inputs.forEach((input) => {
+      const key = input.previousElementSibling.textContent;
+      const value = input.value || input.placeholder || "Brak danych";
+      attributes[key] = value;
+    });
+    selectedProducts.push({ name: productName, attributes });
+    selectedProductsGlobal.push({ name: productName, attributes });
+    // Tworzenie elementu listy
+    const productCard = document.createElement("div");
+    productCard.classList.add("product-card");
+
+    const productTitle = document.createElement("h4");
+    productTitle.textContent = productName;
+    productCard.appendChild(productTitle);
+
+    const attributesList = document.createElement("ul");
+    for (const [key, value] of Object.entries(attributes)) {
+      const attributeItem = document.createElement("li");
+      attributeItem.textContent = `${key}: ${value}`;
+      attributesList.appendChild(attributeItem);
+    }
+    productCard.appendChild(attributesList);
+
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Usuń";
+    removeButton.classList.add("remove-button");
+    removeButton.addEventListener("click", () => {
+      selectedProductsList.removeChild(productCard);
+      selectedProducts = selectedProducts.filter((prod) => prod.name !== productName);
+      selectedProductsGlobal = selectedProductsGlobal.filter((prod) => prod.name !== productName);
+      generateProductList(selectedProductsGlobal);
+      checkNextButtonState();
+      enableUpdateButton()
+    });
+    // Sprawdzenie czy cena istnieje
+    fetch(`/product/${productId}/get-price/?attributes=${encodeURIComponent(JSON.stringify(attributes))}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success && data.price) {
+          // Wyświetl cenę, jeśli istnieje
+          const priceText = document.createElement("p");
+          priceText.textContent = `Cena: ${data.price}`;
+          // priceText.textContent = `Cena: ${data.price} ${data.unit}`;
+          priceText.classList.add("price-text", "price-field");
+          productCard.appendChild(priceText);
+          // Dopisz cenę do produktu w selectedProductsGlobal
+        selectedProductsGlobal = selectedProductsGlobal.map((prod) => {
+        if (prod.name === productName) {
+          return { ...prod, price: data.price,required_fields: data.required_fields };
+        }
+        return prod;
+      });
+      
+        } else {
+          // Dodanie linku do ustalania ceny
+          const setPriceLink = document.createElement("a");
+          setPriceLink.href = `/product/${productId}/manage-prices/?attributes=${encodeURIComponent(JSON.stringify(attributes))}`;
+          setPriceLink.textContent = "Ustal cenę";
+          setPriceLink.classList.add("price-link");
+          productCard.appendChild(setPriceLink);
+        }
+        console.log("selectedProductsGlobal",selectedProductsGlobal)
+        generateProductList(selectedProductsGlobal);
+        marginUpdateEachProduct(0);
+      })
+      .catch((error) => {
+        console.error("Błąd podczas sprawdzania ceny:", error);
+      });
+      
+    productCard.appendChild(removeButton);
+    selectedProductsList.appendChild(productCard);
+
+    // Ukryj szczegóły produktu
+    productDetailsContainer.classList.add("hidden");
+    productAttributesContainer.innerHTML = "";
+
+    // Odblokowanie zakładki i przycisku "Dalej"
+    unlockFinancingTab();
+    checkNextButtonState();
+  });
+}
+
+
+// Początkowy stan przycisku "Dalej"
+checkNextButtonState();
+    // Obsługa kliknięcia przycisku "Dalej"
+    nextButton2.addEventListener("click", () => {
+      // Przejdź do zakładki "Produkty"
+      tabs.forEach((tab) => tab.classList.remove("active")); // Usuń klasę aktywnej zakładki
+      financingTab.classList.add("active"); // Ustaw zakładkę "Produkty" jako aktywną
+
+      // Ukryj zawartość bieżącej zakładki i pokaż zawartość zakładki "Produkty"
+      document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.remove("active");
+      });
+      document.querySelector("#tab3").classList.add("active");
+  });
+
+});
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const hasDifferentAddressCheckbox = document.querySelector("#id_has_different_investment_address");
+    const investmentAddressFields = document.querySelector("#investment-address-fields");
+
+    if (hasDifferentAddressCheckbox) {
+      // Pokaż/ukryj pola na podstawie początkowego stanu checkboxa
+      investmentAddressFields.style.display = hasDifferentAddressCheckbox.checked ? "block" : "none";
+
+      hasDifferentAddressCheckbox.addEventListener("change", function () {
+        investmentAddressFields.style.display = this.checked ? "block" : "none";
+      });
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleButton = document.getElementById("toggle-visibility");
+    const eyeIcon = toggleButton.querySelector(".icon-eye");
+    const eyeOffIcon = toggleButton.querySelector(".icon-eye-off");
+  
+    let isVisible = true;
+  
+    toggleButton.addEventListener("click", () => {
+      isVisible = !isVisible;
+  
+      if (isVisible) {
+        eyeIcon.style.display = "inline";
+        eyeOffIcon.style.display = "none";
+      } else {
+        eyeIcon.style.display = "none";
+        eyeOffIcon.style.display = "inline";
+      }
+  
+      // Ukryj/pokaż wszystkie elementy cen
+      const priceFields = document.querySelectorAll(".price-field");
+      priceFields.forEach((field) => {
+        field.style.display = isVisible ? "" : "none";
+      });
+    });
+  
+    // Opcjonalne: MutationObserver do monitorowania nowych elementów
+    const priceContainer = document.body; // Zmień na odpowiedni kontener, jeśli ceny są w specyficznym elemencie
+    const observer = new MutationObserver(() => {
+      const priceFields = document.querySelectorAll(".price-field");
+      priceFields.forEach((field) => {
+        field.style.display = isVisible ? "" : "none";
+      });
+    });
+  
+    observer.observe(priceContainer, { childList: true, subtree: true }); // Obserwuj zmiany w `priceContainer`
+  });
+
+
+  const tabs = document.querySelectorAll(".tab-link");
+  const contents = document.querySelectorAll(".tab-content");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+      contents.forEach((content) => content.classList.remove("active"));
+      document.getElementById(tab.dataset.tab).classList.add("active");
+    });
+  });
+
+    // Funkcja do ładowania danych leada
+    const loadLeadData = (leadId) => {
+      const productsTab = document.querySelector("button[data-tab='tab2']"); // Zakładka "Produkty"
+      console.log("Loading lead with ID:", leadId); // Debug
+      if (leadId) {
+        fetch(`/klienci/dane-leada/${leadId}/`) // Wywołaj endpoint
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              leadData = data.lead;
+              console.log("leadData", leadData)
+              // Iteruj przez dane leadów i uzupełniaj pola formularza
+              for (const field in leadData) {
+                const input = document.getElementById(`id_${field}`);
+                if (input) {
+                  input.value = leadData[field] || ""; // Ustaw wartość lub pusty ciąg
+                  input.disabled = false; // Odblokuj pole do edycji
+                }
+              }
+  
+              // Odblokuj przycisk "Dalej"
+              const nextButton = document.querySelector(".next-button");
+              if (nextButton) {
+                nextButton.disabled = false;
+                productsTab.classList.remove("disabled");
+                    // Obsługa kliknięcia przycisku "Dalej"
+    nextButton.addEventListener("click", () => {
+      // Przejdź do zakładki "Produkty"
+      tabs.forEach((tab) => tab.classList.remove("active")); // Usuń klasę aktywnej zakładki
+      productsTab.classList.add("active"); // Ustaw zakładkę "Produkty" jako aktywną
+
+      // Ukryj zawartość bieżącej zakładki i pokaż zawartość zakładki "Produkty"
+      document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.remove("active");
+      });
+      document.querySelector("#tab2").classList.add("active");
+      
+  });
+              }
+            } else {
+              alert("Nie udało się załadować danych leada.");
+            }
+          })
+          .catch((error) => {
+            console.error("Błąd podczas ładowania danych leada:", error);
+            alert("Wystąpił błąd podczas ładowania danych.");
+          });
+      } else {
+        alert("Proszę wybrać leada.");
+      }
+    };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const loadButton = document.getElementById("load-lead");
+    const leadSelect = document.getElementById("existing-leads");
+    const productsTab = document.querySelector("button[data-tab='tab2']"); // Zakładka "Produkty"
+
+  
+    // Automatyczne ładowanie leada, jeśli leadId jest w adresie URL
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const leadIdFromUrl = urlParams.get("lead_id");
+  
+      if (leadIdFromUrl) {
+        loadLeadData(leadIdFromUrl);
+        console.log("leadData", leadData)
+        productsTab.classList.remove("disabled");
+      }
+    } catch (error) {
+      console.error("Błąd podczas parsowania URL:", error);
+    }
+  
+    // Obsługa kliknięcia przycisku
+    if (loadButton && leadSelect) {
+      loadButton.addEventListener("click", () => {
+        const leadId = leadSelect.value; // Pobierz wybranego leada
+        loadLeadData(leadId);
+      });
+    }
+  });
+
+  function generateRequiredFieldsForm() {
+    const formContainer = document.getElementById("required-fields-form"); // Kontener na pola
+    const generateButton = document.querySelector(".generate-button"); // Przycisk generowania oferty
+    formContainer.innerHTML = ""; // Wyczyść zawartość przed generowaniem
+    let uniqueFields = {}; // Obiekt do przechowywania unikalnych pól
+
+    // Przejście przez wszystkie produkty i zebranie wymaganych pól
+    selectedProductsGlobal.forEach(product => {
+        if (product.required_fields) {
+            Object.values(product.required_fields).forEach(fieldGroup => {
+                Object.entries(fieldGroup).forEach(([key, field]) => {
+                    if (!uniqueFields[key]) {
+                        uniqueFields[key] = field;
+                    }
+                });
+            });
+        }
+    });
+
+    // Tworzenie inputów na podstawie unikalnych pól
+    Object.entries(uniqueFields).forEach(([key, field]) => {
+        const fieldWrapper = document.createElement("div");
+        fieldWrapper.classList.add("form-group");
+
+        const label = document.createElement("label");
+        label.setAttribute("for", key);
+        label.textContent = field.label;
+        
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("id", key);
+        input.setAttribute("name", key);
+        input.setAttribute("placeholder", field.placeholder);
+        input.classList.add("required-input");
+
+        // Dodanie walidacji
+        input.addEventListener("input", validateRequiredFields);
+
+        fieldWrapper.appendChild(label);
+        fieldWrapper.appendChild(input);
+        formContainer.appendChild(fieldWrapper);
+    });
+
+    // Sprawdzenie, czy formularz powinien być blokowany
+    validateRequiredFields();
+}
+
+// **Funkcja walidująca uzupełnienie pól i blokująca przycisk generowania oferty**
+function validateRequiredFields() {
+    const generateButton = document.querySelector(".generate-button");
+    const inputs = document.querySelectorAll(".required-input");
+    
+    let allFieldsFilled = true;
+    inputs.forEach(input => {
+        if (input.value.trim() === "") {
+            allFieldsFilled = false;
+        }
+    });
+
+    // Blokowanie lub odblokowanie przycisku generowania oferty
+    generateButton.disabled = !allFieldsFilled;
+}
+
+// **Inicjalizacja generowania pól przy przejściu do zakładki generowania oferty**
+document.addEventListener("DOMContentLoaded", function () {
+    const offerTabButton = document.querySelector("button[data-tab='tab4']"); // Przycisk zakładki "Generowanie oferty"
+
+    if (offerTabButton) {
+        offerTabButton.addEventListener("click", () => {
+            generateRequiredFieldsForm();
+        });
+    }
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const offerTab = document.querySelector("button[data-tab='tab4']");
+  offerTab.addEventListener("click", generateRequiredFieldsForm);
+});
+
+
+function validateRequiredFields(requiredFieldsData) {
+  if (!requiredFieldsData || typeof requiredFieldsData !== "object") {
+      console.error("❌ Błąd: requiredFieldsData jest null lub undefined!", requiredFieldsData);
+      return { isValid: false, validatedData: {} };  // Zwracamy pusty obiekt i informację, że dane są błędne
+  }
+
+  let validatedData = {};
+  let isValid = true;
+
+  Object.keys(requiredFieldsData).forEach((field) => {
+      let value = requiredFieldsData[field];
+
+      if (!value) {
+          console.warn(`⚠️ Pole "${field}" jest puste.`);
+          isValid = false;
+      }
+
+      switch (field) {
+          case "elec_bill":
+              value = value.replace(/[^0-9]/g, ""); // Usuń wszystkie znaki oprócz cyfr
+              break;
+          case "kWhPrice":
+          case "estimate_electric_raise_year":
+              value = value.replace(",", ".").replace(/[^0-9.]/g, ""); // Zamień przecinek na kropkę
+              value = parseFloat(value).toFixed(2);
+              break;
+          case "postal-code":
+              value = value.replace(/[^0-9-]/g, "");
+              let postalMatch = value.match(/^(\d{2})[- ]?(\d{3})$/);
+              if (postalMatch) {
+                  value = `${postalMatch[1]}-${postalMatch[2]}`;
+              } else {
+                  isValid = false;
+              }
+              break;
+      }
+
+      validatedData[field] = value;
+  });
+
+  return { isValid, validatedData };
+}
+
+
+
+</script>
+{% endblock %}
+

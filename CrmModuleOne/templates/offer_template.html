@@ -1,0 +1,679 @@
+{% load humanize %}{% load mathfilters %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koncepcja Systemu Fotowoltaicznego</title>
+
+
+    <link rel="stylesheet" href="https://crm.hszgroup.pl/static/css/stylesOffer.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+
+    <div class="container page ">
+        <img src="https://crm.hszgroup.pl/static/images//HSZ_logo.png" alt="HSZ Group" class="logo">
+        <div class = "content frontPage">
+            <h1 class="title">KONCEPCJA SYSTEMU <p class="subtitle">{{ subtitle }}<p></h1>
+       <!-- Linia przerywana -->
+       <div class="solid-line-title"></div>
+        <div class="info-section">
+            <p><span class="info-label">PRZYGOTOWANA DLA:</span> <span class="info-value">{{ customer.first_name }} {{ customer.last_name }}</span></p>
+            <p><span class="info-label">LOKALIZACJA PROJEKTU:</span> <span class="info-value">{{ customer.street }} {{ customer.house_number }}, {{ customer.city }}</span></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        
+        <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+        <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+        <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+    </div>
+</div>
+
+<div class="container page">
+    <img src="https://crm.hszgroup.pl/static/images//HSZ_logo.png" alt="HSZ Group" class="logoNext" >
+
+    <header>
+        <h1 class="title">DOPASOWANIE INSTALACJI <span class="highlight">FOTOWOLTAICZNEJ</span></h1>
+    </header>
+    <div style="margin-top: 5rem;"class="solid-line"></div>
+    <h3>TWÓJ OBECNY RACHUNEK ZA ENERGIĘ ELEKTRYCZNĄ</h3>
+    
+<div class="elecFirst">
+    <section class="electric-bill">
+       
+        <div class="bill-value">
+            <span class="big-number">{{electric_bill|floatformat:2}}</span> <span class="unit">pln/rok</span>
+        </div>
+        <p class="monthly">{{ electric_bill_monthly|floatformat:2 }} pln/mc</p>
+        <p class="info">Cena 1kWh energii elektrycznej = {{kWh_price|floatformat:2}}</p>
+    </section>
+
+    <section class="future-prediction">
+        <ul style=" margin-top: 2rem;">
+            <li>Przewidywany wzrost ceny energii w ciągu roku = <strong>{{electric_raise}}%</strong></li>
+            <li>Przewidywana cena 1kWh energii za <strong>20 lat</strong> = <strong>{{rasie20Y}} pln</strong></li>
+            <li>Twoja aktualna emisja CO² = <strong>{{CO_emision}} kg/rok</strong></li>
+        </ul>
+    </section>
+</div>
+
+
+
+ 
+    <div style=" margin-top: 18rem;" class="elecSecond">
+        <div  class="solid-line"></div>
+        <h3 style=" margin-top: 1rem;">REKOMENDOWANA WIELKOŚĆ SYSTEMU FOTOWOLTAICZNEGO</h3>
+    <section class="recommended-size">  
+        
+        
+        <div class="size-info">
+            <span class="big-number">{{ foto_power_recom|floatformat:2}}</span> <span class="unit">kWp</span>
+            <div class="placeMetter">
+            <p>Zajmowana powierzchnia</p>
+            <span class="big-number">{{panel_m2|floatformat:0}}</span> <span class="unit">m²</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="energy-balance">
+        <h3>BILANS ENERGETYCZNY</h3>
+        <div class="energy-bars">
+            <div class="energy-item" style="width:{{ field1 }}%;">
+                <p>Szacowana produkcja roczna <strong>{{estimate_year_production|floatformat:2}} kWh</strong></p>
+                <div class="bar green"></div>
+                
+            </div>
+            <div class="energy-item">
+                <p>Całkowite roczne zapotrzebowanie <strong>{{estimate_year_consume|floatformat:2}} kWh</strong></p>
+                <div class="bar gray" style="width:{{ field2 }}%;"></div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <div style=" margin-top: 18rem;" class="elecSecond">
+        <div  class="solid-line"></div>
+        <h3 style=" margin-top: 1rem;">PARAMETRY SYSTEMU FOTOWOLTAICZNEGO</h3>
+    <section class="size-parameter">  
+        
+        
+        <div class="size-info">
+            
+            <div class="panelMetter ">
+            <p class="supportMetter">Ilość paneli</p>
+            <span class="big-number">{{panel_value}}</span> <span class="unit">szt.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="power-system">
+        <div class="size-info">
+            
+            <div class="panelMetter">
+            <p>Moc systemu</p>
+            <span class="big-number">{{ foto_power|floatformat:1 }}</span> <span class="unit">kWp</span>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+    <div class="footer">
+        
+        <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+        <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+        <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+    </div>
+</div>
+<div class="container page">
+    <img src="https://crm.hszgroup.pl/static/images/HSZ_logo.png" alt="HSZ Group" class="logoNext">
+    <h1 class="title">KORZYŚCI Z <span class="highlight">MAGAZYNU ENERGII</span></h1>
+
+    <div class="chart-containerTwo">
+        <div class="solid-line"></div>
+        <h3>ZWIĘKSZENIE AUTOKONSUMPCJI</h3>
+        <div class="bar-chartOne">
+            <div class="bar-containerOne">
+                <div class="bar old-autoconsumption" style="height: 30%;">30%<p class="old-mag">Bez Magazynu</p></div>
+ 
+            </div>
+            <div class="bar-containerTwo">
+                <div class="bar new-autoconsumption" style="height: 77%;" >77%<p class="old-mag">Z Magazynem</p></div>
+            </div>
+            
+        </div>
+        <p class="caption">Dzięki magazynowi energii zwiększysz wykorzystanie własnej energii.</p>
+    </div>
+
+    <div class="chart-containerTwo">
+        <div class="solid-line"></div>
+        <h3>MNIEJSZA UTRATA NADWYŻEK DO SIECI</h3>
+        <div class="pie-chart">
+            <div class="pie-slice old-loss"><p>Strata 70%</p></div>
+            <div class="pie-slice new-loss"><p>Strata 23%</p></div>
+        </div>
+        <p class="caption2">Zmagazynowana energia nie trafia do sieci, dzięki czemu więcej zostaje u Ciebie.</p>
+    </div>
+
+    <div class="footer">
+        <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+        <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+        <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+    </div>
+</div>
+
+<div class="container page">
+    <img src="https://crm.hszgroup.pl/static/images/HSZ_logo.png" alt="HSZ Group" class="logoNext">
+    <h1 class="title">ZWROT Z INWESTYCJI</h1>
+
+    <div class="comparison-container">
+        <h3>ZYSKI Z UNIKNIĘCIA ZAKUPU ENERGII</h3>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Bez magazynu</th>
+                    <th>Z magazynem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Zakup energii nocą: {{night_electric_without_mag}} PLN/rok</td>
+                    <td>Zakup energii nocą: {{night_electric_with_mag}} PLN/rok</td>
+                </tr>
+                <tr>
+                    <td>Straty energii: 70%</td>
+                    <td>Straty energii: 23%</td>
+                </tr>
+                <tr>
+                    <td>Średnie oszczędności: 0 PLN</td>
+                    <td>Średnie oszczędności: {{saving}} PLN</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="chart-containerTwo">
+        <h3>PRZEWIDYWANY ZWROT Z INWESTYCJI</h3>
+        <div class="roi-bar-chart">
+            <div class="bar-containerOne">
+                <div class="bar old-roi" style="height: 60%;">20 Lat<p>Bez magazynu</p></div>
+            </div>
+            <div class="bar-containerTwo">
+                <div class="bar new-roi" style="height: 25%;">6 Lat<p>Z magazynem</p></div>
+            </div>
+        </div>
+        <p class="caption">Dzięki magazynowi energii, cały system zwróci się szybciej.</p>
+    </div>
+
+    <div class="footer">
+        <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+        <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+        <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+    </div>
+</div>
+<div class="container page">
+    <img src="https://crm.hszgroup.pl/static/images//HSZ_logo.png" alt="HSZ Group" class="logoNext" >
+    <h1 class="title">WYCENA <span class="highlight">SYSTEMU</span></h1>
+
+    <div class="section-header">KOSZTORYS</div>
+    {% if  subtitle == "FOTOWOLTAICZNEGO" or subtitle == "FOTOWOLTAICZNEGO Z MAGAZYNEM ENERGII" %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="3">Panele</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ panels_name }}</td>
+                <td>{{ panel_value }}</td>
+                <td>szt.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="3">Inwertery</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{inverter_name}}</td>
+                <td>1</td>
+                <td>szt.</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+    {% if  subtitle == "MAGAZYNU ENERGII" or subtitle == "FOTOWOLTAICZNEGO Z MAGAZYNEM ENERGII" %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="3">Magazyny Energii</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{mag_name}}</td>
+                <td>1</td>
+                <td>szt.</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+    {% endif %}
+        <thead>
+            <tr>
+                <th colspan="3">Inne</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Montaż</td>
+                <td>1,000</td>
+                <td>kpl</td>
+            </tr>
+            <tr>
+                <td>Elektronika</td>
+                <td>1,000</td>
+                <td>kpl</td>
+            </tr>
+            <tr>
+                <td class="details" colspan="3">
+                    <strong>Szczegóły:</strong> Zabezpieczenia A, Zabezpieczenia DC, 
+                    Kable solarne, Kable zasilające, Skrzynki elektroniczne, 
+                    Zabezpieczenie nadprądowe
+                </td>
+            </tr>
+            <tr>
+                <td>Instalacja uziemiająca</td>
+                <td>1,000</td>
+                <td>kpl</td>
+            </tr>
+            <tr>
+                <td>Konfiguracja Falownika</td>
+                <td>1,000</td>
+                <td>kpl</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="summary-container">
+        <table class="summary-table">
+            <tr>
+                <td class="label">Suma netto</td>
+                <td class="value">{{ total_price|intcomma }} pln</td>
+            </tr>
+            <tr>
+                <td class="label">Suma VAT</td>
+                <td class="value">{{ totalVat|intcomma }} pln</td>
+            </tr>
+            <tr>
+                <td class="label">Suma brutto</td>
+                <td class="value">{{ total_gross_price|intcomma }} pln</td>
+            </tr>
+           {% if total_subsidy > 0 %} <tr>
+                <td class="label"><b>Kwota dofiansowania</b></td>
+                <td class="value"><b>{{ total_subsidy|intcomma }} pln</b></td>
+            </tr>
+            {% endif %}
+        </table>
+        <table class="summary-total">
+            <tr>
+                <td class="label">Cena całkowita</td>
+                <td class="final-value">{{ total_gross_price|intcomma }} pln</td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        
+        <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+        <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+        <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+    </div>
+</div>
+
+<div class="container page ">
+    <img src="https://crm.hszgroup.pl/static/images//HSZ_logo.png" alt="HSZ Group" class="logoNext">
+
+    <div class="energy-production">
+        <h2>PRODUKCJA ENERGII <br><span>I WPŁYW NA ŚRODOWISKO</span></h2>
+    
+        <div class="dashed-line"></div>
+    
+        <section class="production-section">
+            <div class="solar-data">
+                <p>Średnie roczne nasłonecznienie dla <br> współrzędnych geograficznych</p>
+                <p><strong>NS</strong> {{lat}}</p>
+                <p><strong>EW</strong> {{lon}}</p>
+                <h3>{{solar_radiation}} <span>kWh/m²</span></h3>
+                <p class="source">* Źródło: NASA</p>
+            </div>
+            <div class="energy-chart">
+                <p>Wykres produkcji energii w ciągu roku</p>
+                <div class="chart-container">
+                    <div class="y-axis">
+                        {% for value, position in y_axis_sun %}
+                        <span style="top: {{ position }}px;">{{ value }}</span>
+                    {% endfor %}
+                    </div>
+                    <div class="chart">
+                        <div class="barVec" style="left: -25px; height: 30%;"></div>
+                        <div class="barVec" style="left: -5px; height: 45%;"></div>
+                        <div class="barVec" style="left: 15px; height: 60%;"></div>
+                        <div class="barVec" style="left: 35px; height: 75%;"></div>
+                        <div class="barVec" style="left: 55px; height: 90%;"></div>
+                        <div class="barVec" style="left: 75px; height: 85%;"></div>
+                        <div class="barVec" style="left: 95px; height: 82%;"></div>
+                        <div class="barVec" style="left: 115px; height: 80%;"></div>
+                        <div class="barVec" style="left: 135px; height: 65%;"></div>
+                        <div class="barVec" style="left: 155px; height: 50%;"></div>
+                        <div class="barVec" style="left: 175px; height: 35%;"></div>
+                        <div class="barVec" style="left: 195px; height: 28%;"></div>
+                        
+                    </div>
+                    <div class="x-axis">
+                        <span style="left: 10px;">I</span>
+                        <span style="left: 30px;">II</span>
+                        <span style="left: 50px;">III</span>
+                        <span style="left: 70px;">IV</span>
+                        <span style="left: 90px;">V</span>
+                        <span style="left: 110px;">VI</span>
+                        <span style="left: 130px;">VII</span>
+                        <span style="left: 150px;">VIII</span>
+                        <span style="left: 170px;">IX</span>
+                        <span style="left: 190px;">X</span>
+                        <span style="left: 210px;">XI</span>
+                        <span style="left: 230px;">XII</span>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </section>
+    
+        <h3 class="h3influ">WPŁYW NA ŚRODOWISKO</h3>
+    
+        <section class="benefits">
+            <table class="benefits-table">
+                <thead>
+                    <tr><th colspan="5" class="header-green">KORZYŚCI</th>                        
+                        <span class="years">
+                            <p>1 rok</p>
+                        <p>5 lat</p>
+                        <p>10 lat</p>
+                        <p>20 lat</p>
+                    </span>
+                    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Energia wyprodukowana [kWh]</td>
+                        {% for key, value in estimates.items %}
+                        <td>{{ value|intcomma }}</td>
+                    {% endfor %}
+                    <tr>
+                        <td>Energia, którą wyprodukujesz wystarczy do przejechania
+                            samochodem elektrycznym [km]</td>
+                            {% for key, value in driving_range.items %}
+                            <td>{{ value|intcomma }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>Co przełoży się na zaoszczędzone paliwo [l]</td>
+                        {% for key, value in fuel_savings.items %}
+                        <td>{{ value|intcomma }}</td>
+                    {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <div class="dashed-line"></div>
+    
+        <section class="benefits">
+            <table class="benefits-table">
+                <thead>
+                    <tr><th colspan="5" class="header-green">ZWIĘKSZ SWÓJ WPŁYW NA ŚRODOWISKO</th>                        
+                        <span class="years">
+                            <p>1 rok</p>
+                        <p>5 lat</p>
+                        <p>10 lat</p>
+                        <p>20 lat</p>
+                    </span>
+                    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CO2 [kg]</td>
+                        <td>{{ co2_emission_saved.1_year|intcomma }}</td>
+                        <td>{{ co2_emission_saved.5_years|intcomma }}</td>
+                        <td>{{ co2_emission_saved.10_years|intcomma }}</td>
+                        <td>{{ co2_emission_saved.20_years|intcomma }}</td>
+                    </tr>
+                    <tr>
+                        <td>NOx;SOx [kg]</td>
+                        <td>{{ nox_sox_saved.1_year|intcomma }}</td>
+                        <td>{{ nox_sox_saved.5_years|intcomma }}</td>
+                        <td>{{ nox_sox_saved.10_years|intcomma }}</td>
+                        <td>{{ nox_sox_saved.20_years|intcomma }}</td>
+                    </tr>
+                    <tr>
+                        <td>Co równa się ilości posadzonych drzew</td>
+                        <td>{{ fuel_savings.1_year|intcomma }}</td>
+                        <td>{{ fuel_savings.5_years|intcomma }}</td>
+                        <td>{{ fuel_savings.10_years|intcomma }}</td>
+                        <td>{{ fuel_savings.20_years|intcomma }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+<div class="footer">
+    
+    <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+    <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+    <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+</div>
+</div>
+<div class="container page ">
+    <img src="https://crm.hszgroup.pl/static/images//HSZ_logo.png" alt="HSZ Group" class="logoNext">
+        <h1 class="costTitle title">KOSZTY INWESTYCJI <br> <span class="highlight">W CIĄGU 20 LAT</span></h1>
+
+
+        <p class="small-text costOne">TWÓJ NOWY RACHUNEK ZA ENERGIĘ ELEKTRYCZNĄ</p>
+        <div class="dashed-line-start"></div>
+        <div class="circle-container">
+            <div class="circle gray-border">
+                <span class="circlePrice">{{ total_pv_cost|floatformat:2|intcomma }}</span>
+                <small>pln</small>
+                <div class="descriptionOne"><p>KOSZTY POCZĄTKOWE</p> Z UWZGLĘDNIENIEM DOTACJI
+                </div>
+            </div>
+        
+            <div class="circle green-border">
+                <span class="circlePrice">{{ annual_savings|floatformat:2|intcomma }}</span>
+                <small>pln</small>
+                <div class="description"><p>ŚREDNIE ROCZNE</p> OSZCZĘDNOŚCI</div>
+            </div>
+        
+            <div class="circle blue-border">
+                <span class="circlePrice">{{ total_savings_20_years|floatformat:2|intcomma }}</span>
+                <small>pln</small>
+                <div class="description"><p>SUMA OSZCZĘDNOŚCI</p> PO 20 LATACH</div>
+            </div>
+        </div>
+        <div class="dashed-line-two"></div>
+        <p class="small-text costTwo">
+            Suma otrzymanych dopłat do wyprodukowanej energii w ciągu 20 lat 
+            <span class="total-savings">{{ subsidy_total|floatformat:2|intcomma }} pln</span>
+        </p>
+        <div class="dashed-line-three"></div>
+        <p class="small-text costThree">
+            Suma oszczędności i otrzymanych dopłat po 20 latach 
+            <span class="total-savings">{{ total_savings_with_subsidies|floatformat:2|intcomma }} pln</span>
+        </p>
+        
+        <p class="small-text costFour">PORÓWNANIE KOSZTÓW ENERGII W TWOIM DOMU W OKRESIE NASTĘPNYCH 20 LAT</p>
+        <div class="dashed-line-end"></div>
+        <div class="barDou-container">
+
+            <div class="barDou grays" >
+                <p class="bar-text-cost">Z systemem fotowoltaicznym</p>
+                <span class="bar-label">{{ energy_cost_with_pv|floatformat:2|intcomma }} pln</span>
+            </div>
+            <div class="barDou green "style="width: {{bardDougreen}}%;"></div>
+            <div class="barDou gray">
+                <p class="bar-text-cost">Bez systemu fotowoltaicznego</p>
+                <span class="barDou-label">{{ energy_cost_without_pv|floatformat:2|intcomma }} pln</span>
+            </div>
+        </div>
+        
+        <div class="summaryTwo">
+            <div class="summary-item">
+                <span>Oszczędności z uwzględnieniem kosztów systemu</span>
+                <span class="totalOne">{{ net_savings|floatformat:2|intcomma }} pln</span>
+            </div>
+            <div class="summary-item">
+                <span>Całkowity koszt systemu fotowoltaicznego</span>
+                <span class="totalTwo">{{ total_pv_cost|floatformat:2|intcomma }} pln</span>
+            </div>
+        </div>
+<div class="footer">
+    
+    <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+    <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+    <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+</div>
+</div>
+
+
+<div class="container page ">
+    <img src="https://crm.hszgroup.pl/static/images//HSZ_logo.png" alt="HSZ Group" class="logoNext">
+    <div class="header-container">
+        SKUMULOWANY PRZEPŁYW <br>
+        <span class="header-highlight">ŚRODKÓW PIENIĘŻNYCH</span>
+    </div>
+
+    <table class="table-container">
+        <thead>
+            <tr class="table-header">
+                <th>Rok</th>
+                <th>Produkcja [kWh]</th>
+                <th>Oszczędność [PLN]</th>
+                <th>Otrzymane dopłaty [PLN]</th>
+                <th class="highlighted-column">Skumulowany przepływ [PLN]</th>
+                <th>Rachunek za energię bez PV [PLN]</th>
+                <th>Rachunek za energię z PV [PLN]</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in cash_flow_data %}
+            <tr class="table-row">
+                <td>{{ row.year }}</td>
+                <td>{{ row.production }}</td>
+                <td>{{ row.savings }}</td>
+                <td>{{ row.subsidy }}</td>
+                <td class="highlighted-column {% if row.cumulative_cash_flow|floatformat:2 < 0 %}negative-value{% endif %}">
+                    {{ row.cumulative_cash_flow }}
+                </td>
+                <td>{{ row.bill_without_pv }}</td>
+                <td class="positive-value">{{ row.bill_with_pv }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+        <div class="footer">
+    
+            <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+            <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+            <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+        </div>
+        
+</div>
+
+</div>
+<div class="container page ">
+    <img src="https://crm.hszgroup.pl/static/images//HSZ_logo.png" alt="HSZ Group" class="logoNext">
+    <div class="header-container">
+        SKUMULOWANY PRZEPŁYW <br>
+        <span class="header-highlight">ŚRODKÓW PIENIĘŻNYCH</span>
+    </div>
+    <span class="subheading-graph">UJĘCIE <p>GRAFICZNE</p></span>
+
+    <div class="graph-container">
+        {% for value in graph_axis_y reversed %}
+        <div class="axis-label-graph y-axis-label-graph" style="top: {{ forloop.counter0|mul:60 }}px;">
+            {{ value|floatformat:0|add:0 }}
+        </div>
+    {% endfor %}
+    
+        <!-- Słupki -->
+        <div class="graph-bar bar-negative" style="height: 110px; left: 30px; bottom: 150px;"></div>
+        <div class="graph-bar bar-negative" style="height: 100px; left: 60px; bottom: 150px;"></div>
+        <div class="graph-bar bar-negative" style="height: 80px; left: 90px; bottom: 150px;"></div>
+        <div class="graph-bar bar-negative" style="height: 60px; left: 120px; bottom: 150px;"></div>
+        <div class="graph-bar bar-negative" style="height: 40px; left: 150px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 20px; left: 180px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 40px; left: 210px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 60px; left: 240px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 80px; left: 270px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 100px; left: 300px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 120px; left: 330px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 140px; left: 360px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 160px; left: 390px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 180px; left: 420px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 200px; left: 450px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 220px; left: 480px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 240px; left: 510px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 260px; left: 540px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 280px; left: 570px; bottom: 150px;"></div>
+        <div class="graph-bar bar-positive" style="height: 300px; left: 600px; bottom: 150px;"></div>
+        
+
+        <!-- Osie X -->
+        <div class="axis-label-graph x-axis-label-graph" style="left: 30px;">1</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 60px;">2</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 90px;">3</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 120px;">4</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 150px;">5</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 180px;">6</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 210px;">7</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 240px;">8</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 270px;">9</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 300px;">10</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 330px;">11</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 360px;">12</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 390px;">13</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 420px;">14</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 450px;">15</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 480px;">16</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 510px;">17</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 540px;">18</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 570px;">19</div>
+        <div class="axis-label-graph x-axis-label-graph" style="left: 600px;">20</div>
+    </div>
+        <div class="footer">
+    
+            <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+            <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+            <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+        </div>
+        
+</div>
+
+</div>
+</body>
+</html>
+

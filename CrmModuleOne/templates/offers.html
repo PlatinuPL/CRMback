@@ -1,0 +1,84 @@
+{% extends "base.html" %} {% load static %}
+<!-- templates/dashboard.html -->
+{% block title %} Klienci {% endblock %} {%block content %}
+<section class="Clients">
+  <div class="mainClientsWindow container grid-1-2">
+    <nav class="navClients">
+      <a
+        href="{% url 'leady' %}"
+        class="{% if request.resolver_match.url_name == 'leady' %}active{% endif %}"
+        >Leady</a
+      >
+      <a
+        href="{% url 'oferty' %}"
+        class="{% if request.resolver_match.url_name == 'oferty' %}active{% endif %}"
+        >Oferty</a
+      >
+      <a
+        href="{% url 'klienci' %}"
+        class="{% if request.resolver_match.url_name == 'klienci' %}active{% endif %}"
+        >Klienci</a
+      >
+    </nav>
+
+    <!-- prettier-ignore -->
+    <div class="clientsTable">
+      {% regroup leads by created_at|date:"F Y" as grouped_leads %} {% for group in grouped_leads %}
+      <h3 class="month-title">{{ group.grouper }}</h3>
+      <table class="clientsTable">
+        <thead>
+          <tr>
+            <th>Imię i nazwisko</th>
+            <th>Telefon</th>
+            <th>Adres</th>
+            {% comment %} <th>Ostatnia wiadomość</th> {% endcomment %}
+            <th class="add-date-first-column">Data dodania</th>
+            <th class="calculator-first-column">Nowa oferta</th>
+            <th>Podgląd</th>
+          </tr>
+          <a href="{% url 'add_client' %}" class="btnAddClient">Dodaj klienta</a>
+        </thead>
+        <tbody>
+          {% for lead in group.list %}
+          <tr class="potential-{{ lead.potential|lower }}">
+            <td>{{ lead.first_name }} {{ lead.last_name }}</td>
+            <td>
+              {% if lead.phone %}
+                <a href="tel:{{ lead.phone }}" class="phone-link">{{ lead.phone }}</a>
+              {% else %}
+                <span class="no-phone">Brak telefonu</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if lead.house_number and lead.city and lead.postal_code %}
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query={{ lead.street }},+{{ lead.house_number }},+{{ lead.city }},+{{ lead.postal_code }}" 
+                  target="_blank" 
+                  class="address-link"
+                >
+                  {{ lead.street|default:"" }} 
+                  {{ lead.house_number|default:"Brak nr domu" }} 
+                  {{ lead.city|default:"Brak miejscowości" }} 
+                  {{ lead.postal_code|default:"Brak kodu pocztowego" }}
+                </a>
+              {% else %}
+                <span class="no-address">Brak pełnego adresu</span>
+              {% endif %}
+            </td>
+            {% comment %} <td>{{ lead.current_heating_source|default:"Brak wiadomości" }}</td> {% endcomment %}
+            <td class="add-date-second-column">{{ lead.created_at|date:"d-m-Y" }}</td>
+            <td class="calculator-second-column">
+              <a href="{% url 'calculator' %}?lead_id={{ lead.id }}" class="btn btn-primary">Przejdź do kalkulatora</a>
+            </td>
+            <td><a class="clientsEditing" href="{% url 'client_card' lead.id %}">Podgląd</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% empty %}
+      <p>Brak leadów do wyświetlenia.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

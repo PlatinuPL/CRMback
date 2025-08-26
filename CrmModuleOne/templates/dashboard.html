@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+<!-- templates/dashboard.html -->
+{% block title %} {% endblock %}
+{% block content %}
+
+<section class="newsletter">
+  {% if latest_post %}
+  <a
+    class="mainNews container {% if latest_post.mandatory_to_acknowledge and user not in latest_post.acknowledged_by.all %}unread{% endif %} grid-2-3"
+    href="{% url 'post_detail' latest_post.id %}"
+  >
+    <div class="mainImgContainer">
+      {% if latest_post.image %}
+      <img
+        src="{{ latest_post.image.url }}"
+        alt="Zdjęcie najnowszego posta"
+        class="latest-post-image"
+      />
+      {% endif %}
+    </div>
+    <div class="mainTextContainer">
+      <h2>{{ latest_post.title }}</h2>
+      <p>{{ latest_post.content|truncatechars:300 }}</p>
+    </div>
+    <div class="authorContainer grid-3-2">
+      {% if latest_post.author.profile_image %}
+      <img
+        src="{{ latest_post.author.profile_image.url }}"
+        alt="Zdjęcie autora"
+        class="author-image"
+      />
+      {% else %}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1rem"
+        height="1rem"
+        viewBox="0 0 24 24"
+      >
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="8" r="5" />
+          <path d="M20 21a8 8 0 0 0-16 0" />
+        </g>
+      </svg>
+      {% endif %}
+
+      <div class="secondColumnAuthor">
+        <p class="authorName">{{ latest_post.author.username }}</p>
+        <p class="publicDate">{{ latest_post.created_at|date:"d F Y, H:i" }}</p>
+      </div>
+      {% if latest_post.content|length <= 20 and latest_post.mandatory_to_acknowledge %}
+      <label>
+        <input
+          type="checkbox"
+          class="acknowledge-checkbox {% if user in latest_post.acknowledged_by.all %}confirmed{% endif %}"
+          data-url="{% url 'acknowledge_post' %}"
+          data-post-id="{{ latest_post.id }}"
+          {% if user in latest_post.acknowledged_by.all %}checked{% endif %}
+        />
+        Zatwierdź przeczytanie
+      </label>
+      {% endif %}
+    </div>
+  </a>
+  {% else %}
+  <p>Brak postów do wyświetlenia.</p>
+  {% endif %}
+
+  <div class="otherNewses container grid-2-10">
+    {% for post in other_posts %}
+    <a
+      class="otherNews {% if post.mandatory_to_acknowledge and user not in post.acknowledged_by.all %}unread{% endif %} flexColumn"
+      href="{% url 'post_detail' post.id %}"
+    >
+      <div class="mainImgContainer">
+        {% if post.image %}
+        <img
+          src="{{ post.image.url }}"
+          alt="Zdjęcie posta"
+          class="post-image"
+        />
+        {% endif %}
+      </div>
+      <div class="mainTextContainer">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content|truncatechars:300 }}</p>
+      </div>
+      <div class="authorContainer grid-3-2">
+        {% if post.author.profile_image %}
+        <img
+          src="{{ post.author.profile_image.url }}"
+          alt="Zdjęcie autora"
+          class="author-image"
+        />
+        {% else %}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1rem"
+          height="1rem"
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="8" r="5" />
+            <path d="M20 21a8 8 0 0 0-16 0" />
+          </g>
+        </svg>
+        {% endif %}
+        <div class="secondColumnAuthor">
+          <p class="authorName">{{ post.author.username }}</p>
+          <p class="publicDate">{{ post.created_at|date:"d F Y, H:i" }}</p>
+        </div>
+        {% if post.content|length < 50 and post.mandatory_to_acknowledge %}
+        <label>
+          <input
+            type="checkbox"
+            class="acknowledge-checkbox {% if user in post.acknowledged_by.all %}confirmed{% endif %}"
+            data-url="{% url 'acknowledge_post' %}"
+            data-post-id="{{ post.id }}"
+            {% if user in post.acknowledged_by.all %}checked{% endif %}
+          />
+          Zatwierdź przeczytanie
+        </label>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <!-- Sekcja paginacji -->
+  <div class="pagination">
+    <span class="step-links">
+      {% if other_posts.has_previous %}
+      <a href="?page=1">&laquo; Pierwsza</a>
+      <a href="?page={{ other_posts.previous_page_number }}">Poprzednia</a>
+      {% endif %}
+
+      <span>Strona {{ other_posts.number }} z {{ other_posts.paginator.num_pages }}</span>
+
+      {% if other_posts.has_next %}
+      <a href="?page={{ other_posts.next_page_number }}">Następna</a>
+      <a href="?page={{ other_posts.paginator.num_pages }}">Ostatnia &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+</section>
+{% endblock %}

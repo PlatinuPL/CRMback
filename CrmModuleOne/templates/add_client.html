@@ -1,0 +1,122 @@
+{% extends 'base.html' %} {% block content %}
+
+
+{% if form.errors %}
+    <div class="alert alert-warning">
+        <strong style="color: red;">Formularz zawiera błędy:</strong>
+        <ul>
+            {% for field, errors in form.errors.items %}
+                <li><strong>{{ field|title }}:</strong> 
+                    <ul>
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+<h1>Dodaj nowego klienta</h1>
+<form method="post">
+  {% csrf_token %}
+
+  <!-- Sekcja: Dane osobowe -->
+  <!-- prettier-ignore -->
+  <div class="form-section">
+    <h3>Dane osobowe</h3>
+    <div class="form-row">{{ form.potential.label_tag }} {{ form.potential }}</div>
+    <div class="form-row required">{{ form.first_name.label_tag }} {{ form.first_name }}</div>
+    <div class="form-row required">{{ form.last_name.label_tag }} {{ form.last_name }}</div>
+    <div class="form-row required">{{ form.phone.label_tag }} {{ form.phone }}</div>
+    <div class="form-row">{{ form.email.label_tag }} {{ form.email }}</div>
+    <div class="form-row">{{ form.street.label_tag }} {{ form.street }}</div>
+    <div class="form-row">{{ form.house_number.label_tag }} {{ form.house_number }}</div>
+    <div class="form-row">{{ form.city.label_tag }} {{ form.city }}</div>
+    <div class="form-row">{{ form.postal_code.label_tag }} {{ form.postal_code }}</div>
+    <div class="form-row">{{ form.postal.label_tag }} {{ form.postal }}</div>
+    <div class="form-row">{{ form.person_type.label_tag }} {{ form.person_type }}</div>
+  </div>
+  <!-- Sekcja: Adres inwestycji -->
+  <div class="form-section collapsible">
+    <h3 class="toggle-section">Adres inwestycji (jeżeli jest inny)</h3>
+    <div class="form-content ">
+      <div class="form-row">
+        {{ form.has_different_investment_address.label_tag }}
+        {{ form.has_different_investment_address }}
+      </div>
+      <div id="investment-address-fields" style="display: none;">
+        <div class="form-row">
+          {{ form.investment_street.label_tag }} {{ form.investment_street }}
+        </div>
+        <div class="form-row">
+          {{ form.investment_house_number.label_tag }} {{ form.investment_house_number }}
+        </div>
+        <div class="form-row">
+          {{ form.investment_postal_code.label_tag }} {{ form.investment_postal_code }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Sekcja: Dane inwestycji -->
+  <!-- prettier-ignore -->
+  <div class="form-section collapsible">
+    <h3 class="toggle-section">Dane dodatkowe</h3>
+    <div class="form-content">
+      <div class="form-row">{{ form.id_card_number.label_tag }} {{ form.id_card_number }}</div>
+      <div class="form-row">{{ form.pesel.label_tag }} {{ form.pesel }}</div>
+      <div class="form-row">{{ form.birth_date.label_tag }} {{ form.birth_date }}</div>
+      <div class="form-row">{{ form.nip.label_tag }} {{ form.nip }}</div>
+      <div class="form-row">{{ form.income_threshold.label_tag }} {{ form.income_threshold }}</div>
+    </div>
+  </div>
+
+  <!-- Sekcja: Dane inwestycji -->
+  <!-- prettier-ignore -->
+  <div class="form-section collapsible">
+  <h3 class="toggle-section">Dane inwestycji</h3>
+  <div class="form-content">
+    <div class="form-row">{{ form.current_heating_source.label_tag }} {{ form.current_heating_source }}</div>
+    <div class="form-row">{{ form.construction_permission_year.label_tag }} {{ form.construction_permission_year }}</div>
+    <div class="form-row">{{ form.land_registry_number.label_tag }} {{ form.land_registry_number }}</div>
+    <div class="form-row">{{ form.plot_number.label_tag }} {{ form.plot_number }}</div>
+    <div class="form-row">{{ form.business_at_investment_address.label_tag }} {{ form.business_at_investment_address }}</div>
+        <!-- Ukryte pole milestone -->
+    <input type="hidden" name="milestone" value="lead">
+  </div>
+</div>
+
+  <!-- Sekcja: Dane do dotacji -->
+  <!-- prettier-ignore -->
+  <div class="form-section collapsible">
+    <h3 class="toggle-section">Dane do dotacji</h3>
+    <div class="form-content">
+      <div class="form-row">{{ form.household_members.label_tag }} {{ form.household_members }}</div>
+      <div class="form-row">{{ form.farm_conversion_hectares.label_tag }} {{ form.farm_conversion_hectares }}</div>
+      <div class="form-row">{{ form.income_per_person.label_tag }} {{ form.income_per_person }}</div>
+      <div class="form-row">{{ form.marital_status.label_tag }} {{ form.marital_status }}</div>
+      <div class="form-row">{{ form.is_sole_owner.label_tag }} {{ form.is_sole_owner }}</div>
+      <div class="form-row">{{ form.runs_business.label_tag }} {{ form.runs_business }}</div>
+      <div class="form-row">{{ form.has_joint_property.label_tag }} {{ form.has_joint_property }}</div>
+    </div>
+  </div>
+
+  <button   class="button" type="submit">Zapisz</button>
+</form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hasDifferentAddressCheckbox = document.querySelector("#id_has_different_investment_address");
+    const investmentAddressFields = document.querySelector("#investment-address-fields");
+
+    if (hasDifferentAddressCheckbox) {
+      // Pokaż/ukryj pola na podstawie początkowego stanu checkboxa
+      investmentAddressFields.style.display = hasDifferentAddressCheckbox.checked ? "block" : "none";
+
+      hasDifferentAddressCheckbox.addEventListener("change", function () {
+        investmentAddressFields.style.display = this.checked ? "block" : "none";
+      });
+    }
+  });
+</script>
+{% endblock %}

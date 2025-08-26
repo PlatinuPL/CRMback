@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dodaj nowy szablon</h2>
+
+<form method="post" enctype="multipart/form-data" class="upload-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_name">Nazwa szablonu:</label>
+        {{ form.name }}
+    </div>
+    <div class="form-group">
+        <label for="id_document_type">Typ dokumentu:</label>
+        {{ form.document_type }}
+    </div>
+    <div class="form-group">
+        <label for="id_file">Wybierz plik:</label>
+        {{ form.file }}
+    </div>
+    <div class="form-group">
+        <label for="id_description">Opis:</label>
+        {{ form.description }}
+    </div>
+    <button type="submit" class="btn btn-primary">Prześlij</button>
+</form>
+base:
+"I transza całkowitej inwestycji", "brak ustaleń imię i nazwisko klienta", "całkowita kwota inwestycji", "data umowy", "data wpłaty całkowitej inwestycji", "dodatkowe ustalenia", "e-mail", "imię i nazwisko handlowca", "imię i nazwisko klienta", "imię i nazwisko reprezentanta", "kod pocztowy", "krs", "kwota prefinansowania przysługująca dla Inwestor", "miejscowość", "nip", "numer dowodu osobistego", "numer telefonu", "numer umowy", "pesel", "poczta", "przelew a I transza 50%", "przelew a II transza 50%", "przelew b I transza 30%", "przelew b II transza", "przelew b III transza 20%", "przelew d", "przelew d I transza", "przelew d II transza", "przelew d III transza", "przelew d kredyt", "ulica", "ustalenia imię i nazwisko klienta", "województwo", 
+<h2>Dostępne szablony:</h2>
+<ul>
+    {% for template in templates %}
+        <li>{{ template.name }} - <a href="{{ template.file.url }}">Pobierz</a></li>
+        <td>
+            <!-- Przycisk usuwania -->
+            <form action="{% url 'delete_template' template.id %}" method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten szablon?');">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Usuń</button>
+            </form>
+        </td>
+
+    {% empty %}
+        <li>Brak zapisanych szablonów.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

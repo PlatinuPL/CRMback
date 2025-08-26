@@ -1,0 +1,135 @@
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]: Internal Server Error: /api/parcels/
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]: Traceback (most recent call last):
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:   File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:     response = get_response(request)
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:                ^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:   File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:   File "/opt/venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:     return view_func(request, *args, **kwargs)
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:   File "/opt2/CRM/CRMsys/CrmModuleOne/views.py", line 43, in list_parcels
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:     lead = Lead.objects.get(id=lead_id)
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]:            ^^^^
+maj 20 15:35:28 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]: NameError: name 'Lead' is not defined
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]: Internal Server Error: /add-parcel/
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]: Traceback (most recent call last):
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:   File "/opt2/CRM/CRMsys/CrmModuleOne/views.py", line 59, in add_parcel
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:     lead = Lead.objects.get(id=lead_id)
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:            ^^^^
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]: NameError: name 'Lead' is not defined
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]: During handling of the above exception, another exception occurred:
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]: Traceback (most recent call last):
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:   File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:     response = get_response(request)
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:                ^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:   File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:   File "/opt/venv/lib/python3.11/site-packages/django/views/decorators/http.py", line 64, in inner
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:     return func(request, *args, **kwargs)
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:   File "/opt/venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:     return view_func(request, *args, **kwargs)
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:   File "/opt/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:     return view_func(request, *args, **kwargs)
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:   File "/opt2/CRM/CRMsys/CrmModuleOne/views.py", line 72, in add_parcel
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:     except Lead.DoesNotExist:
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]:            ^^^^
+maj 20 15:35:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]: NameError: name 'Lead' is not defined
+maj 20 15:36:39 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: Stopping mygunicorn2.service - Gunicorn Service for CRM...
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891141]: [2025-05-20 17:36:39 +0200] [1891141] [INFO] Worker exiting (pid: 1891141)
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891142]: [2025-05-20 17:36:39 +0200] [1891142] [INFO] Worker exiting (pid: 1891142)
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891143]: [2025-05-20 17:36:39 +0200] [1891143] [INFO] Worker exiting (pid: 1891143)
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891140]: [2025-05-20 15:36:39 +0000] [1891140] [INFO] Handling signal: term
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891140]: [2025-05-20 15:36:40 +0000] [1891140] [ERROR] Worker (pid:1891142) was sent SIGTERM!
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891140]: [2025-05-20 15:36:40 +0000] [1891140] [ERROR] Worker (pid:1891143) was sent SIGTERM!
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891140]: [2025-05-20 15:36:40 +0000] [1891140] [ERROR] Worker (pid:1891141) was sent SIGTERM!
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891140]: [2025-05-20 15:36:40 +0000] [1891140] [INFO] Shutting down: Master
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: mygunicorn2.service: Deactivated successfully.
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: Stopped mygunicorn2.service - Gunicorn Service for CRM.
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: mygunicorn2.service: Consumed 2.431s CPU time.
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: Started mygunicorn2.service - Gunicorn Service for CRM.
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891193]: [2025-05-20 15:36:40 +0000] [1891193] [INFO] Starting gunicorn 23.0.0
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891193]: [2025-05-20 15:36:40 +0000] [1891193] [INFO] Listening at: http://127.0.0.1:8001 (1891193)
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891193]: [2025-05-20 15:36:40 +0000] [1891193] [INFO] Using worker: sync
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891194]: [2025-05-20 15:36:40 +0000] [1891194] [INFO] Booting worker with pid: 1891194
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891195]: [2025-05-20 15:36:40 +0000] [1891195] [INFO] Booting worker with pid: 1891195
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: [2025-05-20 15:36:40 +0000] [1891196] [INFO] Booting worker with pid: 1891196
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891194]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.task' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891194]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891194]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.meeting' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891194]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891195]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.task' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891195]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891195]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.meeting' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:36:40 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891195]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:36:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.task' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:36:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:36:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.meeting' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:36:41 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: Internal Server Error: /add-parcel/
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: Traceback (most recent call last):
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   File "/opt2/CRM/CRMsys/CrmModuleOne/views.py", line 59, in add_parcel
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:     lead = Prelead.objects.get(id=lead_id)
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   File "/opt/venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:     return getattr(self.get_queryset(), name)(*args, **kwargs)
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   File "/opt/venv/lib/python3.11/site-packages/django/db/models/query.py", line 649, in get
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:     raise self.model.DoesNotExist(
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: CrmModuleOne.models.Prelead.DoesNotExist: Prelead matching query does not exist.
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: During handling of the above exception, another exception occurred:
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: Traceback (most recent call last):
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:     response = get_response(request)
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:                ^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   File "/opt/venv/lib/python3.11/site-packages/django/views/decorators/http.py", line 64, in inner
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:     return func(request, *args, **kwargs)
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   File "/opt/venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:     return view_func(request, *args, **kwargs)
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   File "/opt/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:     return view_func(request, *args, **kwargs)
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:   File "/opt2/CRM/CRMsys/CrmModuleOne/views.py", line 72, in add_parcel
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:     except Lead.DoesNotExist:
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]:            ^^^^
+maj 20 15:36:57 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: NameError: name 'Lead' is not defined
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891193]: [2025-05-20 15:38:22 +0000] [1891193] [INFO] Handling signal: term
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891196]: [2025-05-20 17:38:22 +0200] [1891196] [INFO] Worker exiting (pid: 1891196)
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891195]: [2025-05-20 17:38:22 +0200] [1891195] [INFO] Worker exiting (pid: 1891195)
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: Stopping mygunicorn2.service - Gunicorn Service for CRM...
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891194]: [2025-05-20 17:38:22 +0200] [1891194] [INFO] Worker exiting (pid: 1891194)
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891193]: [2025-05-20 15:38:22 +0000] [1891193] [ERROR] Worker (pid:1891196) was sent SIGTERM!
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891193]: [2025-05-20 15:38:22 +0000] [1891193] [ERROR] Worker (pid:1891195) was sent SIGTERM!
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891193]: [2025-05-20 15:38:22 +0000] [1891193] [INFO] Shutting down: Master
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: mygunicorn2.service: Deactivated successfully.
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: Stopped mygunicorn2.service - Gunicorn Service for CRM.
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: mygunicorn2.service: Consumed 2.459s CPU time.
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 systemd[1]: Started mygunicorn2.service - Gunicorn Service for CRM.
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891244]: [2025-05-20 15:38:22 +0000] [1891244] [INFO] Starting gunicorn 23.0.0
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891244]: [2025-05-20 15:38:22 +0000] [1891244] [INFO] Listening at: http://127.0.0.1:8001 (1891244)
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891244]: [2025-05-20 15:38:22 +0000] [1891244] [INFO] Using worker: sync
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891246]: [2025-05-20 15:38:22 +0000] [1891246] [INFO] Booting worker with pid: 1891246
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891247]: [2025-05-20 15:38:22 +0000] [1891247] [INFO] Booting worker with pid: 1891247
+maj 20 15:38:22 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891248]: [2025-05-20 15:38:22 +0000] [1891248] [INFO] Booting worker with pid: 1891248
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891247]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.task' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891247]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891247]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.meeting' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891247]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891246]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.task' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891246]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891246]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.meeting' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891246]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891248]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.task' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891248]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891248]: /opt/venv/lib/python3.11/site-packages/django/db/models/base.py:366: RuntimeWarning: Model 'CrmModuleOne.meeting' was already registered. Reloading models is not advised as it can lead to inconsistencies, most notably with related models.
+maj 20 15:38:23 debian-s-2vcpu-4gb-amd-fra1-01 gunicorn[1891248]:   new_class._meta.apps.register_model(new_class._meta.app_label, new_class)

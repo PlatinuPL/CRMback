@@ -1,0 +1,754 @@
+{% extends "base.html" %} 
+{% load static %}
+<!-- templates/dashboard.html -->
+{% block title %} Klienci {% endblock %} 
+{% block content %}
+
+<!-- Modal powinno być na najwyższym poziomie -->
+<div class="modal" id="importResultModal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h2>Wynik importu</h2>
+        <div id="modal-messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<nav class="nav nav-tabs navClients" style="display:flex;">
+  <a href="?tab=leady" class="nav-item nav-link {% if tab == 'leady' %}active{% endif %}">Leady</a>
+  <a href="?tab=weryfikacja" class="nav-item nav-link {% if tab == 'weryfikacja' %}active{% endif %}">Weryfikacja</a>
+  <a href="?tab=analiza_umowy" class="nav-item nav-link {% if tab == 'analiza_umowy' %}active{% endif %}">Analiza umowy</a>
+  <a href="?tab=archiwalne" class="nav-item nav-link {% if tab == 'archiwalne' %}active{% endif %}">Archiwalne</a>
+</nav>
+
+{% if tab == 'archiwalne' %}
+    <nav class="dropdown-menu {% if tab == 'archiwalne' %}show{% endif %}">
+      <a class="dropdown-item {% if subtab == 'no_answer' %}active{% endif %}" href="?tab=archiwalne&subtab=no_answer">Nie odbierają</a>
+      <a class="dropdown-item {% if subtab == 'inactive_number' %}active{% endif %}" href="?tab=archiwalne&subtab=inactive_number">Numer nieaktywny</a>
+      <a class="dropdown-item {% if subtab == 'przypisane' %}active{% endif %}" href="?tab=archiwalne&subtab=przypisane">Przypisane</a>
+    </nav>
+{% endif %}
+
+
+  <!-- Modal dla działek -->
+<div class="modal" id="parcelModal" style="display:none;">
+  <div class="modal-content" style="max-width:1000px; position: relative;">
+    <span class="modal-close" style="font-size:3rem;" onclick="closeParcelModal()">&times;</span>
+    <h2>Działki dla preleada</h2>
+
+    <!-- Lista istniejących działek -->
+    <div id="existingParcels" style="margin-bottom:1rem;">
+      <!-- wypełniane dynamicznie JS-em -->
+      <p>Ładuję...</p>
+    </div>
+
+    <hr>
+
+    <h3>Dodaj / Edytuj działkę</h3>
+    <!-- Formularz przeniesiony poza existingParcels -->
+    <form id="parcelForm" style="display:flex; flex-wrap: wrap;">
+      {% csrf_token %}
+      <input type="hidden" name="prelead_id" id="parcel-lead-id">
+
+  <div class="form-group">
+    <label>Województwo</label>
+    <select name="voivodeship" id="parcel-voivodeship" required></select>
+  </div>
+  <div class="form-group">
+    <label>Powiat</label>
+    <select name="county" id="parcel-county" required disabled></select>
+  </div>
+  <div class="form-group">
+    <label>Gmina</label>
+    <select name="commune" id="parcel-commune" required disabled></select>
+  </div>
+      <div class="form-group">
+        <label>Obręb</label>
+        <input type="text" name="precinct" id="parcel-precinct" placeholder="Obręb" required>
+      </div>
+      <div class="form-group">
+        <label>Numer działki</label>
+        <input type="text" name="plot_number" id="parcel-plot-number" placeholder="Numer działki" required>
+      </div>
+      <div class="form-group">
+        <label>Powierzchnia (ha)</label>
+        <input type="number" step="0.01" name="area" id="parcel-area" placeholder="Powierzchnia (ha)" required>
+      </div>
+
+<!--   <button type="submit" class="btn btn-primary" style="flex-basis: 100%; margin-top: 1rem;">
+    Zapisz działkę
+  </button> -->
+        <button type="submit" class="save-btn btn-save" style="height: 40px; border-radius: 8px;">
+  <i class="fas fa-save"></i> Zapisz
+</button>
+    </form>
+  </div>
+</div>
+
+<section class="Clients">
+  <div class="mainClientsWindow container grid-1-2">
+    <div class="clientsTable">
+      <form method="POST" action="{% url 'import_leadsfb' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary mb-3">
+          <i class="fas fa-file-import"></i> Importuj leady
+        </button>
+      </form>
+<form method="post" action="{% url 'geocode_parcels' %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary">
+    🔄 Przypisz współrzędne do działek
+  </button>
+</form>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+{% regroup leads.object_list by created_at|date:"F Y" as grouped_leads %}
+
+      {% for group in grouped_leads %}
+      <h3 class="month-title">{{ group.grouper }}</h3>
+      <table class="clientsTable">
+        <thead>
+          <tr>
+            <th>Imię i nazwisko</th>
+            <th>Telefon</th>
+            <th>Adres email</th>
+            <th class="add-date-first-column">Data dodania</th>
+            <th>Zapisz/Przypisz</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+          {% for lead in group.list %}
+          
+          <tr class="potential-{% if lead.potential %}{{ lead.potential|lower }}{% else %}none{% endif %}">
+            <td>{{ lead.first_name }} {{ lead.last_name }}</td>
+            <td>
+              {% if lead.phone %}
+                <a href="tel:{{ lead.phone }}" class="phone-link">{{ lead.phone }}</a>
+              {% else %}
+                <span class="no-phone">Brak telefonu</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if lead.email %}
+                <span class="adress">{{ lead.email }}</span>
+              {% else %}
+                <span class="no-address">Brak pełnego adresu</span>
+              {% endif %}
+            </td>
+            <td class="add-date-second-column">{{ lead.created_at|date:"d-m-Y" }}</td>
+
+
+  <!-- Cały formularz przeniesiony do jednej komórki z odpowiednimi polami -->
+  <td colspan="3">
+     <form method="POST" class="prelead-form" style="margin: 0; padding:5px;"  action="{% url 'save_prelead' %}">
+      {% csrf_token %}
+      <input type="hidden" name="prelead_id" value="{{ lead.id }}">
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <div style="width:22%;">
+        <select name="potential" class="form-select" required>
+          {% for value, label in lead.POTENTIAL_CHOICES %}
+            <option value="{{ value }}" {% if value == lead.potential %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+<select name="assigned_to" class="form-select">
+  <option value="" disabled selected>Wybierz handlowca</option>
+  {% for user in handlowcy %}
+    <option 
+      value="{{ user.id }}" 
+      {% if user.id == lead.assigned_to.id %}selected{% endif %}
+    >
+      {{ user.get_full_name|default:user.username }}
+    </option>
+  {% endfor %}
+</select>
+          </div>
+          
+        <textarea 
+          name="note" 
+          class="form-control" 
+          rows="3" 
+          style="min-width: 270px; resize: vertical;max-width: 60%;"
+        >{{ lead.note }}</textarea>
+        <!-- Zmienione z <p> na <div> dla lepszej semantyki -->
+
+
+
+{% if lead.status != 'PR' %}
+<div style="    display: flex
+;
+    flex-direction: column;">
+        <button type="submit" class="save-btn" style="height: 40px; border-radius: 8px" one; cursor: pointer;">
+          <i class="fas fa-save"></i> Zapisz
+        </button>
+
+</div>
+{% endif %}
+<textarea name="log" id="log-{{ lead.id }}" class="form-control log-toggle"
+    readonly rows="1"
+    style="margin-bottom:10px; overflow:hidden; text-overflow:ellipsis;
+           border:none; background:none; resize:none; padding:0; margin:0;
+           font:inherit; color:inherit; max-width:60%; height:1rem;">
+  {{ lead.log }}
+</textarea>
+          <!-- Dodajemy nowe checkboxy do formularza -->
+<div class="checkbox-group" style="display:flex; white-space:nowrap;">
+  <label style="margin-left: 0;"><input type="radio" name="lead_action" value="no_answer" style="width:10%;"> Nie odbiera</label>
+  <label style="margin-left: 1rem;"><input type="radio" name="lead_action" value="inactive_number" style="width:10%;"> Numer nieaktywny</label>
+  <label style="margin-left: 1rem;"><input type="radio" name="lead_action" value="to_verify" style="width:10%;"> Do weryfikacji</label>
+  <label style="margin-left: 1rem;"><input type="radio" name="lead_action" value="contract_sent" style="width:10%;"> Umowa wysłana</label>
+</div>
+
+<!-- Ukryte pole do przechwycenia akcji w backendzie -->
+<input type="hidden" name="status_update" value="">
+      </div>
+    </form>
+<button type="button" class="btn btn-secondary" onclick="openParcelModal({{ lead.id }})">
+    Dodaj działkę
+</button>
+  </td>
+</tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+      {% empty %}
+      <p>Brak leadów do wyświetlenia.</p>
+      {% endfor %}
+
+
+        <div class="pagination">
+  {% if leads.has_previous %}
+    <a href="?tab={{ tab }}{% if subtab %}&subtab={{ subtab }}{% endif %}&page=1">Pierwsza</a>
+    <a href="?tab={{ tab }}{% if subtab %}&subtab={{ subtab }}{% endif %}&page={{ leads.previous_page_number }}">« Poprzednia</a>
+  {% else %}
+    <span class="disabled">Pierwsza</span>
+    <span class="disabled">« Poprzednia</span>
+  {% endif %}
+
+  <span class="current">
+    Strona {{ leads.number }} z {{ leads.paginator.num_pages }}
+  </span>
+
+  {% if leads.has_next %}
+    <a href="?tab={{ tab }}{% if subtab %}&subtab={{ subtab }}{% endif %}&page={{ leads.next_page_number }}">Następna »</a>
+    <a href="?tab={{ tab }}{% if subtab %}&subtab={{ subtab }}{% endif %}&page={{ leads.paginator.num_pages }}">Ostatnia</a>
+  {% else %}
+    <span class="disabled">Następna »</span>
+    <span class="disabled">Ostatnia</span>
+  {% endif %}
+</div>
+    </div>
+  </div>
+</section>
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+ 
+
+    function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+
+    // Stylowanie tymczasowe (możesz to przenieść do CSS)
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.right = '20px';
+    toast.style.padding = '10px 20px';
+    toast.style.backgroundColor = type === 'success' ? '#28a745' : '#dc3545';
+    toast.style.color = 'white';
+    toast.style.borderRadius = '5px';
+    toast.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+    toast.style.zIndex = '1000';
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+function updateHiddenField(element, fieldName) {
+    // Szukamy formularza w hierarchii DOM wokół elementu
+    const form = element.closest('form');
+    
+    // Jeśli formularz nie istnieje, logujemy błąd i kończymy funkcję
+    if (!form) {
+        console.error("Nie znaleziono formularza w hierarchii DOM.");
+        return;
+    }
+    
+    // Szukamy ukrytego pola o podanej nazwie
+    const hiddenInput = form.querySelector(`input[name="${fieldName}"]`);
+    
+    // Jeżeli ukryte pole nie istnieje, logujemy błąd
+    if (!hiddenInput) {
+        console.error(`Nie znaleziono ukrytego pola o nazwie ${fieldName}`);
+        return;
+    }
+
+    // Aktualizujemy wartość ukrytego pola na wartość z elementu
+    hiddenInput.value = element.value;
+}
+
+
+  function closeModal() {
+    document.getElementById('importResultModal').style.display = "none";
+  }
+
+  // Zamknij modal przy kliknięciu poza obszarem
+  window.onclick = function(event) {
+    const modal = document.getElementById('importResultModal');
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+
+
+const form = document.querySelector('#preleadForm');
+
+if (form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
+
+    fetch(this.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        showToast('Zmiany zostały zapisane!', 'success');
+        updateUI(this, data);
+        setTimeout(() => location.reload(), 1000);
+      } else {
+        showToast('Wystąpił błąd podczas zapisywania: ' + data.error, 'error');
+      }
+    })
+    .catch(error => {
+      showToast('Błąd połączenia: ' + error, 'error');
+    });
+  });
+}
+
+
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Tworzymy FormData z formularza
+        const formData = new FormData(this);
+
+        // Logujemy wartości formularza przed wysłaniem
+        formData.forEach((value, key) => {
+            console.log(`${key}: ${value}`);
+        });
+
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showToast('Zmiany zostały zapisane!', 'success');
+                  updateUI(this, data);
+                    setTimeout(() => {
+        location.reload();
+    }, 1000); // odczekaj sekundę, żeby toast zdążył się pokazać
+            } else {
+                showToast('Wystąpił błąd podczas zapisywania: ' + data.error, 'error');
+            }
+        })
+        .catch(error => {
+            showToast('Błąd połączenia: ' + error, 'error');
+        });
+    });
+});
+
+
+function updateUI(form, data) {
+    // Aktualizujemy hidden field, notatkę i potencjał w formularzu
+    if (data.note !== undefined) {
+        form.querySelector('textarea[name="log"]').value = data.note;
+    }
+
+    if (data.log !== undefined) {
+        form.querySelector('textarea[name="log"]').value = data.log;
+    }
+
+    if (data.potential !== undefined) {
+        form.querySelector('select[name="potential"]').value = data.potential;
+    }
+
+    // Przykład, gdy chcesz zmienić klasę wiersza z potencjałem:
+    const tr = form.closest('tr');
+    if (tr) {
+        const potential = data.potential ? data.potential.toLowerCase() : 'none'; // lub inna domyślna klasa
+        tr.className = tr.className.replace(/potential-\w+/, 'potential-' + potential);
+    }
+}
+document.querySelectorAll('input[name="lead_action"]').forEach(radio => {
+  radio.addEventListener('change', function () {
+    const form = this.closest('form');
+    const hidden = form.querySelector('input[name="status_update"]');
+    if (hidden) hidden.value = this.value;
+  });
+});
+
+document.querySelectorAll('.log-toggle').forEach(textarea => {
+    textarea.addEventListener('click', function () {
+        const isExpanded = this.classList.contains('expanded');
+
+        // Zamknij wszystkie inne
+        document.querySelectorAll('.log-toggle.expanded').forEach(el => {
+            el.style.height = '1rem';
+            el.style.overflow = 'hidden';
+            el.classList.remove('expanded');
+        });
+
+        if (!isExpanded) {
+            // Rozwiń bieżący
+            this.style.height = '10rem';
+            this.style.overflow = 'auto';
+            this.classList.add('expanded');
+        } else {
+            // Zwiń, bo kliknięto ponownie
+            this.style.height = '1rem';
+            this.style.overflow = 'hidden';
+            this.classList.remove('expanded');
+        }
+    });
+});
+    {% if request.session.show_import_modal %}
+  window.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('importResultModal');
+    if (modal) modal.style.display = 'block';
+  });
+{% endif %}
+
+// Otwórz modal i pobierz istniejące działki
+function openParcelModal(leadId) {
+  const modal = document.getElementById('parcelModal');
+  document.getElementById('parcel-lead-id').value = leadId;
+  modal.style.display = 'block';
+  loadParcels(leadId);
+}
+
+// Zamknij modal
+function closeParcelModal() {
+  document.getElementById('parcelModal').style.display = 'none';
+  // wyczyść formularz
+  document.getElementById('parcelForm').reset();
+}
+
+    //////////////////////////////////////////////////////////////////
+ document.getElementById('parcelForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const form = this;
+
+  const voivodeshipSelect = document.getElementById('parcel-voivodeship');
+  const countySelect = document.getElementById('parcel-county');
+  const communeSelect = document.getElementById('parcel-commune');
+
+  const voivodeshipId = voivodeshipSelect.value;
+  const voivodeshipLabel = voivodeshipSelect.options[voivodeshipSelect.selectedIndex]?.textContent.trim() || "";
+
+  const countyId = countySelect.value;
+  const countyLabel = countySelect.options[countySelect.selectedIndex]?.textContent.trim() || "";
+
+  const communeId = communeSelect.value;
+  const communeLabel = communeSelect.options[communeSelect.selectedIndex]?.textContent.trim() || "";
+
+  const formData = new FormData(form);
+
+  // Zachowaj ID – one są wymagane przez backend
+  formData.set("voivodeship", voivodeshipId);
+  formData.set("county", countyId);
+  formData.set("commune", communeId);
+
+  // Dodaj labelki tylko informacyjnie (jeśli potrzebujesz)
+  formData.set("voivodeship_label", voivodeshipLabel);
+  formData.set("county_label", countyLabel);
+  formData.set("commune_label", communeLabel);
+
+  // Prelead (opcjonalnie)
+  const preleadSelect = form.querySelector('select[name="prelead_id"]');
+  if (preleadSelect) {
+    const selectedText = preleadSelect.options[preleadSelect.selectedIndex]?.text || "";
+    formData.set('prelead_name', selectedText);
+  }
+
+  console.log("FormData preview:");
+  for (let [key, value] of formData.entries()) {
+    console.log(key + ": " + value);
+  }
+
+  // AJAX
+  fetch("{% url 'add_parcel' %}", {
+    method: "POST",
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRFToken': getCookie('csrftoken')
+    },
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      showToast('Działka zapisana!', 'success');
+      loadParcels(formData.get('prelead_id'));
+    } else {
+      showToast('Błąd: ' + data.error, 'error');
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    showToast('Błąd połączenia', 'error');
+  });
+});
+
+    
+
+function deleteParcel(parcelId) {
+  if (!confirm("Czy na pewno chcesz usunąć tę działkę?")) return;
+
+  fetch('/api/parcels/delete/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'X-CSRFToken': getCookie('csrftoken') // jeśli nie masz tej funkcji, podam ją niżej
+    },
+    body: `parcel_id=${parcelId}`
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      // Odśwież listę działek po usunięciu
+      const leadId = document.getElementById('parcel-lead-id').value;
+      loadParcels(leadId);
+    } else {
+      alert("Błąd usuwania: " + data.error);
+    }
+  })
+  .catch(err => {
+    alert("Błąd sieci: " + err);
+  });
+}
+    
+// Pobranie działek AJAX-em
+function loadParcels(leadId) {
+  const container = document.getElementById('existingParcels');
+  container.innerHTML = '<p>Ładuję...</p>';
+
+  fetch(`/api/parcels/?prelead_id=${leadId}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.success) {
+        container.innerHTML = `<p class="error">${data.error}</p>`;
+        return;
+      }
+      if (data.parcels.length === 0) {
+        container.innerHTML = '<p>Brak działek</p>';
+        return;
+      }
+
+      // Generujemy tabelę działek
+      container.innerHTML = '';
+
+      const table = document.createElement('table');
+      table.className = 'table table-striped'; // jeśli używasz bootstrapa
+      table.style.width = '100%';
+      table.style.borderCollapse = 'collapse';
+
+      // Nagłówek tabeli
+      const thead = document.createElement('thead');
+      thead.innerHTML = `
+        <tr>
+          <th>Województwo</th>
+          <th>Powiat</th>
+          <th>Miasto / Gmina</th>
+          <th>Obręb</th>
+          <th>Nr działki</th>
+          <th>Powierzchnia (ha)</th>
+          <th>Akcje</th>
+        </tr>
+      `;
+      table.appendChild(thead);
+
+      // Ciało tabeli
+      const tbody = document.createElement('tbody');
+
+      data.parcels.forEach((p, idx) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>${p.voivodeship}</td>
+          <td>${p.county}</td>
+          <td>${p.town}</td>
+          <td>${p.precinct}</td>
+          <td>${p.plot_number}</td>
+          <td>${p.area}</td>
+        <td>
+          <button class="btn btn-sm btn-secondary" onclick="copyParcel(${idx})">
+            Kopiuj
+          </button>
+          <button class="btn btn-sm btn-danger" style="margin-left: 0.5rem;" onclick="deleteParcel(${p.id})">
+            Usuń
+          </button>
+        </td>
+        `;
+
+        // zachowujemy dane w atrybucie wiersza
+        tr.dataset.parcel = JSON.stringify(p);
+
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+      container.appendChild(table);
+    })
+    .catch(err => {
+      container.innerHTML = `<p class="error">Błąd ładowania: ${err}</p>`;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  let data = [];
+
+const wojSelect = document.getElementById('parcel-voivodeship');
+const powSelect = document.getElementById('parcel-county');
+const gmiSelect = document.getElementById('parcel-commune');
+
+  if (!wojSelect || !powSelect || !gmiSelect) {
+    console.error('Brak elementów select w DOM');
+    return;
+  }
+
+  function resetSelect(selectElement, placeholder) {
+    selectElement.innerHTML = `<option value="">${placeholder}</option>`;
+    selectElement.disabled = true;
+  }
+
+
+function loadWojewodztwa() {
+  resetSelect(wojSelect, 'Wybierz województwo');
+  Object.entries(data)
+    .sort((a, b) => a[1].name.localeCompare(b[1].name))
+    .forEach(([wojId, woj]) => {
+      const option = document.createElement('option');
+      option.value = wojId;
+      option.textContent = woj.name || `Województwo ${wojId}`;
+      wojSelect.appendChild(option);
+    });
+  wojSelect.disabled = false;
+}
+function loadPowiaty(wojId) {
+  resetSelect(powSelect, 'Wybierz powiat');
+  resetSelect(gmiSelect, 'Wybierz gminę');
+  if (!wojId || !data[wojId]) return;
+
+  const powiaty = data[wojId].powiaty;
+
+  Object.entries(powiaty)
+    .sort((a, b) => a[1].name.localeCompare(b[1].name))
+    .forEach(([powId, pow]) => {
+      const option = document.createElement('option');
+      option.value = powId;
+      option.textContent = pow.name || `Powiat ${powId}`;
+      powSelect.appendChild(option);
+    });
+  powSelect.disabled = false;
+}
+
+function loadGminy(wojId, powId) {
+  resetSelect(gmiSelect, 'Wybierz gminę');
+  if (!wojId || !powId || !data[wojId] || !data[wojId].powiaty[powId]) return;
+
+  const gminy = data[wojId].powiaty[powId].gminy;
+
+  Object.entries(gminy)
+    .sort((a, b) => a[1].name.localeCompare(b[1].name))
+    .forEach(([gmiId, gmi]) => {
+      const option = document.createElement('option');
+      option.value = gmiId;
+      option.textContent = gmi.name || `Gmina ${gmiId}`;
+      gmiSelect.appendChild(option);
+    });
+
+  gmiSelect.disabled = false;
+}
+
+
+  wojSelect.addEventListener('change', e => {
+    loadPowiaty(e.target.value);
+  });
+
+  powSelect.addEventListener('change', e => {
+    loadGminy(wojSelect.value, e.target.value);
+  });
+
+fetch('/static/terc.json')
+  .then(res => res.json())
+  .then(jsonData => {
+    console.log(jsonData);  // <--- sprawdź, jak wygląda
+    data = jsonData;
+    loadWojewodztwa();
+  });
+
+});
+// Funkcja kopiująca dane działki do formularza
+function copyParcel(index) {
+  const items = document.querySelectorAll('#existingParcels .parcel-item');
+  const p = JSON.parse(items[index].dataset.parcel);
+  document.getElementById('parcel-voivodeship').value = p.voivodeship;
+  document.getElementById('parcel-county').value      = p.county;
+  document.getElementById('parcel-town').value        = p.town;
+  document.getElementById('parcel-precinct').value    = p.precinct;
+  document.getElementById('parcel-plot-number').value = p.plot_number;
+  document.getElementById('parcel-area').value        = p.area;
+}
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + '=')) {
+        cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+    
+</script>
+
+{% endblock %}

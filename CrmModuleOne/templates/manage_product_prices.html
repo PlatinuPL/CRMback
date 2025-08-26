@@ -1,0 +1,89 @@
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarządzanie cenami produktu</title>
+</head>
+<body>
+    <h1>Ustal cenę dla produktu: {{ product.name }}</h1>
+
+    <h2>Dodaj nową konfigurację:</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="attributes">Atrybuty (tylko do odczytu):</label>
+        <textarea id="attributes" name="attributes" rows="5" cols="50" readonly>{{ attributes }}</textarea><br>
+
+        <label for="price">Cena jednostkowa:</label>
+        <input id="price" name="price" type="number" step="0.01" value="{{ form.initial.price }}" required /> zł/m²<br>
+
+        <p><strong>Cena całkowita:</strong> <span id="total-price">0.00</span> zł</p>
+
+        <label for="unit">Jednostka (np. zł/szt.):</label>
+        <input id="unit" name="unit" type="text" placeholder="Jednostka, np. zł/szt." /><br>
+
+        <button type="submit">Zapisz cenę</button>
+    </form>
+
+    <h2>Istniejące konfiguracje:</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Atrybuty</th>
+                <th>Cena jednostkowa</th>
+                <th>Powierzchnia</th>
+                <th>Cena całkowita</th>
+                <th>Jednostka</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for config in configurations %}
+            <tr>
+                <td><pre>{{ config.attributes|default:"{}" }}</pre></td>
+                <td>{{ config.price }} zł/m²</td>
+                <td>{{ config.attributes.Powierzchnia|default:"N/A" }}</td>
+                <td>{{ config.price }} zł</td>
+                <td>{{ config.unit }}</td>
+                <td>
+                    <!-- Akcje edycji/usuwania -->
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Pobierz dane atrybutów
+            const attributesField = document.getElementById("attributes");
+            const surfaceField = document.getElementById("surface");
+            const priceField = document.getElementById("price");
+            const totalPriceField = document.getElementById("total-price");
+
+            // Parsuj atrybuty JSON
+            try {
+                const attributes = JSON.parse(attributesField.value);
+                const surface = attributes["Powierzchnia"]?.replace("m2", "").trim();
+
+                if (surface) {
+                    surfaceField.value = surface; // Ustaw powierzchnię w polu formularza
+                }
+
+                // Obliczanie całkowitej ceny w czasie rzeczywistym
+                priceField.addEventListener("input", function () {
+                    const price = parseFloat(priceField.value) || 0;
+                    const surfaceValue = parseFloat(surface) || 0;
+                    const totalPrice = price * surfaceValue;
+
+                    totalPriceField.textContent = totalPrice.toFixed(2);
+                });
+            } catch (error) {
+                console.error("Nie udało się sparsować atrybutów:", error);
+            }
+        });
+    </script>
+</body>
+</html>

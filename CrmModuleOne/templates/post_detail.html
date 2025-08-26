@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% load static %} {% block title %} {{post.title }}
+{%endblock %} {% block content %}
+<div class="post-detail container">
+  <h1>{{ post.title }}</h1>
+  <p><strong>Autor:</strong> {{ post.author.username }}</p>
+  <p>
+    <strong>Data publikacji:</strong> {{ post.created_at|date:"d-m-Y H:i" }}
+  </p>
+  {% if post.image %}
+  <img
+    class="post-imageDetail"
+    src="{{ post.image.url }}"
+    alt="Zdjęcie posta"
+  />
+  {% endif %}
+  <div class="post-content">{{ post.content|linebreaksbr }}</div>
+
+  <!-- Checkbox do potwierdzenia przeczytania -->
+  <label class="confirmedCheckbox">
+    {% if post.mandatory_to_acknowledge %}
+
+    <!-- prettier-ignore -->
+    <input
+    type="checkbox"
+    class="acknowledge-checkbox {% if user in post.acknowledged_by.all %}confirmed{% endif %}"
+    data-url="{% url 'acknowledge_post' %}"
+    data-post-id="{{ post.id }}"
+    {% if user in post.acknowledged_by.all %}checked{% endif %}
+/>
+    Zatwierdź przeczytanie {% endif %}
+
+    <a class="backToList" href="{% url 'dashboard' %}"
+      >Powrót do listy postów</a
+    >
+  </label>
+</div>
+{% endblock %}

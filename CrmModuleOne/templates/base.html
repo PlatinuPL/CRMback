@@ -1,0 +1,1409 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{% block title %}CRM System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/media.css' %}" />
+  </head>
+  <body>
+    <!-- Nagłówek -->
+    <header>
+      <div class="header containerHeader">
+        <!-- Logo -->
+        <div class="logo">
+          <a class="logoAnc" href="{% url 'dashboard' %}">
+            <img src="{% static 'images/HSZ_logo_bez.png' %}" alt="Logo CRM" />
+            <p>Solargrids</p>
+          </a>
+        </div>
+        
+
+        <!-- Lista podstron -->
+        <nav class="main-nav" id="main-nav">
+          <ul>
+            <li>
+              <a
+                href="{% url 'dashboard' %}"
+                class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+                >Tablica ogłoszeń</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'calculator' %}"
+                class="{% if request.resolver_match.url_name == 'calculator' %}active{% endif %}{% if unacknowledged_posts_count > 0 %}disabled-link{% endif %}"
+                >Kalkulator</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'klienci' %}"
+                class="{% if request.resolver_match.url_name == 'klienci' %}active{% endif %}{% if unacknowledged_posts_count > 0 %}disabled-link{% endif %}{% if request.resolver_match.url_name == 'oferty' %}active{% endif %}{% if request.resolver_match.url_name == 'leady' %}active{% endif %}"
+                >Klienci</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'leadsfb' %}"
+                class="{% if request.resolver_match.url_name == 'leadsfb' %}active{% endif %}{% if unacknowledged_posts_count > 0 %}disabled-link{% endif %}"
+                >Leady</a
+              >
+            </li>
+              <li>
+              <a
+                href="{% url 'grafiks' %}"
+                class="{% if request.resolver_match.url_name == 'grafiks' %}active{% endif %}{% if unacknowledged_posts_count > 0 %}disabled-link{% endif %}"
+                >Grafiki</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Ikony użytkownika -->
+        <div class="user-icons">
+          <a href="#"  class="notification-toggle" title="Powiadomienia">
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1rem"
+              height="1rem"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M4 19v-2h2v-7q0-2.075 1.25-3.687T10.5 4.2v-.7q0-.625.438-1.062T12 2t1.063.438T13.5 3.5v.7q2 .5 3.25 2.113T18 10v7h2v2zm8 3q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-4-5h8v-7q0-1.65-1.175-2.825T12 6T9.175 7.175T8 10z"
+              />
+            </svg>
+            <span id="notification-counter" class="hidden"></span>
+          </a>
+          
+        </a>
+        <div class="notification-dropdown hidden"> <ul id="notifications-container" >      </ul>    <a href="{% url 'notifications_list' %}" class="see-all-notifications">
+            Zobacz wszystkie powiadomienia
+        </a>
+    
+    </div>
+
+    <a href="#" title="Inbox">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+          </svg>
+          
+      </a>
+
+          <a href="#" class="profile-toggle" title="Profil">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1rem"
+              height="1rem"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="8" r="5" />
+                <path d="M20 21a8 8 0 0 0-16 0" />
+              </g>
+            </svg>
+            <div class="user-menu-box">
+            <p style="color: #515151;"><b>{{ user.first_name }} {{ user.last_name }} </b></p>
+            <p>{% for group in user.groups.all %}{{ group.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            </div>
+          </a>
+
+          <div class="profile-dropdown user-menu-drop">
+            <div class="user-menu-drop">
+            <a
+            href="{% url 'upload_template' %}"
+            class="{% if request.resolver_match.url_name == 'klienci' %}active{% endif %}{% if request.resolver_match.url_name == 'oferty' %}active{% endif %}{% if request.resolver_match.url_name == 'leady' %}active{% endif %}"
+            ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+              </svg>
+              Szablony</a
+          >
+          <a href="#" title="Ustawienia">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1rem"
+              height="1rem"
+              viewBox="0 0 24 24"
+            >
+              <g fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M13.765 2.152C13.398 2 12.932 2 12 2s-1.398 0-1.765.152a2 2 0 0 0-1.083 1.083c-.092.223-.129.484-.143.863a1.62 1.62 0 0 1-.79 1.353a1.62 1.62 0 0 1-1.567.008c-.336-.178-.579-.276-.82-.308a2 2 0 0 0-1.478.396C4.04 5.79 3.806 6.193 3.34 7s-.7 1.21-.751 1.605a2 2 0 0 0 .396 1.479c.148.192.355.353.676.555c.473.297.777.803.777 1.361s-.304 1.064-.777 1.36c-.321.203-.529.364-.676.556a2 2 0 0 0-.396 1.479c.052.394.285.798.75 1.605c.467.807.7 1.21 1.015 1.453a2 2 0 0 0 1.479.396c.24-.032.483-.13.819-.308a1.62 1.62 0 0 1 1.567.008c.483.28.77.795.79 1.353c.014.38.05.64.143.863a2 2 0 0 0 1.083 1.083C10.602 22 11.068 22 12 22s1.398 0 1.765-.152a2 2 0 0 0 1.083-1.083c.092-.223.129-.483.143-.863c.02-.558.307-1.074.79-1.353a1.62 1.62 0 0 1 1.567-.008c.336.178.579.276.819.308a2 2 0 0 0 1.479-.396c.315-.242.548-.646 1.014-1.453s.7-1.21.751-1.605a2 2 0 0 0-.396-1.479c-.148-.192-.355-.353-.676-.555A1.62 1.62 0 0 1 19.562 12c0-.558.304-1.064.777-1.36c.321-.203.529-.364.676-.556a2 2 0 0 0 .396-1.479c-.052-.394-.285-.798-.75-1.605c-.467-.807-.7-1.21-1.015-1.453a2 2 0 0 0-1.479-.396c-.24.032-.483.13-.82.308a1.62 1.62 0 0 1-1.566-.008a1.62 1.62 0 0 1-.79-1.353c-.014-.38-.05-.64-.143-.863a2 2 0 0 0-1.083-1.083Z"
+                />
+              </g>
+            </svg>Ustawienia
+          </a>
+            <form class="noneForm" method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+             
+              <button class="noneForm" type="submit"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+              </svg>
+              Wyloguj się</button>
+
+            </form>
+        </div>
+        </div>
+    </div>
+    <!-- Przycisk mobilnego menu -->
+  <button class="menu-toggle" id="menu-toggle">
+      ☰
+  </button>
+
+ 
+      </div>
+    </header>
+
+    <!-- Główna zawartość -->
+    <main>
+      {% block content %}
+      <!-- Treść strony -->
+      {% endblock %}
+    </main>
+
+    <!-- Stopka -->
+    <footer>
+      <div class="footer-container">
+        <p>&copy; {% now "Y" %} CRM System - Wszystkie prawa zastrzeżone</p>
+        <p>
+          Kontakt:
+          <a href="mailto:support@crm-system.pl">support@crm-system.pl</a>
+        </p>
+      </div>
+    </footer>
+    <div class="calendar-container">
+    <div class="calendar">
+                  <!-- Przycisk do obracania kalendarza -->
+    <button class="flip-calendar-btn" onclick="flipCalendar()"><ion-icon name="calculator-outline"></ion-icon></button>
+      <div class="current-datetime">
+        <h2 id="current-date"></h2>
+        <p id="current-time"></p>
+    </div>
+    <button class="toggle-calendar-btn"><ion-icon name="remove-outline"></ion-icon></button>
+      <div class="calendar-header">
+          <button onclick="prevMonth()">&#10094;</button>
+          <h2 id="month-year"></h2>
+          <button onclick="nextMonth()">&#10095;</button>
+      </div>
+      <div class="calendar-body">
+          <div class="calendar-weekdays"></div>
+          <div class="calendar-days" id="calendar-days"></div>
+      </div>
+      <div class="weekly-events">
+        <div class="tabs-calendar">
+            <button class="tab-calendar-button active" data-tab="weekly">📅 Bieżące</button>
+            <button class="tab-calendar-button" data-tab="history">📜 Historia</button>
+            <button class="tab-calendar-button hidden" data-tab="daily">📜 Dzisiejsze</button>
+        </div>
+    
+        <div class="tab-calendar-content active" id="weekly-tab-calendar">
+            <ul id="weekly-events-list"></ul>
+            <div id="pagination-controls"></div>
+        </div>
+    
+        <div class="tab-calendar-content" id="history-tab-calendar">
+            <ul id="history-events-list"></ul>
+            <div id="history-pagination-controls"></div>
+        </div>
+        <div class="tab-calendar-content" id="daily-tab-calendar">
+          <ul id="daily-events-list"></ul>
+      </div>
+    </div>
+  </div>
+          <!-- Tył kalendarza - Kalkulator -->
+          <div class="calendar-back">
+                        <!-- Przycisk do obracania kalendarza -->
+    <button class="flip-calendar-btn" onclick="flipCalendar()"><ion-icon name="calendar-outline"></ion-icon></button>
+          <div class="current-datetime">
+        <h2 id="current-date"></h2>
+        <p id="current-time"></p>
+    </div>
+    <button class="toggle-calendar-btn"><ion-icon name="remove-outline"></ion-icon></button>
+            <h2 class="calculator-title">Kalkulator</h2>
+            <div class="calculator-widget">
+                <input type="text" id="calc-display" oninput="updateCalcExpression()" />
+                <div class="calc-buttons">
+                    <button class="calc-btn" onclick="appendToCalc('7')">7</button>
+                    <button class="calc-btn" onclick="appendToCalc('8')">8</button>
+                    <button class="calc-btn" onclick="appendToCalc('9')">9</button>
+                    
+                    <button class="calc-btn" onclick="clearCalc()">C</button>
+                    <button class="calc-btn" onclick="deleteLastCharacter()">⌫</button>
+                    
+                    <button class="calc-btn" onclick="appendToCalc('4')">4</button>
+                    <button class="calc-btn" onclick="appendToCalc('5')">5</button>
+                    <button class="calc-btn" onclick="appendToCalc('6')">6</button>
+                    <button class="calc-btn" onclick="appendToCalc('+')">+</button>
+                    <button class="calc-btn" onclick="appendToCalc('-')">−</button>
+                    <button class="calc-btn" onclick="appendToCalc('1')">1</button>
+                    <button class="calc-btn" onclick="appendToCalc('2')">2</button>
+                    <button class="calc-btn" onclick="appendToCalc('3')">3</button>
+                    <button class="calc-btn" onclick="appendToCalc('*')">×</button>
+                    <button class="calc-btn" onclick="appendToCalc('/')">÷</button>
+                    <button class="calc-btn" onclick="appendToCalc('0')">0</button>
+                    <button class="calc-btn" onclick="appendToCalc('.')">.</button> <!-- Przycisk kropki -->
+                    <button class="calc-btn" onclick="calculateResult()">=</button>
+                    <button class="calc-btn" onclick="appendToCalc('(')">(</button>
+                    <button class="calc-btn" onclick="appendToCalc(')')">)</button>
+            
+                    
+                     <!-- Przycisk backspace -->
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="calculator-history">
+                <ul id="calc-history-list"></ul>
+            </div>
+          
+        </div>
+
+      </div>
+    <!-- Skrypty -->  
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+      let currentPageWeekly = 1;
+      let currentPageHistory = 1;
+      const eventsPerPage = 6;
+let currentDate = new Date();
+let tasks = [];
+let meetings = [];
+
+const monthNames = [
+    "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
+    "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"
+];
+
+const daysOfWeek = ["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Niedz"];
+
+/** Generowanie kalendarza **/
+function generateCalendar() {
+    const monthYear = document.getElementById("month-year");
+    const daysContainer = document.getElementById("calendar-days");
+    const weekdaysContainer = document.querySelector(".calendar-weekdays");
+
+    daysContainer.innerHTML = ""; // Czyszczenie poprzedniego kalendarza
+    weekdaysContainer.innerHTML = ""; // Czyszczenie dni tygodnia
+
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    monthYear.textContent = `${monthNames[month]} ${year}`;
+
+    daysOfWeek.forEach(day => {
+        weekdaysContainer.innerHTML += `<span>${day}</span>`;
+    });
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+    const startDay = firstDay === 0 ? 6 : firstDay - 1;
+
+    for (let i = 0; i < startDay; i++) {
+        daysContainer.innerHTML += `<div class="empty"></div>`;
+    }
+
+    for (let day = 1; day <= lastDate; day++) {
+      const taskDate = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+      let eventClass = "";
+  
+      const hasTask = tasks.includes(taskDate);
+      const hasMeeting = meetings.includes(taskDate);
+  
+      if (hasTask && hasMeeting) {
+          eventClass = "task-meeting"; // Nowa klasa dla dni z obiema kategoriami
+      } else if (hasTask) {
+          eventClass = "task";
+      } else if (hasMeeting) {
+          eventClass = "meeting";
+      }
+      const dayElement = document.createElement("div");
+      dayElement.textContent = day;
+      dayElement.dataset.date = taskDate; // Dodanie daty jako atrybut
+  
+      if (eventClass) { // ✅ Sprawdzamy, czy eventClass nie jest pusty
+          dayElement.classList.add(eventClass);
+      }
+  
+      // Obsługa kliknięcia w dzień
+      dayElement.addEventListener("click", function () {
+          showEventsForDay(taskDate);
+      });
+  
+      daysContainer.appendChild(dayElement);
+  }}
+
+/** Przejście do poprzedniego miesiąca **/
+function prevMonth() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    generateCalendar();
+}
+
+/** Przejście do następnego miesiąca **/
+function nextMonth() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    generateCalendar();
+}
+
+/** Pobranie wydarzeń z serwera **/
+fetch("/get_event_to_calendar/")
+    .then(response => response.json())
+    .then(data => {
+        if (!data.tasks || !data.meetings) {
+            console.error("Błąd: Brak oczekiwanych danych", data);
+            return;
+        }
+
+        // 📌 Filtrujemy tylko NIEWYKONANE zadania
+        tasks = data.tasks
+            .filter(task => !task.completed) // <-- Usuwamy wykonane zadania
+            .map(task => task.date);
+
+        // 📌 Filtrujemy tylko NIEODBYTE spotkania
+        meetings = data.meetings
+            .filter(meeting => !meeting.note) // <-- Usuwamy odbyte spotkania
+            .map(meeting => meeting.date);
+
+        tasks2 = data.tasks
+            .filter(task => task.date) // Pominięcie obiektów bez daty
+            .map(task => task);
+
+        meetings2 = data.meetings
+            .filter(meeting => meeting.date) // Pominięcie obiektów bez daty
+            .map(meeting => meeting)
+
+
+        generateCalendar();
+        displayWeeklyEvents(tasks2, meetings2);
+        displayHistoryEvents(tasks2, meetings2);
+    })
+    .catch(error => console.error("Błąd pobierania danych:", error));
+
+generateCalendar();
+
+/** Obsługa przeciągania kalendarza **/
+document.addEventListener("DOMContentLoaded", () => {
+  const calendarContainer = document.querySelector(".calendar-container");
+
+  let offsetX = 0, offsetY = 0, isDragging = false;
+
+let currentX = 0, currentY = -2250;
+
+if (localStorage.getItem("calendarPosition")) {
+  const savedPosition = JSON.parse(localStorage.getItem("calendarPosition"));
+  currentX = savedPosition.x;
+  currentY = savedPosition.y;
+} else {
+  currentX = 0;
+  currentY = -2258;
+}
+
+calendarContainer.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+  calendarContainer.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - currentX;
+    offsetY = e.clientY - currentY;
+    calendarContainer.style.cursor = "grabbing";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+
+    // Oblicz nowe pozycje
+    let newX = e.clientX - offsetX;
+    let newY = e.clientY - offsetY;
+
+    // Pobierz wymiary elementu i okna
+    const rect = calendarContainer.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+
+
+    currentX = newX;
+    currentY = newY;
+    calendarContainer.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+    localStorage.setItem("calendarPosition", JSON.stringify({ x: currentX, y: currentY }));
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+    calendarContainer.style.cursor = "grab";
+  });
+
+  renderCalcHistory(); // Załadowanie historii przy starcie
+});
+
+
+/** Aktualizacja godziny dla wszystkich zegarów **/
+function updateDateTime() {
+  const now = new Date();
+  const dateOptions = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
+  const timeOptions = { hour: "2-digit", minute: "2-digit", second: "2-digit" };
+
+  document.querySelectorAll("#current-date").forEach(element => {
+      element.textContent = now.toLocaleDateString("pl-PL", dateOptions);
+  });
+
+  document.querySelectorAll("#current-time").forEach(element => {
+      element.textContent = now.toLocaleTimeString("pl-PL", timeOptions);
+  });
+}
+
+// Uruchamianie aktualizacji co sekundę
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+/** Pobranie wydarzeń na ten tydzień **/
+function getCurrentWeekEvents(events) {
+    {% comment %} const now = new Date();
+    const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay() + 1)); // Poniedziałek
+    const endOfWeek = new Date(now.setDate(startOfWeek.getDate() + 6)); // Niedziela
+
+    return events.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate >= startOfWeek && eventDate <= endOfWeek;
+    }); {% endcomment %}
+    return events.filter(event => true); // Zwraca wszystkie wydarzenia bez filtrowania po dacie
+}
+
+/** Wyświetlanie wydarzeń na ten tydzień **/
+function displayWeeklyEvents(tasks, meetings) {
+    const eventsList = document.getElementById("weekly-events-list");
+    eventsList.innerHTML = "";
+
+    const weekEvents = [
+        ...getCurrentWeekEvents(tasks).map(e => ({ ...e, type: "task" })),
+        ...getCurrentWeekEvents(meetings).map(e => ({ ...e, type: "meeting" }))
+    ];
+
+    if (weekEvents.length === 0) {
+        eventsList.innerHTML = "<li>Brak wydarzeń w tym tygodniu</li>";
+        return;
+    }
+
+    weekEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    weekEvents.forEach(event => {
+        const eventItem = document.createElement("li");
+        eventItem.innerHTML = `
+            <span class="${event.type === 'task' ? 'event-task' : 'event-meeting'}">
+                ${event.title}
+            </span> <span>${event.date}</span>`;
+        eventsList.appendChild(eventItem);
+    });
+}
+
+
+/** 🔥 Funkcja do wyświetlania wydarzeń z paginacją */
+function displayHistoryEvents(tasks, meetings) {
+  const eventsList = document.getElementById("history-events-list");
+  eventsList.innerHTML = ""; // Czyszczenie listy przed aktualizacją
+
+  const weekEvents = [
+      ...getCurrentWeekEvents(tasks).map(e => ({ ...e, type: "task" })),
+      ...getCurrentWeekEvents(meetings).map(e => ({ ...e, type: "meeting" }))
+  ];
+  const filteredEvents = weekEvents.filter(event => 
+  (event.type === 'task' && event.completed) || 
+  (event.type === 'meeting' && event.note)
+);
+
+  if (weekEvents.length === 0) {
+      eventsList.innerHTML = "<li>Brak wydarzeń</li>";
+      return;
+  }
+
+  {% comment %} weekEvents.sort((a, b) => {
+    // Porównanie daty
+    const dateComparison = new Date(a.date) - new Date(b.date);
+    if (dateComparison !== 0) return dateComparison; // Jeśli daty są różne, zwróć wynik porównania
+
+    // Porównanie godziny, jeśli daty są identyczne
+    return new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`);
+}); {% endcomment %}
+
+filteredEvents.sort((a, b) => {
+  const aClosedAt = a.completed_at || a.note_added_at || null;
+  const bClosedAt = b.completed_at || b.note_added_at || null;
+
+  if (aClosedAt && bClosedAt) {
+      return new Date(bClosedAt) - new Date(aClosedAt); // Sortowanie malejące (najnowsze zamknięcie wyżej)
+  } else if (aClosedAt) {
+      return -1; // Zamknięte wydarzenie ma pierwszeństwo
+  } else if (bClosedAt) {
+      return 1; // Zamknięte wydarzenie ma pierwszeństwo
+  }
+
+  const dateComparison = new Date(a.date) - new Date(b.date);
+  if (dateComparison !== 0) return dateComparison;
+
+  return new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`);
+});
+
+// Wyświetlenie pełnej listy posortowanych wydarzeń
+console.log("✅ Posortowana lista wydarzeń:", weekEvents);
+
+
+  // 📌 Podział na strony
+  const totalPages = Math.ceil(filteredEvents.length / eventsPerPage);
+  const startIndex = (currentPageHistory - 1) * eventsPerPage;
+  const paginatedEvents = filteredEvents.slice(startIndex, startIndex + eventsPerPage);
+
+  paginatedEvents.forEach(event => {
+      if ((event.type === 'task' && event.completed) || (event.type === 'meeting' && event.note)) {
+          const eventItem = document.createElement("li");
+          eventItem.classList.add("event-item");
+          eventItem.setAttribute("data-id", event.id);
+          eventItem.innerHTML = `
+              <div class="event-title ${event.type === 'task' ? 'event-task' : 'event-meeting'}">
+                  <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
+                  <span class="event-title-text">${truncateText(event.title, 21)}</span>
+                  <span class="event-date">${event.date}</span>
+                  <span class="event-time">${event.time}</span>  <!-- Dodanie godziny -->
+              </div>
+              <div class="event-details">
+                  <p><strong>Szczegóły wydarzenia:</strong> ${event.title}</p>
+                  <p><strong>Data:</strong> ${event.date} <b>Godzina:</b> ${event.time}</p>
+                  <p><strong>Klient:</strong> <a href="${event.client_link}" class="client-link">${event.client_name}</a></p>
+                  {% comment %} <p><strong>Autor:</strong> ${event.author}</p> {% endcomment %}
+
+                  ${event.type === 'task' ? `
+                      <p><strong>Dodano:</strong> ${event.added_date}</p>
+                      <p><strong>Status:</strong> <span class="task-status">${event.completed ? "✅ Ukończone" : "⏳ W toku"}</span><button class="hidden complete-task-btn" data-task-id="${event.id}" ${event.completed ? "disabled" : ""}>
+                      </button></p>
+`
+                  : `
+                       
+                      <p><strong>Spotkanie się odbyło?</strong> ${event.occurred ? "✅ Tak" : "❌ Nie"}</p>
+                     `}
+              </div>
+          `;
+
+          // ✅ Dodajemy event do rozwijania/zamykania
+          eventItem.addEventListener("click", function (e) {
+              const details = this.querySelector(".event-details");
+              const arrow = this.querySelector(".arrow");
+
+              if (!details || !arrow) {
+                  console.error("❌ Brak elementu .event-details lub .arrow");
+                  return;
+              }
+
+              // 🔥 Zamykamy inne otwarte wydarzenia przed otwarciem nowego
+              document.querySelectorAll(".event-item.open").forEach(openItem => {
+                  if (openItem !== this) { // Pomijamy kliknięty element
+                      openItem.classList.remove("open");
+                      openItem.querySelector(".event-details").classList.remove("visible");
+                      openItem.querySelector(".arrow").classList.remove("rotated");
+                  }
+              });
+
+              // 🔄 Przełączamy obecnie kliknięty element
+              details.classList.toggle("visible");
+              this.classList.toggle("open");
+              arrow.classList.toggle("rotated");
+          });
+
+          // 🚀 Zapobieganie zamykaniu po kliknięciu w pole tekstowe
+          eventItem.querySelector(".meeting-note")?.addEventListener("click", function (event) {
+              event.stopPropagation(); // ⛔ Zatrzymanie propagacji, aby nie zamykało eventItem
+          });
+
+          // Dodanie obsługi kliknięcia "Oznacz jako ukończone"
+          if (event.type === 'task') {
+              const completeButton = eventItem.querySelector(".complete-task-btn");
+              completeButton.addEventListener("click", function() {
+                  const taskId = this.getAttribute("data-task-id");
+                  markTaskAsCompleted(taskId, this);
+              });
+          }
+
+          if (event.type === 'meeting') {
+              const statusButtons = eventItem.querySelectorAll(".meeting-status-btn");
+              const noteField = eventItem.querySelector(".meeting-note");
+
+              statusButtons.forEach(button => {
+                  button.addEventListener("click", function () {
+                      const status = this.getAttribute("data-status") === "true";
+                      const note = noteField.value.trim();
+
+                      if (!note) {
+                          alert("⚠️ Notatka jest wymagana, aby oznaczyć spotkanie!");
+                          noteField.focus();
+                          return;
+                      }
+
+                      markMeetingAs(status, note, eventItem, event);
+                  });
+              });
+          }
+
+          eventsList.appendChild(eventItem);
+      }
+  });
+
+  renderPaginationControls(totalPages, "history");
+}
+/** 🔥 Funkcja do wyświetlania wydarzeń z paginacją */
+function displayWeeklyEvents(tasks, meetings) {
+    const eventsList = document.getElementById("weekly-events-list");
+    eventsList.innerHTML = ""; // Czyszczenie listy przed aktualizacją
+
+    const weekEvents = [
+        ...getCurrentWeekEvents(tasks).map(e => ({ ...e, type: "task" })),
+        ...getCurrentWeekEvents(meetings).map(e => ({ ...e, type: "meeting" }))
+    ];
+    const filteredEvents = weekEvents.filter(event => 
+    (event.type === 'task' && !event.completed) || 
+    (event.type === 'meeting' && !event.note)
+);
+    if (weekEvents.length === 0) {
+        eventsList.innerHTML = "<li>Brak wydarzeń w tym tygodniu</li>";
+        return;
+    }
+
+    weekEvents.sort((a, b) => {
+      // Porównanie daty
+      const dateComparison = new Date(a.date) - new Date(b.date);
+      if (dateComparison !== 0) return dateComparison; // Jeśli daty są różne, zwróć wynik porównania
+  
+      // Porównanie godziny, jeśli daty są identyczne
+      return new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`);
+  });
+  
+  // Jeśli filtrujesz później wydarzenia, także sortuj je poprawnie
+  filteredEvents.sort((a, b) => {
+      const dateComparison = new Date(a.date) - new Date(b.date);
+      if (dateComparison !== 0) return dateComparison;
+  
+      return new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`);
+  });
+    // 📌 Podział na strony
+    const totalPages = Math.ceil(filteredEvents.length / eventsPerPage);
+    const startIndex = (currentPageWeekly - 1) * eventsPerPage;
+    const paginatedEvents = filteredEvents.slice(startIndex, startIndex + eventsPerPage);
+
+    paginatedEvents.forEach(event => {
+        if ((event.type === 'task' && !event.completed) || (event.type === 'meeting' && !event.note)) {
+            const eventItem = document.createElement("li");
+            eventItem.classList.add("event-item");
+          // Sprawdzenie, czy wydarzenie jest przeterminowane
+          const now = new Date();
+          const eventDate = new Date(event.date);
+          const eventDateTime = new Date(`${event.date}T${event.time}`); // Łączenie daty i godziny
+
+          // Dodanie klasy dla przeterminowanych wydarzeń
+          if ((event.type === 'task' && !event.completed && eventDateTime < now) || 
+              (event.type === 'meeting' && !event.note && eventDateTime < now)) {
+              eventItem.classList.add("overdue"); 
+          } 
+          // Dodanie klasy dla wydarzeń, które zbliżają się do terminu (mniej niż 8 godzin)
+          else if ((event.type === 'task' && !event.completed && (eventDateTime - now) <= 8 * 60 * 60 * 1000) || 
+                  (event.type === 'meeting' && !event.note && (eventDateTime - now) <= 8 * 60 * 60 * 1000)) {
+              eventItem.classList.add("warning"); 
+          }
+            eventItem.setAttribute("data-id", event.id);
+            eventItem.innerHTML = `
+                <div class="event-title ${event.type === 'task' ? 'event-task' : 'event-meeting'}">
+                    <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
+                    <span class="event-title-text">${truncateText(event.title, 21)}</span>
+                    <span class="event-date">${event.date}</span>
+                    <span class="event-time">${event.time}</span>  <!-- Dodanie godziny -->
+                </div>
+                <div class="event-details">
+                    <p><strong>Szczegóły wydarzenia:</strong> ${event.title}</p>
+                    <p><strong>Data:</strong> ${event.date} <b>Godzina:</b> ${event.time}</p>
+                    <p><strong>Klient:</strong> <a href="${event.client_link}" class="client-link">${event.client_name}</a></p>
+                    {% comment %} <p><strong>Autor:</strong> ${event.author}</p> {% endcomment %}
+
+                    ${event.type === 'task' ? `
+                        <p><strong>Dodano:</strong> ${event.added_date}</p>
+                        <p><strong>Status:</strong> <span class="task-status">${event.completed ? "✅ Ukończone" : "⏳ W toku"}</span>
+                          <button class="complete-task-btn" data-task-id="${event.id}" ${event.completed ? "disabled" : ""}>
+                            ${event.completed ? "✔️ Ukończone" : "✅ Oznacz jako ukończone"}
+                        </button></p>
+`
+                    : `
+                         
+                        {% comment %} <p><strong>Spotkanie się odbyło?</strong> ${event.occurred ? "✅ Tak" : "❌ Nie"}</p> {% endcomment %}
+                        <label style="margin-left:0;"> Notatka do spotkania:</label>
+                        <textarea class="meeting-note" placeholder="Dodaj notatkę..."></textarea>
+                        <div class="meeting-actions">
+                            <button class="meeting-status-btn" data-status="true">✔ Odbyło się</button>
+                            <button class="meeting-status-btn" data-status="false">✖ Nie odbyło się</button>
+                        </div>`}
+                </div>
+            `;
+
+            // ✅ Dodajemy event do rozwijania/zamykania
+            eventItem.addEventListener("click", function (e) {
+                const details = this.querySelector(".event-details");
+                const arrow = this.querySelector(".arrow");
+
+                if (!details || !arrow) {
+                    console.error("❌ Brak elementu .event-details lub .arrow");
+                    return;
+                }
+
+                // 🔥 Zamykamy inne otwarte wydarzenia przed otwarciem nowego
+                document.querySelectorAll(".event-item.open").forEach(openItem => {
+                    if (openItem !== this) { // Pomijamy kliknięty element
+                        openItem.classList.remove("open");
+                        openItem.querySelector(".event-details").classList.remove("visible");
+                        openItem.querySelector(".arrow").classList.remove("rotated");
+                    }
+                });
+
+                // 🔄 Przełączamy obecnie kliknięty element
+                details.classList.toggle("visible");
+                this.classList.toggle("open");
+                arrow.classList.toggle("rotated");
+            });
+
+            // 🚀 Zapobieganie zamykaniu po kliknięciu w pole tekstowe
+            eventItem.querySelector(".meeting-note")?.addEventListener("click", function (event) {
+                event.stopPropagation(); // ⛔ Zatrzymanie propagacji, aby nie zamykało eventItem
+            });
+
+// Dodanie obsługi kliknięcia "Oznacz jako ukończone"
+if (event.type === 'task') {
+  const completeButton = eventItem.querySelector(".complete-task-btn");
+  completeButton.addEventListener("click", function() {
+      const taskId = this.getAttribute("data-task-id");
+      markTaskAsCompleted(taskId, this).then(() => {
+          refreshEvents(); // Pobranie zdarzeń na nowo
+      });
+  });
+}
+
+if (event.type === 'meeting') {
+  const statusButtons = eventItem.querySelectorAll(".meeting-status-btn");
+  const noteField = eventItem.querySelector(".meeting-note");
+
+  statusButtons.forEach(button => {
+      button.addEventListener("click", function () {
+          const status = this.getAttribute("data-status") === "true";
+          const note = noteField.value.trim();
+
+          if (!note) {
+              alert("⚠️ Notatka jest wymagana, aby oznaczyć spotkanie!");
+              noteField.focus();
+              return;
+          }
+
+          markMeetingAs(status, note, eventItem, event).then(() => {
+              refreshEvents(); // Pobranie zdarzeń na nowo
+          });
+      });
+  });
+}
+
+            eventsList.appendChild(eventItem);
+        }
+
+
+    });
+
+    renderPaginationControls(totalPages, "weekly");
+}
+function refreshEvents() {
+  console.log("🔄 Odświeżanie wydarzeń...");
+
+  fetch("/get_event_to_calendar/")
+  .then(response => response.json())
+  .then(data => {
+      if (!data.tasks || !data.meetings) {
+          console.error("❌ Błąd: Brak oczekiwanych danych", data);
+          return;
+      }
+
+      tasks = data.tasks.map(task => task.date);
+      meetings = data.meetings.map(meeting => meeting.date);
+
+      tasks2 = data.tasks.filter(task => task.date).map(task => task);
+      meetings2 = data.meetings.filter(meeting => meeting.date).map(meeting => meeting);
+
+      // 🔥 Czyszczenie list wydarzeń przed ponownym renderowaniem
+      document.getElementById("weekly-events-list").innerHTML = "";
+      document.getElementById("history-events-list").innerHTML = "";
+
+      generateCalendar();
+      displayWeeklyEvents(tasks2, meetings2);
+      displayHistoryEvents(tasks2, meetings2);
+
+      console.log("✅ Wydarzenia zostały odświeżone!");
+  })
+  .catch(error => console.error("❌ Błąd pobierania danych:", error));
+}
+function renderPaginationControls(totalPages, type) {
+  const paginationContainer = document.getElementById(
+      type === "weekly" ? "pagination-controls" : "history-pagination-controls"
+  );
+
+  if (!paginationContainer) {
+      console.error(`❌ Brak elementu paginacji: ${type}`);
+      return;
+  }
+
+  paginationContainer.innerHTML = "";
+
+  if (totalPages <= 1) return; // Nie pokazuj paginacji, jeśli jest tylko jedna strona
+
+  if (type === "weekly") {
+    paginationContainer.innerHTML += `
+        <button class="${currentPageWeekly > 1 ? "" : "hiddenOpacity"}" onclick="changePage('weekly', ${currentPageWeekly - 1})">← Poprzednia</button>
+        <span>Strona ${currentPageWeekly} z ${totalPages}</span>
+        <button class="${currentPageWeekly < totalPages ? "" : "hiddenOpacity"}" onclick="changePage('weekly', ${currentPageWeekly + 1})">Następna →</button>
+    `;
+} else if (type === "history") {
+    paginationContainer.innerHTML += `
+        <button class="${currentPageHistory > 1 ? "" : "hiddenOpacity"}" onclick="changePage('history', ${currentPageHistory - 1})">← Poprzednia</button>
+        <span>Strona ${currentPageHistory} z ${totalPages}</span>
+        <button class="${currentPageHistory < totalPages ? "" : "hiddenOpacity"}" onclick="changePage('history', ${currentPageHistory + 1})">Następna →</button>
+    `;
+}
+}
+
+
+function changePage(type, newPage) {
+  if (type === "weekly") {
+      currentPageWeekly = newPage;
+      displayWeeklyEvents(tasks2, meetings2);
+  } else {
+      currentPageHistory = newPage;
+      displayHistoryEvents(tasks2, meetings2);
+  }
+}
+
+function markTaskAsCompleted(taskId, button) {
+  return fetch(`/mark_task_completed/${taskId}/`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCSRFToken()
+      },
+      body: JSON.stringify({ completed: true })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          const statusText = button.closest(".event-details").querySelector(".task-status");
+          statusText.textContent = "✅ Ukończone";
+          button.textContent = "✔️ Ukończone";
+          button.disabled = true;
+          console.log("✅ Zadanie ukończone, odświeżanie wydarzeń...");
+          refreshEvents(); // 🔥 Automatyczne odświeżenie listy
+      } else {
+          console.error("❌ Błąd aktualizacji:", data.error);
+      }
+  })
+  .catch(error => console.error("❌ Błąd sieci:", error));
+}
+
+// Funkcja do pobierania CSRF Tokena
+function getCSRFToken() {
+  return document.querySelector("[name=csrfmiddlewaretoken]")?.value || "";
+}
+
+function truncateText(text, maxLength) {
+  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+}
+
+function markMeetingAs(status, note, eventItem, event) {
+  const meetingId = event.id;
+
+  return fetch(`/update_meeting_status/`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCSRFToken()
+      },
+      body: JSON.stringify({
+          meeting_id: meetingId,
+          occurred: status,
+          note: note
+      })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          eventItem.classList.add("completed");
+          alert("✅ Status spotkania został zapisany!");
+          console.log("✅ Spotkanie oznaczone, odświeżanie wydarzeń...");
+          refreshEvents(); // 🔥 Automatyczne odświeżenie listy
+      } else {
+          alert("❌ Wystąpił błąd podczas zapisywania!");
+      }
+  })
+  .catch(error => console.error("Błąd:", error));
+}
+
+document.querySelectorAll(".tab-calendar-button").forEach(button => {
+  button.addEventListener("click", function () {
+      // Usuwamy aktywną klasę ze wszystkich przycisków
+      document.querySelectorAll(".tab-calendar-button").forEach(btn => btn.classList.remove("active"));
+      this.classList.add("active");
+
+      // Ukrywamy wszystkie treści zakładek
+      document.querySelectorAll(".tab-calendar-content").forEach(content => content.classList.remove("active"));
+
+      // Pokazujemy odpowiednią zawartość
+      document.getElementById(`${this.dataset.tab}-tab-calendar`).classList.add("active");
+  });
+});
+// Funkcja obracania kalendarza
+function flipCalendar() {
+  const calendarContainer = document.querySelector('.calendar-container');
+  const isFlipped = calendarContainer.classList.toggle('flip');
+
+  // Zapisanie stanu w localStorage
+  localStorage.setItem("calendarFlipped", isFlipped);
+}
+
+// Funkcje obsługi kalkulatora
+// Inicjalizacja zmiennej dla wyrażenia
+let calcExpression = "";
+
+function appendToCalc(value) {
+    calcExpression += value;
+    document.getElementById("calc-display").value = calcExpression;
+}
+
+function clearCalc() {
+    calcExpression = "";
+    document.getElementById("calc-display").value = "";
+}
+
+function deleteLastCharacter() {
+    calcExpression = calcExpression.slice(0, -1); // Usuwa ostatni znak
+    document.getElementById("calc-display").value = calcExpression;
+}
+
+function calculateResult() {
+    const display = document.getElementById("calc-display");
+    try {
+        let result = eval(display.value);
+        result = parseFloat(result.toFixed(2)); // Zaokrąglenie do 2 miejsc po przecinku
+        updateCalcHistory(display.value, result);
+        display.value = result;
+        calcExpression = result.toString(); // Aktualizacja wyrażenia po obliczeniu
+    } catch (error) {
+        display.value = "Błąd";
+    }
+}
+
+function updateCalcExpression() {
+    // Aktualizuje zmienną `calcExpression`, gdy użytkownik wpisuje ręcznie
+    calcExpression = document.getElementById("calc-display").value;
+}
+
+// Obsługa wklejania i wpisywania bezpośrednio do inputa
+document.getElementById("calc-display").addEventListener("input", function(event) {
+    // Pobierz wartość inputa i przefiltruj dozwolone znaki (cyfry, operatory, kropka)
+    let validInput = event.target.value.replace(/[^0-9+\-*/().]/g, '');
+    event.target.value = validInput; // Aktualizacja inputa
+    calcExpression = validInput; // Aktualizacja zmiennej kalkulatora
+});
+
+
+
+const calcHistory = JSON.parse(localStorage.getItem("calcHistory")) || []; // Pobiera historię lub tworzy pustą tablicę
+
+function updateCalcHistory(expression, result) {
+    if (calcHistory.length >= 10) {
+        calcHistory.shift(); // Usuwa najstarsze obliczenie
+    }
+    const newEntry = `${expression} = ${result}`;
+    calcHistory.push(newEntry);
+    
+    // Zapis do localStorage
+    localStorage.setItem("calcHistory", JSON.stringify(calcHistory));
+
+    renderCalcHistory(); // Aktualizuje wyświetlanie
+}
+function renderCalcHistory() {
+  const historyList = document.getElementById("calc-history-list");
+  historyList.innerHTML = ""; // Czyścimy listę przed dodaniem nowych wpisów
+
+  calcHistory.forEach(entry => {
+      const listItem = document.createElement("li");
+      listItem.textContent = entry;
+      listItem.addEventListener("click", function () {
+          document.getElementById("calc-display").value = entry.split(" = ")[0]; // Kliknięcie kopiuje wyrażenie
+      });
+      historyList.appendChild(listItem);
+  });
+}
+
+function toggleCalendarVisibility() {
+  const calendarFront = document.querySelector(".calendar"); 
+  const calendarHeader = document.querySelector(".calendar-header");
+  const calendarBody = document.querySelector(".calendar-body");
+  const calendarEvents = document.querySelector(".weekly-events");
+
+  const calendarBack = document.querySelector(".calendar-back"); 
+  const calculatorTitle = document.querySelector(".calculator-title");
+  const calculatorWidget = document.querySelector(".calculator-widget");
+  const calculatorHistory = document.querySelector(".calculator-history");
+
+  const toggleButtons = document.querySelectorAll(".toggle-calendar-btn");
+
+  // Przełączanie klasy "hidden"
+  const isHidden = calendarFront.classList.toggle("calendar-hidden");
+  calendarHeader.classList.toggle("hidden", isHidden);
+  calendarBody.classList.toggle("hidden", isHidden);
+  calendarEvents.classList.toggle("hidden", isHidden);
+
+  calendarBack.classList.toggle("calendar-hidden", isHidden);
+  calculatorTitle.classList.toggle("hidden", isHidden);
+  calculatorWidget.classList.toggle("hidden", isHidden);
+  calculatorHistory.classList.toggle("hidden", isHidden);
+
+  // Zapisanie stanu w localStorage
+  localStorage.setItem("calendarMinimized", isHidden);
+
+  // Aktualizacja ikon przycisku
+  toggleButtons.forEach(button => {
+      button.innerHTML = isHidden 
+          ? '<ion-icon name="open-outline"></ion-icon>'
+          : '<ion-icon name="remove-outline"></ion-icon>';
+  });
+}
+
+// Dodanie event listenera do wszystkich przycisków
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButtons = document.querySelectorAll(".toggle-calendar-btn");
+  toggleButtons.forEach(button => {
+      button.addEventListener("click", toggleCalendarVisibility);
+  });
+});
+
+// Przywracanie stanu kalendarza po załadowaniu strony
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButtons = document.querySelectorAll(".toggle-calendar-btn");
+  toggleButtons.forEach(button => {
+      button.addEventListener("click", toggleCalendarVisibility);
+  });
+
+  const calendarContainer = document.querySelector('.calendar-container');
+  const calendarFront = document.querySelector(".calendar");
+  const calendarHeader = document.querySelector(".calendar-header");
+  const calendarBody = document.querySelector(".calendar-body");
+  const calendarEvents = document.querySelector(".weekly-events");
+
+  const calendarBack = document.querySelector(".calendar-back");
+  const calculatorTitle = document.querySelector(".calculator-title");
+  const calculatorWidget = document.querySelector(".calculator-widget");
+  const calculatorHistory = document.querySelector(".calculator-history");
+
+  // Odczytanie zapisanych stanów z localStorage
+  const isMinimized = localStorage.getItem("calendarMinimized") === "true";
+  const isFlipped = localStorage.getItem("calendarFlipped") === "true";
+
+  if (isMinimized) {
+      calendarFront.classList.add("calendar-hidden");
+      calendarHeader.classList.add("hidden");
+      calendarBody.classList.add("hidden");
+      calendarEvents.classList.add("hidden");
+
+      calendarBack.classList.add("calendar-hidden");
+      calculatorTitle.classList.add("hidden");
+      calculatorWidget.classList.add("hidden");
+      calculatorHistory.classList.add("hidden");
+
+      toggleButtons.forEach(button => {
+          button.innerHTML = '<ion-icon name="open-outline"></ion-icon>';
+      });
+  }
+
+  if (isFlipped) {
+      calendarContainer.classList.add("flip");
+  }
+});
+/** 🔥 Funkcja do wyświetlania wydarzeń dla wybranego dnia */
+function showEventsForDay(selectedDate) {
+  const dailyEventsList = document.getElementById("daily-events-list");
+  dailyEventsList.innerHTML = ""; // Czyszczenie listy przed aktualizacją
+
+  const dayEvents = [
+      ...tasks2.filter(task => task.date === selectedDate).map(e => ({ ...e, type: "task" })),
+      ...meetings2.filter(meeting => meeting.date === selectedDate).map(e => ({ ...e, type: "meeting" }))
+  ];
+
+  if (dayEvents.length === 0) {
+      dailyEventsList.innerHTML = "<li>Brak wydarzeń na ten dzień</li>";
+      return;
+  }
+
+  // Sortowanie według godziny
+  dayEvents.sort((a, b) => {
+      return new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`);
+  });
+
+  dayEvents.forEach(event => {
+      const eventItem = document.createElement("li");
+      eventItem.classList.add("event-item");
+
+      const now = new Date();
+      const eventDateTime = new Date(`${event.date}T${event.time}`);
+
+      // Dodanie klasy dla przeterminowanych wydarzeń
+      if ((event.type === 'task' && !event.completed && eventDateTime < now) || 
+          (event.type === 'meeting' && !event.note && eventDateTime < now)) {
+          eventItem.classList.add("overdue"); 
+      } 
+      // Dodanie klasy dla wydarzeń zbliżających się do terminu (mniej niż 8 godzin)
+      else if ((event.type === 'task' && !event.completed && (eventDateTime - now) <= 8 * 60 * 60 * 1000) || 
+               (event.type === 'meeting' && !event.note && (eventDateTime - now) <= 8 * 60 * 60 * 1000)) {
+          eventItem.classList.add("warning"); 
+      }
+
+      eventItem.innerHTML = `
+          <div class="event-title ${event.type === 'task' ? 'event-task' : 'event-meeting'}">
+              <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
+              <span class="event-title-text">${truncateText(event.title, 21)}</span>
+              <span class="event-time">${event.time}</span> 
+          </div>
+          <div class="event-details">
+              <p><strong>Szczegóły wydarzenia:</strong> ${event.title}</p>
+              <p><strong>Godzina:</strong> ${event.time}</p>
+              <p><strong>Klient:</strong> <a href="${event.client_link}" class="client-link">${event.client_name}</a></p>
+              ${event.type === 'task' ? `
+                  <p><strong>Status:</strong> <span class="task-status">${event.completed ? "✅ Ukończone" : "⏳ W toku"}</span>
+                  <button class="complete-task-btn" data-task-id="${event.id}" ${event.completed ? "disabled" : ""}>
+                      ${event.completed ? "✔️ Ukończone" : "✅ Oznacz jako ukończone"}
+                  </button></p>` 
+              : `
+                  <label>Notatka do spotkania:</label>
+                  <textarea class="meeting-note" placeholder="Dodaj notatkę..."></textarea>
+                  <div class="meeting-actions">
+                      <button class="meeting-status-btn" data-status="true">✔ Odbyło się</button>
+                      <button class="meeting-status-btn" data-status="false">✖ Nie odbyło się</button>
+                  </div>`}
+          </div>
+      `;
+
+      // ✅ Obsługa rozwijania/zamykania wydarzeń
+      eventItem.addEventListener("click", function () {
+          const details = this.querySelector(".event-details");
+          const arrow = this.querySelector(".arrow");
+
+          if (!details || !arrow) {
+              console.error("❌ Brak elementu .event-details lub .arrow");
+              return;
+          }
+
+          // Zamknięcie innych otwartych elementów
+          document.querySelectorAll(".event-item.open").forEach(openItem => {
+              if (openItem !== this) {
+                  openItem.classList.remove("open");
+                  openItem.querySelector(".event-details").classList.remove("visible");
+                  openItem.querySelector(".arrow").classList.remove("rotated");
+              }
+          });
+
+          details.classList.toggle("visible");
+          this.classList.toggle("open");
+          arrow.classList.toggle("rotated");
+      });
+
+      if (event.type === 'task') {
+          const completeButton = eventItem.querySelector(".complete-task-btn");
+          completeButton.addEventListener("click", function () {
+              const taskId = this.getAttribute("data-task-id");
+              markTaskAsCompleted(taskId, this).then(() => {
+                  refreshEvents(); // Odświeżenie po oznaczeniu jako ukończone
+              });
+          });
+      }
+
+      if (event.type === 'meeting') {
+          const statusButtons = eventItem.querySelectorAll(".meeting-status-btn");
+          const noteField = eventItem.querySelector(".meeting-note");
+
+          statusButtons.forEach(button => {
+              button.addEventListener("click", function () {
+                  const status = this.getAttribute("data-status") === "true";
+                  const note = noteField.value.trim();
+
+                  if (!note) {
+                      alert("⚠️ Notatka jest wymagana, aby oznaczyć spotkanie!");
+                      noteField.focus();
+                      return;
+                  }
+
+                  markMeetingAs(status, note, eventItem, event).then(() => {
+                      refreshEvents();
+                  });
+              });
+          });
+      }
+
+      dailyEventsList.appendChild(eventItem);
+  });
+
+  // ✅ Przełączanie zakładek w kalendarzu
+  document.querySelectorAll(".tab-calendar-button").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-calendar-content").forEach(tab => tab.classList.remove("active"));
+
+  document.getElementById("daily-tab-calendar").classList.add("active");
+  document.querySelector("[data-tab='daily']").classList.add("active");
+}
+
+function loadNotifications() {
+  fetch('/get_recent_notifications/')
+      .then(response => response.json())
+      .then(data => {
+          const container = document.getElementById("notifications-container");
+          const counter = document.getElementById("notification-counter");
+
+          container.innerHTML = ""; // Wyczyść poprzednie powiadomienia
+          let unreadCount = 0;
+
+          if (data.notifications.length === 0) {
+              container.innerHTML = "<li class='notification-item'>Brak nowych powiadomień</li>";
+          } else {
+              data.notifications.forEach(notification => {
+                  const li = document.createElement("li");
+                  li.classList.add("notification-item");
+                  li.setAttribute("data-id", notification.id);  // ✅ Dodajemy ID powiadomienia
+                  li.innerHTML = `
+                      <strong>${notification.title}</strong>
+                      <p>${notification.message}</p>
+                      <small>${new Date(notification.created_at).toLocaleString()}</small>
+                  `;
+
+                  if (!notification.is_read) {
+                      unreadCount++;
+                      li.classList.add("notification-unread"); // ✅ Klasa dla nieprzeczytanych
+                  }
+
+                  // Dodajemy obsługę kliknięcia
+                  li.addEventListener("click", function () {
+                      markNotificationAsRead(notification.id, li);
+                  });
+
+                  container.appendChild(li);
+              });
+          }
+
+          // Aktualizuj licznik nieprzeczytanych powiadomień
+          if (unreadCount > 0) {
+              counter.textContent = unreadCount;
+              counter.classList.remove("hidden");
+          } else {
+              counter.classList.add("hidden");
+          }
+      })
+      .catch(error => console.error("❌ Błąd pobierania powiadomień:", error));
+}
+
+
+// Funkcja do oznaczania powiadomienia jako przeczytanego
+function markNotificationAsRead(notificationId, element) {
+  if (!notificationId) {
+      console.error("❌ Błąd: Brak ID powiadomienia!");
+      return;
+  }
+
+  fetch(`/mark_notification_as_read/${notificationId}/`, {  // ✅ Teraz powinno działać
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCSRFToken() // Pobranie tokena CSRF
+      },
+      body: JSON.stringify({ is_read: true })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          element.classList.remove("notification-unread"); // Usuń klasę nieprzeczytanego powiadomienia
+          updateUnreadCount();
+      } else {
+          console.error("❌ Błąd podczas oznaczania powiadomienia jako przeczytanego:", data.error);
+      }
+  })
+  .catch(error => console.error("❌ Błąd sieci:", error));
+}
+
+
+// Funkcja do aktualizacji licznika po przeczytaniu powiadomienia
+function updateUnreadCount() {
+  const unreadNotifications = document.querySelectorAll(".notification-unread").length;
+  const counter = document.getElementById("notification-counter");
+
+  if (unreadNotifications > 0) {
+      counter.textContent = unreadNotifications;
+      counter.classList.remove("hidden");
+  } else {
+      counter.classList.add("hidden");
+  }
+}
+
+
+
+
+// Załaduj powiadomienia po załadowaniu strony
+document.addEventListener("DOMContentLoaded", () => {
+  loadNotifications(); // Wczytaj powiadomienia na starcie
+  setInterval(loadNotifications, 30000); // Odświeżaj co 30 sekund
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const mainNav = document.getElementById("main-nav");
+  
+    menuToggle.addEventListener("click", function () {
+      mainNav.classList.toggle("active");
+    });
+  });
+
+      document.addEventListener("keydown", (e) => {
+  // Ctrl + Shift + K
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "k") {
+    e.preventDefault(); // Zapobiegaj domyślnej akcji (np. odświeżeniu)
+    localStorage.removeItem("calendarPosition");
+    const calendarContainer = document.querySelector(".calendar-container");
+    if (calendarContainer) {
+      calendarContainer.style.transform = "translate(0px, -2250px)";
+    }
+    // Zresetuj zmienne, jeśli używasz ich globalnie
+    currentX = 0;
+    currentY = -2250;
+    console.log("Pozycja kalendarza zresetowana.");
+  }
+});
+  </script>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,9530 @@
+{
+  "02": {
+    "name": "DOLNOŚLĄSKIE",
+    "powiaty": {
+      "01": {
+        "name": "bolesławiecki",
+        "gminy": {
+          "01": {
+            "name": "Bolesławiec"
+          },
+          "02": {
+            "name": "Bolesławiec"
+          },
+          "03": {
+            "name": "Gromadka"
+          },
+          "04": {
+            "name": "Nowogrodziec"
+          },
+          "05": {
+            "name": "Osiecznica"
+          },
+          "06": {
+            "name": "Warta Bolesławiecka"
+          }
+        }
+      },
+      "02": {
+        "name": "dzierżoniowski",
+        "gminy": {
+          "01": {
+            "name": "Bielawa"
+          },
+          "02": {
+            "name": "Dzierżoniów"
+          },
+          "03": {
+            "name": "Pieszyce"
+          },
+          "04": {
+            "name": "Piława Górna"
+          },
+          "05": {
+            "name": "Dzierżoniów"
+          },
+          "06": {
+            "name": "Łagiewniki"
+          },
+          "07": {
+            "name": "Niemcza"
+          }
+        }
+      },
+      "03": {
+        "name": "głogowski",
+        "gminy": {
+          "01": {
+            "name": "Głogów"
+          },
+          "02": {
+            "name": "Głogów"
+          },
+          "03": {
+            "name": "Jerzmanowa"
+          },
+          "04": {
+            "name": "Kotla"
+          },
+          "05": {
+            "name": "Pęcław"
+          },
+          "06": {
+            "name": "Żukowice"
+          }
+        }
+      },
+      "04": {
+        "name": "górowski",
+        "gminy": {
+          "01": {
+            "name": "Góra"
+          },
+          "02": {
+            "name": "Jemielno"
+          },
+          "03": {
+            "name": "Niechlów"
+          },
+          "04": {
+            "name": "Wąsosz"
+          }
+        }
+      },
+      "05": {
+        "name": "jaworski",
+        "gminy": {
+          "01": {
+            "name": "Jawor"
+          },
+          "02": {
+            "name": "Bolków"
+          },
+          "03": {
+            "name": "Męcinka"
+          },
+          "04": {
+            "name": "Mściwojów"
+          },
+          "05": {
+            "name": "Paszowice"
+          },
+          "06": {
+            "name": "Wądroże Wielkie"
+          }
+        }
+      },
+      "06": {
+        "name": "karkonoski",
+        "gminy": {
+          "01": {
+            "name": "Karpacz"
+          },
+          "02": {
+            "name": "Kowary"
+          },
+          "03": {
+            "name": "Piechowice"
+          },
+          "04": {
+            "name": "Szklarska Poręba"
+          },
+          "05": {
+            "name": "Janowice Wielkie"
+          },
+          "06": {
+            "name": "Jeżów Sudecki"
+          },
+          "07": {
+            "name": "Mysłakowice"
+          },
+          "08": {
+            "name": "Podgórzyn"
+          },
+          "09": {
+            "name": "Stara Kamienica"
+          }
+        }
+      },
+      "07": {
+        "name": "kamiennogórski",
+        "gminy": {
+          "01": {
+            "name": "Kamienna Góra"
+          },
+          "02": {
+            "name": "Kamienna Góra"
+          },
+          "03": {
+            "name": "Lubawka"
+          },
+          "04": {
+            "name": "Marciszów"
+          }
+        }
+      },
+      "08": {
+        "name": "kłodzki",
+        "gminy": {
+          "01": {
+            "name": "Duszniki-Zdrój"
+          },
+          "02": {
+            "name": "Kłodzko"
+          },
+          "03": {
+            "name": "Kudowa-Zdrój"
+          },
+          "04": {
+            "name": "Nowa Ruda"
+          },
+          "05": {
+            "name": "Polanica-Zdrój"
+          },
+          "06": {
+            "name": "Bystrzyca Kłodzka"
+          },
+          "07": {
+            "name": "Kłodzko"
+          },
+          "08": {
+            "name": "Lądek-Zdrój"
+          },
+          "09": {
+            "name": "Lewin Kłodzki"
+          },
+          "10": {
+            "name": "Międzylesie"
+          },
+          "11": {
+            "name": "Nowa Ruda"
+          },
+          "12": {
+            "name": "Radków"
+          },
+          "13": {
+            "name": "Stronie Śląskie"
+          },
+          "14": {
+            "name": "Szczytna"
+          }
+        }
+      },
+      "09": {
+        "name": "legnicki",
+        "gminy": {
+          "01": {
+            "name": "Chojnów"
+          },
+          "02": {
+            "name": "Chojnów"
+          },
+          "03": {
+            "name": "Krotoszyce"
+          },
+          "04": {
+            "name": "Kunice"
+          },
+          "05": {
+            "name": "Legnickie Pole"
+          },
+          "06": {
+            "name": "Miłkowice"
+          },
+          "07": {
+            "name": "Prochowice"
+          },
+          "08": {
+            "name": "Ruja"
+          }
+        }
+      },
+      "10": {
+        "name": "lubański",
+        "gminy": {
+          "01": {
+            "name": "Lubań"
+          },
+          "02": {
+            "name": "Świeradów-Zdrój"
+          },
+          "03": {
+            "name": "Leśna"
+          },
+          "04": {
+            "name": "Lubań"
+          },
+          "05": {
+            "name": "Olszyna"
+          },
+          "06": {
+            "name": "Platerówka"
+          },
+          "07": {
+            "name": "Siekierczyn"
+          }
+        }
+      },
+      "11": {
+        "name": "lubiński",
+        "gminy": {
+          "01": {
+            "name": "Lubin"
+          },
+          "02": {
+            "name": "Lubin"
+          },
+          "03": {
+            "name": "Rudna"
+          },
+          "04": {
+            "name": "Ścinawa"
+          }
+        }
+      },
+      "12": {
+        "name": "lwówecki",
+        "gminy": {
+          "01": {
+            "name": "Gryfów Śląski"
+          },
+          "02": {
+            "name": "Lubomierz"
+          },
+          "03": {
+            "name": "Lwówek Śląski"
+          },
+          "04": {
+            "name": "Mirsk"
+          },
+          "05": {
+            "name": "Wleń"
+          }
+        }
+      },
+      "13": {
+        "name": "milicki",
+        "gminy": {
+          "01": {
+            "name": "Cieszków"
+          },
+          "02": {
+            "name": "Krośnice"
+          },
+          "03": {
+            "name": "Milicz"
+          }
+        }
+      },
+      "14": {
+        "name": "oleśnicki",
+        "gminy": {
+          "01": {
+            "name": "Oleśnica"
+          },
+          "02": {
+            "name": "Bierutów"
+          },
+          "03": {
+            "name": "Dobroszyce"
+          },
+          "04": {
+            "name": "Dziadowa Kłoda"
+          },
+          "05": {
+            "name": "Międzybórz"
+          },
+          "06": {
+            "name": "Oleśnica"
+          },
+          "07": {
+            "name": "Syców"
+          },
+          "08": {
+            "name": "Twardogóra"
+          }
+        }
+      },
+      "15": {
+        "name": "oławski",
+        "gminy": {
+          "01": {
+            "name": "Oława"
+          },
+          "02": {
+            "name": "Domaniów"
+          },
+          "03": {
+            "name": "Jelcz-Laskowice"
+          },
+          "04": {
+            "name": "Oława"
+          }
+        }
+      },
+      "16": {
+        "name": "polkowicki",
+        "gminy": {
+          "01": {
+            "name": "Chocianów"
+          },
+          "02": {
+            "name": "Gaworzyce"
+          },
+          "03": {
+            "name": "Grębocice"
+          },
+          "04": {
+            "name": "Polkowice"
+          },
+          "05": {
+            "name": "Przemków"
+          },
+          "06": {
+            "name": "Radwanice"
+          }
+        }
+      },
+      "17": {
+        "name": "strzeliński",
+        "gminy": {
+          "01": {
+            "name": "Borów"
+          },
+          "02": {
+            "name": "Kondratowice"
+          },
+          "03": {
+            "name": "Przeworno"
+          },
+          "04": {
+            "name": "Strzelin"
+          },
+          "05": {
+            "name": "Wiązów"
+          }
+        }
+      },
+      "18": {
+        "name": "średzki",
+        "gminy": {
+          "01": {
+            "name": "Kostomłoty"
+          },
+          "02": {
+            "name": "Malczyce"
+          },
+          "03": {
+            "name": "Miękinia"
+          },
+          "04": {
+            "name": "Środa Śląska"
+          },
+          "05": {
+            "name": "Udanin"
+          }
+        }
+      },
+      "19": {
+        "name": "świdnicki",
+        "gminy": {
+          "01": {
+            "name": "Świdnica"
+          },
+          "02": {
+            "name": "Świebodzice"
+          },
+          "03": {
+            "name": "Dobromierz"
+          },
+          "04": {
+            "name": "Jaworzyna Śląska"
+          },
+          "05": {
+            "name": "Marcinowice"
+          },
+          "06": {
+            "name": "Strzegom"
+          },
+          "07": {
+            "name": "Świdnica"
+          },
+          "08": {
+            "name": "Żarów"
+          }
+        }
+      },
+      "20": {
+        "name": "trzebnicki",
+        "gminy": {
+          "01": {
+            "name": "Oborniki Śląskie"
+          },
+          "02": {
+            "name": "Prusice"
+          },
+          "03": {
+            "name": "Trzebnica"
+          },
+          "04": {
+            "name": "Wisznia Mała"
+          },
+          "05": {
+            "name": "Zawonia"
+          },
+          "06": {
+            "name": "Żmigród"
+          }
+        }
+      },
+      "21": {
+        "name": "wałbrzyski",
+        "gminy": {
+          "01": {
+            "name": "Boguszów-Gorce"
+          },
+          "02": {
+            "name": "Jedlina-Zdrój"
+          },
+          "03": {
+            "name": "Szczawno-Zdrój"
+          },
+          "04": {
+            "name": "Czarny Bór"
+          },
+          "05": {
+            "name": "Głuszyca"
+          },
+          "06": {
+            "name": "Mieroszów"
+          },
+          "07": {
+            "name": "Stare Bogaczowice"
+          },
+          "08": {
+            "name": "Walim"
+          }
+        }
+      },
+      "22": {
+        "name": "wołowski",
+        "gminy": {
+          "01": {
+            "name": "Brzeg Dolny"
+          },
+          "02": {
+            "name": "Wińsko"
+          },
+          "03": {
+            "name": "Wołów"
+          }
+        }
+      },
+      "23": {
+        "name": "wrocławski",
+        "gminy": {
+          "01": {
+            "name": "Czernica"
+          },
+          "02": {
+            "name": "Długołęka"
+          },
+          "03": {
+            "name": "Jordanów Śląski"
+          },
+          "04": {
+            "name": "Kąty Wrocławskie"
+          },
+          "05": {
+            "name": "Kobierzyce"
+          },
+          "06": {
+            "name": "Mietków"
+          },
+          "07": {
+            "name": "Sobótka"
+          },
+          "08": {
+            "name": "Siechnice"
+          },
+          "09": {
+            "name": "Żórawina"
+          }
+        }
+      },
+      "24": {
+        "name": "ząbkowicki",
+        "gminy": {
+          "01": {
+            "name": "Bardo"
+          },
+          "02": {
+            "name": "Ciepłowody"
+          },
+          "03": {
+            "name": "Kamieniec Ząbkowicki"
+          },
+          "04": {
+            "name": "Stoszowice"
+          },
+          "05": {
+            "name": "Ząbkowice Śląskie"
+          },
+          "06": {
+            "name": "Ziębice"
+          },
+          "07": {
+            "name": "Złoty Stok"
+          }
+        }
+      },
+      "25": {
+        "name": "zgorzelecki",
+        "gminy": {
+          "01": {
+            "name": "Zawidów"
+          },
+          "02": {
+            "name": "Zgorzelec"
+          },
+          "03": {
+            "name": "Bogatynia"
+          },
+          "04": {
+            "name": "Pieńsk"
+          },
+          "05": {
+            "name": "Sulików"
+          },
+          "06": {
+            "name": "Węgliniec"
+          },
+          "07": {
+            "name": "Zgorzelec"
+          }
+        }
+      },
+      "26": {
+        "name": "złotoryjski",
+        "gminy": {
+          "01": {
+            "name": "Wojcieszów"
+          },
+          "02": {
+            "name": "Złotoryja"
+          },
+          "03": {
+            "name": "Pielgrzymka"
+          },
+          "04": {
+            "name": "Świerzawa"
+          },
+          "05": {
+            "name": "Zagrodno"
+          },
+          "06": {
+            "name": "Złotoryja"
+          }
+        }
+      },
+      "61": {
+        "name": "Jelenia Góra",
+        "gminy": {
+          "01": {
+            "name": "Jelenia Góra"
+          }
+        }
+      },
+      "62": {
+        "name": "Legnica",
+        "gminy": {
+          "01": {
+            "name": "Legnica"
+          }
+        }
+      },
+      "64": {
+        "name": "Wrocław",
+        "gminy": {
+          "01": {
+            "name": "Wrocław"
+          },
+          "02": {
+            "name": "Wrocław-Fabryczna"
+          },
+          "03": {
+            "name": "Wrocław-Krzyki"
+          },
+          "04": {
+            "name": "Wrocław-Psie Pole"
+          },
+          "05": {
+            "name": "Wrocław-Stare Miasto"
+          },
+          "06": {
+            "name": "Wrocław-Śródmieście"
+          }
+        }
+      },
+      "65": {
+        "name": "Wałbrzych",
+        "gminy": {
+          "01": {
+            "name": "Wałbrzych"
+          }
+        }
+      }
+    }
+  },
+  "04": {
+    "name": "KUJAWSKO-POMORSKIE",
+    "powiaty": {
+      "01": {
+        "name": "aleksandrowski",
+        "gminy": {
+          "01": {
+            "name": "Aleksandrów Kujawski"
+          },
+          "02": {
+            "name": "Ciechocinek"
+          },
+          "03": {
+            "name": "Nieszawa"
+          },
+          "04": {
+            "name": "Aleksandrów Kujawski"
+          },
+          "05": {
+            "name": "Bądkowo"
+          },
+          "06": {
+            "name": "Koneck"
+          },
+          "07": {
+            "name": "Raciążek"
+          },
+          "08": {
+            "name": "Waganiec"
+          },
+          "09": {
+            "name": "Zakrzewo"
+          }
+        }
+      },
+      "02": {
+        "name": "brodnicki",
+        "gminy": {
+          "01": {
+            "name": "Brodnica"
+          },
+          "02": {
+            "name": "Bobrowo"
+          },
+          "03": {
+            "name": "Brodnica"
+          },
+          "04": {
+            "name": "Brzozie"
+          },
+          "05": {
+            "name": "Górzno"
+          },
+          "06": {
+            "name": "Bartniczka"
+          },
+          "07": {
+            "name": "Jabłonowo Pomorskie"
+          },
+          "08": {
+            "name": "Osiek"
+          },
+          "09": {
+            "name": "Świedziebnia"
+          },
+          "10": {
+            "name": "Zbiczno"
+          }
+        }
+      },
+      "03": {
+        "name": "bydgoski",
+        "gminy": {
+          "01": {
+            "name": "Białe Błota"
+          },
+          "02": {
+            "name": "Dąbrowa Chełmińska"
+          },
+          "03": {
+            "name": "Dobrcz"
+          },
+          "04": {
+            "name": "Koronowo"
+          },
+          "05": {
+            "name": "Nowa Wieś Wielka"
+          },
+          "06": {
+            "name": "Osielsko"
+          },
+          "07": {
+            "name": "Sicienko"
+          },
+          "08": {
+            "name": "Solec Kujawski"
+          }
+        }
+      },
+      "04": {
+        "name": "chełmiński",
+        "gminy": {
+          "01": {
+            "name": "Chełmno"
+          },
+          "02": {
+            "name": "Chełmno"
+          },
+          "03": {
+            "name": "Kijewo Królewskie"
+          },
+          "04": {
+            "name": "Lisewo"
+          },
+          "05": {
+            "name": "Papowo Biskupie"
+          },
+          "06": {
+            "name": "Stolno"
+          },
+          "07": {
+            "name": "Unisław"
+          }
+        }
+      },
+      "05": {
+        "name": "golubsko-dobrzyński",
+        "gminy": {
+          "01": {
+            "name": "Golub-Dobrzyń"
+          },
+          "02": {
+            "name": "Ciechocin"
+          },
+          "03": {
+            "name": "Golub-Dobrzyń"
+          },
+          "04": {
+            "name": "Kowalewo Pomorskie"
+          },
+          "05": {
+            "name": "Radomin"
+          },
+          "06": {
+            "name": "Zbójno"
+          }
+        }
+      },
+      "06": {
+        "name": "grudziądzki",
+        "gminy": {
+          "01": {
+            "name": "Grudziądz"
+          },
+          "02": {
+            "name": "Gruta"
+          },
+          "03": {
+            "name": "Łasin"
+          },
+          "04": {
+            "name": "Radzyń Chełmiński"
+          },
+          "05": {
+            "name": "Rogóźno"
+          },
+          "06": {
+            "name": "Świecie nad Osą"
+          }
+        }
+      },
+      "07": {
+        "name": "inowrocławski",
+        "gminy": {
+          "01": {
+            "name": "Inowrocław"
+          },
+          "02": {
+            "name": "Dąbrowa Biskupia"
+          },
+          "03": {
+            "name": "Gniewkowo"
+          },
+          "04": {
+            "name": "Inowrocław"
+          },
+          "05": {
+            "name": "Janikowo"
+          },
+          "06": {
+            "name": "Kruszwica"
+          },
+          "07": {
+            "name": "Pakość"
+          },
+          "08": {
+            "name": "Rojewo"
+          },
+          "09": {
+            "name": "Złotniki Kujawskie"
+          }
+        }
+      },
+      "08": {
+        "name": "lipnowski",
+        "gminy": {
+          "01": {
+            "name": "Lipno"
+          },
+          "02": {
+            "name": "Bobrowniki"
+          },
+          "03": {
+            "name": "Chrostkowo"
+          },
+          "04": {
+            "name": "Dobrzyń nad Wisłą"
+          },
+          "05": {
+            "name": "Kikół"
+          },
+          "06": {
+            "name": "Lipno"
+          },
+          "07": {
+            "name": "Skępe"
+          },
+          "08": {
+            "name": "Tłuchowo"
+          },
+          "09": {
+            "name": "Wielgie"
+          }
+        }
+      },
+      "09": {
+        "name": "mogileński",
+        "gminy": {
+          "01": {
+            "name": "Dąbrowa"
+          },
+          "02": {
+            "name": "Jeziora Wielkie"
+          },
+          "03": {
+            "name": "Mogilno"
+          },
+          "04": {
+            "name": "Strzelno"
+          }
+        }
+      },
+      "10": {
+        "name": "nakielski",
+        "gminy": {
+          "01": {
+            "name": "Kcynia"
+          },
+          "02": {
+            "name": "Mrocza"
+          },
+          "03": {
+            "name": "Nakło nad Notecią"
+          },
+          "04": {
+            "name": "Sadki"
+          },
+          "05": {
+            "name": "Szubin"
+          }
+        }
+      },
+      "11": {
+        "name": "radziejowski",
+        "gminy": {
+          "01": {
+            "name": "Radziejów"
+          },
+          "02": {
+            "name": "Bytoń"
+          },
+          "03": {
+            "name": "Dobre"
+          },
+          "04": {
+            "name": "Osięciny"
+          },
+          "05": {
+            "name": "Piotrków Kujawski"
+          },
+          "06": {
+            "name": "Radziejów"
+          },
+          "07": {
+            "name": "Topólka"
+          }
+        }
+      },
+      "12": {
+        "name": "rypiński",
+        "gminy": {
+          "01": {
+            "name": "Rypin"
+          },
+          "02": {
+            "name": "Brzuze"
+          },
+          "03": {
+            "name": "Rogowo"
+          },
+          "04": {
+            "name": "Rypin"
+          },
+          "05": {
+            "name": "Skrwilno"
+          },
+          "06": {
+            "name": "Wąpielsk"
+          }
+        }
+      },
+      "13": {
+        "name": "sępoleński",
+        "gminy": {
+          "01": {
+            "name": "Kamień Krajeński"
+          },
+          "02": {
+            "name": "Sępólno Krajeńskie"
+          },
+          "03": {
+            "name": "Sośno"
+          },
+          "04": {
+            "name": "Więcbork"
+          }
+        }
+      },
+      "14": {
+        "name": "świecki",
+        "gminy": {
+          "01": {
+            "name": "Bukowiec"
+          },
+          "02": {
+            "name": "Dragacz"
+          },
+          "03": {
+            "name": "Drzycim"
+          },
+          "04": {
+            "name": "Jeżewo"
+          },
+          "05": {
+            "name": "Lniano"
+          },
+          "06": {
+            "name": "Nowe"
+          },
+          "07": {
+            "name": "Osie"
+          },
+          "08": {
+            "name": "Pruszcz"
+          },
+          "09": {
+            "name": "Świecie"
+          },
+          "10": {
+            "name": "Świekatowo"
+          },
+          "11": {
+            "name": "Warlubie"
+          }
+        }
+      },
+      "15": {
+        "name": "toruński",
+        "gminy": {
+          "01": {
+            "name": "Chełmża"
+          },
+          "02": {
+            "name": "Chełmża"
+          },
+          "03": {
+            "name": "Czernikowo"
+          },
+          "04": {
+            "name": "Lubicz"
+          },
+          "05": {
+            "name": "Łubianka"
+          },
+          "06": {
+            "name": "Łysomice"
+          },
+          "07": {
+            "name": "Obrowo"
+          },
+          "08": {
+            "name": "Wielka Nieszawka"
+          },
+          "09": {
+            "name": "Zławieś Wielka"
+          }
+        }
+      },
+      "16": {
+        "name": "tucholski",
+        "gminy": {
+          "01": {
+            "name": "Cekcyn"
+          },
+          "02": {
+            "name": "Gostycyn"
+          },
+          "03": {
+            "name": "Kęsowo"
+          },
+          "04": {
+            "name": "Lubiewo"
+          },
+          "05": {
+            "name": "Śliwice"
+          },
+          "06": {
+            "name": "Tuchola"
+          }
+        }
+      },
+      "17": {
+        "name": "wąbrzeski",
+        "gminy": {
+          "01": {
+            "name": "Wąbrzeźno"
+          },
+          "02": {
+            "name": "Dębowa Łąka"
+          },
+          "03": {
+            "name": "Książki"
+          },
+          "04": {
+            "name": "Płużnica"
+          },
+          "05": {
+            "name": "Ryńsk"
+          }
+        }
+      },
+      "18": {
+        "name": "włocławski",
+        "gminy": {
+          "01": {
+            "name": "Kowal"
+          },
+          "02": {
+            "name": "Baruchowo"
+          },
+          "03": {
+            "name": "Boniewo"
+          },
+          "04": {
+            "name": "Brześć Kujawski"
+          },
+          "05": {
+            "name": "Choceń"
+          },
+          "06": {
+            "name": "Chodecz"
+          },
+          "07": {
+            "name": "Fabianki"
+          },
+          "08": {
+            "name": "Izbica Kujawska"
+          },
+          "09": {
+            "name": "Kowal"
+          },
+          "10": {
+            "name": "Lubanie"
+          },
+          "11": {
+            "name": "Lubień Kujawski"
+          },
+          "12": {
+            "name": "Lubraniec"
+          },
+          "13": {
+            "name": "Włocławek"
+          }
+        }
+      },
+      "19": {
+        "name": "żniński",
+        "gminy": {
+          "01": {
+            "name": "Barcin"
+          },
+          "02": {
+            "name": "Gąsawa"
+          },
+          "03": {
+            "name": "Janowiec Wielkopolski"
+          },
+          "04": {
+            "name": "Łabiszyn"
+          },
+          "05": {
+            "name": "Rogowo"
+          },
+          "06": {
+            "name": "Żnin"
+          }
+        }
+      },
+      "61": {
+        "name": "Bydgoszcz",
+        "gminy": {
+          "01": {
+            "name": "Bydgoszcz"
+          }
+        }
+      },
+      "62": {
+        "name": "Grudziądz",
+        "gminy": {
+          "01": {
+            "name": "Grudziądz"
+          }
+        }
+      },
+      "63": {
+        "name": "Toruń",
+        "gminy": {
+          "01": {
+            "name": "Toruń"
+          }
+        }
+      },
+      "64": {
+        "name": "Włocławek",
+        "gminy": {
+          "01": {
+            "name": "Włocławek"
+          }
+        }
+      }
+    }
+  },
+  "06": {
+    "name": "LUBELSKIE",
+    "powiaty": {
+      "01": {
+        "name": "bialski",
+        "gminy": {
+          "01": {
+            "name": "Międzyrzec Podlaski"
+          },
+          "02": {
+            "name": "Terespol"
+          },
+          "03": {
+            "name": "Biała Podlaska"
+          },
+          "04": {
+            "name": "Drelów"
+          },
+          "05": {
+            "name": "Janów Podlaski"
+          },
+          "06": {
+            "name": "Kodeń"
+          },
+          "07": {
+            "name": "Konstantynów"
+          },
+          "08": {
+            "name": "Leśna Podlaska"
+          },
+          "09": {
+            "name": "Łomazy"
+          },
+          "10": {
+            "name": "Międzyrzec Podlaski"
+          },
+          "11": {
+            "name": "Piszczac"
+          },
+          "12": {
+            "name": "Rokitno"
+          },
+          "13": {
+            "name": "Rossosz"
+          },
+          "14": {
+            "name": "Sławatycze"
+          },
+          "15": {
+            "name": "Sosnówka"
+          },
+          "16": {
+            "name": "Terespol"
+          },
+          "17": {
+            "name": "Tuczna"
+          },
+          "18": {
+            "name": "Wisznice"
+          },
+          "19": {
+            "name": "Zalesie"
+          }
+        }
+      },
+      "02": {
+        "name": "biłgorajski",
+        "gminy": {
+          "01": {
+            "name": "Biłgoraj"
+          },
+          "02": {
+            "name": "Aleksandrów"
+          },
+          "03": {
+            "name": "Biłgoraj"
+          },
+          "04": {
+            "name": "Biszcza"
+          },
+          "05": {
+            "name": "Frampol"
+          },
+          "06": {
+            "name": "Goraj"
+          },
+          "07": {
+            "name": "Józefów"
+          },
+          "08": {
+            "name": "Księżpol"
+          },
+          "09": {
+            "name": "Łukowa"
+          },
+          "10": {
+            "name": "Obsza"
+          },
+          "11": {
+            "name": "Potok Górny"
+          },
+          "12": {
+            "name": "Tarnogród"
+          },
+          "13": {
+            "name": "Tereszpol"
+          },
+          "14": {
+            "name": "Turobin"
+          }
+        }
+      },
+      "03": {
+        "name": "chełmski",
+        "gminy": {
+          "01": {
+            "name": "Rejowiec Fabryczny"
+          },
+          "02": {
+            "name": "Białopole"
+          },
+          "03": {
+            "name": "Chełm"
+          },
+          "04": {
+            "name": "Dorohusk"
+          },
+          "05": {
+            "name": "Dubienka"
+          },
+          "06": {
+            "name": "Kamień"
+          },
+          "07": {
+            "name": "Leśniowice"
+          },
+          "08": {
+            "name": "Rejowiec Fabryczny"
+          },
+          "09": {
+            "name": "Ruda-Huta"
+          },
+          "10": {
+            "name": "Sawin"
+          },
+          "11": {
+            "name": "Siedliszcze"
+          },
+          "12": {
+            "name": "Wierzbica"
+          },
+          "13": {
+            "name": "Wojsławice"
+          },
+          "14": {
+            "name": "Żmudź"
+          },
+          "15": {
+            "name": "Rejowiec"
+          }
+        }
+      },
+      "04": {
+        "name": "hrubieszowski",
+        "gminy": {
+          "01": {
+            "name": "Hrubieszów"
+          },
+          "02": {
+            "name": "Dołhobyczów"
+          },
+          "03": {
+            "name": "Horodło"
+          },
+          "04": {
+            "name": "Hrubieszów"
+          },
+          "05": {
+            "name": "Mircze"
+          },
+          "06": {
+            "name": "Trzeszczany"
+          },
+          "07": {
+            "name": "Uchanie"
+          },
+          "08": {
+            "name": "Werbkowice"
+          }
+        }
+      },
+      "05": {
+        "name": "janowski",
+        "gminy": {
+          "01": {
+            "name": "Batorz"
+          },
+          "02": {
+            "name": "Chrzanów"
+          },
+          "03": {
+            "name": "Dzwola"
+          },
+          "04": {
+            "name": "Godziszów"
+          },
+          "05": {
+            "name": "Janów Lubelski"
+          },
+          "06": {
+            "name": "Modliborzyce"
+          },
+          "07": {
+            "name": "Potok Wielki"
+          }
+        }
+      },
+      "06": {
+        "name": "krasnostawski",
+        "gminy": {
+          "01": {
+            "name": "Krasnystaw"
+          },
+          "02": {
+            "name": "Fajsławice"
+          },
+          "03": {
+            "name": "Gorzków"
+          },
+          "04": {
+            "name": "Izbica"
+          },
+          "05": {
+            "name": "Krasnystaw"
+          },
+          "06": {
+            "name": "Kraśniczyn"
+          },
+          "07": {
+            "name": "Łopiennik Górny"
+          },
+          "09": {
+            "name": "Rudnik"
+          },
+          "10": {
+            "name": "Siennica Różana"
+          },
+          "11": {
+            "name": "Żółkiewka"
+          }
+        }
+      },
+      "07": {
+        "name": "kraśnicki",
+        "gminy": {
+          "01": {
+            "name": "Kraśnik"
+          },
+          "02": {
+            "name": "Annopol"
+          },
+          "03": {
+            "name": "Dzierzkowice"
+          },
+          "04": {
+            "name": "Gościeradów"
+          },
+          "05": {
+            "name": "Kraśnik"
+          },
+          "06": {
+            "name": "Szastarka"
+          },
+          "07": {
+            "name": "Trzydnik Duży"
+          },
+          "08": {
+            "name": "Urzędów"
+          },
+          "09": {
+            "name": "Wilkołaz"
+          },
+          "10": {
+            "name": "Zakrzówek"
+          }
+        }
+      },
+      "08": {
+        "name": "lubartowski",
+        "gminy": {
+          "01": {
+            "name": "Lubartów"
+          },
+          "02": {
+            "name": "Abramów"
+          },
+          "03": {
+            "name": "Firlej"
+          },
+          "04": {
+            "name": "Jeziorzany"
+          },
+          "05": {
+            "name": "Kamionka"
+          },
+          "06": {
+            "name": "Kock"
+          },
+          "07": {
+            "name": "Lubartów"
+          },
+          "08": {
+            "name": "Michów"
+          },
+          "09": {
+            "name": "Niedźwiada"
+          },
+          "10": {
+            "name": "Ostrów Lubelski"
+          },
+          "11": {
+            "name": "Ostrówek"
+          },
+          "12": {
+            "name": "Serniki"
+          },
+          "13": {
+            "name": "Uścimów"
+          }
+        }
+      },
+      "09": {
+        "name": "lubelski",
+        "gminy": {
+          "01": {
+            "name": "Bełżyce"
+          },
+          "02": {
+            "name": "Borzechów"
+          },
+          "03": {
+            "name": "Bychawa"
+          },
+          "04": {
+            "name": "Garbów"
+          },
+          "05": {
+            "name": "Głusk"
+          },
+          "06": {
+            "name": "Jabłonna"
+          },
+          "07": {
+            "name": "Jastków"
+          },
+          "08": {
+            "name": "Konopnica"
+          },
+          "09": {
+            "name": "Krzczonów"
+          },
+          "10": {
+            "name": "Niedrzwica Duża"
+          },
+          "11": {
+            "name": "Niemce"
+          },
+          "12": {
+            "name": "Strzyżewice"
+          },
+          "13": {
+            "name": "Wojciechów"
+          },
+          "14": {
+            "name": "Wólka"
+          },
+          "15": {
+            "name": "Wysokie"
+          },
+          "16": {
+            "name": "Zakrzew"
+          }
+        }
+      },
+      "10": {
+        "name": "łęczyński",
+        "gminy": {
+          "01": {
+            "name": "Cyców"
+          },
+          "02": {
+            "name": "Ludwin"
+          },
+          "03": {
+            "name": "Łęczna"
+          },
+          "04": {
+            "name": "Milejów"
+          },
+          "05": {
+            "name": "Puchaczów"
+          },
+          "06": {
+            "name": "Spiczyn"
+          }
+        }
+      },
+      "11": {
+        "name": "łukowski",
+        "gminy": {
+          "01": {
+            "name": "Łuków"
+          },
+          "02": {
+            "name": "Stoczek Łukowski"
+          },
+          "03": {
+            "name": "Adamów"
+          },
+          "04": {
+            "name": "Krzywda"
+          },
+          "05": {
+            "name": "Łuków"
+          },
+          "06": {
+            "name": "Serokomla"
+          },
+          "07": {
+            "name": "Stanin"
+          },
+          "08": {
+            "name": "Stoczek Łukowski"
+          },
+          "09": {
+            "name": "Trzebieszów"
+          },
+          "10": {
+            "name": "Wojcieszków"
+          },
+          "11": {
+            "name": "Wola Mysłowska"
+          }
+        }
+      },
+      "12": {
+        "name": "opolski",
+        "gminy": {
+          "01": {
+            "name": "Chodel"
+          },
+          "02": {
+            "name": "Józefów nad Wisłą"
+          },
+          "03": {
+            "name": "Karczmiska"
+          },
+          "04": {
+            "name": "Łaziska"
+          },
+          "05": {
+            "name": "Opole Lubelskie"
+          },
+          "06": {
+            "name": "Poniatowa"
+          },
+          "07": {
+            "name": "Wilków"
+          }
+        }
+      },
+      "13": {
+        "name": "parczewski",
+        "gminy": {
+          "01": {
+            "name": "Dębowa Kłoda"
+          },
+          "02": {
+            "name": "Jabłoń"
+          },
+          "03": {
+            "name": "Milanów"
+          },
+          "04": {
+            "name": "Parczew"
+          },
+          "05": {
+            "name": "Podedwórze"
+          },
+          "06": {
+            "name": "Siemień"
+          },
+          "07": {
+            "name": "Sosnowica"
+          }
+        }
+      },
+      "14": {
+        "name": "puławski",
+        "gminy": {
+          "01": {
+            "name": "Puławy"
+          },
+          "02": {
+            "name": "Baranów"
+          },
+          "03": {
+            "name": "Janowiec"
+          },
+          "04": {
+            "name": "Kazimierz Dolny"
+          },
+          "05": {
+            "name": "Końskowola"
+          },
+          "06": {
+            "name": "Kurów"
+          },
+          "07": {
+            "name": "Markuszów"
+          },
+          "08": {
+            "name": "Nałęczów"
+          },
+          "09": {
+            "name": "Puławy"
+          },
+          "10": {
+            "name": "Wąwolnica"
+          },
+          "11": {
+            "name": "Żyrzyn"
+          }
+        }
+      },
+      "15": {
+        "name": "radzyński",
+        "gminy": {
+          "01": {
+            "name": "Radzyń Podlaski"
+          },
+          "02": {
+            "name": "Borki"
+          },
+          "03": {
+            "name": "Czemierniki"
+          },
+          "04": {
+            "name": "Kąkolewnica"
+          },
+          "05": {
+            "name": "Komarówka Podlaska"
+          },
+          "06": {
+            "name": "Radzyń Podlaski"
+          },
+          "07": {
+            "name": "Ulan-Majorat"
+          },
+          "08": {
+            "name": "Wohyń"
+          }
+        }
+      },
+      "16": {
+        "name": "rycki",
+        "gminy": {
+          "01": {
+            "name": "Dęblin"
+          },
+          "02": {
+            "name": "Kłoczew"
+          },
+          "03": {
+            "name": "Nowodwór"
+          },
+          "04": {
+            "name": "Ryki"
+          },
+          "05": {
+            "name": "Stężyca"
+          },
+          "06": {
+            "name": "Ułęż"
+          }
+        }
+      },
+      "17": {
+        "name": "świdnicki",
+        "gminy": {
+          "01": {
+            "name": "Świdnik"
+          },
+          "02": {
+            "name": "Mełgiew"
+          },
+          "03": {
+            "name": "Piaski"
+          },
+          "04": {
+            "name": "Rybczewice"
+          },
+          "05": {
+            "name": "Trawniki"
+          }
+        }
+      },
+      "18": {
+        "name": "tomaszowski",
+        "gminy": {
+          "01": {
+            "name": "Tomaszów Lubelski"
+          },
+          "02": {
+            "name": "Bełżec"
+          },
+          "03": {
+            "name": "Jarczów"
+          },
+          "04": {
+            "name": "Krynice"
+          },
+          "05": {
+            "name": "Lubycza Królewska"
+          },
+          "06": {
+            "name": "Łaszczów"
+          },
+          "07": {
+            "name": "Rachanie"
+          },
+          "08": {
+            "name": "Susiec"
+          },
+          "09": {
+            "name": "Tarnawatka"
+          },
+          "10": {
+            "name": "Telatyn"
+          },
+          "11": {
+            "name": "Tomaszów Lubelski"
+          },
+          "12": {
+            "name": "Tyszowce"
+          },
+          "13": {
+            "name": "Ulhówek"
+          }
+        }
+      },
+      "19": {
+        "name": "włodawski",
+        "gminy": {
+          "01": {
+            "name": "Włodawa"
+          },
+          "02": {
+            "name": "Hanna"
+          },
+          "03": {
+            "name": "Hańsk"
+          },
+          "04": {
+            "name": "Stary Brus"
+          },
+          "05": {
+            "name": "Urszulin"
+          },
+          "06": {
+            "name": "Włodawa"
+          },
+          "07": {
+            "name": "Wola Uhruska"
+          },
+          "08": {
+            "name": "Wyryki"
+          }
+        }
+      },
+      "20": {
+        "name": "zamojski",
+        "gminy": {
+          "01": {
+            "name": "Adamów"
+          },
+          "02": {
+            "name": "Grabowiec"
+          },
+          "03": {
+            "name": "Komarów-Osada"
+          },
+          "04": {
+            "name": "Krasnobród"
+          },
+          "05": {
+            "name": "Łabunie"
+          },
+          "06": {
+            "name": "Miączyn"
+          },
+          "07": {
+            "name": "Nielisz"
+          },
+          "08": {
+            "name": "Radecznica"
+          },
+          "09": {
+            "name": "Sitno"
+          },
+          "10": {
+            "name": "Skierbieszów"
+          },
+          "11": {
+            "name": "Stary Zamość"
+          },
+          "12": {
+            "name": "Sułów"
+          },
+          "13": {
+            "name": "Szczebrzeszyn"
+          },
+          "14": {
+            "name": "Zamość"
+          },
+          "15": {
+            "name": "Zwierzyniec"
+          }
+        }
+      },
+      "61": {
+        "name": "Biała Podlaska",
+        "gminy": {
+          "01": {
+            "name": "Biała Podlaska"
+          }
+        }
+      },
+      "62": {
+        "name": "Chełm",
+        "gminy": {
+          "01": {
+            "name": "Chełm"
+          }
+        }
+      },
+      "63": {
+        "name": "Lublin",
+        "gminy": {
+          "01": {
+            "name": "Lublin"
+          }
+        }
+      },
+      "64": {
+        "name": "Zamość",
+        "gminy": {
+          "01": {
+            "name": "Zamość"
+          }
+        }
+      }
+    }
+  },
+  "08": {
+    "name": "LUBUSKIE",
+    "powiaty": {
+      "01": {
+        "name": "gorzowski",
+        "gminy": {
+          "01": {
+            "name": "Kostrzyn nad Odrą"
+          },
+          "02": {
+            "name": "Bogdaniec"
+          },
+          "03": {
+            "name": "Deszczno"
+          },
+          "04": {
+            "name": "Kłodawa"
+          },
+          "05": {
+            "name": "Lubiszyn"
+          },
+          "06": {
+            "name": "Santok"
+          },
+          "07": {
+            "name": "Witnica"
+          }
+        }
+      },
+      "02": {
+        "name": "krośnieński",
+        "gminy": {
+          "01": {
+            "name": "Gubin"
+          },
+          "02": {
+            "name": "Bobrowice"
+          },
+          "03": {
+            "name": "Bytnica"
+          },
+          "04": {
+            "name": "Dąbie"
+          },
+          "05": {
+            "name": "Gubin"
+          },
+          "06": {
+            "name": "Krosno Odrzańskie"
+          },
+          "07": {
+            "name": "Maszewo"
+          }
+        }
+      },
+      "03": {
+        "name": "międzyrzecki",
+        "gminy": {
+          "01": {
+            "name": "Bledzew"
+          },
+          "02": {
+            "name": "Międzyrzecz"
+          },
+          "03": {
+            "name": "Przytoczna"
+          },
+          "04": {
+            "name": "Pszczew"
+          },
+          "05": {
+            "name": "Skwierzyna"
+          },
+          "06": {
+            "name": "Trzciel"
+          }
+        }
+      },
+      "04": {
+        "name": "nowosolski",
+        "gminy": {
+          "01": {
+            "name": "Nowa Sól"
+          },
+          "02": {
+            "name": "Bytom Odrzański"
+          },
+          "03": {
+            "name": "Kolsko"
+          },
+          "04": {
+            "name": "Kożuchów"
+          },
+          "05": {
+            "name": "Nowa Sól"
+          },
+          "06": {
+            "name": "Nowe Miasteczko"
+          },
+          "07": {
+            "name": "Otyń"
+          },
+          "08": {
+            "name": "Siedlisko"
+          }
+        }
+      },
+      "05": {
+        "name": "słubicki",
+        "gminy": {
+          "01": {
+            "name": "Cybinka"
+          },
+          "02": {
+            "name": "Górzyca"
+          },
+          "03": {
+            "name": "Ośno Lubuskie"
+          },
+          "04": {
+            "name": "Rzepin"
+          },
+          "05": {
+            "name": "Słubice"
+          }
+        }
+      },
+      "06": {
+        "name": "strzelecko-drezdenecki",
+        "gminy": {
+          "01": {
+            "name": "Dobiegniew"
+          },
+          "02": {
+            "name": "Drezdenko"
+          },
+          "03": {
+            "name": "Stare Kurowo"
+          },
+          "04": {
+            "name": "Strzelce Krajeńskie"
+          },
+          "05": {
+            "name": "Zwierzyn"
+          }
+        }
+      },
+      "07": {
+        "name": "sulęciński",
+        "gminy": {
+          "01": {
+            "name": "Krzeszyce"
+          },
+          "02": {
+            "name": "Lubniewice"
+          },
+          "03": {
+            "name": "Słońsk"
+          },
+          "04": {
+            "name": "Sulęcin"
+          },
+          "05": {
+            "name": "Torzym"
+          }
+        }
+      },
+      "08": {
+        "name": "świebodziński",
+        "gminy": {
+          "01": {
+            "name": "Lubrza"
+          },
+          "02": {
+            "name": "Łagów"
+          },
+          "03": {
+            "name": "Skąpe"
+          },
+          "04": {
+            "name": "Szczaniec"
+          },
+          "05": {
+            "name": "Świebodzin"
+          },
+          "06": {
+            "name": "Zbąszynek"
+          }
+        }
+      },
+      "09": {
+        "name": "zielonogórski",
+        "gminy": {
+          "01": {
+            "name": "Babimost"
+          },
+          "02": {
+            "name": "Bojadła"
+          },
+          "03": {
+            "name": "Czerwieńsk"
+          },
+          "04": {
+            "name": "Kargowa"
+          },
+          "05": {
+            "name": "Nowogród Bobrzański"
+          },
+          "06": {
+            "name": "Sulechów"
+          },
+          "07": {
+            "name": "Świdnica"
+          },
+          "08": {
+            "name": "Trzebiechów"
+          },
+          "09": {
+            "name": "Zabór"
+          }
+        }
+      },
+      "10": {
+        "name": "żagański",
+        "gminy": {
+          "01": {
+            "name": "Gozdnica"
+          },
+          "02": {
+            "name": "Żagań"
+          },
+          "03": {
+            "name": "Brzeźnica"
+          },
+          "04": {
+            "name": "Iłowa"
+          },
+          "05": {
+            "name": "Małomice"
+          },
+          "06": {
+            "name": "Niegosławice"
+          },
+          "07": {
+            "name": "Szprotawa"
+          },
+          "08": {
+            "name": "Wymiarki"
+          },
+          "09": {
+            "name": "Żagań"
+          }
+        }
+      },
+      "11": {
+        "name": "żarski",
+        "gminy": {
+          "01": {
+            "name": "Łęknica"
+          },
+          "02": {
+            "name": "Żary"
+          },
+          "03": {
+            "name": "Brody"
+          },
+          "04": {
+            "name": "Jasień"
+          },
+          "05": {
+            "name": "Lipinki Łużyckie"
+          },
+          "06": {
+            "name": "Lubsko"
+          },
+          "07": {
+            "name": "Przewóz"
+          },
+          "08": {
+            "name": "Trzebiel"
+          },
+          "09": {
+            "name": "Tuplice"
+          },
+          "10": {
+            "name": "Żary"
+          }
+        }
+      },
+      "12": {
+        "name": "wschowski",
+        "gminy": {
+          "01": {
+            "name": "Sława"
+          },
+          "02": {
+            "name": "Szlichtyngowa"
+          },
+          "03": {
+            "name": "Wschowa"
+          }
+        }
+      },
+      "61": {
+        "name": "Gorzów Wielkopolski",
+        "gminy": {
+          "01": {
+            "name": "Gorzów Wielkopolski"
+          }
+        }
+      },
+      "62": {
+        "name": "Zielona Góra",
+        "gminy": {
+          "01": {
+            "name": "Zielona Góra"
+          }
+        }
+      }
+    }
+  },
+  "10": {
+    "name": "ŁÓDZKIE",
+    "powiaty": {
+      "01": {
+        "name": "bełchatowski",
+        "gminy": {
+          "01": {
+            "name": "Bełchatów"
+          },
+          "02": {
+            "name": "Bełchatów"
+          },
+          "03": {
+            "name": "Drużbice"
+          },
+          "04": {
+            "name": "Kleszczów"
+          },
+          "05": {
+            "name": "Kluki"
+          },
+          "06": {
+            "name": "Rusiec"
+          },
+          "07": {
+            "name": "Szczerców"
+          },
+          "08": {
+            "name": "Zelów"
+          }
+        }
+      },
+      "02": {
+        "name": "kutnowski",
+        "gminy": {
+          "01": {
+            "name": "Kutno"
+          },
+          "02": {
+            "name": "Bedlno"
+          },
+          "03": {
+            "name": "Dąbrowice"
+          },
+          "04": {
+            "name": "Krośniewice"
+          },
+          "05": {
+            "name": "Krzyżanów"
+          },
+          "06": {
+            "name": "Kutno"
+          },
+          "07": {
+            "name": "Łanięta"
+          },
+          "08": {
+            "name": "Nowe Ostrowy"
+          },
+          "09": {
+            "name": "Oporów"
+          },
+          "10": {
+            "name": "Strzelce"
+          },
+          "11": {
+            "name": "Żychlin"
+          }
+        }
+      },
+      "03": {
+        "name": "łaski",
+        "gminy": {
+          "01": {
+            "name": "Buczek"
+          },
+          "02": {
+            "name": "Łask"
+          },
+          "03": {
+            "name": "Sędziejowice"
+          },
+          "04": {
+            "name": "Widawa"
+          },
+          "05": {
+            "name": "Wodzierady"
+          }
+        }
+      },
+      "04": {
+        "name": "łęczycki",
+        "gminy": {
+          "01": {
+            "name": "Łęczyca"
+          },
+          "02": {
+            "name": "Daszyna"
+          },
+          "03": {
+            "name": "Góra Świętej Małgorzaty"
+          },
+          "04": {
+            "name": "Grabów"
+          },
+          "05": {
+            "name": "Łęczyca"
+          },
+          "06": {
+            "name": "Piątek"
+          },
+          "07": {
+            "name": "Świnice Warckie"
+          },
+          "08": {
+            "name": "Witonia"
+          }
+        }
+      },
+      "05": {
+        "name": "łowicki",
+        "gminy": {
+          "01": {
+            "name": "Łowicz"
+          },
+          "02": {
+            "name": "Bielawy"
+          },
+          "03": {
+            "name": "Chąśno"
+          },
+          "04": {
+            "name": "Domaniewice"
+          },
+          "05": {
+            "name": "Kiernozia"
+          },
+          "06": {
+            "name": "Kocierzew Południowy"
+          },
+          "07": {
+            "name": "Łowicz"
+          },
+          "08": {
+            "name": "Łyszkowice"
+          },
+          "09": {
+            "name": "Nieborów"
+          },
+          "10": {
+            "name": "Zduny"
+          }
+        }
+      },
+      "06": {
+        "name": "łódzki wschodni",
+        "gminy": {
+          "02": {
+            "name": "Andrespol"
+          },
+          "03": {
+            "name": "Brójce"
+          },
+          "07": {
+            "name": "Koluszki"
+          },
+          "08": {
+            "name": "Nowosolna"
+          },
+          "10": {
+            "name": "Rzgów"
+          },
+          "11": {
+            "name": "Tuszyn"
+          }
+        }
+      },
+      "07": {
+        "name": "opoczyński",
+        "gminy": {
+          "01": {
+            "name": "Białaczów"
+          },
+          "02": {
+            "name": "Drzewica"
+          },
+          "03": {
+            "name": "Mniszków"
+          },
+          "04": {
+            "name": "Opoczno"
+          },
+          "05": {
+            "name": "Paradyż"
+          },
+          "06": {
+            "name": "Poświętne"
+          },
+          "07": {
+            "name": "Sławno"
+          },
+          "08": {
+            "name": "Żarnów"
+          }
+        }
+      },
+      "08": {
+        "name": "pabianicki",
+        "gminy": {
+          "01": {
+            "name": "Konstantynów Łódzki"
+          },
+          "02": {
+            "name": "Pabianice"
+          },
+          "03": {
+            "name": "Dłutów"
+          },
+          "04": {
+            "name": "Dobroń"
+          },
+          "05": {
+            "name": "Ksawerów"
+          },
+          "06": {
+            "name": "Lutomiersk"
+          },
+          "07": {
+            "name": "Pabianice"
+          }
+        }
+      },
+      "09": {
+        "name": "pajęczański",
+        "gminy": {
+          "01": {
+            "name": "Działoszyn"
+          },
+          "02": {
+            "name": "Kiełczygłów"
+          },
+          "03": {
+            "name": "Nowa Brzeźnica"
+          },
+          "04": {
+            "name": "Pajęczno"
+          },
+          "05": {
+            "name": "Rząśnia"
+          },
+          "06": {
+            "name": "Siemkowice"
+          },
+          "07": {
+            "name": "Strzelce Wielkie"
+          },
+          "08": {
+            "name": "Sulmierzyce"
+          }
+        }
+      },
+      "10": {
+        "name": "piotrkowski",
+        "gminy": {
+          "01": {
+            "name": "Aleksandrów"
+          },
+          "02": {
+            "name": "Czarnocin"
+          },
+          "03": {
+            "name": "Gorzkowice"
+          },
+          "04": {
+            "name": "Grabica"
+          },
+          "05": {
+            "name": "Łęki Szlacheckie"
+          },
+          "06": {
+            "name": "Moszczenica"
+          },
+          "07": {
+            "name": "Ręczno"
+          },
+          "08": {
+            "name": "Rozprza"
+          },
+          "09": {
+            "name": "Sulejów"
+          },
+          "10": {
+            "name": "Wola Krzysztoporska"
+          },
+          "11": {
+            "name": "Wolbórz"
+          }
+        }
+      },
+      "11": {
+        "name": "poddębicki",
+        "gminy": {
+          "01": {
+            "name": "Dalików"
+          },
+          "02": {
+            "name": "Pęczniew"
+          },
+          "03": {
+            "name": "Poddębice"
+          },
+          "04": {
+            "name": "Uniejów"
+          },
+          "05": {
+            "name": "Wartkowice"
+          },
+          "06": {
+            "name": "Zadzim"
+          }
+        }
+      },
+      "12": {
+        "name": "radomszczański",
+        "gminy": {
+          "01": {
+            "name": "Radomsko"
+          },
+          "02": {
+            "name": "Dobryszyce"
+          },
+          "03": {
+            "name": "Gidle"
+          },
+          "04": {
+            "name": "Gomunice"
+          },
+          "05": {
+            "name": "Kamieńsk"
+          },
+          "06": {
+            "name": "Kobiele Wielkie"
+          },
+          "07": {
+            "name": "Kodrąb"
+          },
+          "08": {
+            "name": "Lgota Wielka"
+          },
+          "09": {
+            "name": "Ładzice"
+          },
+          "10": {
+            "name": "Masłowice"
+          },
+          "11": {
+            "name": "Przedbórz"
+          },
+          "12": {
+            "name": "Radomsko"
+          },
+          "13": {
+            "name": "Wielgomłyny"
+          },
+          "14": {
+            "name": "Żytno"
+          }
+        }
+      },
+      "13": {
+        "name": "rawski",
+        "gminy": {
+          "01": {
+            "name": "Rawa Mazowiecka"
+          },
+          "02": {
+            "name": "Biała Rawska"
+          },
+          "03": {
+            "name": "Cielądz"
+          },
+          "04": {
+            "name": "Rawa Mazowiecka"
+          },
+          "05": {
+            "name": "Regnów"
+          },
+          "06": {
+            "name": "Sadkowice"
+          }
+        }
+      },
+      "14": {
+        "name": "sieradzki",
+        "gminy": {
+          "01": {
+            "name": "Sieradz"
+          },
+          "02": {
+            "name": "Błaszki"
+          },
+          "03": {
+            "name": "Brąszewice"
+          },
+          "04": {
+            "name": "Brzeźnio"
+          },
+          "05": {
+            "name": "Burzenin"
+          },
+          "06": {
+            "name": "Goszczanów"
+          },
+          "07": {
+            "name": "Klonowa"
+          },
+          "08": {
+            "name": "Sieradz"
+          },
+          "09": {
+            "name": "Warta"
+          },
+          "10": {
+            "name": "Wróblew"
+          },
+          "11": {
+            "name": "Złoczew"
+          }
+        }
+      },
+      "15": {
+        "name": "skierniewicki",
+        "gminy": {
+          "01": {
+            "name": "Bolimów"
+          },
+          "02": {
+            "name": "Głuchów"
+          },
+          "03": {
+            "name": "Godzianów"
+          },
+          "04": {
+            "name": "Kowiesy"
+          },
+          "05": {
+            "name": "Lipce Reymontowskie"
+          },
+          "06": {
+            "name": "Maków"
+          },
+          "07": {
+            "name": "Nowy Kawęczyn"
+          },
+          "08": {
+            "name": "Skierniewice"
+          },
+          "09": {
+            "name": "Słupia"
+          }
+        }
+      },
+      "16": {
+        "name": "tomaszowski",
+        "gminy": {
+          "01": {
+            "name": "Tomaszów Mazowiecki"
+          },
+          "02": {
+            "name": "Będków"
+          },
+          "03": {
+            "name": "Budziszewice"
+          },
+          "04": {
+            "name": "Czerniewice"
+          },
+          "05": {
+            "name": "Inowłódz"
+          },
+          "06": {
+            "name": "Lubochnia"
+          },
+          "07": {
+            "name": "Rokiciny"
+          },
+          "08": {
+            "name": "Rzeczyca"
+          },
+          "09": {
+            "name": "Tomaszów Mazowiecki"
+          },
+          "10": {
+            "name": "Ujazd"
+          },
+          "11": {
+            "name": "Żelechlinek"
+          }
+        }
+      },
+      "17": {
+        "name": "wieluński",
+        "gminy": {
+          "01": {
+            "name": "Biała"
+          },
+          "02": {
+            "name": "Czarnożyły"
+          },
+          "03": {
+            "name": "Konopnica"
+          },
+          "04": {
+            "name": "Mokrsko"
+          },
+          "05": {
+            "name": "Osjaków"
+          },
+          "06": {
+            "name": "Ostrówek"
+          },
+          "07": {
+            "name": "Pątnów"
+          },
+          "08": {
+            "name": "Skomlin"
+          },
+          "09": {
+            "name": "Wieluń"
+          },
+          "10": {
+            "name": "Wierzchlas"
+          }
+        }
+      },
+      "18": {
+        "name": "wieruszowski",
+        "gminy": {
+          "01": {
+            "name": "Bolesławiec"
+          },
+          "02": {
+            "name": "Czastary"
+          },
+          "03": {
+            "name": "Galewice"
+          },
+          "04": {
+            "name": "Lututów"
+          },
+          "05": {
+            "name": "Łubnice"
+          },
+          "06": {
+            "name": "Sokolniki"
+          },
+          "07": {
+            "name": "Wieruszów"
+          }
+        }
+      },
+      "19": {
+        "name": "zduńskowolski",
+        "gminy": {
+          "01": {
+            "name": "Zduńska Wola"
+          },
+          "02": {
+            "name": "Szadek"
+          },
+          "03": {
+            "name": "Zapolice"
+          },
+          "04": {
+            "name": "Zduńska Wola"
+          }
+        }
+      },
+      "20": {
+        "name": "zgierski",
+        "gminy": {
+          "01": {
+            "name": "Głowno"
+          },
+          "02": {
+            "name": "Ozorków"
+          },
+          "03": {
+            "name": "Zgierz"
+          },
+          "04": {
+            "name": "Aleksandrów Łódzki"
+          },
+          "05": {
+            "name": "Głowno"
+          },
+          "06": {
+            "name": "Ozorków"
+          },
+          "07": {
+            "name": "Parzęczew"
+          },
+          "08": {
+            "name": "Stryków"
+          },
+          "09": {
+            "name": "Zgierz"
+          }
+        }
+      },
+      "21": {
+        "name": "brzeziński",
+        "gminy": {
+          "01": {
+            "name": "Brzeziny"
+          },
+          "02": {
+            "name": "Brzeziny"
+          },
+          "03": {
+            "name": "Dmosin"
+          },
+          "04": {
+            "name": "Jeżów"
+          },
+          "05": {
+            "name": "Rogów"
+          }
+        }
+      },
+      "61": {
+        "name": "Łódź",
+        "gminy": {
+          "01": {
+            "name": "Łódź"
+          },
+          "02": {
+            "name": "Łódź-Bałuty"
+          },
+          "03": {
+            "name": "Łódź-Górna"
+          },
+          "04": {
+            "name": "Łódź-Polesie"
+          },
+          "05": {
+            "name": "Łódź-Śródmieście"
+          },
+          "06": {
+            "name": "Łódź-Widzew"
+          }
+        }
+      },
+      "62": {
+        "name": "Piotrków Trybunalski",
+        "gminy": {
+          "01": {
+            "name": "Piotrków Trybunalski"
+          }
+        }
+      },
+      "63": {
+        "name": "Skierniewice",
+        "gminy": {
+          "01": {
+            "name": "Skierniewice"
+          }
+        }
+      }
+    }
+  },
+  "12": {
+    "name": "MAŁOPOLSKIE",
+    "powiaty": {
+      "01": {
+        "name": "bocheński",
+        "gminy": {
+          "01": {
+            "name": "Bochnia"
+          },
+          "02": {
+            "name": "Bochnia"
+          },
+          "03": {
+            "name": "Drwinia"
+          },
+          "04": {
+            "name": "Lipnica Murowana"
+          },
+          "05": {
+            "name": "Łapanów"
+          },
+          "06": {
+            "name": "Nowy Wiśnicz"
+          },
+          "07": {
+            "name": "Rzezawa"
+          },
+          "08": {
+            "name": "Trzciana"
+          },
+          "09": {
+            "name": "Żegocina"
+          }
+        }
+      },
+      "02": {
+        "name": "brzeski",
+        "gminy": {
+          "01": {
+            "name": "Borzęcin"
+          },
+          "02": {
+            "name": "Brzesko"
+          },
+          "03": {
+            "name": "Czchów"
+          },
+          "04": {
+            "name": "Dębno"
+          },
+          "05": {
+            "name": "Gnojnik"
+          },
+          "06": {
+            "name": "Iwkowa"
+          },
+          "07": {
+            "name": "Szczurowa"
+          }
+        }
+      },
+      "03": {
+        "name": "chrzanowski",
+        "gminy": {
+          "01": {
+            "name": "Alwernia"
+          },
+          "02": {
+            "name": "Babice"
+          },
+          "03": {
+            "name": "Chrzanów"
+          },
+          "04": {
+            "name": "Libiąż"
+          },
+          "05": {
+            "name": "Trzebinia"
+          }
+        }
+      },
+      "04": {
+        "name": "dąbrowski",
+        "gminy": {
+          "01": {
+            "name": "Bolesław"
+          },
+          "02": {
+            "name": "Dąbrowa Tarnowska"
+          },
+          "03": {
+            "name": "Gręboszów"
+          },
+          "04": {
+            "name": "Mędrzechów"
+          },
+          "05": {
+            "name": "Olesno"
+          },
+          "06": {
+            "name": "Radgoszcz"
+          },
+          "07": {
+            "name": "Szczucin"
+          }
+        }
+      },
+      "05": {
+        "name": "gorlicki",
+        "gminy": {
+          "01": {
+            "name": "Gorlice"
+          },
+          "02": {
+            "name": "Biecz"
+          },
+          "03": {
+            "name": "Bobowa"
+          },
+          "04": {
+            "name": "Gorlice"
+          },
+          "05": {
+            "name": "Lipinki"
+          },
+          "06": {
+            "name": "Łużna"
+          },
+          "07": {
+            "name": "Moszczenica"
+          },
+          "08": {
+            "name": "Ropa"
+          },
+          "09": {
+            "name": "Sękowa"
+          },
+          "10": {
+            "name": "Uście Gorlickie"
+          }
+        }
+      },
+      "06": {
+        "name": "krakowski",
+        "gminy": {
+          "01": {
+            "name": "Czernichów"
+          },
+          "02": {
+            "name": "Igołomia-Wawrzeńczyce"
+          },
+          "03": {
+            "name": "Iwanowice"
+          },
+          "04": {
+            "name": "Jerzmanowice-Przeginia"
+          },
+          "05": {
+            "name": "Kocmyrzów-Luborzyca"
+          },
+          "06": {
+            "name": "Krzeszowice"
+          },
+          "07": {
+            "name": "Liszki"
+          },
+          "08": {
+            "name": "Michałowice"
+          },
+          "09": {
+            "name": "Mogilany"
+          },
+          "10": {
+            "name": "Skała"
+          },
+          "11": {
+            "name": "Skawina"
+          },
+          "12": {
+            "name": "Słomniki"
+          },
+          "13": {
+            "name": "Sułoszowa"
+          },
+          "14": {
+            "name": "Świątniki Górne"
+          },
+          "15": {
+            "name": "Wielka Wieś"
+          },
+          "16": {
+            "name": "Zabierzów"
+          },
+          "17": {
+            "name": "Zielonki"
+          }
+        }
+      },
+      "07": {
+        "name": "limanowski",
+        "gminy": {
+          "01": {
+            "name": "Limanowa"
+          },
+          "02": {
+            "name": "Mszana Dolna"
+          },
+          "03": {
+            "name": "Dobra"
+          },
+          "04": {
+            "name": "Jodłownik"
+          },
+          "05": {
+            "name": "Kamienica"
+          },
+          "06": {
+            "name": "Laskowa"
+          },
+          "07": {
+            "name": "Limanowa"
+          },
+          "08": {
+            "name": "Łukowica"
+          },
+          "09": {
+            "name": "Mszana Dolna"
+          },
+          "10": {
+            "name": "Niedźwiedź"
+          },
+          "11": {
+            "name": "Słopnice"
+          },
+          "12": {
+            "name": "Tymbark"
+          },
+          "13": {
+            "name": "Szczawa"
+          }
+        }
+      },
+      "08": {
+        "name": "miechowski",
+        "gminy": {
+          "01": {
+            "name": "Charsznica"
+          },
+          "02": {
+            "name": "Gołcza"
+          },
+          "03": {
+            "name": "Kozłów"
+          },
+          "04": {
+            "name": "Książ Wielki"
+          },
+          "05": {
+            "name": "Miechów"
+          },
+          "06": {
+            "name": "Racławice"
+          },
+          "07": {
+            "name": "Słaboszów"
+          }
+        }
+      },
+      "09": {
+        "name": "myślenicki",
+        "gminy": {
+          "01": {
+            "name": "Dobczyce"
+          },
+          "02": {
+            "name": "Lubień"
+          },
+          "03": {
+            "name": "Myślenice"
+          },
+          "04": {
+            "name": "Pcim"
+          },
+          "05": {
+            "name": "Raciechowice"
+          },
+          "06": {
+            "name": "Siepraw"
+          },
+          "07": {
+            "name": "Sułkowice"
+          },
+          "08": {
+            "name": "Tokarnia"
+          },
+          "09": {
+            "name": "Wiśniowa"
+          }
+        }
+      },
+      "10": {
+        "name": "nowosądecki",
+        "gminy": {
+          "01": {
+            "name": "Grybów"
+          },
+          "02": {
+            "name": "Chełmiec"
+          },
+          "03": {
+            "name": "Gródek nad Dunajcem"
+          },
+          "04": {
+            "name": "Grybów"
+          },
+          "05": {
+            "name": "Kamionka Wielka"
+          },
+          "06": {
+            "name": "Korzenna"
+          },
+          "07": {
+            "name": "Krynica-Zdrój"
+          },
+          "08": {
+            "name": "Łabowa"
+          },
+          "09": {
+            "name": "Łącko"
+          },
+          "10": {
+            "name": "Łososina Dolna"
+          },
+          "11": {
+            "name": "Muszyna"
+          },
+          "12": {
+            "name": "Nawojowa"
+          },
+          "13": {
+            "name": "Piwniczna-Zdrój"
+          },
+          "14": {
+            "name": "Podegrodzie"
+          },
+          "15": {
+            "name": "Rytro"
+          },
+          "16": {
+            "name": "Stary Sącz"
+          }
+        }
+      },
+      "11": {
+        "name": "nowotarski",
+        "gminy": {
+          "01": {
+            "name": "Nowy Targ"
+          },
+          "02": {
+            "name": "Szczawnica"
+          },
+          "03": {
+            "name": "Czarny Dunajec"
+          },
+          "04": {
+            "name": "Czorsztyn"
+          },
+          "05": {
+            "name": "Jabłonka"
+          },
+          "06": {
+            "name": "Krościenko nad Dunajcem"
+          },
+          "07": {
+            "name": "Lipnica Wielka"
+          },
+          "08": {
+            "name": "Łapsze Niżne"
+          },
+          "09": {
+            "name": "Nowy Targ"
+          },
+          "10": {
+            "name": "Ochotnica Dolna"
+          },
+          "11": {
+            "name": "Raba Wyżna"
+          },
+          "12": {
+            "name": "Rabka-Zdrój"
+          },
+          "13": {
+            "name": "Spytkowice"
+          },
+          "14": {
+            "name": "Szaflary"
+          }
+        }
+      },
+      "12": {
+        "name": "olkuski",
+        "gminy": {
+          "01": {
+            "name": "Bukowno"
+          },
+          "03": {
+            "name": "Bolesław"
+          },
+          "04": {
+            "name": "Klucze"
+          },
+          "05": {
+            "name": "Olkusz"
+          },
+          "06": {
+            "name": "Trzyciąż"
+          },
+          "07": {
+            "name": "Wolbrom"
+          }
+        }
+      },
+      "13": {
+        "name": "oświęcimski",
+        "gminy": {
+          "01": {
+            "name": "Oświęcim"
+          },
+          "02": {
+            "name": "Brzeszcze"
+          },
+          "03": {
+            "name": "Chełmek"
+          },
+          "04": {
+            "name": "Kęty"
+          },
+          "05": {
+            "name": "Osiek"
+          },
+          "06": {
+            "name": "Oświęcim"
+          },
+          "07": {
+            "name": "Polanka Wielka"
+          },
+          "08": {
+            "name": "Przeciszów"
+          },
+          "09": {
+            "name": "Zator"
+          }
+        }
+      },
+      "14": {
+        "name": "proszowicki",
+        "gminy": {
+          "01": {
+            "name": "Koniusza"
+          },
+          "02": {
+            "name": "Koszyce"
+          },
+          "03": {
+            "name": "Nowe Brzesko"
+          },
+          "04": {
+            "name": "Pałecznica"
+          },
+          "05": {
+            "name": "Proszowice"
+          },
+          "06": {
+            "name": "Radziemice"
+          }
+        }
+      },
+      "15": {
+        "name": "suski",
+        "gminy": {
+          "01": {
+            "name": "Jordanów"
+          },
+          "02": {
+            "name": "Sucha Beskidzka"
+          },
+          "03": {
+            "name": "Budzów"
+          },
+          "04": {
+            "name": "Bystra-Sidzina"
+          },
+          "05": {
+            "name": "Jordanów"
+          },
+          "06": {
+            "name": "Maków Podhalański"
+          },
+          "07": {
+            "name": "Stryszawa"
+          },
+          "08": {
+            "name": "Zawoja"
+          },
+          "09": {
+            "name": "Zembrzyce"
+          }
+        }
+      },
+      "16": {
+        "name": "tarnowski",
+        "gminy": {
+          "01": {
+            "name": "Ciężkowice"
+          },
+          "02": {
+            "name": "Gromnik"
+          },
+          "03": {
+            "name": "Lisia Góra"
+          },
+          "04": {
+            "name": "Pleśna"
+          },
+          "05": {
+            "name": "Radłów"
+          },
+          "06": {
+            "name": "Ryglice"
+          },
+          "07": {
+            "name": "Rzepiennik Strzyżewski"
+          },
+          "08": {
+            "name": "Skrzyszów"
+          },
+          "09": {
+            "name": "Tarnów"
+          },
+          "10": {
+            "name": "Tuchów"
+          },
+          "11": {
+            "name": "Wierzchosławice"
+          },
+          "12": {
+            "name": "Wietrzychowice"
+          },
+          "13": {
+            "name": "Wojnicz"
+          },
+          "14": {
+            "name": "Zakliczyn"
+          },
+          "15": {
+            "name": "Żabno"
+          },
+          "16": {
+            "name": "Szerzyny"
+          }
+        }
+      },
+      "17": {
+        "name": "tatrzański",
+        "gminy": {
+          "01": {
+            "name": "Zakopane"
+          },
+          "02": {
+            "name": "Biały Dunajec"
+          },
+          "03": {
+            "name": "Bukowina Tatrzańska"
+          },
+          "04": {
+            "name": "Kościelisko"
+          },
+          "05": {
+            "name": "Poronin"
+          }
+        }
+      },
+      "18": {
+        "name": "wadowicki",
+        "gminy": {
+          "01": {
+            "name": "Andrychów"
+          },
+          "02": {
+            "name": "Brzeźnica"
+          },
+          "03": {
+            "name": "Kalwaria Zebrzydowska"
+          },
+          "04": {
+            "name": "Lanckorona"
+          },
+          "05": {
+            "name": "Mucharz"
+          },
+          "06": {
+            "name": "Spytkowice"
+          },
+          "07": {
+            "name": "Stryszów"
+          },
+          "08": {
+            "name": "Tomice"
+          },
+          "09": {
+            "name": "Wadowice"
+          },
+          "10": {
+            "name": "Wieprz"
+          }
+        }
+      },
+      "19": {
+        "name": "wielicki",
+        "gminy": {
+          "01": {
+            "name": "Biskupice"
+          },
+          "02": {
+            "name": "Gdów"
+          },
+          "03": {
+            "name": "Kłaj"
+          },
+          "04": {
+            "name": "Niepołomice"
+          },
+          "05": {
+            "name": "Wieliczka"
+          }
+        }
+      },
+      "61": {
+        "name": "Kraków",
+        "gminy": {
+          "01": {
+            "name": "Kraków"
+          },
+          "02": {
+            "name": "Kraków-Krowodrza"
+          },
+          "03": {
+            "name": "Kraków-Nowa Huta"
+          },
+          "04": {
+            "name": "Kraków-Podgórze"
+          },
+          "05": {
+            "name": "Kraków-Śródmieście"
+          }
+        }
+      },
+      "62": {
+        "name": "Nowy Sącz",
+        "gminy": {
+          "01": {
+            "name": "Nowy Sącz"
+          }
+        }
+      },
+      "63": {
+        "name": "Tarnów",
+        "gminy": {
+          "01": {
+            "name": "Tarnów"
+          }
+        }
+      }
+    }
+  },
+  "14": {
+    "name": "MAZOWIECKIE",
+    "powiaty": {
+      "01": {
+        "name": "białobrzeski",
+        "gminy": {
+          "01": {
+            "name": "Białobrzegi"
+          },
+          "02": {
+            "name": "Promna"
+          },
+          "03": {
+            "name": "Radzanów"
+          },
+          "04": {
+            "name": "Stara Błotnica"
+          },
+          "05": {
+            "name": "Stromiec"
+          },
+          "06": {
+            "name": "Wyśmierzyce"
+          }
+        }
+      },
+      "02": {
+        "name": "ciechanowski",
+        "gminy": {
+          "01": {
+            "name": "Ciechanów"
+          },
+          "02": {
+            "name": "Ciechanów"
+          },
+          "03": {
+            "name": "Glinojeck"
+          },
+          "04": {
+            "name": "Gołymin-Ośrodek"
+          },
+          "05": {
+            "name": "Grudusk"
+          },
+          "06": {
+            "name": "Ojrzeń"
+          },
+          "07": {
+            "name": "Opinogóra Górna"
+          },
+          "08": {
+            "name": "Regimin"
+          },
+          "09": {
+            "name": "Sońsk"
+          }
+        }
+      },
+      "03": {
+        "name": "garwoliński",
+        "gminy": {
+          "01": {
+            "name": "Garwolin"
+          },
+          "02": {
+            "name": "Łaskarzew"
+          },
+          "03": {
+            "name": "Borowie"
+          },
+          "04": {
+            "name": "Garwolin"
+          },
+          "05": {
+            "name": "Górzno"
+          },
+          "06": {
+            "name": "Łaskarzew"
+          },
+          "07": {
+            "name": "Maciejowice"
+          },
+          "08": {
+            "name": "Miastków Kościelny"
+          },
+          "09": {
+            "name": "Parysów"
+          },
+          "10": {
+            "name": "Pilawa"
+          },
+          "11": {
+            "name": "Sobolew"
+          },
+          "12": {
+            "name": "Trojanów"
+          },
+          "13": {
+            "name": "Wilga"
+          },
+          "14": {
+            "name": "Żelechów"
+          }
+        }
+      },
+      "04": {
+        "name": "gostyniński",
+        "gminy": {
+          "01": {
+            "name": "Gostynin"
+          },
+          "02": {
+            "name": "Gostynin"
+          },
+          "03": {
+            "name": "Pacyna"
+          },
+          "04": {
+            "name": "Sanniki"
+          },
+          "05": {
+            "name": "Szczawin Kościelny"
+          }
+        }
+      },
+      "05": {
+        "name": "grodziski",
+        "gminy": {
+          "01": {
+            "name": "Milanówek"
+          },
+          "02": {
+            "name": "Podkowa Leśna"
+          },
+          "03": {
+            "name": "Baranów"
+          },
+          "04": {
+            "name": "Grodzisk Mazowiecki"
+          },
+          "05": {
+            "name": "Jaktorów"
+          },
+          "06": {
+            "name": "Żabia Wola"
+          }
+        }
+      },
+      "06": {
+        "name": "grójecki",
+        "gminy": {
+          "01": {
+            "name": "Belsk Duży"
+          },
+          "02": {
+            "name": "Błędów"
+          },
+          "03": {
+            "name": "Chynów"
+          },
+          "04": {
+            "name": "Goszczyn"
+          },
+          "05": {
+            "name": "Grójec"
+          },
+          "06": {
+            "name": "Jasieniec"
+          },
+          "07": {
+            "name": "Mogielnica"
+          },
+          "08": {
+            "name": "Nowe Miasto nad Pilicą"
+          },
+          "09": {
+            "name": "Pniewy"
+          },
+          "11": {
+            "name": "Warka"
+          }
+        }
+      },
+      "07": {
+        "name": "kozienicki",
+        "gminy": {
+          "01": {
+            "name": "Garbatka-Letnisko"
+          },
+          "02": {
+            "name": "Głowaczów"
+          },
+          "03": {
+            "name": "Gniewoszów"
+          },
+          "04": {
+            "name": "Grabów nad Pilicą"
+          },
+          "05": {
+            "name": "Kozienice"
+          },
+          "06": {
+            "name": "Magnuszew"
+          },
+          "07": {
+            "name": "Sieciechów"
+          }
+        }
+      },
+      "08": {
+        "name": "legionowski",
+        "gminy": {
+          "01": {
+            "name": "Legionowo"
+          },
+          "02": {
+            "name": "Jabłonna"
+          },
+          "03": {
+            "name": "Nieporęt"
+          },
+          "04": {
+            "name": "Serock"
+          },
+          "05": {
+            "name": "Wieliszew"
+          }
+        }
+      },
+      "09": {
+        "name": "lipski",
+        "gminy": {
+          "01": {
+            "name": "Chotcza"
+          },
+          "02": {
+            "name": "Ciepielów"
+          },
+          "03": {
+            "name": "Lipsko"
+          },
+          "04": {
+            "name": "Rzeczniów"
+          },
+          "05": {
+            "name": "Sienno"
+          },
+          "06": {
+            "name": "Solec nad Wisłą"
+          }
+        }
+      },
+      "10": {
+        "name": "łosicki",
+        "gminy": {
+          "01": {
+            "name": "Huszlew"
+          },
+          "02": {
+            "name": "Łosice"
+          },
+          "03": {
+            "name": "Olszanka"
+          },
+          "04": {
+            "name": "Platerów"
+          },
+          "05": {
+            "name": "Sarnaki"
+          },
+          "06": {
+            "name": "Stara Kornica"
+          }
+        }
+      },
+      "11": {
+        "name": "makowski",
+        "gminy": {
+          "01": {
+            "name": "Maków Mazowiecki"
+          },
+          "02": {
+            "name": "Czerwonka"
+          },
+          "03": {
+            "name": "Karniewo"
+          },
+          "04": {
+            "name": "Krasnosielc"
+          },
+          "05": {
+            "name": "Młynarze"
+          },
+          "06": {
+            "name": "Płoniawy-Bramura"
+          },
+          "07": {
+            "name": "Różan"
+          },
+          "08": {
+            "name": "Rzewnie"
+          },
+          "09": {
+            "name": "Sypniewo"
+          },
+          "10": {
+            "name": "Szelków"
+          }
+        }
+      },
+      "12": {
+        "name": "miński",
+        "gminy": {
+          "01": {
+            "name": "Mińsk Mazowiecki"
+          },
+          "04": {
+            "name": "Cegłów"
+          },
+          "05": {
+            "name": "Dębe Wielkie"
+          },
+          "06": {
+            "name": "Dobre"
+          },
+          "07": {
+            "name": "Halinów"
+          },
+          "08": {
+            "name": "Jakubów"
+          },
+          "09": {
+            "name": "Kałuszyn"
+          },
+          "10": {
+            "name": "Latowicz"
+          },
+          "11": {
+            "name": "Mińsk Mazowiecki"
+          },
+          "12": {
+            "name": "Mrozy"
+          },
+          "13": {
+            "name": "Siennica"
+          },
+          "14": {
+            "name": "Stanisławów"
+          },
+          "15": {
+            "name": "Sulejówek"
+          }
+        }
+      },
+      "13": {
+        "name": "mławski",
+        "gminy": {
+          "01": {
+            "name": "Mława"
+          },
+          "02": {
+            "name": "Dzierzgowo"
+          },
+          "03": {
+            "name": "Lipowiec Kościelny"
+          },
+          "04": {
+            "name": "Radzanów"
+          },
+          "05": {
+            "name": "Strzegowo"
+          },
+          "06": {
+            "name": "Stupsk"
+          },
+          "07": {
+            "name": "Szreńsk"
+          },
+          "08": {
+            "name": "Szydłowo"
+          },
+          "09": {
+            "name": "Wieczfnia Kościelna"
+          },
+          "10": {
+            "name": "Wiśniewo"
+          }
+        }
+      },
+      "14": {
+        "name": "nowodworski",
+        "gminy": {
+          "01": {
+            "name": "Nowy Dwór Mazowiecki"
+          },
+          "02": {
+            "name": "Czosnów"
+          },
+          "03": {
+            "name": "Leoncin"
+          },
+          "04": {
+            "name": "Nasielsk"
+          },
+          "05": {
+            "name": "Pomiechówek"
+          },
+          "06": {
+            "name": "Zakroczym"
+          }
+        }
+      },
+      "15": {
+        "name": "ostrołęcki",
+        "gminy": {
+          "01": {
+            "name": "Baranowo"
+          },
+          "02": {
+            "name": "Czarnia"
+          },
+          "03": {
+            "name": "Czerwin"
+          },
+          "04": {
+            "name": "Goworowo"
+          },
+          "05": {
+            "name": "Kadzidło"
+          },
+          "06": {
+            "name": "Lelis"
+          },
+          "07": {
+            "name": "Łyse"
+          },
+          "08": {
+            "name": "Myszyniec"
+          },
+          "09": {
+            "name": "Olszewo-Borki"
+          },
+          "10": {
+            "name": "Rzekuń"
+          },
+          "11": {
+            "name": "Troszyn"
+          }
+        }
+      },
+      "16": {
+        "name": "ostrowski",
+        "gminy": {
+          "01": {
+            "name": "Ostrów Mazowiecka"
+          },
+          "02": {
+            "name": "Andrzejewo"
+          },
+          "03": {
+            "name": "Boguty-Pianki"
+          },
+          "04": {
+            "name": "Brok"
+          },
+          "05": {
+            "name": "Małkinia Górna"
+          },
+          "06": {
+            "name": "Nur"
+          },
+          "07": {
+            "name": "Ostrów Mazowiecka"
+          },
+          "08": {
+            "name": "Stary Lubotyń"
+          },
+          "09": {
+            "name": "Szulborze Wielkie"
+          },
+          "10": {
+            "name": "Wąsewo"
+          },
+          "11": {
+            "name": "Zaręby Kościelne"
+          }
+        }
+      },
+      "17": {
+        "name": "otwocki",
+        "gminy": {
+          "01": {
+            "name": "Józefów"
+          },
+          "02": {
+            "name": "Otwock"
+          },
+          "03": {
+            "name": "Celestynów"
+          },
+          "04": {
+            "name": "Karczew"
+          },
+          "05": {
+            "name": "Kołbiel"
+          },
+          "06": {
+            "name": "Osieck"
+          },
+          "07": {
+            "name": "Sobienie-Jeziory"
+          },
+          "08": {
+            "name": "Wiązowna"
+          }
+        }
+      },
+      "18": {
+        "name": "piaseczyński",
+        "gminy": {
+          "01": {
+            "name": "Góra Kalwaria"
+          },
+          "02": {
+            "name": "Konstancin-Jeziorna"
+          },
+          "03": {
+            "name": "Lesznowola"
+          },
+          "04": {
+            "name": "Piaseczno"
+          },
+          "05": {
+            "name": "Prażmów"
+          },
+          "06": {
+            "name": "Tarczyn"
+          }
+        }
+      },
+      "19": {
+        "name": "płocki",
+        "gminy": {
+          "01": {
+            "name": "Bielsk"
+          },
+          "02": {
+            "name": "Bodzanów"
+          },
+          "03": {
+            "name": "Brudzeń Duży"
+          },
+          "04": {
+            "name": "Bulkowo"
+          },
+          "05": {
+            "name": "Drobin"
+          },
+          "06": {
+            "name": "Gąbin"
+          },
+          "07": {
+            "name": "Łąck"
+          },
+          "08": {
+            "name": "Mała Wieś"
+          },
+          "09": {
+            "name": "Nowy Duninów"
+          },
+          "10": {
+            "name": "Radzanowo"
+          },
+          "11": {
+            "name": "Słubice"
+          },
+          "12": {
+            "name": "Słupno"
+          },
+          "13": {
+            "name": "Stara Biała"
+          },
+          "14": {
+            "name": "Staroźreby"
+          },
+          "15": {
+            "name": "Wyszogród"
+          }
+        }
+      },
+      "20": {
+        "name": "płoński",
+        "gminy": {
+          "01": {
+            "name": "Płońsk"
+          },
+          "02": {
+            "name": "Raciąż"
+          },
+          "03": {
+            "name": "Baboszewo"
+          },
+          "04": {
+            "name": "Czerwińsk nad Wisłą"
+          },
+          "05": {
+            "name": "Dzierzążnia"
+          },
+          "06": {
+            "name": "Joniec"
+          },
+          "07": {
+            "name": "Naruszewo"
+          },
+          "08": {
+            "name": "Nowe Miasto"
+          },
+          "09": {
+            "name": "Płońsk"
+          },
+          "10": {
+            "name": "Raciąż"
+          },
+          "11": {
+            "name": "Sochocin"
+          },
+          "12": {
+            "name": "Załuski"
+          }
+        }
+      },
+      "21": {
+        "name": "pruszkowski",
+        "gminy": {
+          "01": {
+            "name": "Piastów"
+          },
+          "02": {
+            "name": "Pruszków"
+          },
+          "03": {
+            "name": "Brwinów"
+          },
+          "04": {
+            "name": "Michałowice"
+          },
+          "05": {
+            "name": "Nadarzyn"
+          },
+          "06": {
+            "name": "Raszyn"
+          }
+        }
+      },
+      "22": {
+        "name": "przasnyski",
+        "gminy": {
+          "01": {
+            "name": "Przasnysz"
+          },
+          "02": {
+            "name": "Chorzele"
+          },
+          "03": {
+            "name": "Czernice Borowe"
+          },
+          "04": {
+            "name": "Jednorożec"
+          },
+          "05": {
+            "name": "Krasne"
+          },
+          "06": {
+            "name": "Krzynowłoga Mała"
+          },
+          "07": {
+            "name": "Przasnysz"
+          }
+        }
+      },
+      "23": {
+        "name": "przysuski",
+        "gminy": {
+          "01": {
+            "name": "Borkowice"
+          },
+          "02": {
+            "name": "Gielniów"
+          },
+          "03": {
+            "name": "Klwów"
+          },
+          "04": {
+            "name": "Odrzywół"
+          },
+          "05": {
+            "name": "Potworów"
+          },
+          "06": {
+            "name": "Przysucha"
+          },
+          "07": {
+            "name": "Rusinów"
+          },
+          "08": {
+            "name": "Wieniawa"
+          }
+        }
+      },
+      "24": {
+        "name": "pułtuski",
+        "gminy": {
+          "01": {
+            "name": "Gzy"
+          },
+          "02": {
+            "name": "Obryte"
+          },
+          "03": {
+            "name": "Pokrzywnica"
+          },
+          "04": {
+            "name": "Pułtusk"
+          },
+          "05": {
+            "name": "Świercze"
+          },
+          "06": {
+            "name": "Winnica"
+          },
+          "07": {
+            "name": "Zatory"
+          }
+        }
+      },
+      "25": {
+        "name": "radomski",
+        "gminy": {
+          "01": {
+            "name": "Pionki"
+          },
+          "02": {
+            "name": "Gózd"
+          },
+          "03": {
+            "name": "Iłża"
+          },
+          "04": {
+            "name": "Jastrzębia"
+          },
+          "05": {
+            "name": "Jedlińsk"
+          },
+          "06": {
+            "name": "Jedlnia-Letnisko"
+          },
+          "07": {
+            "name": "Kowala"
+          },
+          "08": {
+            "name": "Pionki"
+          },
+          "09": {
+            "name": "Przytyk"
+          },
+          "10": {
+            "name": "Skaryszew"
+          },
+          "11": {
+            "name": "Wierzbica"
+          },
+          "12": {
+            "name": "Wolanów"
+          },
+          "13": {
+            "name": "Zakrzew"
+          }
+        }
+      },
+      "26": {
+        "name": "siedlecki",
+        "gminy": {
+          "01": {
+            "name": "Domanice"
+          },
+          "02": {
+            "name": "Korczew"
+          },
+          "03": {
+            "name": "Kotuń"
+          },
+          "04": {
+            "name": "Mokobody"
+          },
+          "05": {
+            "name": "Mordy"
+          },
+          "06": {
+            "name": "Paprotnia"
+          },
+          "07": {
+            "name": "Przesmyki"
+          },
+          "08": {
+            "name": "Siedlce"
+          },
+          "09": {
+            "name": "Skórzec"
+          },
+          "10": {
+            "name": "Suchożebry"
+          },
+          "11": {
+            "name": "Wiśniew"
+          },
+          "12": {
+            "name": "Wodynie"
+          },
+          "13": {
+            "name": "Zbuczyn"
+          }
+        }
+      },
+      "27": {
+        "name": "sierpecki",
+        "gminy": {
+          "01": {
+            "name": "Sierpc"
+          },
+          "02": {
+            "name": "Gozdowo"
+          },
+          "03": {
+            "name": "Mochowo"
+          },
+          "04": {
+            "name": "Rościszewo"
+          },
+          "05": {
+            "name": "Sierpc"
+          },
+          "06": {
+            "name": "Szczutowo"
+          },
+          "07": {
+            "name": "Zawidz"
+          }
+        }
+      },
+      "28": {
+        "name": "sochaczewski",
+        "gminy": {
+          "01": {
+            "name": "Sochaczew"
+          },
+          "02": {
+            "name": "Brochów"
+          },
+          "03": {
+            "name": "Iłów"
+          },
+          "04": {
+            "name": "Młodzieszyn"
+          },
+          "05": {
+            "name": "Nowa Sucha"
+          },
+          "06": {
+            "name": "Rybno"
+          },
+          "07": {
+            "name": "Sochaczew"
+          },
+          "08": {
+            "name": "Teresin"
+          }
+        }
+      },
+      "29": {
+        "name": "sokołowski",
+        "gminy": {
+          "01": {
+            "name": "Sokołów Podlaski"
+          },
+          "02": {
+            "name": "Bielany"
+          },
+          "03": {
+            "name": "Ceranów"
+          },
+          "04": {
+            "name": "Jabłonna Lacka"
+          },
+          "05": {
+            "name": "Kosów Lacki"
+          },
+          "06": {
+            "name": "Repki"
+          },
+          "07": {
+            "name": "Sabnie"
+          },
+          "08": {
+            "name": "Sokołów Podlaski"
+          },
+          "09": {
+            "name": "Sterdyń"
+          }
+        }
+      },
+      "30": {
+        "name": "szydłowiecki",
+        "gminy": {
+          "01": {
+            "name": "Chlewiska"
+          },
+          "02": {
+            "name": "Jastrząb"
+          },
+          "03": {
+            "name": "Mirów"
+          },
+          "04": {
+            "name": "Orońsko"
+          },
+          "05": {
+            "name": "Szydłowiec"
+          }
+        }
+      },
+      "32": {
+        "name": "warszawski zachodni",
+        "gminy": {
+          "01": {
+            "name": "Błonie"
+          },
+          "02": {
+            "name": "Izabelin"
+          },
+          "03": {
+            "name": "Kampinos"
+          },
+          "04": {
+            "name": "Leszno"
+          },
+          "05": {
+            "name": "Łomianki"
+          },
+          "06": {
+            "name": "Ożarów Mazowiecki"
+          },
+          "07": {
+            "name": "Stare Babice"
+          }
+        }
+      },
+      "33": {
+        "name": "węgrowski",
+        "gminy": {
+          "01": {
+            "name": "Węgrów"
+          },
+          "02": {
+            "name": "Grębków"
+          },
+          "03": {
+            "name": "Korytnica"
+          },
+          "04": {
+            "name": "Liw"
+          },
+          "05": {
+            "name": "Łochów"
+          },
+          "06": {
+            "name": "Miedzna"
+          },
+          "07": {
+            "name": "Sadowne"
+          },
+          "08": {
+            "name": "Stoczek"
+          },
+          "09": {
+            "name": "Wierzbno"
+          }
+        }
+      },
+      "34": {
+        "name": "wołomiński",
+        "gminy": {
+          "01": {
+            "name": "Kobyłka"
+          },
+          "02": {
+            "name": "Marki"
+          },
+          "03": {
+            "name": "Ząbki"
+          },
+          "04": {
+            "name": "Zielonka"
+          },
+          "05": {
+            "name": "Dąbrówka"
+          },
+          "06": {
+            "name": "Jadów"
+          },
+          "07": {
+            "name": "Klembów"
+          },
+          "08": {
+            "name": "Poświętne"
+          },
+          "09": {
+            "name": "Radzymin"
+          },
+          "10": {
+            "name": "Strachówka"
+          },
+          "11": {
+            "name": "Tłuszcz"
+          },
+          "12": {
+            "name": "Wołomin"
+          }
+        }
+      },
+      "35": {
+        "name": "wyszkowski",
+        "gminy": {
+          "01": {
+            "name": "Brańszczyk"
+          },
+          "02": {
+            "name": "Długosiodło"
+          },
+          "03": {
+            "name": "Rząśnik"
+          },
+          "04": {
+            "name": "Somianka"
+          },
+          "05": {
+            "name": "Wyszków"
+          },
+          "06": {
+            "name": "Zabrodzie"
+          }
+        }
+      },
+      "36": {
+        "name": "zwoleński",
+        "gminy": {
+          "01": {
+            "name": "Kazanów"
+          },
+          "02": {
+            "name": "Policzna"
+          },
+          "03": {
+            "name": "Przyłęk"
+          },
+          "04": {
+            "name": "Tczów"
+          },
+          "05": {
+            "name": "Zwoleń"
+          }
+        }
+      },
+      "37": {
+        "name": "żuromiński",
+        "gminy": {
+          "01": {
+            "name": "Bieżuń"
+          },
+          "02": {
+            "name": "Kuczbork-Osada"
+          },
+          "03": {
+            "name": "Lubowidz"
+          },
+          "04": {
+            "name": "Lutocin"
+          },
+          "05": {
+            "name": "Siemiątkowo"
+          },
+          "06": {
+            "name": "Żuromin"
+          }
+        }
+      },
+      "38": {
+        "name": "żyrardowski",
+        "gminy": {
+          "01": {
+            "name": "Żyrardów"
+          },
+          "02": {
+            "name": "Mszczonów"
+          },
+          "03": {
+            "name": "Puszcza Mariańska"
+          },
+          "04": {
+            "name": "Radziejowice"
+          },
+          "05": {
+            "name": "Wiskitki"
+          }
+        }
+      },
+      "61": {
+        "name": "Ostrołęka",
+        "gminy": {
+          "01": {
+            "name": "Ostrołęka"
+          }
+        }
+      },
+      "62": {
+        "name": "Płock",
+        "gminy": {
+          "01": {
+            "name": "Płock"
+          }
+        }
+      },
+      "63": {
+        "name": "Radom",
+        "gminy": {
+          "01": {
+            "name": "Radom"
+          }
+        }
+      },
+      "64": {
+        "name": "Siedlce",
+        "gminy": {
+          "01": {
+            "name": "Siedlce"
+          }
+        }
+      },
+      "65": {
+        "name": "Warszawa",
+        "gminy": {
+          "01": {
+            "name": "Warszawa"
+          },
+          "02": {
+            "name": "Bemowo"
+          },
+          "03": {
+            "name": "Białołęka"
+          },
+          "04": {
+            "name": "Bielany"
+          },
+          "05": {
+            "name": "Mokotów"
+          },
+          "06": {
+            "name": "Ochota"
+          },
+          "07": {
+            "name": "Praga-Południe"
+          },
+          "08": {
+            "name": "Praga-Północ"
+          },
+          "09": {
+            "name": "Rembertów"
+          },
+          "10": {
+            "name": "Śródmieście"
+          },
+          "11": {
+            "name": "Targówek"
+          },
+          "12": {
+            "name": "Ursus"
+          },
+          "13": {
+            "name": "Ursynów"
+          },
+          "14": {
+            "name": "Wawer"
+          },
+          "15": {
+            "name": "Wesoła"
+          },
+          "16": {
+            "name": "Wilanów"
+          },
+          "17": {
+            "name": "Włochy"
+          },
+          "18": {
+            "name": "Wola"
+          },
+          "19": {
+            "name": "Żoliborz"
+          }
+        }
+      }
+    }
+  },
+  "16": {
+    "name": "OPOLSKIE",
+    "powiaty": {
+      "01": {
+        "name": "brzeski",
+        "gminy": {
+          "01": {
+            "name": "Brzeg"
+          },
+          "02": {
+            "name": "Skarbimierz"
+          },
+          "03": {
+            "name": "Grodków"
+          },
+          "04": {
+            "name": "Lewin Brzeski"
+          },
+          "05": {
+            "name": "Lubsza"
+          },
+          "06": {
+            "name": "Olszanka"
+          }
+        }
+      },
+      "02": {
+        "name": "głubczycki",
+        "gminy": {
+          "01": {
+            "name": "Baborów"
+          },
+          "02": {
+            "name": "Branice"
+          },
+          "03": {
+            "name": "Głubczyce"
+          },
+          "04": {
+            "name": "Kietrz"
+          }
+        }
+      },
+      "03": {
+        "name": "kędzierzyńsko-kozielski",
+        "gminy": {
+          "01": {
+            "name": "Kędzierzyn-Koźle"
+          },
+          "02": {
+            "name": "Bierawa"
+          },
+          "03": {
+            "name": "Cisek"
+          },
+          "04": {
+            "name": "Pawłowiczki"
+          },
+          "05": {
+            "name": "Polska Cerekiew"
+          },
+          "06": {
+            "name": "Reńska Wieś"
+          }
+        }
+      },
+      "04": {
+        "name": "kluczborski",
+        "gminy": {
+          "01": {
+            "name": "Byczyna"
+          },
+          "02": {
+            "name": "Kluczbork"
+          },
+          "03": {
+            "name": "Lasowice Wielkie"
+          },
+          "04": {
+            "name": "Wołczyn"
+          }
+        }
+      },
+      "05": {
+        "name": "krapkowicki",
+        "gminy": {
+          "01": {
+            "name": "Gogolin"
+          },
+          "02": {
+            "name": "Krapkowice"
+          },
+          "03": {
+            "name": "Strzeleczki"
+          },
+          "04": {
+            "name": "Walce"
+          },
+          "05": {
+            "name": "Zdzieszowice"
+          }
+        }
+      },
+      "06": {
+        "name": "namysłowski",
+        "gminy": {
+          "01": {
+            "name": "Domaszowice"
+          },
+          "02": {
+            "name": "Namysłów"
+          },
+          "03": {
+            "name": "Pokój"
+          },
+          "04": {
+            "name": "Świerczów"
+          },
+          "05": {
+            "name": "Wilków"
+          }
+        }
+      },
+      "07": {
+        "name": "nyski",
+        "gminy": {
+          "01": {
+            "name": "Głuchołazy"
+          },
+          "02": {
+            "name": "Kamiennik"
+          },
+          "03": {
+            "name": "Korfantów"
+          },
+          "04": {
+            "name": "Łambinowice"
+          },
+          "05": {
+            "name": "Nysa"
+          },
+          "06": {
+            "name": "Otmuchów"
+          },
+          "07": {
+            "name": "Paczków"
+          },
+          "08": {
+            "name": "Pakosławice"
+          },
+          "09": {
+            "name": "Skoroszyce"
+          }
+        }
+      },
+      "08": {
+        "name": "oleski",
+        "gminy": {
+          "01": {
+            "name": "Dobrodzień"
+          },
+          "02": {
+            "name": "Gorzów Śląski"
+          },
+          "03": {
+            "name": "Olesno"
+          },
+          "04": {
+            "name": "Praszka"
+          },
+          "05": {
+            "name": "Radłów"
+          },
+          "06": {
+            "name": "Rudniki"
+          },
+          "07": {
+            "name": "Zębowice"
+          }
+        }
+      },
+      "09": {
+        "name": "opolski",
+        "gminy": {
+          "01": {
+            "name": "Chrząstowice"
+          },
+          "02": {
+            "name": "Dąbrowa"
+          },
+          "03": {
+            "name": "Dobrzeń Wielki"
+          },
+          "04": {
+            "name": "Komprachcice"
+          },
+          "05": {
+            "name": "Łubniany"
+          },
+          "06": {
+            "name": "Murów"
+          },
+          "07": {
+            "name": "Niemodlin"
+          },
+          "08": {
+            "name": "Ozimek"
+          },
+          "09": {
+            "name": "Popielów"
+          },
+          "10": {
+            "name": "Prószków"
+          },
+          "11": {
+            "name": "Tarnów Opolski"
+          },
+          "12": {
+            "name": "Tułowice"
+          },
+          "13": {
+            "name": "Turawa"
+          }
+        }
+      },
+      "10": {
+        "name": "prudnicki",
+        "gminy": {
+          "01": {
+            "name": "Biała"
+          },
+          "02": {
+            "name": "Głogówek"
+          },
+          "03": {
+            "name": "Lubrza"
+          },
+          "04": {
+            "name": "Prudnik"
+          }
+        }
+      },
+      "11": {
+        "name": "strzelecki",
+        "gminy": {
+          "01": {
+            "name": "Izbicko"
+          },
+          "02": {
+            "name": "Jemielnica"
+          },
+          "03": {
+            "name": "Kolonowskie"
+          },
+          "04": {
+            "name": "Leśnica"
+          },
+          "05": {
+            "name": "Strzelce Opolskie"
+          },
+          "06": {
+            "name": "Ujazd"
+          },
+          "07": {
+            "name": "Zawadzkie"
+          }
+        }
+      },
+      "61": {
+        "name": "Opole",
+        "gminy": {
+          "01": {
+            "name": "Opole"
+          }
+        }
+      }
+    }
+  },
+  "18": {
+    "name": "PODKARPACKIE",
+    "powiaty": {
+      "01": {
+        "name": "bieszczadzki",
+        "gminy": {
+          "03": {
+            "name": "Czarna"
+          },
+          "05": {
+            "name": "Lutowiska"
+          },
+          "08": {
+            "name": "Ustrzyki Dolne"
+          }
+        }
+      },
+      "02": {
+        "name": "brzozowski",
+        "gminy": {
+          "01": {
+            "name": "Brzozów"
+          },
+          "02": {
+            "name": "Domaradz"
+          },
+          "03": {
+            "name": "Dydnia"
+          },
+          "04": {
+            "name": "Haczów"
+          },
+          "05": {
+            "name": "Jasienica Rosielna"
+          },
+          "06": {
+            "name": "Nozdrzec"
+          }
+        }
+      },
+      "03": {
+        "name": "dębicki",
+        "gminy": {
+          "01": {
+            "name": "Dębica"
+          },
+          "02": {
+            "name": "Brzostek"
+          },
+          "03": {
+            "name": "Czarna"
+          },
+          "04": {
+            "name": "Dębica"
+          },
+          "05": {
+            "name": "Jodłowa"
+          },
+          "06": {
+            "name": "Pilzno"
+          },
+          "07": {
+            "name": "Żyraków"
+          }
+        }
+      },
+      "04": {
+        "name": "jarosławski",
+        "gminy": {
+          "01": {
+            "name": "Jarosław"
+          },
+          "02": {
+            "name": "Radymno"
+          },
+          "03": {
+            "name": "Chłopice"
+          },
+          "04": {
+            "name": "Jarosław"
+          },
+          "05": {
+            "name": "Laszki"
+          },
+          "06": {
+            "name": "Pawłosiów"
+          },
+          "07": {
+            "name": "Pruchnik"
+          },
+          "08": {
+            "name": "Radymno"
+          },
+          "09": {
+            "name": "Rokietnica"
+          },
+          "10": {
+            "name": "Roźwienica"
+          },
+          "11": {
+            "name": "Wiązownica"
+          }
+        }
+      },
+      "05": {
+        "name": "jasielski",
+        "gminy": {
+          "01": {
+            "name": "Jasło"
+          },
+          "02": {
+            "name": "Brzyska"
+          },
+          "03": {
+            "name": "Dębowiec"
+          },
+          "04": {
+            "name": "Jasło"
+          },
+          "05": {
+            "name": "Kołaczyce"
+          },
+          "06": {
+            "name": "Krempna"
+          },
+          "07": {
+            "name": "Nowy Żmigród"
+          },
+          "08": {
+            "name": "Osiek Jasielski"
+          },
+          "09": {
+            "name": "Skołyszyn"
+          },
+          "11": {
+            "name": "Tarnowiec"
+          }
+        }
+      },
+      "06": {
+        "name": "kolbuszowski",
+        "gminy": {
+          "01": {
+            "name": "Cmolas"
+          },
+          "02": {
+            "name": "Kolbuszowa"
+          },
+          "03": {
+            "name": "Majdan Królewski"
+          },
+          "04": {
+            "name": "Niwiska"
+          },
+          "05": {
+            "name": "Raniżów"
+          },
+          "06": {
+            "name": "Dzikowiec"
+          }
+        }
+      },
+      "07": {
+        "name": "krośnieński",
+        "gminy": {
+          "01": {
+            "name": "Chorkówka"
+          },
+          "02": {
+            "name": "Dukla"
+          },
+          "03": {
+            "name": "Iwonicz-Zdrój"
+          },
+          "04": {
+            "name": "Jedlicze"
+          },
+          "05": {
+            "name": "Korczyna"
+          },
+          "06": {
+            "name": "Krościenko Wyżne"
+          },
+          "07": {
+            "name": "Miejsce Piastowe"
+          },
+          "08": {
+            "name": "Rymanów"
+          },
+          "09": {
+            "name": "Wojaszówka"
+          },
+          "10": {
+            "name": "Jaśliska"
+          }
+        }
+      },
+      "08": {
+        "name": "leżajski",
+        "gminy": {
+          "01": {
+            "name": "Leżajsk"
+          },
+          "02": {
+            "name": "Grodzisko Dolne"
+          },
+          "03": {
+            "name": "Kuryłówka"
+          },
+          "04": {
+            "name": "Leżajsk"
+          },
+          "05": {
+            "name": "Nowa Sarzyna"
+          }
+        }
+      },
+      "09": {
+        "name": "lubaczowski",
+        "gminy": {
+          "01": {
+            "name": "Lubaczów"
+          },
+          "02": {
+            "name": "Cieszanów"
+          },
+          "03": {
+            "name": "Horyniec-Zdrój"
+          },
+          "04": {
+            "name": "Lubaczów"
+          },
+          "05": {
+            "name": "Narol"
+          },
+          "06": {
+            "name": "Oleszyce"
+          },
+          "07": {
+            "name": "Stary Dzików"
+          },
+          "08": {
+            "name": "Wielkie Oczy"
+          }
+        }
+      },
+      "10": {
+        "name": "łańcucki",
+        "gminy": {
+          "01": {
+            "name": "Łańcut"
+          },
+          "02": {
+            "name": "Białobrzegi"
+          },
+          "03": {
+            "name": "Czarna"
+          },
+          "04": {
+            "name": "Łańcut"
+          },
+          "05": {
+            "name": "Markowa"
+          },
+          "06": {
+            "name": "Rakszawa"
+          },
+          "07": {
+            "name": "Żołynia"
+          }
+        }
+      },
+      "11": {
+        "name": "mielecki",
+        "gminy": {
+          "01": {
+            "name": "Mielec"
+          },
+          "02": {
+            "name": "Borowa"
+          },
+          "03": {
+            "name": "Czermin"
+          },
+          "04": {
+            "name": "Gawłuszowice"
+          },
+          "05": {
+            "name": "Mielec"
+          },
+          "06": {
+            "name": "Padew Narodowa"
+          },
+          "07": {
+            "name": "Przecław"
+          },
+          "08": {
+            "name": "Radomyśl Wielki"
+          },
+          "09": {
+            "name": "Tuszów Narodowy"
+          },
+          "10": {
+            "name": "Wadowice Górne"
+          }
+        }
+      },
+      "12": {
+        "name": "niżański",
+        "gminy": {
+          "01": {
+            "name": "Harasiuki"
+          },
+          "02": {
+            "name": "Jarocin"
+          },
+          "03": {
+            "name": "Jeżowe"
+          },
+          "04": {
+            "name": "Krzeszów"
+          },
+          "05": {
+            "name": "Nisko"
+          },
+          "06": {
+            "name": "Rudnik nad Sanem"
+          },
+          "07": {
+            "name": "Ulanów"
+          }
+        }
+      },
+      "13": {
+        "name": "przemyski",
+        "gminy": {
+          "01": {
+            "name": "Bircza"
+          },
+          "02": {
+            "name": "Dubiecko"
+          },
+          "03": {
+            "name": "Fredropol"
+          },
+          "04": {
+            "name": "Krasiczyn"
+          },
+          "05": {
+            "name": "Krzywcza"
+          },
+          "06": {
+            "name": "Medyka"
+          },
+          "07": {
+            "name": "Orły"
+          },
+          "08": {
+            "name": "Przemyśl"
+          },
+          "09": {
+            "name": "Stubno"
+          },
+          "10": {
+            "name": "Żurawica"
+          }
+        }
+      },
+      "14": {
+        "name": "przeworski",
+        "gminy": {
+          "01": {
+            "name": "Przeworsk"
+          },
+          "02": {
+            "name": "Adamówka"
+          },
+          "03": {
+            "name": "Gać"
+          },
+          "04": {
+            "name": "Jawornik Polski"
+          },
+          "05": {
+            "name": "Kańczuga"
+          },
+          "06": {
+            "name": "Przeworsk"
+          },
+          "07": {
+            "name": "Sieniawa"
+          },
+          "08": {
+            "name": "Tryńcza"
+          },
+          "09": {
+            "name": "Zarzecze"
+          }
+        }
+      },
+      "15": {
+        "name": "ropczycko-sędziszowski",
+        "gminy": {
+          "01": {
+            "name": "Iwierzyce"
+          },
+          "02": {
+            "name": "Ostrów"
+          },
+          "03": {
+            "name": "Ropczyce"
+          },
+          "04": {
+            "name": "Sędziszów Małopolski"
+          },
+          "05": {
+            "name": "Wielopole Skrzyńskie"
+          }
+        }
+      },
+      "16": {
+        "name": "rzeszowski",
+        "gminy": {
+          "01": {
+            "name": "Dynów"
+          },
+          "02": {
+            "name": "Błażowa"
+          },
+          "03": {
+            "name": "Boguchwała"
+          },
+          "04": {
+            "name": "Chmielnik"
+          },
+          "05": {
+            "name": "Dynów"
+          },
+          "06": {
+            "name": "Głogów Małopolski"
+          },
+          "07": {
+            "name": "Hyżne"
+          },
+          "08": {
+            "name": "Kamień"
+          },
+          "09": {
+            "name": "Krasne"
+          },
+          "10": {
+            "name": "Lubenia"
+          },
+          "11": {
+            "name": "Sokołów Małopolski"
+          },
+          "12": {
+            "name": "Świlcza"
+          },
+          "13": {
+            "name": "Trzebownisko"
+          },
+          "14": {
+            "name": "Tyczyn"
+          }
+        }
+      },
+      "17": {
+        "name": "sanocki",
+        "gminy": {
+          "01": {
+            "name": "Sanok"
+          },
+          "02": {
+            "name": "Besko"
+          },
+          "03": {
+            "name": "Bukowsko"
+          },
+          "04": {
+            "name": "Komańcza"
+          },
+          "05": {
+            "name": "Sanok"
+          },
+          "06": {
+            "name": "Tyrawa Wołoska"
+          },
+          "07": {
+            "name": "Zagórz"
+          },
+          "08": {
+            "name": "Zarszyn"
+          }
+        }
+      },
+      "18": {
+        "name": "stalowowolski",
+        "gminy": {
+          "01": {
+            "name": "Stalowa Wola"
+          },
+          "02": {
+            "name": "Bojanów"
+          },
+          "03": {
+            "name": "Pysznica"
+          },
+          "04": {
+            "name": "Radomyśl nad Sanem"
+          },
+          "05": {
+            "name": "Zaklików"
+          },
+          "06": {
+            "name": "Zaleszany"
+          }
+        }
+      },
+      "19": {
+        "name": "strzyżowski",
+        "gminy": {
+          "01": {
+            "name": "Czudec"
+          },
+          "02": {
+            "name": "Frysztak"
+          },
+          "03": {
+            "name": "Niebylec"
+          },
+          "04": {
+            "name": "Strzyżów"
+          },
+          "05": {
+            "name": "Wiśniowa"
+          }
+        }
+      },
+      "20": {
+        "name": "tarnobrzeski",
+        "gminy": {
+          "01": {
+            "name": "Baranów Sandomierski"
+          },
+          "02": {
+            "name": "Gorzyce"
+          },
+          "03": {
+            "name": "Grębów"
+          },
+          "04": {
+            "name": "Nowa Dęba"
+          }
+        }
+      },
+      "21": {
+        "name": "leski",
+        "gminy": {
+          "01": {
+            "name": "Baligród"
+          },
+          "02": {
+            "name": "Cisna"
+          },
+          "03": {
+            "name": "Lesko"
+          },
+          "04": {
+            "name": "Olszanica"
+          },
+          "05": {
+            "name": "Solina"
+          }
+        }
+      },
+      "61": {
+        "name": "Krosno",
+        "gminy": {
+          "01": {
+            "name": "Krosno"
+          }
+        }
+      },
+      "62": {
+        "name": "Przemyśl",
+        "gminy": {
+          "01": {
+            "name": "Przemyśl"
+          }
+        }
+      },
+      "63": {
+        "name": "Rzeszów",
+        "gminy": {
+          "01": {
+            "name": "Rzeszów"
+          }
+        }
+      },
+      "64": {
+        "name": "Tarnobrzeg",
+        "gminy": {
+          "01": {
+            "name": "Tarnobrzeg"
+          }
+        }
+      }
+    }
+  },
+  "20": {
+    "name": "PODLASKIE",
+    "powiaty": {
+      "01": {
+        "name": "augustowski",
+        "gminy": {
+          "01": {
+            "name": "Augustów"
+          },
+          "02": {
+            "name": "Augustów"
+          },
+          "03": {
+            "name": "Bargłów Kościelny"
+          },
+          "04": {
+            "name": "Lipsk"
+          },
+          "05": {
+            "name": "Nowinka"
+          },
+          "06": {
+            "name": "Płaska"
+          },
+          "07": {
+            "name": "Sztabin"
+          }
+        }
+      },
+      "02": {
+        "name": "białostocki",
+        "gminy": {
+          "01": {
+            "name": "Choroszcz"
+          },
+          "02": {
+            "name": "Czarna Białostocka"
+          },
+          "03": {
+            "name": "Dobrzyniewo Duże"
+          },
+          "04": {
+            "name": "Gródek"
+          },
+          "05": {
+            "name": "Juchnowiec Kościelny"
+          },
+          "06": {
+            "name": "Łapy"
+          },
+          "07": {
+            "name": "Michałowo"
+          },
+          "08": {
+            "name": "Poświętne"
+          },
+          "09": {
+            "name": "Supraśl"
+          },
+          "10": {
+            "name": "Suraż"
+          },
+          "11": {
+            "name": "Turośń Kościelna"
+          },
+          "12": {
+            "name": "Tykocin"
+          },
+          "13": {
+            "name": "Wasilków"
+          },
+          "14": {
+            "name": "Zabłudów"
+          },
+          "15": {
+            "name": "Zawady"
+          },
+          "16": {
+            "name": "Grabówka"
+          }
+        }
+      },
+      "03": {
+        "name": "bielski",
+        "gminy": {
+          "01": {
+            "name": "Bielsk Podlaski"
+          },
+          "02": {
+            "name": "Brańsk"
+          },
+          "03": {
+            "name": "Bielsk Podlaski"
+          },
+          "04": {
+            "name": "Boćki"
+          },
+          "05": {
+            "name": "Brańsk"
+          },
+          "06": {
+            "name": "Orla"
+          },
+          "07": {
+            "name": "Rudka"
+          },
+          "08": {
+            "name": "Wyszki"
+          }
+        }
+      },
+      "04": {
+        "name": "grajewski",
+        "gminy": {
+          "01": {
+            "name": "Grajewo"
+          },
+          "02": {
+            "name": "Grajewo"
+          },
+          "03": {
+            "name": "Radziłów"
+          },
+          "04": {
+            "name": "Rajgród"
+          },
+          "05": {
+            "name": "Szczuczyn"
+          },
+          "06": {
+            "name": "Wąsosz"
+          }
+        }
+      },
+      "05": {
+        "name": "hajnowski",
+        "gminy": {
+          "01": {
+            "name": "Hajnówka"
+          },
+          "02": {
+            "name": "Białowieża"
+          },
+          "03": {
+            "name": "Czeremcha"
+          },
+          "04": {
+            "name": "Czyże"
+          },
+          "05": {
+            "name": "Dubicze Cerkiewne"
+          },
+          "06": {
+            "name": "Hajnówka"
+          },
+          "07": {
+            "name": "Kleszczele"
+          },
+          "08": {
+            "name": "Narew"
+          },
+          "09": {
+            "name": "Narewka"
+          }
+        }
+      },
+      "06": {
+        "name": "kolneński",
+        "gminy": {
+          "01": {
+            "name": "Kolno"
+          },
+          "02": {
+            "name": "Grabowo"
+          },
+          "03": {
+            "name": "Kolno"
+          },
+          "04": {
+            "name": "Mały Płock"
+          },
+          "05": {
+            "name": "Stawiski"
+          },
+          "06": {
+            "name": "Turośl"
+          }
+        }
+      },
+      "07": {
+        "name": "łomżyński",
+        "gminy": {
+          "01": {
+            "name": "Jedwabne"
+          },
+          "02": {
+            "name": "Łomża"
+          },
+          "03": {
+            "name": "Miastkowo"
+          },
+          "04": {
+            "name": "Nowogród"
+          },
+          "05": {
+            "name": "Piątnica"
+          },
+          "06": {
+            "name": "Przytuły"
+          },
+          "07": {
+            "name": "Śniadowo"
+          },
+          "08": {
+            "name": "Wizna"
+          },
+          "09": {
+            "name": "Zbójna"
+          }
+        }
+      },
+      "08": {
+        "name": "moniecki",
+        "gminy": {
+          "01": {
+            "name": "Goniądz"
+          },
+          "02": {
+            "name": "Jasionówka"
+          },
+          "03": {
+            "name": "Jaświły"
+          },
+          "04": {
+            "name": "Knyszyn"
+          },
+          "05": {
+            "name": "Krypno"
+          },
+          "06": {
+            "name": "Mońki"
+          },
+          "07": {
+            "name": "Trzcianne"
+          }
+        }
+      },
+      "09": {
+        "name": "sejneński",
+        "gminy": {
+          "01": {
+            "name": "Sejny"
+          },
+          "02": {
+            "name": "Giby"
+          },
+          "03": {
+            "name": "Krasnopol"
+          },
+          "04": {
+            "name": "Puńsk"
+          },
+          "05": {
+            "name": "Sejny"
+          }
+        }
+      },
+      "10": {
+        "name": "siemiatycki",
+        "gminy": {
+          "01": {
+            "name": "Siemiatycze"
+          },
+          "02": {
+            "name": "Drohiczyn"
+          },
+          "03": {
+            "name": "Dziadkowice"
+          },
+          "04": {
+            "name": "Grodzisk"
+          },
+          "05": {
+            "name": "Mielnik"
+          },
+          "06": {
+            "name": "Milejczyce"
+          },
+          "07": {
+            "name": "Nurzec-Stacja"
+          },
+          "08": {
+            "name": "Perlejewo"
+          },
+          "09": {
+            "name": "Siemiatycze"
+          }
+        }
+      },
+      "11": {
+        "name": "sokólski",
+        "gminy": {
+          "01": {
+            "name": "Dąbrowa Białostocka"
+          },
+          "02": {
+            "name": "Janów"
+          },
+          "03": {
+            "name": "Korycin"
+          },
+          "04": {
+            "name": "Krynki"
+          },
+          "05": {
+            "name": "Kuźnica"
+          },
+          "06": {
+            "name": "Nowy Dwór"
+          },
+          "07": {
+            "name": "Sidra"
+          },
+          "08": {
+            "name": "Sokółka"
+          },
+          "09": {
+            "name": "Suchowola"
+          },
+          "10": {
+            "name": "Szudziałowo"
+          }
+        }
+      },
+      "12": {
+        "name": "suwalski",
+        "gminy": {
+          "01": {
+            "name": "Bakałarzewo"
+          },
+          "02": {
+            "name": "Filipów"
+          },
+          "03": {
+            "name": "Jeleniewo"
+          },
+          "04": {
+            "name": "Przerośl"
+          },
+          "05": {
+            "name": "Raczki"
+          },
+          "06": {
+            "name": "Rutka-Tartak"
+          },
+          "07": {
+            "name": "Suwałki"
+          },
+          "08": {
+            "name": "Szypliszki"
+          },
+          "09": {
+            "name": "Wiżajny"
+          }
+        }
+      },
+      "13": {
+        "name": "wysokomazowiecki",
+        "gminy": {
+          "01": {
+            "name": "Wysokie Mazowieckie"
+          },
+          "02": {
+            "name": "Ciechanowiec"
+          },
+          "03": {
+            "name": "Czyżew"
+          },
+          "04": {
+            "name": "Klukowo"
+          },
+          "05": {
+            "name": "Kobylin-Borzymy"
+          },
+          "06": {
+            "name": "Kulesze Kościelne"
+          },
+          "07": {
+            "name": "Nowe Piekuty"
+          },
+          "08": {
+            "name": "Sokoły"
+          },
+          "09": {
+            "name": "Szepietowo"
+          },
+          "10": {
+            "name": "Wysokie Mazowieckie"
+          }
+        }
+      },
+      "14": {
+        "name": "zambrowski",
+        "gminy": {
+          "01": {
+            "name": "Zambrów"
+          },
+          "02": {
+            "name": "Kołaki Kościelne"
+          },
+          "03": {
+            "name": "Rutki"
+          },
+          "04": {
+            "name": "Szumowo"
+          },
+          "05": {
+            "name": "Zambrów"
+          }
+        }
+      },
+      "61": {
+        "name": "Białystok",
+        "gminy": {
+          "01": {
+            "name": "Białystok"
+          }
+        }
+      },
+      "62": {
+        "name": "Łomża",
+        "gminy": {
+          "01": {
+            "name": "Łomża"
+          }
+        }
+      },
+      "63": {
+        "name": "Suwałki",
+        "gminy": {
+          "01": {
+            "name": "Suwałki"
+          }
+        }
+      }
+    }
+  },
+  "22": {
+    "name": "POMORSKIE",
+    "powiaty": {
+      "01": {
+        "name": "bytowski",
+        "gminy": {
+          "01": {
+            "name": "Borzytuchom"
+          },
+          "02": {
+            "name": "Bytów"
+          },
+          "03": {
+            "name": "Czarna Dąbrówka"
+          },
+          "04": {
+            "name": "Kołczygłowy"
+          },
+          "05": {
+            "name": "Lipnica"
+          },
+          "06": {
+            "name": "Miastko"
+          },
+          "07": {
+            "name": "Parchowo"
+          },
+          "08": {
+            "name": "Studzienice"
+          },
+          "09": {
+            "name": "Trzebielino"
+          },
+          "10": {
+            "name": "Tuchomie"
+          }
+        }
+      },
+      "02": {
+        "name": "chojnicki",
+        "gminy": {
+          "01": {
+            "name": "Chojnice"
+          },
+          "02": {
+            "name": "Brusy"
+          },
+          "03": {
+            "name": "Chojnice"
+          },
+          "04": {
+            "name": "Czersk"
+          },
+          "05": {
+            "name": "Konarzyny"
+          }
+        }
+      },
+      "03": {
+        "name": "człuchowski",
+        "gminy": {
+          "01": {
+            "name": "Człuchów"
+          },
+          "02": {
+            "name": "Czarne"
+          },
+          "03": {
+            "name": "Człuchów"
+          },
+          "04": {
+            "name": "Debrzno"
+          },
+          "05": {
+            "name": "Koczała"
+          },
+          "06": {
+            "name": "Przechlewo"
+          },
+          "07": {
+            "name": "Rzeczenica"
+          }
+        }
+      },
+      "04": {
+        "name": "gdański",
+        "gminy": {
+          "01": {
+            "name": "Pruszcz Gdański"
+          },
+          "02": {
+            "name": "Cedry Wielkie"
+          },
+          "03": {
+            "name": "Kolbudy"
+          },
+          "04": {
+            "name": "Pruszcz Gdański"
+          },
+          "05": {
+            "name": "Przywidz"
+          },
+          "06": {
+            "name": "Pszczółki"
+          },
+          "07": {
+            "name": "Suchy Dąb"
+          },
+          "08": {
+            "name": "Trąbki Wielkie"
+          }
+        }
+      },
+      "05": {
+        "name": "kartuski",
+        "gminy": {
+          "01": {
+            "name": "Chmielno"
+          },
+          "02": {
+            "name": "Kartuzy"
+          },
+          "03": {
+            "name": "Przodkowo"
+          },
+          "04": {
+            "name": "Sierakowice"
+          },
+          "05": {
+            "name": "Somonino"
+          },
+          "06": {
+            "name": "Stężyca"
+          },
+          "07": {
+            "name": "Sulęczyno"
+          },
+          "08": {
+            "name": "Żukowo"
+          }
+        }
+      },
+      "06": {
+        "name": "kościerski",
+        "gminy": {
+          "01": {
+            "name": "Kościerzyna"
+          },
+          "02": {
+            "name": "Dziemiany"
+          },
+          "03": {
+            "name": "Karsin"
+          },
+          "04": {
+            "name": "Kościerzyna"
+          },
+          "05": {
+            "name": "Liniewo"
+          },
+          "06": {
+            "name": "Lipusz"
+          },
+          "07": {
+            "name": "Nowa Karczma"
+          },
+          "08": {
+            "name": "Stara Kiszewa"
+          }
+        }
+      },
+      "07": {
+        "name": "kwidzyński",
+        "gminy": {
+          "01": {
+            "name": "Kwidzyn"
+          },
+          "02": {
+            "name": "Gardeja"
+          },
+          "03": {
+            "name": "Kwidzyn"
+          },
+          "04": {
+            "name": "Prabuty"
+          },
+          "05": {
+            "name": "Ryjewo"
+          },
+          "06": {
+            "name": "Sadlinki"
+          }
+        }
+      },
+      "08": {
+        "name": "lęborski",
+        "gminy": {
+          "01": {
+            "name": "Lębork"
+          },
+          "02": {
+            "name": "Łeba"
+          },
+          "03": {
+            "name": "Cewice"
+          },
+          "04": {
+            "name": "Nowa Wieś Lęborska"
+          },
+          "05": {
+            "name": "Wicko"
+          }
+        }
+      },
+      "09": {
+        "name": "malborski",
+        "gminy": {
+          "01": {
+            "name": "Malbork"
+          },
+          "03": {
+            "name": "Lichnowy"
+          },
+          "04": {
+            "name": "Malbork"
+          },
+          "06": {
+            "name": "Miłoradz"
+          },
+          "07": {
+            "name": "Nowy Staw"
+          },
+          "08": {
+            "name": "Stare Pole"
+          }
+        }
+      },
+      "10": {
+        "name": "nowodworski",
+        "gminy": {
+          "01": {
+            "name": "Krynica Morska"
+          },
+          "02": {
+            "name": "Nowy Dwór Gdański"
+          },
+          "03": {
+            "name": "Ostaszewo"
+          },
+          "04": {
+            "name": "Stegna"
+          },
+          "05": {
+            "name": "Sztutowo"
+          }
+        }
+      },
+      "11": {
+        "name": "pucki",
+        "gminy": {
+          "01": {
+            "name": "Hel"
+          },
+          "02": {
+            "name": "Jastarnia"
+          },
+          "03": {
+            "name": "Puck"
+          },
+          "04": {
+            "name": "Władysławowo"
+          },
+          "05": {
+            "name": "Kosakowo"
+          },
+          "06": {
+            "name": "Krokowa"
+          },
+          "07": {
+            "name": "Puck"
+          }
+        }
+      },
+      "12": {
+        "name": "słupski",
+        "gminy": {
+          "01": {
+            "name": "Ustka"
+          },
+          "02": {
+            "name": "Damnica"
+          },
+          "03": {
+            "name": "Dębnica Kaszubska"
+          },
+          "04": {
+            "name": "Główczyce"
+          },
+          "05": {
+            "name": "Kępice"
+          },
+          "06": {
+            "name": "Kobylnica"
+          },
+          "07": {
+            "name": "Potęgowo"
+          },
+          "08": {
+            "name": "Redzikowo"
+          },
+          "09": {
+            "name": "Smołdzino"
+          },
+          "10": {
+            "name": "Ustka"
+          }
+        }
+      },
+      "13": {
+        "name": "starogardzki",
+        "gminy": {
+          "01": {
+            "name": "Czarna Woda"
+          },
+          "02": {
+            "name": "Skórcz"
+          },
+          "03": {
+            "name": "Starogard Gdański"
+          },
+          "04": {
+            "name": "Bobowo"
+          },
+          "05": {
+            "name": "Kaliska"
+          },
+          "06": {
+            "name": "Lubichowo"
+          },
+          "07": {
+            "name": "Osieczna"
+          },
+          "08": {
+            "name": "Osiek"
+          },
+          "09": {
+            "name": "Skarszewy"
+          },
+          "10": {
+            "name": "Skórcz"
+          },
+          "11": {
+            "name": "Smętowo Graniczne"
+          },
+          "12": {
+            "name": "Starogard Gdański"
+          },
+          "13": {
+            "name": "Zblewo"
+          }
+        }
+      },
+      "14": {
+        "name": "tczewski",
+        "gminy": {
+          "01": {
+            "name": "Tczew"
+          },
+          "02": {
+            "name": "Gniew"
+          },
+          "03": {
+            "name": "Morzeszczyn"
+          },
+          "04": {
+            "name": "Pelplin"
+          },
+          "05": {
+            "name": "Subkowy"
+          },
+          "06": {
+            "name": "Tczew"
+          }
+        }
+      },
+      "15": {
+        "name": "wejherowski",
+        "gminy": {
+          "01": {
+            "name": "Reda"
+          },
+          "02": {
+            "name": "Rumia"
+          },
+          "03": {
+            "name": "Wejherowo"
+          },
+          "04": {
+            "name": "Choczewo"
+          },
+          "05": {
+            "name": "Gniewino"
+          },
+          "06": {
+            "name": "Linia"
+          },
+          "07": {
+            "name": "Luzino"
+          },
+          "08": {
+            "name": "Łęczyce"
+          },
+          "09": {
+            "name": "Szemud"
+          },
+          "10": {
+            "name": "Wejherowo"
+          }
+        }
+      },
+      "16": {
+        "name": "sztumski",
+        "gminy": {
+          "01": {
+            "name": "Dzierzgoń"
+          },
+          "02": {
+            "name": "Mikołajki Pomorskie"
+          },
+          "03": {
+            "name": "Stary Dzierzgoń"
+          },
+          "04": {
+            "name": "Stary Targ"
+          },
+          "05": {
+            "name": "Sztum"
+          }
+        }
+      },
+      "61": {
+        "name": "Gdańsk",
+        "gminy": {
+          "01": {
+            "name": "Gdańsk"
+          }
+        }
+      },
+      "62": {
+        "name": "Gdynia",
+        "gminy": {
+          "01": {
+            "name": "Gdynia"
+          }
+        }
+      },
+      "63": {
+        "name": "Słupsk",
+        "gminy": {
+          "01": {
+            "name": "Słupsk"
+          }
+        }
+      },
+      "64": {
+        "name": "Sopot",
+        "gminy": {
+          "01": {
+            "name": "Sopot"
+          }
+        }
+      }
+    }
+  },
+  "24": {
+    "name": "ŚLĄSKIE",
+    "powiaty": {
+      "01": {
+        "name": "będziński",
+        "gminy": {
+          "01": {
+            "name": "Będzin"
+          },
+          "02": {
+            "name": "Czeladź"
+          },
+          "03": {
+            "name": "Wojkowice"
+          },
+          "04": {
+            "name": "Bobrowniki"
+          },
+          "05": {
+            "name": "Mierzęcice"
+          },
+          "06": {
+            "name": "Psary"
+          },
+          "07": {
+            "name": "Siewierz"
+          },
+          "08": {
+            "name": "Sławków"
+          }
+        }
+      },
+      "02": {
+        "name": "bielski",
+        "gminy": {
+          "01": {
+            "name": "Szczyrk"
+          },
+          "02": {
+            "name": "Bestwina"
+          },
+          "03": {
+            "name": "Buczkowice"
+          },
+          "04": {
+            "name": "Czechowice-Dziedzice"
+          },
+          "05": {
+            "name": "Jasienica"
+          },
+          "06": {
+            "name": "Jaworze"
+          },
+          "07": {
+            "name": "Kozy"
+          },
+          "08": {
+            "name": "Porąbka"
+          },
+          "09": {
+            "name": "Wilamowice"
+          },
+          "10": {
+            "name": "Wilkowice"
+          }
+        }
+      },
+      "03": {
+        "name": "cieszyński",
+        "gminy": {
+          "01": {
+            "name": "Cieszyn"
+          },
+          "02": {
+            "name": "Ustroń"
+          },
+          "03": {
+            "name": "Wisła"
+          },
+          "04": {
+            "name": "Brenna"
+          },
+          "05": {
+            "name": "Chybie"
+          },
+          "06": {
+            "name": "Dębowiec"
+          },
+          "07": {
+            "name": "Goleszów"
+          },
+          "08": {
+            "name": "Hażlach"
+          },
+          "09": {
+            "name": "Istebna"
+          },
+          "10": {
+            "name": "Skoczów"
+          },
+          "11": {
+            "name": "Strumień"
+          },
+          "12": {
+            "name": "Zebrzydowice"
+          }
+        }
+      },
+      "04": {
+        "name": "częstochowski",
+        "gminy": {
+          "01": {
+            "name": "Blachownia"
+          },
+          "02": {
+            "name": "Dąbrowa Zielona"
+          },
+          "03": {
+            "name": "Janów"
+          },
+          "04": {
+            "name": "Kamienica Polska"
+          },
+          "05": {
+            "name": "Kłomnice"
+          },
+          "06": {
+            "name": "Koniecpol"
+          },
+          "07": {
+            "name": "Konopiska"
+          },
+          "08": {
+            "name": "Kruszyna"
+          },
+          "09": {
+            "name": "Lelów"
+          },
+          "10": {
+            "name": "Mstów"
+          },
+          "11": {
+            "name": "Mykanów"
+          },
+          "12": {
+            "name": "Olsztyn"
+          },
+          "13": {
+            "name": "Poczesna"
+          },
+          "14": {
+            "name": "Przyrów"
+          },
+          "15": {
+            "name": "Rędziny"
+          },
+          "16": {
+            "name": "Starcza"
+          }
+        }
+      },
+      "05": {
+        "name": "gliwicki",
+        "gminy": {
+          "01": {
+            "name": "Knurów"
+          },
+          "02": {
+            "name": "Pyskowice"
+          },
+          "03": {
+            "name": "Gierałtowice"
+          },
+          "04": {
+            "name": "Pilchowice"
+          },
+          "05": {
+            "name": "Rudziniec"
+          },
+          "06": {
+            "name": "Sośnicowice"
+          },
+          "07": {
+            "name": "Toszek"
+          },
+          "08": {
+            "name": "Wielowieś"
+          }
+        }
+      },
+      "06": {
+        "name": "kłobucki",
+        "gminy": {
+          "01": {
+            "name": "Kłobuck"
+          },
+          "02": {
+            "name": "Krzepice"
+          },
+          "03": {
+            "name": "Lipie"
+          },
+          "04": {
+            "name": "Miedźno"
+          },
+          "05": {
+            "name": "Opatów"
+          },
+          "06": {
+            "name": "Panki"
+          },
+          "07": {
+            "name": "Popów"
+          },
+          "08": {
+            "name": "Przystajń"
+          },
+          "09": {
+            "name": "Wręczyca Wielka"
+          }
+        }
+      },
+      "07": {
+        "name": "lubliniecki",
+        "gminy": {
+          "01": {
+            "name": "Lubliniec"
+          },
+          "02": {
+            "name": "Boronów"
+          },
+          "03": {
+            "name": "Ciasna"
+          },
+          "04": {
+            "name": "Herby"
+          },
+          "05": {
+            "name": "Kochanowice"
+          },
+          "06": {
+            "name": "Koszęcin"
+          },
+          "07": {
+            "name": "Pawonków"
+          },
+          "08": {
+            "name": "Woźniki"
+          }
+        }
+      },
+      "08": {
+        "name": "mikołowski",
+        "gminy": {
+          "01": {
+            "name": "Łaziska Górne"
+          },
+          "02": {
+            "name": "Mikołów"
+          },
+          "03": {
+            "name": "Orzesze"
+          },
+          "04": {
+            "name": "Ornontowice"
+          },
+          "05": {
+            "name": "Wyry"
+          }
+        }
+      },
+      "09": {
+        "name": "myszkowski",
+        "gminy": {
+          "01": {
+            "name": "Myszków"
+          },
+          "02": {
+            "name": "Koziegłowy"
+          },
+          "03": {
+            "name": "Niegowa"
+          },
+          "04": {
+            "name": "Poraj"
+          },
+          "05": {
+            "name": "Żarki"
+          }
+        }
+      },
+      "10": {
+        "name": "pszczyński",
+        "gminy": {
+          "01": {
+            "name": "Goczałkowice-Zdrój"
+          },
+          "02": {
+            "name": "Kobiór"
+          },
+          "03": {
+            "name": "Miedźna"
+          },
+          "04": {
+            "name": "Pawłowice"
+          },
+          "05": {
+            "name": "Pszczyna"
+          },
+          "06": {
+            "name": "Suszec"
+          }
+        }
+      },
+      "11": {
+        "name": "raciborski",
+        "gminy": {
+          "01": {
+            "name": "Racibórz"
+          },
+          "02": {
+            "name": "Kornowac"
+          },
+          "03": {
+            "name": "Krzanowice"
+          },
+          "04": {
+            "name": "Krzyżanowice"
+          },
+          "05": {
+            "name": "Kuźnia Raciborska"
+          },
+          "06": {
+            "name": "Nędza"
+          },
+          "07": {
+            "name": "Pietrowice Wielkie"
+          },
+          "08": {
+            "name": "Rudnik"
+          }
+        }
+      },
+      "12": {
+        "name": "rybnicki",
+        "gminy": {
+          "01": {
+            "name": "Czerwionka-Leszczyny"
+          },
+          "02": {
+            "name": "Gaszowice"
+          },
+          "03": {
+            "name": "Jejkowice"
+          },
+          "04": {
+            "name": "Lyski"
+          },
+          "05": {
+            "name": "Świerklany"
+          }
+        }
+      },
+      "13": {
+        "name": "tarnogórski",
+        "gminy": {
+          "01": {
+            "name": "Kalety"
+          },
+          "02": {
+            "name": "Miasteczko Śląskie"
+          },
+          "03": {
+            "name": "Radzionków"
+          },
+          "04": {
+            "name": "Tarnowskie Góry"
+          },
+          "05": {
+            "name": "Krupski Młyn"
+          },
+          "06": {
+            "name": "Ożarowice"
+          },
+          "07": {
+            "name": "Świerklaniec"
+          },
+          "08": {
+            "name": "Tworóg"
+          },
+          "09": {
+            "name": "Zbrosławice"
+          }
+        }
+      },
+      "14": {
+        "name": "bieruńsko-lędziński",
+        "gminy": {
+          "01": {
+            "name": "Bieruń"
+          },
+          "02": {
+            "name": "Imielin"
+          },
+          "03": {
+            "name": "Lędziny"
+          },
+          "04": {
+            "name": "Bojszowy"
+          },
+          "05": {
+            "name": "Chełm Śląski"
+          }
+        }
+      },
+      "15": {
+        "name": "wodzisławski",
+        "gminy": {
+          "01": {
+            "name": "Pszów"
+          },
+          "02": {
+            "name": "Radlin"
+          },
+          "03": {
+            "name": "Rydułtowy"
+          },
+          "04": {
+            "name": "Wodzisław Śląski"
+          },
+          "05": {
+            "name": "Godów"
+          },
+          "06": {
+            "name": "Gorzyce"
+          },
+          "07": {
+            "name": "Lubomia"
+          },
+          "08": {
+            "name": "Marklowice"
+          },
+          "09": {
+            "name": "Mszana"
+          }
+        }
+      },
+      "16": {
+        "name": "zawierciański",
+        "gminy": {
+          "01": {
+            "name": "Poręba"
+          },
+          "02": {
+            "name": "Zawiercie"
+          },
+          "03": {
+            "name": "Irządze"
+          },
+          "04": {
+            "name": "Kroczyce"
+          },
+          "05": {
+            "name": "Łazy"
+          },
+          "06": {
+            "name": "Ogrodzieniec"
+          },
+          "07": {
+            "name": "Pilica"
+          },
+          "08": {
+            "name": "Szczekociny"
+          },
+          "09": {
+            "name": "Włodowice"
+          },
+          "10": {
+            "name": "Żarnowiec"
+          }
+        }
+      },
+      "17": {
+        "name": "żywiecki",
+        "gminy": {
+          "01": {
+            "name": "Żywiec"
+          },
+          "02": {
+            "name": "Czernichów"
+          },
+          "03": {
+            "name": "Gilowice"
+          },
+          "04": {
+            "name": "Jeleśnia"
+          },
+          "05": {
+            "name": "Koszarawa"
+          },
+          "06": {
+            "name": "Lipowa"
+          },
+          "07": {
+            "name": "Łękawica"
+          },
+          "08": {
+            "name": "Łodygowice"
+          },
+          "09": {
+            "name": "Milówka"
+          },
+          "10": {
+            "name": "Radziechowy-Wieprz"
+          },
+          "11": {
+            "name": "Rajcza"
+          },
+          "12": {
+            "name": "Ślemień"
+          },
+          "13": {
+            "name": "Świnna"
+          },
+          "14": {
+            "name": "Ujsoły"
+          },
+          "15": {
+            "name": "Węgierska Górka"
+          }
+        }
+      },
+      "61": {
+        "name": "Bielsko-Biała",
+        "gminy": {
+          "01": {
+            "name": "Bielsko-Biała"
+          }
+        }
+      },
+      "62": {
+        "name": "Bytom",
+        "gminy": {
+          "01": {
+            "name": "Bytom"
+          }
+        }
+      },
+      "63": {
+        "name": "Chorzów",
+        "gminy": {
+          "01": {
+            "name": "Chorzów"
+          }
+        }
+      },
+      "64": {
+        "name": "Częstochowa",
+        "gminy": {
+          "01": {
+            "name": "Częstochowa"
+          }
+        }
+      },
+      "65": {
+        "name": "Dąbrowa Górnicza",
+        "gminy": {
+          "01": {
+            "name": "Dąbrowa Górnicza"
+          }
+        }
+      },
+      "66": {
+        "name": "Gliwice",
+        "gminy": {
+          "01": {
+            "name": "Gliwice"
+          }
+        }
+      },
+      "67": {
+        "name": "Jastrzębie-Zdrój",
+        "gminy": {
+          "01": {
+            "name": "Jastrzębie-Zdrój"
+          }
+        }
+      },
+      "68": {
+        "name": "Jaworzno",
+        "gminy": {
+          "01": {
+            "name": "Jaworzno"
+          }
+        }
+      },
+      "69": {
+        "name": "Katowice",
+        "gminy": {
+          "01": {
+            "name": "Katowice"
+          }
+        }
+      },
+      "70": {
+        "name": "Mysłowice",
+        "gminy": {
+          "01": {
+            "name": "Mysłowice"
+          }
+        }
+      },
+      "71": {
+        "name": "Piekary Śląskie",
+        "gminy": {
+          "01": {
+            "name": "Piekary Śląskie"
+          }
+        }
+      },
+      "72": {
+        "name": "Ruda Śląska",
+        "gminy": {
+          "01": {
+            "name": "Ruda Śląska"
+          }
+        }
+      },
+      "73": {
+        "name": "Rybnik",
+        "gminy": {
+          "01": {
+            "name": "Rybnik"
+          }
+        }
+      },
+      "74": {
+        "name": "Siemianowice Śląskie",
+        "gminy": {
+          "01": {
+            "name": "Siemianowice Śląskie"
+          }
+        }
+      },
+      "75": {
+        "name": "Sosnowiec",
+        "gminy": {
+          "01": {
+            "name": "Sosnowiec"
+          }
+        }
+      },
+      "76": {
+        "name": "Świętochłowice",
+        "gminy": {
+          "01": {
+            "name": "Świętochłowice"
+          }
+        }
+      },
+      "77": {
+        "name": "Tychy",
+        "gminy": {
+          "01": {
+            "name": "Tychy"
+          }
+        }
+      },
+      "78": {
+        "name": "Zabrze",
+        "gminy": {
+          "01": {
+            "name": "Zabrze"
+          }
+        }
+      },
+      "79": {
+        "name": "Żory",
+        "gminy": {
+          "01": {
+            "name": "Żory"
+          }
+        }
+      }
+    }
+  },
+  "26": {
+    "name": "ŚWIĘTOKRZYSKIE",
+    "powiaty": {
+      "01": {
+        "name": "buski",
+        "gminy": {
+          "01": {
+            "name": "Busko-Zdrój"
+          },
+          "02": {
+            "name": "Gnojno"
+          },
+          "03": {
+            "name": "Nowy Korczyn"
+          },
+          "04": {
+            "name": "Pacanów"
+          },
+          "05": {
+            "name": "Solec-Zdrój"
+          },
+          "06": {
+            "name": "Stopnica"
+          },
+          "07": {
+            "name": "Tuczępy"
+          },
+          "08": {
+            "name": "Wiślica"
+          }
+        }
+      },
+      "02": {
+        "name": "jędrzejowski",
+        "gminy": {
+          "01": {
+            "name": "Imielno"
+          },
+          "02": {
+            "name": "Jędrzejów"
+          },
+          "03": {
+            "name": "Małogoszcz"
+          },
+          "04": {
+            "name": "Nagłowice"
+          },
+          "05": {
+            "name": "Oksa"
+          },
+          "06": {
+            "name": "Sędziszów"
+          },
+          "07": {
+            "name": "Słupia"
+          },
+          "08": {
+            "name": "Sobków"
+          },
+          "09": {
+            "name": "Wodzisław"
+          }
+        }
+      },
+      "03": {
+        "name": "kazimierski",
+        "gminy": {
+          "01": {
+            "name": "Bejsce"
+          },
+          "02": {
+            "name": "Czarnocin"
+          },
+          "03": {
+            "name": "Kazimierza Wielka"
+          },
+          "04": {
+            "name": "Opatowiec"
+          },
+          "05": {
+            "name": "Skalbmierz"
+          }
+        }
+      },
+      "04": {
+        "name": "kielecki",
+        "gminy": {
+          "01": {
+            "name": "Bieliny"
+          },
+          "02": {
+            "name": "Bodzentyn"
+          },
+          "03": {
+            "name": "Chęciny"
+          },
+          "04": {
+            "name": "Chmielnik"
+          },
+          "05": {
+            "name": "Daleszyce"
+          },
+          "06": {
+            "name": "Górno"
+          },
+          "07": {
+            "name": "Łagów"
+          },
+          "08": {
+            "name": "Łopuszno"
+          },
+          "09": {
+            "name": "Masłów"
+          },
+          "10": {
+            "name": "Miedziana Góra"
+          },
+          "11": {
+            "name": "Mniów"
+          },
+          "12": {
+            "name": "Morawica"
+          },
+          "13": {
+            "name": "Nowa Słupia"
+          },
+          "14": {
+            "name": "Piekoszów"
+          },
+          "15": {
+            "name": "Pierzchnica"
+          },
+          "16": {
+            "name": "Raków"
+          },
+          "17": {
+            "name": "Nowiny"
+          },
+          "18": {
+            "name": "Strawczyn"
+          },
+          "19": {
+            "name": "Zagnańsk"
+          }
+        }
+      },
+      "05": {
+        "name": "konecki",
+        "gminy": {
+          "01": {
+            "name": "Fałków"
+          },
+          "02": {
+            "name": "Gowarczów"
+          },
+          "03": {
+            "name": "Końskie"
+          },
+          "04": {
+            "name": "Radoszyce"
+          },
+          "05": {
+            "name": "Ruda Maleniecka"
+          },
+          "06": {
+            "name": "Słupia Konecka"
+          },
+          "07": {
+            "name": "Smyków"
+          },
+          "08": {
+            "name": "Stąporków"
+          }
+        }
+      },
+      "06": {
+        "name": "opatowski",
+        "gminy": {
+          "01": {
+            "name": "Baćkowice"
+          },
+          "02": {
+            "name": "Iwaniska"
+          },
+          "03": {
+            "name": "Lipnik"
+          },
+          "04": {
+            "name": "Opatów"
+          },
+          "05": {
+            "name": "Ożarów"
+          },
+          "06": {
+            "name": "Sadowie"
+          },
+          "07": {
+            "name": "Tarłów"
+          },
+          "08": {
+            "name": "Wojciechowice"
+          }
+        }
+      },
+      "07": {
+        "name": "ostrowiecki",
+        "gminy": {
+          "01": {
+            "name": "Ostrowiec Świętokrzyski"
+          },
+          "02": {
+            "name": "Bałtów"
+          },
+          "03": {
+            "name": "Bodzechów"
+          },
+          "04": {
+            "name": "Ćmielów"
+          },
+          "05": {
+            "name": "Kunów"
+          },
+          "06": {
+            "name": "Waśniów"
+          }
+        }
+      },
+      "08": {
+        "name": "pińczowski",
+        "gminy": {
+          "01": {
+            "name": "Działoszyce"
+          },
+          "02": {
+            "name": "Kije"
+          },
+          "03": {
+            "name": "Michałów"
+          },
+          "04": {
+            "name": "Pińczów"
+          },
+          "05": {
+            "name": "Złota"
+          }
+        }
+      },
+      "09": {
+        "name": "sandomierski",
+        "gminy": {
+          "01": {
+            "name": "Sandomierz"
+          },
+          "02": {
+            "name": "Dwikozy"
+          },
+          "03": {
+            "name": "Klimontów"
+          },
+          "04": {
+            "name": "Koprzywnica"
+          },
+          "05": {
+            "name": "Łoniów"
+          },
+          "06": {
+            "name": "Obrazów"
+          },
+          "07": {
+            "name": "Samborzec"
+          },
+          "08": {
+            "name": "Wilczyce"
+          },
+          "09": {
+            "name": "Zawichost"
+          }
+        }
+      },
+      "10": {
+        "name": "skarżyski",
+        "gminy": {
+          "01": {
+            "name": "Skarżysko-Kamienna"
+          },
+          "02": {
+            "name": "Bliżyn"
+          },
+          "03": {
+            "name": "Łączna"
+          },
+          "04": {
+            "name": "Skarżysko Kościelne"
+          },
+          "05": {
+            "name": "Suchedniów"
+          }
+        }
+      },
+      "11": {
+        "name": "starachowicki",
+        "gminy": {
+          "01": {
+            "name": "Starachowice"
+          },
+          "02": {
+            "name": "Brody"
+          },
+          "03": {
+            "name": "Mirzec"
+          },
+          "04": {
+            "name": "Pawłów"
+          },
+          "05": {
+            "name": "Wąchock"
+          }
+        }
+      },
+      "12": {
+        "name": "staszowski",
+        "gminy": {
+          "01": {
+            "name": "Bogoria"
+          },
+          "02": {
+            "name": "Łubnice"
+          },
+          "03": {
+            "name": "Oleśnica"
+          },
+          "04": {
+            "name": "Osiek"
+          },
+          "05": {
+            "name": "Połaniec"
+          },
+          "06": {
+            "name": "Rytwiany"
+          },
+          "07": {
+            "name": "Staszów"
+          },
+          "08": {
+            "name": "Szydłów"
+          }
+        }
+      },
+      "13": {
+        "name": "włoszczowski",
+        "gminy": {
+          "01": {
+            "name": "Kluczewsko"
+          },
+          "02": {
+            "name": "Krasocin"
+          },
+          "03": {
+            "name": "Moskorzew"
+          },
+          "04": {
+            "name": "Radków"
+          },
+          "05": {
+            "name": "Secemin"
+          },
+          "06": {
+            "name": "Włoszczowa"
+          }
+        }
+      },
+      "61": {
+        "name": "Kielce",
+        "gminy": {
+          "01": {
+            "name": "Kielce"
+          }
+        }
+      }
+    }
+  },
+  "28": {
+    "name": "WARMIŃSKO-MAZURSKIE",
+    "powiaty": {
+      "01": {
+        "name": "bartoszycki",
+        "gminy": {
+          "01": {
+            "name": "Bartoszyce"
+          },
+          "02": {
+            "name": "Górowo Iławeckie"
+          },
+          "03": {
+            "name": "Bartoszyce"
+          },
+          "04": {
+            "name": "Bisztynek"
+          },
+          "05": {
+            "name": "Górowo Iławeckie"
+          },
+          "06": {
+            "name": "Sępopol"
+          }
+        }
+      },
+      "02": {
+        "name": "braniewski",
+        "gminy": {
+          "01": {
+            "name": "Braniewo"
+          },
+          "02": {
+            "name": "Braniewo"
+          },
+          "03": {
+            "name": "Frombork"
+          },
+          "04": {
+            "name": "Lelkowo"
+          },
+          "05": {
+            "name": "Pieniężno"
+          },
+          "06": {
+            "name": "Płoskinia"
+          },
+          "07": {
+            "name": "Wilczęta"
+          }
+        }
+      },
+      "03": {
+        "name": "działdowski",
+        "gminy": {
+          "01": {
+            "name": "Działdowo"
+          },
+          "02": {
+            "name": "Działdowo"
+          },
+          "03": {
+            "name": "Iłowo-Osada"
+          },
+          "04": {
+            "name": "Lidzbark"
+          },
+          "05": {
+            "name": "Płośnica"
+          },
+          "06": {
+            "name": "Rybno"
+          }
+        }
+      },
+      "04": {
+        "name": "elbląski",
+        "gminy": {
+          "01": {
+            "name": "Elbląg"
+          },
+          "02": {
+            "name": "Godkowo"
+          },
+          "03": {
+            "name": "Gronowo Elbląskie"
+          },
+          "04": {
+            "name": "Markusy"
+          },
+          "05": {
+            "name": "Milejewo"
+          },
+          "06": {
+            "name": "Młynary"
+          },
+          "07": {
+            "name": "Pasłęk"
+          },
+          "08": {
+            "name": "Rychliki"
+          },
+          "09": {
+            "name": "Tolkmicko"
+          }
+        }
+      },
+      "05": {
+        "name": "ełcki",
+        "gminy": {
+          "01": {
+            "name": "Ełk"
+          },
+          "02": {
+            "name": "Ełk"
+          },
+          "03": {
+            "name": "Kalinowo"
+          },
+          "04": {
+            "name": "Prostki"
+          },
+          "05": {
+            "name": "Stare Juchy"
+          }
+        }
+      },
+      "06": {
+        "name": "giżycki",
+        "gminy": {
+          "01": {
+            "name": "Giżycko"
+          },
+          "04": {
+            "name": "Giżycko"
+          },
+          "05": {
+            "name": "Kruklanki"
+          },
+          "06": {
+            "name": "Miłki"
+          },
+          "08": {
+            "name": "Ryn"
+          },
+          "10": {
+            "name": "Wydminy"
+          }
+        }
+      },
+      "07": {
+        "name": "iławski",
+        "gminy": {
+          "01": {
+            "name": "Iława"
+          },
+          "02": {
+            "name": "Lubawa"
+          },
+          "03": {
+            "name": "Iława"
+          },
+          "04": {
+            "name": "Kisielice"
+          },
+          "05": {
+            "name": "Lubawa"
+          },
+          "06": {
+            "name": "Susz"
+          },
+          "07": {
+            "name": "Zalewo"
+          }
+        }
+      },
+      "08": {
+        "name": "kętrzyński",
+        "gminy": {
+          "01": {
+            "name": "Kętrzyn"
+          },
+          "02": {
+            "name": "Barciany"
+          },
+          "03": {
+            "name": "Kętrzyn"
+          },
+          "04": {
+            "name": "Korsze"
+          },
+          "05": {
+            "name": "Reszel"
+          },
+          "06": {
+            "name": "Srokowo"
+          }
+        }
+      },
+      "09": {
+        "name": "lidzbarski",
+        "gminy": {
+          "01": {
+            "name": "Lidzbark Warmiński"
+          },
+          "02": {
+            "name": "Kiwity"
+          },
+          "03": {
+            "name": "Lidzbark Warmiński"
+          },
+          "04": {
+            "name": "Lubomino"
+          },
+          "05": {
+            "name": "Orneta"
+          }
+        }
+      },
+      "10": {
+        "name": "mrągowski",
+        "gminy": {
+          "01": {
+            "name": "Mrągowo"
+          },
+          "02": {
+            "name": "Mikołajki"
+          },
+          "03": {
+            "name": "Mrągowo"
+          },
+          "04": {
+            "name": "Piecki"
+          },
+          "05": {
+            "name": "Sorkwity"
+          }
+        }
+      },
+      "11": {
+        "name": "nidzicki",
+        "gminy": {
+          "01": {
+            "name": "Janowiec Kościelny"
+          },
+          "02": {
+            "name": "Janowo"
+          },
+          "03": {
+            "name": "Kozłowo"
+          },
+          "04": {
+            "name": "Nidzica"
+          }
+        }
+      },
+      "12": {
+        "name": "nowomiejski",
+        "gminy": {
+          "01": {
+            "name": "Nowe Miasto Lubawskie"
+          },
+          "02": {
+            "name": "Biskupiec"
+          },
+          "03": {
+            "name": "Grodziczno"
+          },
+          "04": {
+            "name": "Kurzętnik"
+          },
+          "05": {
+            "name": "Nowe Miasto Lubawskie"
+          }
+        }
+      },
+      "13": {
+        "name": "olecki",
+        "gminy": {
+          "03": {
+            "name": "Kowale Oleckie"
+          },
+          "04": {
+            "name": "Olecko"
+          },
+          "05": {
+            "name": "Świętajno"
+          },
+          "06": {
+            "name": "Wieliczki"
+          }
+        }
+      },
+      "14": {
+        "name": "olsztyński",
+        "gminy": {
+          "01": {
+            "name": "Barczewo"
+          },
+          "02": {
+            "name": "Biskupiec"
+          },
+          "03": {
+            "name": "Dobre Miasto"
+          },
+          "04": {
+            "name": "Dywity"
+          },
+          "05": {
+            "name": "Gietrzwałd"
+          },
+          "06": {
+            "name": "Jeziorany"
+          },
+          "07": {
+            "name": "Jonkowo"
+          },
+          "08": {
+            "name": "Kolno"
+          },
+          "09": {
+            "name": "Olsztynek"
+          },
+          "10": {
+            "name": "Purda"
+          },
+          "11": {
+            "name": "Stawiguda"
+          },
+          "12": {
+            "name": "Świątki"
+          }
+        }
+      },
+      "15": {
+        "name": "ostródzki",
+        "gminy": {
+          "01": {
+            "name": "Ostróda"
+          },
+          "02": {
+            "name": "Dąbrówno"
+          },
+          "03": {
+            "name": "Grunwald"
+          },
+          "04": {
+            "name": "Łukta"
+          },
+          "05": {
+            "name": "Małdyty"
+          },
+          "06": {
+            "name": "Miłakowo"
+          },
+          "07": {
+            "name": "Miłomłyn"
+          },
+          "08": {
+            "name": "Morąg"
+          },
+          "09": {
+            "name": "Ostróda"
+          }
+        }
+      },
+      "16": {
+        "name": "piski",
+        "gminy": {
+          "01": {
+            "name": "Biała Piska"
+          },
+          "02": {
+            "name": "Orzysz"
+          },
+          "03": {
+            "name": "Pisz"
+          },
+          "04": {
+            "name": "Ruciane-Nida"
+          }
+        }
+      },
+      "17": {
+        "name": "szczycieński",
+        "gminy": {
+          "01": {
+            "name": "Szczytno"
+          },
+          "02": {
+            "name": "Dźwierzuty"
+          },
+          "03": {
+            "name": "Jedwabno"
+          },
+          "04": {
+            "name": "Pasym"
+          },
+          "05": {
+            "name": "Rozogi"
+          },
+          "06": {
+            "name": "Szczytno"
+          },
+          "07": {
+            "name": "Świętajno"
+          },
+          "08": {
+            "name": "Wielbark"
+          }
+        }
+      },
+      "18": {
+        "name": "gołdapski",
+        "gminy": {
+          "01": {
+            "name": "Banie Mazurskie"
+          },
+          "02": {
+            "name": "Dubeninki"
+          },
+          "03": {
+            "name": "Gołdap"
+          }
+        }
+      },
+      "19": {
+        "name": "węgorzewski",
+        "gminy": {
+          "01": {
+            "name": "Budry"
+          },
+          "02": {
+            "name": "Pozezdrze"
+          },
+          "03": {
+            "name": "Węgorzewo"
+          }
+        }
+      },
+      "61": {
+        "name": "Elbląg",
+        "gminy": {
+          "01": {
+            "name": "Elbląg"
+          }
+        }
+      },
+      "62": {
+        "name": "Olsztyn",
+        "gminy": {
+          "01": {
+            "name": "Olsztyn"
+          }
+        }
+      }
+    }
+  },
+  "30": {
+    "name": "WIELKOPOLSKIE",
+    "powiaty": {
+      "01": {
+        "name": "chodzieski",
+        "gminy": {
+          "01": {
+            "name": "Chodzież"
+          },
+          "02": {
+            "name": "Budzyń"
+          },
+          "03": {
+            "name": "Chodzież"
+          },
+          "04": {
+            "name": "Margonin"
+          },
+          "05": {
+            "name": "Szamocin"
+          }
+        }
+      },
+      "02": {
+        "name": "czarnkowsko-trzcianecki",
+        "gminy": {
+          "01": {
+            "name": "Czarnków"
+          },
+          "02": {
+            "name": "Czarnków"
+          },
+          "03": {
+            "name": "Drawsko"
+          },
+          "04": {
+            "name": "Krzyż Wielkopolski"
+          },
+          "05": {
+            "name": "Lubasz"
+          },
+          "06": {
+            "name": "Połajewo"
+          },
+          "07": {
+            "name": "Trzcianka"
+          },
+          "08": {
+            "name": "Wieleń"
+          }
+        }
+      },
+      "03": {
+        "name": "gnieźnieński",
+        "gminy": {
+          "01": {
+            "name": "Gniezno"
+          },
+          "02": {
+            "name": "Czerniejewo"
+          },
+          "03": {
+            "name": "Gniezno"
+          },
+          "04": {
+            "name": "Kiszkowo"
+          },
+          "05": {
+            "name": "Kłecko"
+          },
+          "06": {
+            "name": "Łubowo"
+          },
+          "07": {
+            "name": "Mieleszyn"
+          },
+          "08": {
+            "name": "Niechanowo"
+          },
+          "09": {
+            "name": "Trzemeszno"
+          },
+          "10": {
+            "name": "Witkowo"
+          }
+        }
+      },
+      "04": {
+        "name": "gostyński",
+        "gminy": {
+          "01": {
+            "name": "Borek Wielkopolski"
+          },
+          "02": {
+            "name": "Gostyń"
+          },
+          "03": {
+            "name": "Krobia"
+          },
+          "04": {
+            "name": "Pępowo"
+          },
+          "05": {
+            "name": "Piaski"
+          },
+          "06": {
+            "name": "Pogorzela"
+          },
+          "07": {
+            "name": "Poniec"
+          }
+        }
+      },
+      "05": {
+        "name": "grodziski",
+        "gminy": {
+          "01": {
+            "name": "Granowo"
+          },
+          "02": {
+            "name": "Grodzisk Wielkopolski"
+          },
+          "03": {
+            "name": "Kamieniec"
+          },
+          "04": {
+            "name": "Rakoniewice"
+          },
+          "05": {
+            "name": "Wielichowo"
+          }
+        }
+      },
+      "06": {
+        "name": "jarociński",
+        "gminy": {
+          "01": {
+            "name": "Jaraczewo"
+          },
+          "02": {
+            "name": "Jarocin"
+          },
+          "03": {
+            "name": "Kotlin"
+          },
+          "04": {
+            "name": "Żerków"
+          }
+        }
+      },
+      "07": {
+        "name": "kaliski",
+        "gminy": {
+          "01": {
+            "name": "Blizanów"
+          },
+          "02": {
+            "name": "Brzeziny"
+          },
+          "03": {
+            "name": "Ceków-Kolonia"
+          },
+          "04": {
+            "name": "Godziesze Wielkie"
+          },
+          "05": {
+            "name": "Koźminek"
+          },
+          "06": {
+            "name": "Lisków"
+          },
+          "07": {
+            "name": "Mycielin"
+          },
+          "08": {
+            "name": "Opatówek"
+          },
+          "09": {
+            "name": "Stawiszyn"
+          },
+          "10": {
+            "name": "Szczytniki"
+          },
+          "11": {
+            "name": "Żelazków"
+          }
+        }
+      },
+      "08": {
+        "name": "kępiński",
+        "gminy": {
+          "01": {
+            "name": "Baranów"
+          },
+          "02": {
+            "name": "Bralin"
+          },
+          "03": {
+            "name": "Kępno"
+          },
+          "04": {
+            "name": "Łęka Opatowska"
+          },
+          "05": {
+            "name": "Perzów"
+          },
+          "06": {
+            "name": "Rychtal"
+          },
+          "07": {
+            "name": "Trzcinica"
+          }
+        }
+      },
+      "09": {
+        "name": "kolski",
+        "gminy": {
+          "01": {
+            "name": "Koło"
+          },
+          "02": {
+            "name": "Babiak"
+          },
+          "03": {
+            "name": "Chodów"
+          },
+          "04": {
+            "name": "Dąbie"
+          },
+          "05": {
+            "name": "Grzegorzew"
+          },
+          "06": {
+            "name": "Kłodawa"
+          },
+          "07": {
+            "name": "Koło"
+          },
+          "08": {
+            "name": "Kościelec"
+          },
+          "09": {
+            "name": "Olszówka"
+          },
+          "10": {
+            "name": "Osiek Mały"
+          },
+          "11": {
+            "name": "Przedecz"
+          }
+        }
+      },
+      "10": {
+        "name": "koniński",
+        "gminy": {
+          "01": {
+            "name": "Golina"
+          },
+          "02": {
+            "name": "Grodziec"
+          },
+          "03": {
+            "name": "Kazimierz Biskupi"
+          },
+          "04": {
+            "name": "Kleczew"
+          },
+          "05": {
+            "name": "Kramsk"
+          },
+          "06": {
+            "name": "Krzymów"
+          },
+          "07": {
+            "name": "Rychwał"
+          },
+          "08": {
+            "name": "Rzgów"
+          },
+          "09": {
+            "name": "Skulsk"
+          },
+          "10": {
+            "name": "Sompolno"
+          },
+          "11": {
+            "name": "Stare Miasto"
+          },
+          "12": {
+            "name": "Ślesin"
+          },
+          "13": {
+            "name": "Wierzbinek"
+          },
+          "14": {
+            "name": "Wilczyn"
+          }
+        }
+      },
+      "11": {
+        "name": "kościański",
+        "gminy": {
+          "01": {
+            "name": "Kościan"
+          },
+          "02": {
+            "name": "Czempiń"
+          },
+          "03": {
+            "name": "Kościan"
+          },
+          "04": {
+            "name": "Krzywiń"
+          },
+          "05": {
+            "name": "Śmigiel"
+          }
+        }
+      },
+      "12": {
+        "name": "krotoszyński",
+        "gminy": {
+          "01": {
+            "name": "Sulmierzyce"
+          },
+          "02": {
+            "name": "Kobylin"
+          },
+          "03": {
+            "name": "Koźmin Wielkopolski"
+          },
+          "04": {
+            "name": "Krotoszyn"
+          },
+          "05": {
+            "name": "Rozdrażew"
+          },
+          "06": {
+            "name": "Zduny"
+          }
+        }
+      },
+      "13": {
+        "name": "leszczyński",
+        "gminy": {
+          "01": {
+            "name": "Krzemieniewo"
+          },
+          "02": {
+            "name": "Lipno"
+          },
+          "03": {
+            "name": "Osieczna"
+          },
+          "04": {
+            "name": "Rydzyna"
+          },
+          "05": {
+            "name": "Święciechowa"
+          },
+          "06": {
+            "name": "Wijewo"
+          },
+          "07": {
+            "name": "Włoszakowice"
+          }
+        }
+      },
+      "14": {
+        "name": "międzychodzki",
+        "gminy": {
+          "01": {
+            "name": "Chrzypsko Wielkie"
+          },
+          "02": {
+            "name": "Kwilcz"
+          },
+          "03": {
+            "name": "Międzychód"
+          },
+          "04": {
+            "name": "Sieraków"
+          }
+        }
+      },
+      "15": {
+        "name": "nowotomyski",
+        "gminy": {
+          "01": {
+            "name": "Kuślin"
+          },
+          "02": {
+            "name": "Lwówek"
+          },
+          "03": {
+            "name": "Miedzichowo"
+          },
+          "04": {
+            "name": "Nowy Tomyśl"
+          },
+          "05": {
+            "name": "Opalenica"
+          },
+          "06": {
+            "name": "Zbąszyń"
+          }
+        }
+      },
+      "16": {
+        "name": "obornicki",
+        "gminy": {
+          "01": {
+            "name": "Oborniki"
+          },
+          "02": {
+            "name": "Rogoźno"
+          },
+          "03": {
+            "name": "Ryczywół"
+          }
+        }
+      },
+      "17": {
+        "name": "ostrowski",
+        "gminy": {
+          "01": {
+            "name": "Ostrów Wielkopolski"
+          },
+          "02": {
+            "name": "Nowe Skalmierzyce"
+          },
+          "03": {
+            "name": "Odolanów"
+          },
+          "04": {
+            "name": "Ostrów Wielkopolski"
+          },
+          "05": {
+            "name": "Przygodzice"
+          },
+          "06": {
+            "name": "Raszków"
+          },
+          "07": {
+            "name": "Sieroszewice"
+          },
+          "08": {
+            "name": "Sośnie"
+          }
+        }
+      },
+      "18": {
+        "name": "ostrzeszowski",
+        "gminy": {
+          "01": {
+            "name": "Czajków"
+          },
+          "02": {
+            "name": "Doruchów"
+          },
+          "03": {
+            "name": "Grabów nad Prosną"
+          },
+          "04": {
+            "name": "Kobyla Góra"
+          },
+          "05": {
+            "name": "Kraszewice"
+          },
+          "06": {
+            "name": "Mikstat"
+          },
+          "07": {
+            "name": "Ostrzeszów"
+          }
+        }
+      },
+      "19": {
+        "name": "pilski",
+        "gminy": {
+          "01": {
+            "name": "Piła"
+          },
+          "02": {
+            "name": "Białośliwie"
+          },
+          "03": {
+            "name": "Kaczory"
+          },
+          "04": {
+            "name": "Łobżenica"
+          },
+          "05": {
+            "name": "Miasteczko Krajeńskie"
+          },
+          "06": {
+            "name": "Szydłowo"
+          },
+          "07": {
+            "name": "Ujście"
+          },
+          "08": {
+            "name": "Wyrzysk"
+          },
+          "09": {
+            "name": "Wysoka"
+          }
+        }
+      },
+      "20": {
+        "name": "pleszewski",
+        "gminy": {
+          "01": {
+            "name": "Chocz"
+          },
+          "02": {
+            "name": "Czermin"
+          },
+          "03": {
+            "name": "Dobrzyca"
+          },
+          "04": {
+            "name": "Gizałki"
+          },
+          "05": {
+            "name": "Gołuchów"
+          },
+          "06": {
+            "name": "Pleszew"
+          }
+        }
+      },
+      "21": {
+        "name": "poznański",
+        "gminy": {
+          "01": {
+            "name": "Luboń"
+          },
+          "02": {
+            "name": "Puszczykowo"
+          },
+          "03": {
+            "name": "Buk"
+          },
+          "04": {
+            "name": "Czerwonak"
+          },
+          "05": {
+            "name": "Dopiewo"
+          },
+          "06": {
+            "name": "Kleszczewo"
+          },
+          "07": {
+            "name": "Komorniki"
+          },
+          "08": {
+            "name": "Kostrzyn"
+          },
+          "09": {
+            "name": "Kórnik"
+          },
+          "10": {
+            "name": "Mosina"
+          },
+          "11": {
+            "name": "Murowana Goślina"
+          },
+          "12": {
+            "name": "Pobiedziska"
+          },
+          "13": {
+            "name": "Rokietnica"
+          },
+          "14": {
+            "name": "Stęszew"
+          },
+          "15": {
+            "name": "Suchy Las"
+          },
+          "16": {
+            "name": "Swarzędz"
+          },
+          "17": {
+            "name": "Tarnowo Podgórne"
+          }
+        }
+      },
+      "22": {
+        "name": "rawicki",
+        "gminy": {
+          "01": {
+            "name": "Bojanowo"
+          },
+          "02": {
+            "name": "Jutrosin"
+          },
+          "03": {
+            "name": "Miejska Górka"
+          },
+          "04": {
+            "name": "Pakosław"
+          },
+          "05": {
+            "name": "Rawicz"
+          }
+        }
+      },
+      "23": {
+        "name": "słupecki",
+        "gminy": {
+          "01": {
+            "name": "Słupca"
+          },
+          "02": {
+            "name": "Lądek"
+          },
+          "03": {
+            "name": "Orchowo"
+          },
+          "04": {
+            "name": "Ostrowite"
+          },
+          "05": {
+            "name": "Powidz"
+          },
+          "06": {
+            "name": "Słupca"
+          },
+          "07": {
+            "name": "Strzałkowo"
+          },
+          "08": {
+            "name": "Zagórów"
+          }
+        }
+      },
+      "24": {
+        "name": "szamotulski",
+        "gminy": {
+          "01": {
+            "name": "Obrzycko"
+          },
+          "02": {
+            "name": "Duszniki"
+          },
+          "03": {
+            "name": "Kaźmierz"
+          },
+          "04": {
+            "name": "Obrzycko"
+          },
+          "05": {
+            "name": "Ostroróg"
+          },
+          "06": {
+            "name": "Pniewy"
+          },
+          "07": {
+            "name": "Szamotuły"
+          },
+          "08": {
+            "name": "Wronki"
+          }
+        }
+      },
+      "25": {
+        "name": "średzki",
+        "gminy": {
+          "01": {
+            "name": "Dominowo"
+          },
+          "02": {
+            "name": "Krzykosy"
+          },
+          "03": {
+            "name": "Nowe Miasto nad Wartą"
+          },
+          "04": {
+            "name": "Środa Wielkopolska"
+          },
+          "05": {
+            "name": "Zaniemyśl"
+          }
+        }
+      },
+      "26": {
+        "name": "śremski",
+        "gminy": {
+          "01": {
+            "name": "Brodnica"
+          },
+          "02": {
+            "name": "Dolsk"
+          },
+          "03": {
+            "name": "Książ Wielkopolski"
+          },
+          "04": {
+            "name": "Śrem"
+          }
+        }
+      },
+      "27": {
+        "name": "turecki",
+        "gminy": {
+          "01": {
+            "name": "Turek"
+          },
+          "02": {
+            "name": "Brudzew"
+          },
+          "03": {
+            "name": "Dobra"
+          },
+          "04": {
+            "name": "Kawęczyn"
+          },
+          "05": {
+            "name": "Malanów"
+          },
+          "06": {
+            "name": "Przykona"
+          },
+          "07": {
+            "name": "Tuliszków"
+          },
+          "08": {
+            "name": "Turek"
+          },
+          "09": {
+            "name": "Władysławów"
+          }
+        }
+      },
+      "28": {
+        "name": "wągrowiecki",
+        "gminy": {
+          "01": {
+            "name": "Wągrowiec"
+          },
+          "02": {
+            "name": "Damasławek"
+          },
+          "03": {
+            "name": "Gołańcz"
+          },
+          "04": {
+            "name": "Mieścisko"
+          },
+          "05": {
+            "name": "Skoki"
+          },
+          "06": {
+            "name": "Wapno"
+          },
+          "07": {
+            "name": "Wągrowiec"
+          }
+        }
+      },
+      "29": {
+        "name": "wolsztyński",
+        "gminy": {
+          "01": {
+            "name": "Przemęt"
+          },
+          "02": {
+            "name": "Siedlec"
+          },
+          "03": {
+            "name": "Wolsztyn"
+          }
+        }
+      },
+      "30": {
+        "name": "wrzesiński",
+        "gminy": {
+          "01": {
+            "name": "Kołaczkowo"
+          },
+          "02": {
+            "name": "Miłosław"
+          },
+          "03": {
+            "name": "Nekla"
+          },
+          "04": {
+            "name": "Pyzdry"
+          },
+          "05": {
+            "name": "Września"
+          }
+        }
+      },
+      "31": {
+        "name": "złotowski",
+        "gminy": {
+          "01": {
+            "name": "Złotów"
+          },
+          "02": {
+            "name": "Jastrowie"
+          },
+          "03": {
+            "name": "Krajenka"
+          },
+          "04": {
+            "name": "Lipka"
+          },
+          "05": {
+            "name": "Okonek"
+          },
+          "06": {
+            "name": "Tarnówka"
+          },
+          "07": {
+            "name": "Zakrzewo"
+          },
+          "08": {
+            "name": "Złotów"
+          }
+        }
+      },
+      "61": {
+        "name": "Kalisz",
+        "gminy": {
+          "01": {
+            "name": "Kalisz"
+          }
+        }
+      },
+      "62": {
+        "name": "Konin",
+        "gminy": {
+          "01": {
+            "name": "Konin"
+          }
+        }
+      },
+      "63": {
+        "name": "Leszno",
+        "gminy": {
+          "01": {
+            "name": "Leszno"
+          }
+        }
+      },
+      "64": {
+        "name": "Poznań",
+        "gminy": {
+          "01": {
+            "name": "Poznań"
+          },
+          "02": {
+            "name": "Poznań-Grunwald"
+          },
+          "03": {
+            "name": "Poznań-Jeżyce"
+          },
+          "04": {
+            "name": "Poznań-Nowe Miasto"
+          },
+          "05": {
+            "name": "Poznań-Stare Miasto"
+          },
+          "06": {
+            "name": "Poznań-Wilda"
+          }
+        }
+      }
+    }
+  },
+  "32": {
+    "name": "ZACHODNIOPOMORSKIE",
+    "powiaty": {
+      "01": {
+        "name": "białogardzki",
+        "gminy": {
+          "01": {
+            "name": "Białogard"
+          },
+          "02": {
+            "name": "Białogard"
+          },
+          "03": {
+            "name": "Karlino"
+          },
+          "04": {
+            "name": "Tychowo"
+          }
+        }
+      },
+      "02": {
+        "name": "choszczeński",
+        "gminy": {
+          "01": {
+            "name": "Bierzwnik"
+          },
+          "02": {
+            "name": "Choszczno"
+          },
+          "03": {
+            "name": "Drawno"
+          },
+          "04": {
+            "name": "Krzęcin"
+          },
+          "05": {
+            "name": "Pełczyce"
+          },
+          "06": {
+            "name": "Recz"
+          }
+        }
+      },
+      "03": {
+        "name": "drawski",
+        "gminy": {
+          "01": {
+            "name": "Czaplinek"
+          },
+          "02": {
+            "name": "Drawsko Pomorskie"
+          },
+          "03": {
+            "name": "Kalisz Pomorski"
+          },
+          "05": {
+            "name": "Wierzchowo"
+          },
+          "06": {
+            "name": "Złocieniec"
+          }
+        }
+      },
+      "04": {
+        "name": "goleniowski",
+        "gminy": {
+          "02": {
+            "name": "Goleniów"
+          },
+          "03": {
+            "name": "Maszewo"
+          },
+          "04": {
+            "name": "Nowogard"
+          },
+          "05": {
+            "name": "Osina"
+          },
+          "06": {
+            "name": "Przybiernów"
+          },
+          "07": {
+            "name": "Stepnica"
+          }
+        }
+      },
+      "05": {
+        "name": "gryficki",
+        "gminy": {
+          "01": {
+            "name": "Brojce"
+          },
+          "02": {
+            "name": "Gryfice"
+          },
+          "03": {
+            "name": "Karnice"
+          },
+          "04": {
+            "name": "Płoty"
+          },
+          "07": {
+            "name": "Rewal"
+          },
+          "08": {
+            "name": "Trzebiatów"
+          }
+        }
+      },
+      "06": {
+        "name": "gryfiński",
+        "gminy": {
+          "01": {
+            "name": "Banie"
+          },
+          "02": {
+            "name": "Cedynia"
+          },
+          "03": {
+            "name": "Chojna"
+          },
+          "04": {
+            "name": "Gryfino"
+          },
+          "05": {
+            "name": "Mieszkowice"
+          },
+          "06": {
+            "name": "Moryń"
+          },
+          "07": {
+            "name": "Stare Czarnowo"
+          },
+          "08": {
+            "name": "Trzcińsko-Zdrój"
+          },
+          "09": {
+            "name": "Widuchowa"
+          }
+        }
+      },
+      "07": {
+        "name": "kamieński",
+        "gminy": {
+          "01": {
+            "name": "Dziwnów"
+          },
+          "02": {
+            "name": "Golczewo"
+          },
+          "03": {
+            "name": "Kamień Pomorski"
+          },
+          "04": {
+            "name": "Międzyzdroje"
+          },
+          "05": {
+            "name": "Świerzno"
+          },
+          "06": {
+            "name": "Wolin"
+          }
+        }
+      },
+      "08": {
+        "name": "kołobrzeski",
+        "gminy": {
+          "01": {
+            "name": "Kołobrzeg"
+          },
+          "02": {
+            "name": "Dygowo"
+          },
+          "03": {
+            "name": "Gościno"
+          },
+          "04": {
+            "name": "Kołobrzeg"
+          },
+          "05": {
+            "name": "Rymań"
+          },
+          "06": {
+            "name": "Siemyśl"
+          },
+          "07": {
+            "name": "Ustronie Morskie"
+          }
+        }
+      },
+      "09": {
+        "name": "koszaliński",
+        "gminy": {
+          "01": {
+            "name": "Będzino"
+          },
+          "02": {
+            "name": "Biesiekierz"
+          },
+          "03": {
+            "name": "Bobolice"
+          },
+          "04": {
+            "name": "Manowo"
+          },
+          "05": {
+            "name": "Mielno"
+          },
+          "06": {
+            "name": "Polanów"
+          },
+          "07": {
+            "name": "Sianów"
+          },
+          "08": {
+            "name": "Świeszyno"
+          }
+        }
+      },
+      "10": {
+        "name": "myśliborski",
+        "gminy": {
+          "01": {
+            "name": "Barlinek"
+          },
+          "02": {
+            "name": "Boleszkowice"
+          },
+          "03": {
+            "name": "Dębno"
+          },
+          "04": {
+            "name": "Myślibórz"
+          },
+          "05": {
+            "name": "Nowogródek Pomorski"
+          }
+        }
+      },
+      "11": {
+        "name": "policki",
+        "gminy": {
+          "01": {
+            "name": "Dobra (Szczecińska)"
+          },
+          "02": {
+            "name": "Kołbaskowo"
+          },
+          "03": {
+            "name": "Nowe Warpno"
+          },
+          "04": {
+            "name": "Police"
+          }
+        }
+      },
+      "12": {
+        "name": "pyrzycki",
+        "gminy": {
+          "01": {
+            "name": "Bielice"
+          },
+          "02": {
+            "name": "Kozielice"
+          },
+          "03": {
+            "name": "Lipiany"
+          },
+          "04": {
+            "name": "Przelewice"
+          },
+          "05": {
+            "name": "Pyrzyce"
+          },
+          "06": {
+            "name": "Warnice"
+          }
+        }
+      },
+      "13": {
+        "name": "sławieński",
+        "gminy": {
+          "01": {
+            "name": "Darłowo"
+          },
+          "02": {
+            "name": "Sławno"
+          },
+          "03": {
+            "name": "Darłowo"
+          },
+          "04": {
+            "name": "Malechowo"
+          },
+          "05": {
+            "name": "Postomino"
+          },
+          "06": {
+            "name": "Sławno"
+          }
+        }
+      },
+      "14": {
+        "name": "stargardzki",
+        "gminy": {
+          "01": {
+            "name": "Stargard"
+          },
+          "02": {
+            "name": "Chociwel"
+          },
+          "03": {
+            "name": "Dobrzany"
+          },
+          "04": {
+            "name": "Dolice"
+          },
+          "05": {
+            "name": "Ińsko"
+          },
+          "06": {
+            "name": "Kobylanka"
+          },
+          "08": {
+            "name": "Marianowo"
+          },
+          "09": {
+            "name": "Stara Dąbrowa"
+          },
+          "10": {
+            "name": "Stargard"
+          },
+          "11": {
+            "name": "Suchań"
+          }
+        }
+      },
+      "15": {
+        "name": "szczecinecki",
+        "gminy": {
+          "01": {
+            "name": "Szczecinek"
+          },
+          "02": {
+            "name": "Barwice"
+          },
+          "03": {
+            "name": "Biały Bór"
+          },
+          "04": {
+            "name": "Borne Sulinowo"
+          },
+          "05": {
+            "name": "Grzmiąca"
+          },
+          "06": {
+            "name": "Szczecinek"
+          }
+        }
+      },
+      "16": {
+        "name": "świdwiński",
+        "gminy": {
+          "01": {
+            "name": "Świdwin"
+          },
+          "02": {
+            "name": "Brzeżno"
+          },
+          "03": {
+            "name": "Połczyn-Zdrój"
+          },
+          "04": {
+            "name": "Rąbino"
+          },
+          "05": {
+            "name": "Sławoborze"
+          },
+          "06": {
+            "name": "Świdwin"
+          }
+        }
+      },
+      "17": {
+        "name": "wałecki",
+        "gminy": {
+          "01": {
+            "name": "Wałcz"
+          },
+          "02": {
+            "name": "Człopa"
+          },
+          "03": {
+            "name": "Mirosławiec"
+          },
+          "04": {
+            "name": "Tuczno"
+          },
+          "05": {
+            "name": "Wałcz"
+          }
+        }
+      },
+      "18": {
+        "name": "łobeski",
+        "gminy": {
+          "01": {
+            "name": "Dobra"
+          },
+          "02": {
+            "name": "Łobez"
+          },
+          "03": {
+            "name": "Radowo Małe"
+          },
+          "04": {
+            "name": "Resko"
+          },
+          "05": {
+            "name": "Węgorzyno"
+          }
+        }
+      },
+      "61": {
+        "name": "Koszalin",
+        "gminy": {
+          "01": {
+            "name": "Koszalin"
+          }
+        }
+      },
+      "62": {
+        "name": "Szczecin",
+        "gminy": {
+          "01": {
+            "name": "Szczecin"
+          }
+        }
+      },
+      "63": {
+        "name": "Świnoujście",
+        "gminy": {
+          "01": {
+            "name": "Świnoujście"
+          }
+        }
+      }
+    }
+  }
+}

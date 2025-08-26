@@ -1,0 +1,311 @@
+
+/* Stylizacja nagłówka */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #fff;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  /* Ukrycie mobilnego przycisku na dużych ekranach */
+  .menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Ukrycie menu na małych ekranach */
+  .main-nav {
+    display: flex;
+  }
+  
+  .main-nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .main-nav ul li {
+    margin: 0 15px;
+  }
+  
+  .main-nav ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+@media (max-width: 1080px) {
+    .calendar-container {display: none;}
+  }
+/* RESPONSYWNOŚĆ: zmiana stylów na mniejszych ekranach */
+@media (max-width: 908px) {
+    .add-date-first-column {
+        display: none;
+    }
+    .add-date-second-column {
+        display: none;
+    }
+    .potential-first-column {
+        display: none;
+    }
+    .potential-second-column {
+        display: none;
+    }
+    .menu-toggle {
+      display: block; /* Pokazuje ikonę menu */
+    }
+  
+    .main-nav {
+      display: none; /* Domyślnie ukryte */
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      padding: 10px 0;
+    }
+  
+    .main-nav ul {
+      flex-direction: column;
+    }
+  
+    .main-nav ul li {
+      text-align: center;
+      margin: 10px 0;
+    }
+  
+    .main-nav.active {
+      display: flex; /* Pokazuje menu po kliknięciu */
+      z-index: 1;
+    }
+    .slider-container, .form-row {
+
+        width: 40%;
+    }
+    .payment-container {
+        left: 11.7rem;
+  }
+  .container {
+    width: 100%;
+    padding: 0;
+}
+.client-card {
+        margin: 0;
+        padding: 0;
+    }
+    .navbar a {
+
+        padding: 5px;
+        font-size: 0.6rem;
+    }
+    .timeline-step {
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .step-label {
+       font-size: 0.6rem;
+    }
+}
+@media (max-width: 670px) {
+    .slider-container, .form-row {
+
+        width: 50%;
+    }
+    .add-date-first-column {
+        display: none;
+    }
+    .add-date-second-column {
+        display: none;
+    }
+    .potential-first-column {
+        display: none;
+    }
+    .potential-second-column {
+        display: none;
+    }
+    .calculator-first-column {
+        display: none;
+    }
+    .calculator-second-column {
+        display: none;
+    }
+    .clientsEditing {
+        font-size: 8px;
+    }
+    table td {
+        font-size: 0.6rem;
+    }
+
+    .clientsTable th {
+        font-size: 0.6rem;
+    }
+    .address-link {
+        white-space: inherit;
+    }
+}
+  @media (max-width: 570px) {
+    .body {
+        font-size: 0.8rem;
+    }
+    .payment-container {
+        left: 11.7rem;
+        width: 50%;
+  }
+  form {
+
+    padding-bottom: 60px !important;
+  }
+    .button {
+        font-size: 0.7rem;
+        padding:  0.5rem 0 ;
+    }
+    .load-button, .next-button, .next-button2, .next-button3 ,.category-button, .product-button, .add-product, .updateButton, .generate-button {
+        padding: 0.5rem 0.5rem;
+    }
+    .calculator {
+        padding: 0;
+    }
+    .slider-container, .form-row {
+
+        width: 70%;
+    }
+    input, select {
+        padding: 6px;
+        font-size: 0.8rem;
+        width: 70%;
+
+    }
+    label {
+        font-size: 13px;
+        gap: 6px;
+        margin-left: 1rem;
+    }
+    .payment-container {
+        position: absolute;
+        top: 20.2rem;
+        left: 0.7rem;
+    }
+.price-summary {
+    margin-bottom: 30px;
+    padding: 10px;
+    font-size: 11px;
+
+}
+    .otherNewses {
+        grid-template-columns: 1fr;
+    }
+    .mainNews {
+        display: flex;
+        flex-direction: column;
+    }
+    .logo {
+        font-size: 0.8rem;
+    }
+    .logoAnc {
+        gap: 0.8rem;
+        align-items: center;
+    }
+    .logo img {
+        height: 30px;
+    }
+    .backBtnClientCard, .open-modal-btn, .complete-btn, #openMeetingModal, #openNoteModal, #openFileModal, #openPaymentModal, .addpaymentBtn{
+        padding: 0.5rem 0.5rem;
+    }
+    .task-item {
+        padding: 0px;
+        gap: 5px;
+        font-size: 0.7rem;
+    }
+    .completed-task {
+        white-space: inherit;
+        margin: 0.6rem;
+    }
+    .taskAddInfo {
+        display: none;
+    }
+    .InfoTask {
+        display: none;
+    }
+    .step-icon {
+        font-size: 10px;
+    }
+    .meeting-list-container {
+        padding: 0px;
+  }
+  .notes-table thead tr th {
+    font-size: 0.7rem;
+    padding: 1rem 0.5rem !important;
+  }
+  .category-tab { 
+    font-size: 0.6rem;
+  }
+  .file-categories ul {
+    display: block;
+  }
+  .file-category ul {
+    display: block;
+        padding: 0;
+  }
+  .file-link {
+    display: none;
+  }
+  .payment-tr th{
+    font-size: 0.6rem;
+  }
+  .modal {
+    padding: 0;
+  }
+  .paymentForm {
+    padding: 0;
+  }
+  .status.pending {
+    font-size: 0.6rem;
+  }
+  .meeting-row td {
+    padding: 0.2rem;
+  }
+  .payButton2 {
+    padding: 0 !important;
+  }
+  .payButton2 button {
+    padding: 2px 4px;
+    font-size: 0.6rem;
+  }
+  .payButton2 textarea {
+    padding: 0;
+    font-size: 7px;
+    height: 3rem;
+  }}
+  @media (max-width: 470px) {
+    .container {
+        width: 100%;
+        padding: 0;
+    }
+    input, select {
+        padding: 6px;
+        font-size: 0.8rem;
+        width: 55%;
+
+    }
+    label {
+        font-size: 11px;
+        gap: 6px;
+        margin-left: 1rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .subsidy-progress-container p {
+font-size: 0.8rem;
+    }
+    .payment-container {
+        width: 70%;
+        top: 24.6rem !important;
+    }
+  }

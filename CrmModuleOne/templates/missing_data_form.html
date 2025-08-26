@@ -1,0 +1,15 @@
+<form method="post">
+    {% csrf_token %}
+    
+    <h3>Brakuje wymaganych danych</h3>
+    <p>Uzupełnij brakujące pola, aby kontynuować generowanie dokumentów:</p>
+
+    <div class="form-group">
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zapisz i generuj dokument</button>
+</form>

@@ -1,0 +1,262 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Edytuj dane klienta</h1>
+<!-- Formularz do usunięcia -->
+
+
+{% if client.status == "lead" %}
+<form  id="delete-form" style="margin-top: 20px; display: flex;
+">
+  <button type="button" class="button" id="back-button" >← Wstecz</button>
+  <button
+  class="button deleteFormButton"
+    type="button"
+    id="delete-button"
+  >
+    Usuń
+  </button>
+</form>
+
+<!-- Modal -->
+<div id="confirmation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
+  <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; max-width: 400px;">
+    <p>Czy na pewno chcesz usunąć klienta {{ client.first_name }} {{ client.last_name }}?</p>
+    <form method="post" style="margin-top: 20px">
+      {% csrf_token %}
+    <button
+      class="button"
+      type="submit"
+      name="delete"
+      style="background-color: red; color: white; margin-right: 10px;">
+      Potwierdź
+    </button>
+    <button   class="button" id="cancel-delete" style="background-color: gray; color: white;">Anuluj</button>
+  </form>
+    
+  </div>
+</div>
+{% else %}
+<form  id="delete-form" style="margin-top: 20px; display: flex;
+">
+  <button type="button" class="button" id="back-button" >← Wstecz</button>
+</form>
+{% endif %}
+
+
+<form method="post" style="margin-top: 20px">
+  {% csrf_token %}
+  <!-- Sekcja: Dane osobowe -->
+  <!-- prettier-ignore -->
+  <div class="form-section">
+    <h3>Dane osobowe</h3>
+    <div class="form-row">{{ form.potential.label_tag }} {{ form.potential }}</div>
+    <div class="form-row required">{{ form.first_name.label_tag }} {{ form.first_name }}</div>
+    <div class="form-row required">{{ form.last_name.label_tag }} {{ form.last_name }}</div>
+    <div class="form-row required">{{ form.phone.label_tag }} {{ form.phone }}</div>
+    <div class="form-row">{{ form.email.label_tag }} {{ form.email }}</div>
+    <div class="form-row">{{ form.street.label_tag }} {{ form.street }}</div>
+    <div class="form-row">{{ form.house_number.label_tag }} {{ form.house_number }}</div>
+    <div class="form-row">{{ form.city.label_tag }} {{ form.city }}</div>
+    <div class="form-row">{{ form.postal_code.label_tag }} {{ form.postal_code }}</div>
+    <div class="form-row">{{ form.postal.label_tag }} {{ form.postal }}</div>
+    <div class="form-row">{{ form.person_type.label_tag }} {{ form.person_type }}</div>
+  </div>
+  <!-- Sekcja: Adres inwestycji -->
+  <div class="form-section collapsible">
+    <h3 class="toggle-section">Adres inwestycji (jeżeli jest inny)</h3>
+    <div class="form-content ">
+      <div class="form-row">
+        {{ form.has_different_investment_address.label_tag }}
+        {{ form.has_different_investment_address }}
+      </div>
+      <div id="investment-address-fields" style="display: none;">
+        <div class="form-row">
+          {{ form.investment_street.label_tag }} {{ form.investment_street }}
+        </div>
+        <div class="form-row">
+          {{ form.investment_house_number.label_tag }} {{ form.investment_house_number }}
+        </div>
+        <div class="form-row">
+          {{ form.investment_postal_code.label_tag }} {{ form.investment_postal_code }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Sekcja: Dane dodatkowe -->
+  <!-- prettier-ignore -->
+  <div class="form-section collapsible">
+    <h3 class="toggle-section">Dane dodatkowe</h3>
+    <div class="form-content">
+      <div class="form-row">{{ form.id_card_number.label_tag }} {{ form.id_card_number }}</div>
+      <div class="form-row">{{ form.pesel.label_tag }} {{ form.pesel }}</div>
+      <div class="form-row">{{ form.birth_date.label_tag }} {{ form.birth_date }}</div>
+      <div class="form-row">{{ form.nip.label_tag }} {{ form.nip }}</div>
+      <div class="form-row">{{ form.income_threshold.label_tag }} {{ form.income_threshold }}</div>
+    </div>
+  </div>
+
+  <!-- Sekcja: Dane inwestycji -->
+  <!-- prettier-ignore -->
+  <div class="form-section collapsible">
+  <h3 class="toggle-section">Dane inwestycji</h3>
+  <div class="form-content">
+    <div class="form-row">{{ form.current_heating_source.label_tag }} {{ form.current_heating_source }}</div>
+    <div class="form-row">{{ form.construction_permission_year.label_tag }} {{ form.construction_permission_year }}</div>
+    <div class="form-row">{{ form.land_registry_number.label_tag }} {{ form.land_registry_number }}</div>
+    <div class="form-row">{{ form.plot_number.label_tag }} {{ form.plot_number }}</div>
+
+  </div>
+</div>
+
+  <!-- Sekcja: Dane do dotacji -->
+  <!-- prettier-ignore -->
+  <div class="form-section collapsible">
+    <h3 class="toggle-section">Dane do dotacji</h3>
+    <div class="form-content">
+      <div class="form-row">{{ form.household_members.label_tag }} {{ form.household_members }}</div>
+      <div class="form-row">{{ form.farm_conversion_hectares.label_tag }} {{ form.farm_conversion_hectares }}</div>
+      <div class="form-row">{{ form.income_per_person.label_tag }} {{ form.income_per_person }}</div>
+      <div class="form-row">{{ form.marital_status.label_tag }} {{ form.marital_status }}</div>
+      <div class="form-row">{{ form.business_at_investment_address.label_tag }} {{ form.business_at_investment_address }}</div>
+      <div class="form-row">{{ form.is_sole_owner.label_tag }} {{ form.is_sole_owner }}</div>
+      <div class="form-row">{{ form.runs_business.label_tag }} {{ form.runs_business }}</div>
+      <div class="form-row">{{ form.has_joint_property.label_tag }} {{ form.has_joint_property }}</div>
+    </div>
+  </div>
+
+  <button class="button" type="submit">Zapisz zmiany</button>
+</form>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hasDifferentAddressCheckbox = document.querySelector("#id_has_different_investment_address");
+    const investmentAddressFields = document.querySelector("#investment-address-fields");
+
+    if (hasDifferentAddressCheckbox) {
+      // Pokaż/ukryj pola na podstawie początkowego stanu checkboxa
+      investmentAddressFields.style.display = hasDifferentAddressCheckbox.checked ? "block" : "none";
+
+      hasDifferentAddressCheckbox.addEventListener("change", function () {
+        investmentAddressFields.style.display = this.checked ? "block" : "none";
+      });
+    }
+  });
+  document.getElementById("back-button").addEventListener("click", function () {
+    // Wróć do poprzedniej strony w historii, ale jeśli to nie działa, przekieruj ręcznie
+    if (document.referrer) {
+      window.location.href = document.referrer; // Powrót do strony referującej
+    } else {
+      window.history.back(); // Próba cofnięcia w historii
+    }
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+    const deleteButton = document.getElementById("delete-button");
+    const confirmationModal = document.getElementById("confirmation-modal");
+    const confirmDelete = document.getElementById("confirm-delete");
+    const cancelDelete = document.getElementById("cancel-delete");
+    const deleteForm = document.getElementById("delete-form");
+  
+    if (deleteButton && confirmationModal) {
+      // Pokaż modal po kliknięciu przycisku "Usuń"
+      deleteButton.addEventListener("click", () => {
+        confirmationModal.style.display = "flex";
+      });
+  
+      // Obsługa potwierdzenia usunięcia
+      if (confirmDelete) {
+        confirmDelete.addEventListener("click", () => {
+          deleteForm.submit(); // Wyślij formularz po potwierdzeniu
+        });
+      }
+  
+      // Obsługa anulowania usunięcia
+      if (cancelDelete) {
+        cancelDelete.addEventListener("click", () => {
+          event.preventDefault(); // Zablokowanie standardowej akcji formularza
+          confirmationModal.style.display = "none"; // Ukryj modal
+        });
+      }
+  
+      // Zamknij modal po kliknięciu poza jego obszar
+      window.addEventListener("click", (event) => {
+        if (event.target === confirmationModal) {
+          confirmationModal.style.display = "none";
+        }
+      });
+    }
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+    let activePlaceholder = null;
+
+    // Obsługa kliknięcia na przycisk placeholdera
+    document.querySelectorAll(".placeholder-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            activePlaceholder = document.createElement("div");
+            activePlaceholder.classList.add("placeholder");
+            activePlaceholder.innerText = this.innerText;
+            activePlaceholder.style.position = "absolute";
+            activePlaceholder.style.cursor = "move";
+            document.body.appendChild(activePlaceholder);
+
+            // Obsługa przeciągania placeholdera
+            document.addEventListener("mousemove", movePlaceholder);
+            document.addEventListener("click", placePlaceholder);
+        });
+    });
+
+    // Funkcja poruszania placeholderem
+    function movePlaceholder(event) {
+        if (activePlaceholder) {
+            activePlaceholder.style.left = event.pageX + "px";
+            activePlaceholder.style.top = event.pageY + "px";
+        }
+    }
+
+    // Funkcja umieszczania placeholdera na dokumencie PDF
+    function placePlaceholder(event) {
+        if (activePlaceholder) {
+            let pdfContainer = document.querySelector("#pdf-viewer");
+            let rect = pdfContainer.getBoundingClientRect();
+
+            // Oblicz współrzędne w dokumencie
+            let x = event.pageX - rect.left;
+            let y = event.pageY - rect.top;
+
+            // Jeśli kliknięto na podgląd PDF, umieść placeholder
+            if (x > 0 && y > 0 && x < rect.width && y < rect.height) {
+                activePlaceholder.style.left = x + "px";
+                activePlaceholder.style.top = y + "px";
+                pdfContainer.appendChild(activePlaceholder);
+
+                // Wyślij dane do backendu Django
+                fetch("/save-placeholder/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": getCSRFToken(),
+                    },
+                    body: JSON.stringify({
+                        template_id: pdfContainer.dataset.templateId,
+                        placeholder: activePlaceholder.innerText,
+                        x: x,
+                        y: y
+                    })
+                }).then(response => response.json()).then(data => {
+                    console.log("Placeholder zapisany:", data);
+                });
+
+                activePlaceholder = null;
+            }
+        }
+    }
+
+    // Pobranie CSRF tokena dla Django
+    function getCSRFToken() {
+        return document.querySelector("[name=csrfmiddlewaretoken]").value;
+    }
+});
+
+
+</script>
+{% endblock %}

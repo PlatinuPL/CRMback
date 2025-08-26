@@ -1,0 +1,65 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logowanie</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body class="loginBody">
+    <div class="login-container">
+      <div class="login-box">
+        <img
+          class="loginLogoImg"
+          src="{% static 'images/HSZ_logo.png' %}"
+          alt="Logo CRM"
+        />
+        <h1 class="login-title">Logowanie</h1>
+        <form class="login-form" method="post">
+          {% csrf_token %}
+          <!-- Pole email -->
+          <div class="input-container input-email">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username, Email or Phone"
+              class="login-input"
+              required
+            />
+            <span class="icon email-icon">✉️</span>
+          </div>
+          <!-- Pole hasło -->
+          <div class="input-container input-password">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              class="login-input"
+              required
+            />
+            <span class="icon password-icon">🔒</span>
+          </div>
+          <!-- Opcje -->
+          <div class="options-container">
+            <label class="remember-me">
+              <input
+                type="checkbox"
+                name="remember_me"
+                class="remember-checkbox"
+              />
+              Zapamiętaj mnie
+            </label>
+            <a href="#" class="forgot-password">Przypomnij hasło</a>
+          </div>
+          <!-- Przycisk logowania -->
+          <button type="submit" class="login-button">Login</button>
+        </form>
+        <p class="register-link">
+          Nie masz konta?
+          <a href="#" class="register-button">Wnioskuj</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

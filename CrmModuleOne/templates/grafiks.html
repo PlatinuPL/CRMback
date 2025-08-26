@@ -1,0 +1,976 @@
+{% extends "base.html" %} 
+{% load static %}
+<!-- templates/dashboard.html -->
+{% block title %} Grafiki {% endblock %} 
+{% block content %}
+<style>
+  #routePlanner {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  #routePlanner h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+  }
+
+  #routePointsInfo ol {
+    padding-left: 1.2rem;
+    margin: 0;
+    list-style-type: decimal;
+  }
+
+  #routePointsInfo li {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  #routePointsInfo li em {
+    color: #007bff;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  #routeSummary {
+    margin-top: 15px;
+    font-size: 1rem;
+    background: #eef6ff;
+    padding: 10px 15px;
+    border-left: 4px solid #007bff;
+    border-radius: 6px;
+    color: #0056b3;
+  }
+
+  #mapRouteCanvas {
+display: none;
+  }
+
+  .btn {
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+  }
+
+  .btn-sm {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-danger:hover {
+    background-color: #b52a36;
+  }
+
+  .toast {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.9rem;
+  }
+  .filter-bar {
+    justify-content: space-between;
+    display: flex
+;
+    white-space: nowrap;
+</style>
+
+  <!-- Modal dla działek -->
+<div class="modal" id="parcelModal" style="display:none;">
+  <div class="modal-content" style="max-width:1000px; position: relative;">
+    <span class="modal-close" style="font-size:3rem;" onclick="closeParcelModal()">&times;</span>
+    <h2>Działki dla preleada</h2>
+
+    <!-- Lista istniejących działek -->
+    <div id="existingParcels" style="margin-bottom:1rem;">
+      <!-- wypełniane dynamicznie JS-em -->
+      <p>Ładuję...</p>
+    </div>
+
+    <hr>
+
+    <h3>Dodaj / Edytuj działkę</h3>
+    <!-- Formularz przeniesiony poza existingParcels -->
+    <form id="parcelForm" style="display:flex; flex-wrap: wrap;">
+      {% csrf_token %}
+      <input type="hidden" name="prelead_id" id="parcel-lead-id">
+
+  <div class="form-group">
+    <label>Województwo</label>
+    <select name="voivodeship" id="parcel-voivodeship" required></select>
+  </div>
+  <div class="form-group">
+    <label>Powiat</label>
+    <select name="county" id="parcel-county" required disabled></select>
+  </div>
+  <div class="form-group">
+    <label>Gmina</label>
+    <select name="commune" id="parcel-commune" required disabled></select>
+  </div>
+      <div class="form-group">
+        <label>Obręb</label>
+        <input type="text" name="precinct" id="parcel-precinct" placeholder="Obręb" required>
+      </div>
+      <div class="form-group">
+        <label>Numer działki</label>
+        <input type="text" name="plot_number" id="parcel-plot-number" placeholder="Numer działki" required>
+      </div>
+      <div class="form-group">
+        <label>Powierzchnia (ha)</label>
+        <input type="number" step="0.01" name="area" id="parcel-area" placeholder="Powierzchnia (ha)" required>
+      </div>
+
+<!--   <button type="submit" class="btn btn-primary" style="flex-basis: 100%; margin-top: 1rem;">
+    Zapisz działkę
+  </button> -->
+        <button type="submit" class="save-btn btn-save" style="height: 40px; border-radius: 8px;">
+  <i class="fas fa-save"></i> Zapisz
+</button>
+    </form>
+  </div>
+</div>
+<section class="Clients">
+<div class="mainClientsWindow container grid-1-2">
+<div id="map" style="height: 600px;     z-index: 0;"></div>
+  <div class="filter-bar container" style="margin-top: 20px; text-align: center;">
+  <label><input style="    width: 10%;" type="radio" name="statusFilter" value="all" checked> Wszystkie</label>
+  <label><input style="    width: 10%;" type="radio" name="statusFilter" value="lead"> Leady</label>
+  <label><input style="    width: 10%;" type="radio" name="statusFilter" value="NUM"> Do weryfikacji (NUM)</label>
+  <label><input style="    width: 10%;" type="radio" name="statusFilter" value="UM"> Umowa wysłana (UM)</label>
+</div>
+</div>
+  <div class="container" id="routePlanner">
+  <h3>Plan trasy z Poznania</h3>
+  <div id="routePointsInfo"></div>
+  <div id="routeSummary" style="margin-top: 10px;"></div>
+  <div id="mapRouteCanvas" style="height: 400px; margin-top: 10px;"></div>
+  <button onclick="clearRoute()" class="btn btn-danger" style="margin-top: 10px;">Wyczyść trasę</button>
+</div>
+  <div id="leadDetailsContainer" class="container" style="margin-top: 30px;"></div>
+</div>
+
+</section>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+
+  
+let map = L.map('map').setView([52.2297, 21.0122], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+let allParcelData = [];
+  
+function renderParcels(data) {
+    // Usuń poprzednie znaczniki (nie tylko GeoJSON)
+    map.eachLayer(layer => {
+        if (layer instanceof L.Marker || layer instanceof L.CircleMarker || layer instanceof L.GeoJSON) {
+            map.removeLayer(layer);
+        }
+    });
+
+    const statusColors = {
+        "UM": "green",
+        "NUM": "blue",
+        "NN2": "red",
+        "NO3": "red",
+        "ST": "gray",
+        "PR": "black",
+        "default": "gray"
+    };
+
+    data.forEach(p => {
+        const marker = L.circleMarker([p.latitude, p.longitude], {
+            radius: 8,
+            fillColor: statusColors[p.status] || statusColors.default,
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        }).addTo(map);
+
+const rawFullName = `${p.first_name || ''} ${p.last_name || ''}`.trim();
+const fullName = rawFullName.replace(/'/g, "\\'"); // ucieka pojedyncze cudzysłowy
+
+        marker.bindPopup(
+          `<strong>${fullName.trim()}</strong><br>` +
+          `Miejscowość: ${p.town}<br>` +
+          `Działka: ${p.plot_number}<br>` +
+          `Powierzchnia: ${p.area} m²<br>` +
+          `Status: ${p.status || "nieokreślony"}` +
+`<button onclick="renderLeadDetails(${p.lead_id})" class="btn btn-sm btn-primary">Pokaż</button>` +
+`<button onclick="addPointToRoute(${p.latitude}, ${p.longitude}, 'Działka: ${p.plot_number}', '${fullName}')" class="btn btn-sm btn-success mt-2">Dodaj do trasy</button>`
+
+
+
+
+        );
+    });
+}
+
+  function renderLeadDetails(leadId) {
+  fetch(`/lead/form/${leadId}/`)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('leadDetailsContainer').innerHTML = html;
+    })
+    .catch(err => {
+      document.getElementById('leadDetailsContainer').innerHTML = `
+        <p class="error" style="color: red; font-weight: bold;">
+          Błąd: ${err}
+        </p>`;
+    });
+}
+// function renderLeadDetails(leadId) {
+//   fetch(`/api/prelead/${leadId}/`)
+//     .then(res => res.json())
+//     .then(data => {
+//       const container = document.getElementById('leadDetailsContainer');
+
+//       if (!data.success) {
+//         container.innerHTML = `<p class="error" style="color: red; font-weight: bold;">${data.error}</p>`;
+//         return;
+//       }
+
+//       const lead = data.lead;
+//       const parcels = data.parcels;
+    
+//       container.innerHTML = `
+//         <div style="
+//           background: #ffffff;
+//           border: 1px solid #e0e0e0;
+//           border-radius: 12px;
+//           padding: 24px;
+//           margin-top: 20px;
+//           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+//           font-family: 'Segoe UI', sans-serif;
+//           max-width: 600px;
+//         ">
+//           <h3 style="
+//             margin-top: 0;
+//             font-size: 1.5rem;
+//             color: #333;
+//             border-bottom: 1px solid #ddd;
+//             padding-bottom: 8px;
+//           ">${lead.first_name} ${lead.last_name}</h3>
+
+//           <p style="margin: 10px 0;"><strong>📞 Telefon:</strong> <a href="tel:${lead.phone}" style="color: #007bff; text-decoration: none;">${lead.phone}</a></p>
+//           <p style="margin: 10px 0;"><strong>✉️ Email:</strong> ${lead.email || '<span style="color: #999;">brak</span>'}</p>
+//           <p style="margin: 10px 0;"><strong>📌 Status:</strong> <span style="background:#f0f0f0; padding:2px 8px; border-radius:6px;">${lead.status || 'brak'}</span></p>
+//           <p style="margin: 10px 0;"><strong>⭐ Potencjał:</strong> <span style="background:#fdf6d3; padding:2px 8px; border-radius:6px;">${lead.potential || 'brak'}</span></p>
+
+//           <h4 style="margin-top: 20px; color: #444;">📍 Działki</h4>
+//           ${
+//             parcels.length > 0
+//               ? `<ul style="padding-left: 20px; margin: 0;">
+//                   ${parcels
+//                     .map(p => `<li style="margin: 6px 0;">
+//                       <strong>${p.plot_number}</strong> &ndash; ${p.area} m², ${p.town}
+//                     </li>`)
+//                     .join('')}
+//                 </ul>`
+//               : `<p style="color: #999; font-style: italic;">Brak działek</p>`
+//           }
+//         </div>
+//       `;
+//     })
+//     .catch(err => {
+//       document.getElementById('leadDetailsContainer').innerHTML = `
+//         <p class="error" style="color: red; font-weight: bold;">
+//           Błąd: ${err}
+//         </p>`;
+//     });
+// }
+
+
+fetch('/api/parcelss/')
+  .then(res => res.json())
+  .then(response => {
+    const data = response.data || response.results || response;
+    if (!Array.isArray(data)) throw new Error("Nieprawidłowy format danych");
+    allParcelData = data;
+    renderParcels(allParcelData);
+  })
+  .catch(err => {
+    console.error("❌ Błąd pobierania danych:", err);
+  });
+
+  document.querySelectorAll('input[name="statusFilter"]').forEach(input => {
+  input.addEventListener('change', function () {
+    const selected = this.value;
+
+    const filtered = allParcelData.filter(p => {
+      const status = p.status;
+      if (selected === "all") return true;
+      if (selected === "lead") return !["UM", "NUM", "NN2", "NO3"].includes(status);
+      return status === selected;
+    });
+
+    renderParcels(filtered);
+  });
+});
+
+    function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+
+    // Stylowanie tymczasowe (możesz to przenieść do CSS)
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.right = '20px';
+    toast.style.padding = '10px 20px';
+    toast.style.backgroundColor = type === 'success' ? '#28a745' : '#dc3545';
+    toast.style.color = 'white';
+    toast.style.borderRadius = '5px';
+    toast.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+    toast.style.zIndex = '1000';
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + '=')) {
+        cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+    const maxPoints = 5;
+const routePoints = []; // punkty wybrane
+const startPoint = [52.4064, 16.9252]; // Poznań
+let routeLayer = null;
+
+function addPointToRoute(lat, lng, label = "Działka", leadName = "") {
+  if (routePoints.length >= maxPoints) {
+    showToast("Możesz dodać maksymalnie 5 punktów!", "error");
+    return;
+  }
+
+  routePoints.push({ lat, lng, label, leadName });
+  updateRouteDisplay();
+}
+
+function clearRoute() {
+  routePoints.length = 0;
+  if (routeLayer) {
+    map.removeLayer(routeLayer);
+    routeLayer = null;
+  }
+  document.getElementById("routePointsInfo").innerHTML = "";
+  document.getElementById("routeSummary").innerHTML = "";
+  document.getElementById("mapRouteCanvas").innerHTML = "";
+}
+
+function updateRouteDisplay() {
+  const coords = [startPoint, ...routePoints.map(p => [p.lat, p.lng]), startPoint];
+
+  // Oblicz dystans (prosty – Haversine)
+  let totalDistance = 0;
+  for (let i = 0; i < coords.length - 1; i++) {
+    totalDistance += calculateDistance(coords[i], coords[i + 1]);
+  }
+
+  // Czas jazdy przy 60km/h
+  const totalTimeHours = totalDistance / 60;
+  const totalTimeFormatted = `${Math.floor(totalTimeHours)}h ${(totalTimeHours % 1 * 60).toFixed(0)}min`;
+
+  // Wyświetl trasę na osobnej mini mapie
+  if (routeLayer) routeLayer.remove();
+  routeLayer = L.polyline(coords, { color: 'blue' }).addTo(map);
+
+  // Wyświetl dane
+  document.getElementById("routePointsInfo").innerHTML = `
+    <ol>
+      <li>Poznań (start)</li>
+     ${routePoints.map(p => `<li>${p.label} – <em>${p.leadName}</em></li>`).join('')}
+      <li>Poznań (powrót)</li>
+    </ol>
+  `;
+
+  document.getElementById("routeSummary").innerHTML = `
+    <strong>Dystans:</strong> ${totalDistance.toFixed(2)} km<br>
+    <strong>Szacowany czas przejazdu:</strong> ${totalTimeFormatted}
+  `;
+}
+
+// Haversine formula
+function calculateDistance([lat1, lon1], [lat2, lon2]) {
+  const R = 6371; // km
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+function deg2rad(deg) {
+  return deg * (Math.PI/180);
+}
+
+  
+    function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+
+    // Stylowanie tymczasowe (możesz to przenieść do CSS)
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.right = '20px';
+    toast.style.padding = '10px 20px';
+    toast.style.backgroundColor = type === 'success' ? '#28a745' : '#dc3545';
+    toast.style.color = 'white';
+    toast.style.borderRadius = '5px';
+    toast.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+    toast.style.zIndex = '1000';
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+function updateHiddenField(element, fieldName) {
+    // Szukamy formularza w hierarchii DOM wokół elementu
+    const form = element.closest('form');
+    
+    // Jeśli formularz nie istnieje, logujemy błąd i kończymy funkcję
+    if (!form) {
+        console.error("Nie znaleziono formularza w hierarchii DOM.");
+        return;
+    }
+    
+    // Szukamy ukrytego pola o podanej nazwie
+    const hiddenInput = form.querySelector(`input[name="${fieldName}"]`);
+    
+    // Jeżeli ukryte pole nie istnieje, logujemy błąd
+    if (!hiddenInput) {
+        console.error(`Nie znaleziono ukrytego pola o nazwie ${fieldName}`);
+        return;
+    }
+
+    // Aktualizujemy wartość ukrytego pola na wartość z elementu
+    hiddenInput.value = element.value;
+}
+
+
+  function closeModal() {
+    document.getElementById('importResultModal').style.display = "none";
+  }
+
+  // Zamknij modal przy kliknięciu poza obszarem
+  window.onclick = function(event) {
+    const modal = document.getElementById('importResultModal');
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+
+
+// const form = document.querySelector('#preleadForm');
+
+// if (form) {
+//   form.addEventListener('submit', function(e) {
+//     e.preventDefault();
+//     const formData = new FormData(this);
+
+//     formData.forEach((value, key) => {
+//       console.log(`${key}: ${value}`);
+//     });
+
+//     fetch(this.action, {
+//       method: 'POST',
+//       body: formData,
+//       headers: {
+//         'X-Requested-With': 'XMLHttpRequest',
+//       }
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       if (data.success) {
+//         showToast('Zmiany zostały zapisane!', 'success');
+//         updateUI(this, data);
+//         setTimeout(() => location.reload(), 1000);
+//       } else {
+//         showToast('Wystąpił błąd podczas zapisywania: ' + data.error, 'error');
+//       }
+//     })
+//     .catch(error => {
+//       showToast('Błąd połączenia: ' + error, 'error');
+//     });
+//   });
+// }
+
+document.addEventListener('submit', function(e) {
+  const form = e.target;
+  if (!form.classList.contains('prelead-form')) return; // tylko nasze formularze
+
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRFToken': getCookie('csrftoken')
+    }
+  })
+  .then(response => {
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      return response.json();
+    } else {
+      throw new Error("Odpowiedź nie jest typu JSON");
+    }
+  })
+  .then(data => {
+    if (data.success) {
+      showToast('✅ Zapisano pomyślnie!', 'success');
+      updateUI(form, data);
+      setTimeout(() => location.reload(), 1000);
+    } else {
+      showToast('❌ Błąd: ' + (data.error || 'Nieznany błąd'), 'error');
+    }
+  })
+  .catch(error => {
+    showToast('❗ Błąd po stronie klienta: ' + error.message, 'error');
+  });
+});
+
+// document.querySelectorAll('form').forEach(form => {
+//     form.addEventListener('submit', function(e) {
+//         e.preventDefault();
+
+//         // Tworzymy FormData z formularza
+//         const formData = new FormData(this);
+
+//         // Logujemy wartości formularza przed wysłaniem
+//         formData.forEach((value, key) => {
+//             console.log(`${key}: ${value}`);
+//         });
+
+//         fetch(this.action, {
+//             method: 'POST',
+//             body: formData,
+//             headers: {
+//                 'X-Requested-With': 'XMLHttpRequest',
+//             }
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.success) {
+//                 showToast('Zmiany zostały zapisane!', 'success');
+//                   updateUI(this, data);
+//                     setTimeout(() => {
+//         location.reload();
+//     }, 1000); // odczekaj sekundę, żeby toast zdążył się pokazać
+//             } else {
+//                 showToast('Wystąpił błąd podczas zapisywania: ' + data.error, 'error');
+//             }
+//         })
+//         .catch(error => {
+//             showToast('Błąd połączenia: ' + error, 'error');
+//         });
+//     });
+// });
+
+
+function updateUI(form, data) {
+    // Aktualizujemy hidden field, notatkę i potencjał w formularzu
+    if (data.note !== undefined) {
+        form.querySelector('textarea[name="log"]').value = data.note;
+    }
+
+    if (data.log !== undefined) {
+        form.querySelector('textarea[name="log"]').value = data.log;
+    }
+
+    if (data.potential !== undefined) {
+        form.querySelector('select[name="potential"]').value = data.potential;
+    }
+
+    // Przykład, gdy chcesz zmienić klasę wiersza z potencjałem:
+    const tr = form.closest('tr');
+    if (tr) {
+        const potential = data.potential ? data.potential.toLowerCase() : 'none'; // lub inna domyślna klasa
+        tr.className = tr.className.replace(/potential-\w+/, 'potential-' + potential);
+    }
+}
+document.querySelectorAll('input[name="lead_action"]').forEach(radio => {
+  radio.addEventListener('change', function () {
+    const form = this.closest('form');
+    const hidden = form.querySelector('input[name="status_update"]');
+    if (hidden) hidden.value = this.value;
+  });
+});
+
+document.querySelectorAll('.log-toggle').forEach(textarea => {
+    textarea.addEventListener('click', function () {
+        const isExpanded = this.classList.contains('expanded');
+
+        // Zamknij wszystkie inne
+        document.querySelectorAll('.log-toggle.expanded').forEach(el => {
+            el.style.height = '1rem';
+            el.style.overflow = 'hidden';
+            el.classList.remove('expanded');
+        });
+
+        if (!isExpanded) {
+            // Rozwiń bieżący
+            this.style.height = '10rem';
+            this.style.overflow = 'auto';
+            this.classList.add('expanded');
+        } else {
+            // Zwiń, bo kliknięto ponownie
+            this.style.height = '1rem';
+            this.style.overflow = 'hidden';
+            this.classList.remove('expanded');
+        }
+    });
+});
+    {% if request.session.show_import_modal %}
+  window.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('importResultModal');
+    if (modal) modal.style.display = 'block';
+  });
+{% endif %}
+
+// Otwórz modal i pobierz istniejące działki
+function openParcelModal(leadId) {
+  const modal = document.getElementById('parcelModal');
+  document.getElementById('parcel-lead-id').value = leadId;
+  modal.style.display = 'block';
+  loadParcels(leadId);
+}
+
+// Zamknij modal
+function closeParcelModal() {
+  document.getElementById('parcelModal').style.display = 'none';
+  // wyczyść formularz
+  document.getElementById('parcelForm').reset();
+}
+
+    //////////////////////////////////////////////////////////////////
+ document.getElementById('parcelForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const form = this;
+
+  const voivodeshipSelect = document.getElementById('parcel-voivodeship');
+  const countySelect = document.getElementById('parcel-county');
+  const communeSelect = document.getElementById('parcel-commune');
+
+  const voivodeshipId = voivodeshipSelect.value;
+  const voivodeshipLabel = voivodeshipSelect.options[voivodeshipSelect.selectedIndex]?.textContent.trim() || "";
+
+  const countyId = countySelect.value;
+  const countyLabel = countySelect.options[countySelect.selectedIndex]?.textContent.trim() || "";
+
+  const communeId = communeSelect.value;
+  const communeLabel = communeSelect.options[communeSelect.selectedIndex]?.textContent.trim() || "";
+
+  const formData = new FormData(form);
+
+  // Zachowaj ID – one są wymagane przez backend
+  formData.set("voivodeship", voivodeshipId);
+  formData.set("county", countyId);
+  formData.set("commune", communeId);
+
+  // Dodaj labelki tylko informacyjnie (jeśli potrzebujesz)
+  formData.set("voivodeship_label", voivodeshipLabel);
+  formData.set("county_label", countyLabel);
+  formData.set("commune_label", communeLabel);
+
+  // Prelead (opcjonalnie)
+  const preleadSelect = form.querySelector('select[name="prelead_id"]');
+  if (preleadSelect) {
+    const selectedText = preleadSelect.options[preleadSelect.selectedIndex]?.text || "";
+    formData.set('prelead_name', selectedText);
+  }
+
+  console.log("FormData preview:");
+  for (let [key, value] of formData.entries()) {
+    console.log(key + ": " + value);
+  }
+
+  // AJAX
+  fetch("{% url 'add_parcel' %}", {
+    method: "POST",
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRFToken': getCookie('csrftoken')
+    },
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      showToast('Działka zapisana!', 'success');
+      loadParcels(formData.get('prelead_id'));
+    } else {
+      showToast('Błąd: ' + data.error, 'error');
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    showToast('Błąd połączenia', 'error');
+  });
+});
+
+    
+
+function deleteParcel(parcelId) {
+  if (!confirm("Czy na pewno chcesz usunąć tę działkę?")) return;
+
+  fetch('/api/parcels/delete/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'X-CSRFToken': getCookie('csrftoken') // jeśli nie masz tej funkcji, podam ją niżej
+    },
+    body: `parcel_id=${parcelId}`
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      // Odśwież listę działek po usunięciu
+      const leadId = document.getElementById('parcel-lead-id').value;
+      loadParcels(leadId);
+    } else {
+      alert("Błąd usuwania: " + data.error);
+    }
+  })
+  .catch(err => {
+    alert("Błąd sieci: " + err);
+  });
+}
+    
+// Pobranie działek AJAX-em
+function loadParcels(leadId) {
+  const container = document.getElementById('existingParcels');
+  container.innerHTML = '<p>Ładuję...</p>';
+
+  fetch(`/api/parcels/?prelead_id=${leadId}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.success) {
+        container.innerHTML = `<p class="error">${data.error}</p>`;
+        return;
+      }
+      if (data.parcels.length === 0) {
+        container.innerHTML = '<p>Brak działek</p>';
+        return;
+      }
+
+      // Generujemy tabelę działek
+      container.innerHTML = '';
+
+      const table = document.createElement('table');
+      table.className = 'table table-striped'; // jeśli używasz bootstrapa
+      table.style.width = '100%';
+      table.style.borderCollapse = 'collapse';
+
+      // Nagłówek tabeli
+      const thead = document.createElement('thead');
+      thead.innerHTML = `
+        <tr>
+          <th>Województwo</th>
+          <th>Powiat</th>
+          <th>Miasto / Gmina</th>
+          <th>Obręb</th>
+          <th>Nr działki</th>
+          <th>Powierzchnia (ha)</th>
+          <th>Akcje</th>
+        </tr>
+      `;
+      table.appendChild(thead);
+
+      // Ciało tabeli
+      const tbody = document.createElement('tbody');
+
+      data.parcels.forEach((p, idx) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>${p.voivodeship}</td>
+          <td>${p.county}</td>
+          <td>${p.town}</td>
+          <td>${p.precinct}</td>
+          <td>${p.plot_number}</td>
+          <td>${p.area}</td>
+        <td>
+          <button class="btn btn-sm btn-secondary" onclick="copyParcel(${idx})">
+            Kopiuj
+          </button>
+          <button class="btn btn-sm btn-danger" style="margin-left: 0.5rem;" onclick="deleteParcel(${p.id})">
+            Usuń
+          </button>
+        </td>
+        `;
+
+        // zachowujemy dane w atrybucie wiersza
+        tr.dataset.parcel = JSON.stringify(p);
+
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+      container.appendChild(table);
+    })
+    .catch(err => {
+      container.innerHTML = `<p class="error">Błąd ładowania: ${err}</p>`;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  let data = [];
+
+const wojSelect = document.getElementById('parcel-voivodeship');
+const powSelect = document.getElementById('parcel-county');
+const gmiSelect = document.getElementById('parcel-commune');
+
+  if (!wojSelect || !powSelect || !gmiSelect) {
+    console.error('Brak elementów select w DOM');
+    return;
+  }
+
+  function resetSelect(selectElement, placeholder) {
+    selectElement.innerHTML = `<option value="">${placeholder}</option>`;
+    selectElement.disabled = true;
+  }
+
+
+function loadWojewodztwa() {
+  resetSelect(wojSelect, 'Wybierz województwo');
+  Object.entries(data)
+    .sort((a, b) => a[1].name.localeCompare(b[1].name))
+    .forEach(([wojId, woj]) => {
+      const option = document.createElement('option');
+      option.value = wojId;
+      option.textContent = woj.name || `Województwo ${wojId}`;
+      wojSelect.appendChild(option);
+    });
+  wojSelect.disabled = false;
+}
+function loadPowiaty(wojId) {
+  resetSelect(powSelect, 'Wybierz powiat');
+  resetSelect(gmiSelect, 'Wybierz gminę');
+  if (!wojId || !data[wojId]) return;
+
+  const powiaty = data[wojId].powiaty;
+
+  Object.entries(powiaty)
+    .sort((a, b) => a[1].name.localeCompare(b[1].name))
+    .forEach(([powId, pow]) => {
+      const option = document.createElement('option');
+      option.value = powId;
+      option.textContent = pow.name || `Powiat ${powId}`;
+      powSelect.appendChild(option);
+    });
+  powSelect.disabled = false;
+}
+
+function loadGminy(wojId, powId) {
+  resetSelect(gmiSelect, 'Wybierz gminę');
+  if (!wojId || !powId || !data[wojId] || !data[wojId].powiaty[powId]) return;
+
+  const gminy = data[wojId].powiaty[powId].gminy;
+
+  Object.entries(gminy)
+    .sort((a, b) => a[1].name.localeCompare(b[1].name))
+    .forEach(([gmiId, gmi]) => {
+      const option = document.createElement('option');
+      option.value = gmiId;
+      option.textContent = gmi.name || `Gmina ${gmiId}`;
+      gmiSelect.appendChild(option);
+    });
+
+  gmiSelect.disabled = false;
+}
+
+
+  wojSelect.addEventListener('change', e => {
+    loadPowiaty(e.target.value);
+  });
+
+  powSelect.addEventListener('change', e => {
+    loadGminy(wojSelect.value, e.target.value);
+  });
+
+fetch('/static/terc.json')
+  .then(res => res.json())
+  .then(jsonData => {
+    console.log(jsonData);  // <--- sprawdź, jak wygląda
+    data = jsonData;
+    loadWojewodztwa();
+  });
+
+});
+// Funkcja kopiująca dane działki do formularza
+function copyParcel(index) {
+  const items = document.querySelectorAll('#existingParcels .parcel-item');
+  const p = JSON.parse(items[index].dataset.parcel);
+  document.getElementById('parcel-voivodeship').value = p.voivodeship;
+  document.getElementById('parcel-county').value      = p.county;
+  document.getElementById('parcel-town').value        = p.town;
+  document.getElementById('parcel-precinct').value    = p.precinct;
+  document.getElementById('parcel-plot-number').value = p.plot_number;
+  document.getElementById('parcel-area').value        = p.area;
+}
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + '=')) {
+        cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+    
+</script>
+
+{% endblock %}

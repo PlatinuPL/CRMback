@@ -1,0 +1,1319 @@
+{% extends "base.html" %}
+
+{% block title %}Karta klienta{% endblock %}
+
+{% block content %}
+<section class="calculator client-card">
+  <nav class="navbar">
+    <div class="navbar-item"><a href="#overview" class="{% if active_tab == 'overview' %}active{% endif %}" data-tab="overview">Przegląd</a></div>
+    <div class="navbar-item"><a href="#tasks" class="{% if active_tab == 'tasks' %}active{% endif %}" data-tab="tasks">Zadania</a></div>
+    <div class="navbar-item"><a href="#appointments" class="{% if active_tab == 'appointments' %}active{% endif %}" data-tab="appointments">Spotkania</a></div>
+    <div class="navbar-item"><a href="#notes" class="{% if active_tab == 'notes' %}active{% endif %}" data-tab="notes">Notatki</a></div>
+    <div class="navbar-item"><a href="#files" class="{% if active_tab == 'files' %}active{% endif %}" data-tab="files">Pliki</a></div>
+    <div class="navbar-item"><a href="#payment" class="{% if active_tab == 'payment' %}active{% endif %}" data-tab="payment">Płatności</a></div>
+  </nav>
+    <!-- Oś czasu -->
+    <div class="timeline">
+      {% for step in milestones %}
+        <div class="timeline-step {{ step.status }}">
+          <span class="step-icon">
+            {% if step.status == "completed" %}✔{% endif %}
+          </span>
+          <span class="step-label">{{ step.label }}</span>
+        </div>
+        {% endfor %}
+      </div>
+  <div class="tab-content" id="overview">
+
+    <!-- Przycisk otwierający modal -->
+<button id="openModalBtn" class="openModalBtn {% if not client.status == "offer" %}hidden {% endif %} btn btn-primary">Generuj dokumenty</button>
+
+
+<!-- Modal -->
+<form method="post" id="generateDocModal" class="modal modalClose modalGen"    {% if missing_fields %}style="display: block;"{% endif%}>
+  {% csrf_token %}
+  
+    <div class="modal-content modal-contentGen">
+        <span class="close-modal">&times;</span>
+        <span class="close">&times;</span>
+        <h3 class="titleGen">Generuj dokumenty</h3>
+
+        <!-- Wybór oferty -->
+        <label for="offerSelect">Wybierz ofertę:</label>
+        <select id="offerSelect" name="selected_offer" style="max-width: 100%;">
+          {% for offer, documents in offers_with_documents %}
+          <option value="{{ offer.id }}" {% if offer_ids|stringformat:"s" == offer.id|stringformat:"s" %}selected{% endif %} data-documents="{{ documents|join:', ' }}">
+                 Data utworzenia: {{ offer.created_at|default:"Brak opisu" }}, Wartość Oferty: {{ offer.total_price|default:"Brak opisu" }}, Kwota do zapłaty: {{ offer.must_payment|default:"Brak opisu" }}
+              </option>
+          {% endfor %}
+      </select>
+      <div class="form-group">
+        <label for="has_representative" class="labelGen">
+            <input type="checkbox" id="has_representative" name="has_representative" style="display: block;">
+            Czy klient ma reprezentanta?
+        </label>
+    </div>
+
+    <div class="form-group hidden" id="representative_field">
+        <label for="representative_name">Imię i nazwisko reprezentanta:</label>
+        <input type="text" id="representative_name" name="representative_name" class="form-control" placeholder="Wpisz imię i nazwisko" ">
+    </div>
+    <div class="form-group labelGen">
+        <label for="client_type">Wybierz typ klienta:</label>
+        <select id="client_type" name="client_type" class="form-control">
+            <option value="individual">Osoba fizyczna</option>
+            <option value="business">Przedsiębiorca</option>
+        </select>
+    </div>
+      <h3>Wymagane dokumenty:</h3>
+<ul id="requiredDocumentsList"></ul>
+
+
+
+<div class="section">
+    <label for="payment-method" class="labelGen">Wybierz metodę płatności:</label>
+    <select id="payment-method"  class="labelGen2" name="payment-method" onchange="showPaymentOptions()">
+        <option value="">-- Wybierz opcję --</option>
+        <option value="transfer-a" {% if payment_method == "transfer-a" %}selected{% endif %}>Przelew (50% / 50%)</option>
+        <option value="transfer-b" {% if payment_method == "transfer-b" %}selected{% endif %}>Przelew (30% / 50% / 20%)</option>
+        <option value="credit" {% if payment_method == "credit" %}selected{% endif %}>Kredyt / pożyczka</option>
+        <option value="split-payment" {% if payment_method == "split-payment" %}selected{% endif %}>Płatność podzielona</option>
+        <option value="clean-air" {% if payment_method == "clean-air" %}selected{% endif %}>Program Czyste Powietrze</option>
+    </select>
+</div>
+
+<!-- Opcja A: Przelew (50% / 50%) -->
+<div id="transfer-a" class="labelGen2 section payment-section {% if payment_method != 'transfer-a' %}hidden{% endif %}">
+    <h3 class="titleGen">Płatność przelewem (50% / 50%)</h3>
+    <label for="transfer-a1">I transza (50%):</label>
+    <input type="number" id="transfer-a1" name="transfer-a1" step="0.01" value="{{ payment_details.transfer_a1|default:'' }}" placeholder="Kwota w PLN">
+    
+    <label for="transfer-a2">II transza (50%):</label>
+    <input type="number" id="transfer-a2" name="transfer-a2" step="0.01" value="{{ payment_details.transfer_a2|default:'' }}" placeholder="Kwota w PLN">
+</div>
+
+<!-- Opcja B: Przelew (30% / 50% / 20%) -->
+<div id="transfer-b" class="labelGen2 section payment-section {% if payment_method != 'transfer-b' %}hidden{% endif %}">
+    <h3 class="titleGen">Płatność przelewem (30% / 50% / 20%)</h3>
+    <label for="transfer-b1">I transza (30%):</label>
+    <input type="number" id="transfer-b1" name="transfer-b1" step="0.01" value="{{ payment_details.transfer_b1|default:'' }}" placeholder="Kwota w PLN">
+
+    <label for="transfer-b2">II transza (50%):</label>
+    <input type="number" id="transfer-b2" name="transfer-b2" step="0.01" value="{{ payment_details.transfer_b2|default:'' }}" placeholder="Kwota w PLN">
+
+    <label for="transfer-b3">III transza (20%):</label>
+    <input type="number" id="transfer-b3" name="transfer-b3" step="0.01" value="{{ payment_details.transfer_b3|default:'' }}" placeholder="Kwota w PLN">
+</div>
+
+<!-- Opcja D: Płatność podzielona -->
+<div id="split-payment" class="labelGen2 section payment-section {% if payment_method != 'split-payment' %}hidden{% endif %}">
+    <h3 class="titleGen">Płatność podzielona</h3>
+    <label for="split-credit">Kwota kredytu:</label>
+    <input type="number" id="split-credit" step="0.01" name="split-credit" value="{{ payment_details.split_credit|default:'' }}" placeholder="Kwota w PLN">
+
+    <label for="split-transfer">Kwota przelewu:</label>
+    <input type="number" id="split-transfer" step="0.01" name="split-transfer" value="{{ payment_details.split_transfer|default:'' }}" placeholder="Kwota w PLN">
+
+    <label for="split-t1">I transza:</label>
+    <input type="number" id="split-t1" name="split-t1" step="0.01" value="{{ payment_details.split_t1|default:'' }}" placeholder="Kwota w PLN">
+
+    <label for="split-t2">II transza:</label>
+    <input type="number" id="split-t2" name="split-t2" step="0.01" value="{{ payment_details.split_t2|default:'' }}" placeholder="Kwota w PLN">
+
+    <label for="split-t3">III transza:</label>
+    <input type="number" id="split-t3" name="split-t3" step="0.01" value="{{ payment_details.split_t3|default:'' }}" placeholder="Kwota w PLN">
+</div>
+
+<!-- Opcja E: Program Czyste Powietrze -->
+<div id="clean-air" class="labelGen2 section payment-section {% if payment_method != 'clean-air' %}hidden{% endif %}">
+    <h3 class="titleGen">Program Czyste Powietrze</h3>
+    <label for="clean-air-date">Data wpłaty:</label>
+    <input type="date" id="clean-air-date" name="clean-air-date" value="{{ payment_details.clean_air_date|default:'' }}">
+</div>
+
+
+
+
+
+        <!-- Przycisk generowania dokumentów -->
+        <button id="generateDocumentsBtn" name="generateDoc" class="btn btn-success">Generuj dokumenty</button>
+    </div>
+    {% if missing_fields %}
+    <div class="alert alert-warning">
+        <strong>Brakuje wymaganych danych:</strong>
+        <p>Uzupełnij brakujące pola, aby kontynuować generowanie dokumentów.</p>
+
+        <div class="missing-fields-container">
+            {% for field in missing_fields %}
+                <div class="form-group">
+                    <label for="{{ field }}" class="form-label">
+                        {{ field|title }}:
+                    </label>
+                    <input type="text" class="form-control" id="{{ field }}" name="{{ field }}" placeholder="Wprowadź wartość" required>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+</form>
+<button id="back-button" class="button backBtnClientCard" data-status="{{ client.status }}">← Wstecz</button>
+ <!-- Dane klienta -->
+    <div class="client-details">
+        
+      {% comment %} <img src="{{ client.photo_url }}" alt="Zdjęcie klienta" class="client-photo"> {% endcomment %}
+     <div style="display: flex;"> <h3>{{ client.first_name }} {{ client.last_name }}</h3>                <a href="{% url 'edit_client' client.id %}" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="{% if client.status == "client" %}hidden{% endif %}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 1.5rem; color:#0056b3;" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+          </svg>
+    </a></div>
+      <p><strong>Email:</strong> {{ client.email }}</p>
+      <p><strong>Telefon:</strong> {{ client.phone }}</p>
+      <p style="position: relative;">
+        <strong>Data urodzenia:</strong> {{ client.birth_date|date:"d.m.Y" }}
+        {% if client.birth_date %}
+            <span class="info-icon" data-birthdate="{{ client.birth_date|date:"d.m.Y" }}">
+                ℹ️
+            </span>
+            <span class="tooltip hidden"></span>
+        {% endif %}
+    </p>
+      <p><strong>Adres domowy:</strong> {{ client.street }} {{ client.house_number }}, {{ client.postal_code }} {{ client.city }} </p>
+      {% if final_offer %}
+    <table>
+        <tr>
+            <td><strong>Całkowita wartość umowy:</strong></td>
+            <td>{{ final_offer.total_price }} PLN</td>
+        </tr>
+        <tr>
+            <td><strong>Kwota do dopłaty:</strong></td>
+            <td>{{ final_offer.must_payment }} PLN</td>
+        </tr>
+        <tr>
+            <td><strong>Całkowita marża:</strong></td>
+            <td>{{ final_offer.total_margin }} PLN</td>
+        </tr>
+    </table>
+{% else %}
+    <p>Brak przypisanej finalnej oferty.</p>
+{% endif %}
+    </div>
+
+    {% if not final_offer %}   
+<!-- Przycisk do otwierania modala -->
+<button id="openOfferModal" class="btn btn-primary">Wybierz finalną ofertę</button>
+ {% endif %}
+<!-- Modal do wyboru oferty -->
+<div id="offerModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Wybierz finalną ofertę</h3>
+        <form id="offerForm" method="POST">
+            {% csrf_token %}
+            <label for="offerSelect">Wybierz ofertę:</label>
+            <select id="offerSelect" name="selected_offer" required style="max-width: 100%;">
+                {% for offer in offers %}
+                <option value="{{ offer.id }}">
+                    Data utworzenia: {{ offer.created_at|default:"Brak opisu" }}, 
+                    Wartość Oferty: {{ offer.total_price|default:"Brak opisu" }}, 
+                    Kwota do zapłaty: {{ offer.must_payment|default:"Brak opisu" }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <!-- Ukryte pole z ID klienta -->
+            <input type="hidden" name="client_id" value="{{ client.id }}">
+
+            <button type="submit" class="btn btn-success">Zapisz jako finalną ofertę</button>
+        </form>
+        <button id="closeOfferModal" class="btn btn-secondary">Zamknij</button>
+    </div>
+</div>
+
+    <p id="statusMessage"></p>
+    <!-- Bieżące zadania -->
+
+    <div class="latest-tasks">
+      <h3>Bieżące zadania</h3>
+      
+      <a href="?tab=tasks" class="show-all">Zobacz wszystkie</a>
+      <ul class="task-list">
+        {% for task in recent_tasks %}
+          <li class="task-item task-item-rec">
+            <div class="checkbox-container-task">
+                <div class="custom-checkbox2 {% if task.completed %}checked{% endif %}"></div>
+            </div>
+            <label class="task-text">{{ task.text|slice:":50" }}{% if task.text|length > 50 %}...{% endif %}</label>
+
+            <span class="task-date {% if task.due_date and task.is_overdue %}due-date-red{% else %}due-date-green{% endif %}">
+                {{ task.due_date|date:"d.m.Y H:i" }}
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+<!-- Dokumenty i pliki -->
+<div class="latest-files">
+  <h3>Ostatnio dodane pliki</h3>
+  <a href="?tab=files" class="show-all">Zobacz wszystkie</a>
+  <div class="file-card-prev">
+    {% for category, count in recent_file_categories.items %}
+    <div class="file-info-prev {{ category|lower }}">
+        <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+
+          <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-size="20">{{ category|slice:":1" }}</text> <!-- Pierwsza litera kategorii -->
+        </svg>
+        <span class="file-name-prev">{{ category }}</span>
+        <span class="file-date-prev">Liczba plików: {{ count }}</span>
+      </div>
+    {% empty %}
+      <p>Brak nowych plików.</p>
+    {% endfor %}
+  </div>
+</div>
+    <!-- Ostatnia aktywność -->
+    <div class="latest-activity">
+        <h3>Ostatnia aktywność</h3>
+        <ul>
+            {% for log in recent_activities %}
+                <li class="activity-item">
+                    <span class="activity-date">{{ log.timestamp|date:"d.m.Y H:i" }}</span>
+                    <span class="activity-user">{{ log.user.get_full_name }}</span>
+                    <span class="activity-action">{{ log.get_action_type_display }}</span>
+                    <span class="activity-description" title="{{ log.description }}">
+                        {{ log.description|truncatechars:40 }}
+                    </span>
+                </li>
+            {% empty %}
+                <li class="activity-empty">Brak aktywności</li>
+            {% endfor %}
+        </ul>
+        <a href="#activity" class="show-all">Zobacz wszystkie</a>
+    </div>
+  </div>
+  <div class="tab-content" id="tasks" style="display: none;">
+    <!-- Przycisk do otwierania modala -->
+<button class="open-modal-btn button">Dodaj nowe zadanie</button>
+
+<!-- Modal dodawania zadania -->
+<div id="taskModal" class="modal modalClose">
+  <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3>Dodaj nowe zadanie</h3>
+      <form method="post" action="?tab=tasks">
+          {% csrf_token %}
+          {{ task_form.as_p }}
+
+          <button type="submit" class="button" name="add_task">Dodaj zadanie</button>
+      </form>
+  </div>
+</div>
+<table style="margin-bottom: 1rem;"class="notes-table">
+    <thead>
+        <tr>
+            <th>Treść</th>
+            <th class="infoTask">Info</th>
+            <th>Wykonano</th>
+        </tr>
+    </thead>
+</table>
+ <!-- Lista aktualnych zadań -->
+ <div class="task-list">
+  {% for task in tasks %}
+      <div class="task-item">
+          <input type="checkbox" class="task-checkbox" data-task-id="{{ task.id }}" {% if task.completed %}checked disabled{% endif %}>
+          <span class="task-text">{{ task.text }}</span>
+          <div class="taskAddInfo">
+          <span class="task-added-date">Dodano: {{ task.added_date|date:"d.m.Y H:i" }}</span>
+          <span class="task-due-date">Termin: {{ task.due_date|date:"d.m.Y H:i" }}</span>
+          <span class="task-author">Autor: {{ task.author }}</span>
+          </div>
+          {% if not task.completed %}
+          <form method="post" class="taskCompleted" action="{% url 'complete_task' task.id %}?tab=tasks">
+                  {% csrf_token %}
+                  <input type="hidden" name="tab" value="tasks">
+                  <button type="submit" class="complete-btn button">Wykonane</button>
+              </form>
+          {% else %}
+              <span class="completed-task">✔ Wykonane</span>
+          {% endif %}
+      </div>
+  {% empty %}
+      <p>Brak aktualnych zadań.</p>
+  {% endfor %}
+</div>
+
+
+
+  </div>
+  <div class="tab-content" id="appointments" style="display: none;">
+<!-- Przycisk otwierający modal dodawania spotkania -->
+<button id="openMeetingModal" class="button">Dodaj spotkanie</button>
+
+<!-- MODAL: Dodaj nowe spotkanie -->
+<div id="meetingModal" class="modal modalClose">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+        <h3>Dodaj nowe spotkanie</h3>
+
+      <form method="post" action="?tab=appointments">
+          {% csrf_token %}
+{{ meeting_form.as_p }}
+          
+          <button type="submit" class="button" name="add_meeting">Dodaj</button>
+      </form>
+  </div>
+</div>
+
+<table class="notes-table">
+    <thead>
+        <tr>
+            <th>Treść</th>
+            <th style="padding-right: 2rem;">Termin spotkania</th>
+            <th>Status</th>
+            <th style="padding: 0 5.5rem;">Wykonano</th>
+        </tr>
+    </thead>
+</table>
+<!-- Lista spotkań -->
+<div class="meeting-list-container">
+    <table class="meeting-table">
+
+        <tbody>
+            {% for meeting in meetings %}
+                {% if not meeting.occurred and not meeting.note %}
+                    <tr class="meeting-row">
+                        <td class="meetingInfo">{{ meeting.description }}</td>
+                        <td class="meetingDate">{{ meeting.meeting_date|date:"d.m.Y H:i" }}</td>
+                        {% comment %} <td>{{ meeting.author }}</td> {% endcomment %}
+                        <td class="meeting-status">
+                            {% if meeting.occurred %}
+                                <span class="status completed">✔ Odbyte</span>
+                            {% else %}
+                                <span class="status pending">❌ Nieodbyte</span>
+                            {% endif %}
+                        </td>
+                        <td class="meetingDone">{% if meeting.note %} {{ meeting.note }} {% else %}
+                            <form method="post" action="{% url 'mark_meeting_occurred' meeting.id %}?tab=appointments" class="payButton2">
+                                {% csrf_token %}
+                                <textarea name="note" placeholder="Dodaj notatkę" required></textarea>
+                                <button type="submit" class="btn btn-success" name="occurred" value="true">
+                                    ✅ odbyło się
+                                </button>
+                                <button type="submit" class="btn btn-secondary" name="occurred" value="false">
+                                    ❌ nie odbyło się
+                                </button>
+                            </form>
+                        </td>{% endif %}
+                    </tr>
+                {% endif %}
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="no-meetings">Brak spotkań.</td>
+                </tr>
+            {% endfor %}
+
+            {% for meeting in meetings_rest %}
+                {% if meeting.note %}
+                    <tr class="meeting-row">
+                        <td class="meetingInfo" >{{ meeting.description }}</td>
+                        <td class="meetingDate">{{ meeting.meeting_date|date:"d.m.Y H:i" }}</td>
+                        {% comment %} <td>{{ meeting.author }}</td> {% endcomment %}
+                        <td class="meeting-status ">
+                            {% if meeting.occurred %}
+                                <span class="status completed">✔ Odbyte</span>
+                            {% else %}
+                                <span class="status pending">❌ Nieodbyte</span>
+                            {% endif %}
+                        </td>
+                        <td class="meetingDone">{{ meeting.note }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+  </div>
+  <div class="tab-content" id="notes" style="display: none;">
+    <button class="button" id="openNoteModal">Dodaj nową notatkę</button>
+    
+    <table class="notes-table">
+        <thead>
+            <tr>
+                <th>Treść</th>
+                <th>Autor</th>
+                <th>Data dodania</th>
+                <th>Ważna</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for note in notes %}
+            <tr>
+                <td>{{ note.text }}</td>
+                <td>{{ note.author }}</td>
+                <td>{{ note.added_date|date:"d.m.Y H:i" }}</td>
+                <td>{% if note.is_important %}<span class="important-note">⭐</span>{% endif %}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center; color: #888;">Brak notatek</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div id="noteModal" class="modal modalClose">
+      <div class="NoteModal-content">
+        <span class="close-modal">&times;</span>
+          <h3>Dodaj nową notatkę</h3>
+          <form method="post" action="?tab=notes">
+            {% csrf_token %}
+        
+            <label for="id_text">Notatka:</label>
+            {{ note_form.text }}
+        
+            <p>
+                <label for="id_is_important" class="custom-checkboxNote">
+                    <input type="checkbox" name="is_important" id="id_is_important" class="form-check-input">
+                    <span class="checkmarkNote"></span> Ważna notatka
+                </label>
+            </p>
+        
+            <button type="submit" class="button" name="add_note">Dodaj</button>
+        </form>
+      </div>
+  </div>
+  </div>
+  <div class="tab-content" id="files" style="display: none;">
+<!-- Przycisk otwierający modal -->
+<button id="openFileModal" class=" btn-primary button">Dodaj pliki</button>
+
+<!-- Modal do dodawania plików -->
+<div id="fileModal" class="modal modalClose">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+      <h3>Dodaj nowe pliki</h3>
+      <form id="fileUploadForm" method="post" enctype="multipart/form-data" action="?tab=files">
+          {% csrf_token %}
+          
+          <!-- Typ pliku -->
+          <label for="fileType">Wybierz typ pliku:</label>
+          <select id="fileType" name="file_type" required>
+              <option value="agreement">Umowy</option>
+              <option value="document">Dokumenty</option>
+              <option value="certificate">Zaświadczenia</option>
+              <option value="photo">Zdjęcia</option>
+              <option value="offer">Oferty</option>
+              <option value="invoice">Faktury</option>
+              <option value="report">Raporty</option>
+              <option value="other">Inne</option>
+          </select>
+
+          <!-- Opis pliku -->
+          <label for="description">Opis:</label>
+          <textarea id="description" name="description" rows="3" placeholder="Wprowadź opis pliku..."></textarea>
+
+          <!-- Pole dodawania plików -->
+          <label for="fileInput" class="custom-file-upload">
+              <i class="fas fa-upload"></i> Wybierz pliki (maks. 10, max. 20 MB każdy)
+          </label>
+          <input type="file" id="fileInput" name="files" multiple style="display: none;" required accept=".jpg,.jpeg,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx">
+
+          <!-- Podgląd wybranych plików -->
+          <ul id="filePreview"></ul>
+
+          <!-- Wiadomość walidacji -->
+          <p id="fileValidationMessage" style="color: red;"></p>
+
+          <!-- Przycisk wysyłania -->
+          <input type="hidden" name="tab" value="files">
+          <button type="submit" name="add_file" class="btn-primary button">Dodaj pliki</button>
+      </form>
+  </div>
+</div>
+<!-- Nawigacja po kategoriach (zakładki) -->
+<nav class="file-categories">
+  <ul>
+      {% for category, files in files_by_category.items %}
+          <li>
+              <a href="#" class="category-tab button {% if active_type == category %}active{% endif %}" 
+                 data-category="category-{{ category|slugify }}">
+                  {{ category }}
+              </a>
+          </li>
+      {% endfor %}
+  </ul>
+</nav>
+    
+    <!-- Lista plików w zakładkach -->
+    <div class="file-list">
+      <a href="https://heictojpg.it/" target="_blank" class="btn btn-primary">
+        Konwertuj HEIC do JPG
+    </a>
+        {% for category, files in files_by_category.items %}
+            <div id="category-{{ category|slugify }}" class="file-category {% if not active_type == category %}hidden{% endif %}">
+                <h3>{{ category }}</h3>
+                {% if files %}
+                    <ul>
+                        {% for file in files %}
+                            <li class="file-item">
+                                          <!-- Jeśli plik to obraz, pokaż miniaturę -->
+                                          {% if file.file.url|lower|slice:"-4:" == ".jpg" or file.file.url|lower|slice:"-4:" == ".png" or file.file.url|lower|slice:"-5:" == ".jpeg" %}
+                                              <!-- Miniatura obrazu -->
+                                              <img src="{{ file.file.url }}" class="thumbnail" onclick="openModalImage('{{ file.file.url }}', 'modal-{{ forloop.counter }}')">
+                                              
+                                              <!-- MODAL dla tego konkretnego obrazu -->
+                                              <div id="modal-{{ forloop.counter }}" class="modalImage modalClose" style="display: none;">
+                                                  <span class="close-modal closeIconModalImage" style="color: white;">&times;</span>
+                                                  <img class="modalImage-content" id="fullImage-{{ forloop.counter }}">
+                                              </div>
+                                              {% elif file.file.url|lower|slice:"-4:" == ".pdf" %}
+                                              <a class="file-link" href="{{ file.file.url }}" target="_blank">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width: 5rem; color:#0056b3;">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                                                  </svg>
+                                                  
+                                              </a>
+                                          {% else %}
+                                              <a class="file-link" href="{{ file.file.url }}" target="_blank">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width: 5rem; color:#0056b3;">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m9 13.5 3 3m0 0 3-3m-3 3v-6m1.06-4.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                                                  </svg>
+                                                  
+                                              </a>
+                                          {% endif %}
+                                <div class="file-info">
+                                    <p><strong>Opis:</strong> {{ file.description|default:"Brak opisu" }}</p>
+                                    <p><strong>Dodano:</strong> {{ file.uploaded_at|date:"d.m.Y H:i" }}</p>
+                                    <p><strong>Autor:</strong> {{ file.author }}</p>
+                                </div>
+                                <a href="{{ file.file.url }}" class="download-btn" download>📥 Pobierz</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Brak plików w tej kategorii.</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+  
+  <div class="tab-content" id="payment" style="display: none;">
+<!-- 🔹 Przycisk otwierający modal -->
+<button id="openPaymentModal" class="btn-primary button">Dodaj Płatność</button>
+
+<!-- 🔹 Modal do dodawania płatności -->
+<div id="paymentModal" class="modal modalClose">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>Dodaj Płatność</h3>
+        <form id="paymentForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Typ płatności -->
+            <label for="paymentType">Rodzaj płatności:</label>
+            {{ payment_form.payment_type }}
+
+            <!-- Kwota -->
+            <label for="amount">Kwota:</label>
+            {{ payment_form.amount }}
+
+            <!-- Termin płatności -->
+            <label for="dueDate">Termin płatności:</label>
+            {{ payment_form.due_date }}
+
+            <!-- Status -->
+            <label for="status">Status płatności:</label>
+            {{ payment_form.status }}
+
+            <!-- Faktura -->
+            <label for="invoice">Faktura (opcjonalnie):</label>
+            <input type="file" id="invoice" name="invoice" accept=".pdf,.jpg,.jpeg,.png">
+
+            <button type="submit" name="add_payment" class="btn-primary button">Dodaj płatność</button>
+        </form>
+    </div>
+</div>
+
+<div id="invoiceModal" class="modal modalClose">
+  <div class="modal-content">
+      <span class="close-modal" onclick="closeInvoiceModal()">&times;</span>
+      <h3>Dodaj fakturę</h3>
+      <form id="invoiceForm" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="hidden" name="payment_id" id="invoicePaymentId">
+          <label for="invoiceFile">Wybierz fakturę:</label>
+          <input type="file" id="invoiceFile" name="invoice" required>
+          <button type="submit" name="add_invoice" class="button btn-primary button">Zapisz fakturę</button>
+      </form>
+  </div>
+</div>
+
+<!-- 🔹 Lista płatności klienta -->
+<table>
+  <thead>
+      <tr class="payment-tr">
+          <th>Rodzaj</th>
+          <th>Kwota</th>
+          <th>Termin</th>
+          <th>Status</th>
+          <th>Faktura</th>
+      </tr>
+  </thead>
+  <tbody>
+      {% for payment in payments %}
+      <tr class="payment-tr" style="text-align: center;">
+          <td>{{ payment.get_payment_type_display }}</td>
+          <td>{{ payment.amount }} zł</td>
+          <td>{{ payment.due_date|date:"j F Y" }}</td>
+          <td class="paymentStatus">{% if payment.get_status_display == "Oczekująca" %}<div style="text-align: center;"><form method="post" class="payButton">
+            {% csrf_token %}
+            <input type="hidden" name="payment_id" value="{{ payment.id }}">
+            <button type="submit" name="mark_as_paid" class="btn btn-success">opłacona</button>
+        </form>{{ payment.get_status_display }} </div> {% else %}{{ payment.get_status_display }}{% endif %} </td>
+          <td class="paymentDoc">
+              {% if payment.invoice_file %}
+                  <a href="{{ payment.invoice_file.file.url }}" target="_blank">Pobierz fakturę</a>
+              {% else %}
+              <button class="addpaymentBtn btn-sm btn-primary button" onclick="openInvoiceModal('{{ payment.id }}')">
+                Dodaj fakturę
+            </button>
+              {% endif %}
+          </td>
+
+
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+
+  </div>
+</section>
+<script>    
+
+document.addEventListener("DOMContentLoaded", function () {
+    const backButton = document.getElementById("back-button");
+
+    if (backButton) {
+        setTimeout(() => {
+            console.log("✅ Przycisk 'back-button' znaleziony."); // Debug
+        }, 1000); // Opóźnienie 1 sekundy
+
+        backButton.addEventListener("click", function () {
+            const clientStatus = this.getAttribute("data-status"); // Pobranie statusu klienta
+            
+
+
+
+                // Przekierowanie w zależności od statusu klienta
+                let redirectUrl = "/klienci/"; // Domyślnie do klientów
+
+                if (clientStatus === "lead") {
+                    redirectUrl = "/leady/";
+                } else if (clientStatus === "offer") {
+                    redirectUrl = "/oferty/";
+                } else {
+                    redirectUrl = "/klienci/";
+                }
+
+
+                window.location.href = redirectUrl;
+
+
+        });
+    } else {
+        setTimeout(() => {
+            console.error("❌ Przycisk 'back-button' NIE został znaleziony!"); // Debug błędu
+        }, 1000);
+    }
+});
+
+
+    
+    // Pobranie tokena CSRF dla Django
+    function getCSRFToken() {
+        const cookieValue = document.cookie.match(/csrftoken=([^;]+)/);
+        return cookieValue ? cookieValue[1] : "";
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let checkbox = document.getElementById("has_representative");
+        let field = document.getElementById("representative_field");
+    
+        checkbox.addEventListener("change", function () {
+            if (this.checked) {
+                field.classList.remove("hidden");
+            } else {
+                field.classList.add("hidden");
+                document.getElementById("representative_name").value = ""; // Czyści pole tekstowe, jeśli checkbox jest odznaczony
+            }
+        });
+    });
+
+// Pobranie elementów HTML
+const offerSelect = document.getElementById("offerSelect");
+const requiredDocumentsList = document.getElementById("requiredDocumentsList");
+
+// Sprawdzenie, czy elementy istnieją w DOM
+if (offerSelect && requiredDocumentsList) {
+    // Funkcja aktualizująca listę dokumentów
+    function updateRequiredDocuments() {
+        // Sprawdzenie, czy jest wybrana opcja
+        const selectedOption = offerSelect.options[offerSelect.selectedIndex];
+        if (!selectedOption) {
+            console.warn("Brak wybranej oferty.");
+            return;
+        }
+
+        // Pobranie listy dokumentów z atrybutu data-documents
+        const documentsAttr = selectedOption.getAttribute("data-documents");
+        if (!documentsAttr) {
+            console.warn("Brak dokumentów dla tej oferty.");
+            requiredDocumentsList.innerHTML = "<li>Brak wymaganych dokumentów</li>";
+            return;
+        }
+
+        const documents = documentsAttr.split(", ").filter(Boolean);
+
+        // Wyczyść listę
+        requiredDocumentsList.innerHTML = "";
+
+        // Dodaj dokumenty do listy
+        documents.forEach(doc => {
+            const li = document.createElement("li");
+            li.textContent = doc;
+            li.classList.add("liGen");
+            requiredDocumentsList.appendChild(li);
+        });
+    }
+
+    // Nasłuchuj zmiany w wyborze oferty
+    offerSelect.addEventListener("change", updateRequiredDocuments);
+
+    // Uruchom funkcję na starcie (dla domyślnie wybranej oferty)
+    updateRequiredDocuments();
+} else {
+    console.error("Elementy `offerSelect` lub `requiredDocumentsList` nie istnieją w DOM.");
+}
+
+    
+    document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("generateDocModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.querySelector(".close");
+    const generateBtn = document.getElementById("generateDocumentsBtn");
+
+    // Otwieranie modala
+    openModalBtn.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    // Zamykanie modala
+    closeModalBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Zamknięcie po kliknięciu poza modalem
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+
+});
+  function openInvoiceModal(paymentId) {
+    document.getElementById("invoicePaymentId").value = paymentId;
+    document.getElementById("invoiceModal").style.display = "block";
+}
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("paymentModal");
+    const openModalBtn = document.getElementById("openPaymentModal");
+
+    openModalBtn.addEventListener("click", () => modal.style.display = "block");
+
+  });
+
+  function slugify(text) {
+    return text
+        .toLowerCase()
+        .replace(/\s+/g, "-")         // Zamiana spacji na "-"
+        .replace(/[ąĄ]/g, "a")
+        .replace(/[ćĆ]/g, "c")
+        .replace(/[ęĘ]/g, "e")
+        .replace(/[łŁ]/g, "l")
+        .replace(/[ńŃ]/g, "n")
+        .replace(/[óÓ]/g, "o")
+        .replace(/[śŚ]/g, "s")
+        .replace(/[źŻ]/g, "z")
+        .replace(/[żŹ]/g, "z")
+        .replace(/[^a-z0-9-]/g, "");  // Usunięcie niedozwolonych znaków
+}
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    let activeType = urlParams.get("type"); // Pobiera wartość z "?type=photo"
+    
+    if (activeType) {
+      activeType = slugify(activeType); // 🔄 Konwersja na slug
+
+        // Ustaw aktywną kategorię w nawigacji
+        document.querySelectorAll(".category-tab").forEach(tab => {
+          tab.classList.toggle("active", tab.dataset.category === `category-${activeType}`);
+      });
+
+      // Pokazuj tylko wybraną kategorię plików
+      document.querySelectorAll(".file-category").forEach(category => {
+          category.classList.toggle("hidden", category.id !== `category-${activeType}`);
+      });
+    }
+});
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("fileUploadForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Zatrzymujemy standardową wysyłkę formularza
+
+        let formData = new FormData(this); // Pobieramy wszystkie dane z formularza
+        formData.append("add_file", "true");  // 👈 Dodaj ten wiersz!
+        
+        fetch(this.action, {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json()) // Oczekujemy JSON
+        .then(data => {
+            if (data.success) {
+                // Jeśli pliki dodane pomyślnie, przełącz na kategorię
+                window.location.href = `?tab=files&type=${data.file_type}`;
+            } else {
+                document.getElementById("fileValidationMessage").textContent = data.error || "Wystąpił błąd.";
+            }
+        })
+        .catch(error => {
+            console.error("Błąd AJAX:", error);
+            document.getElementById("fileValidationMessage").textContent = "Wystąpił błąd podczas przesyłania plików.";
+        });
+    });
+});
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Pobierz wszystkie modale i przyciski zamykające
+    const modals = document.querySelectorAll(".modalClose");
+    const closeButtons = document.querySelectorAll(".close-modal");
+
+    // Funkcja do zamykania modali
+    function closeModal(modal) {
+        modal.style.display = "none";
+    }
+
+    // Dodanie event listenerów do przycisków zamykania
+    closeButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const modal = button.closest(".modalClose");
+        if (modal) closeModal(modal);
+      });
+    });
+    
+    // Zamknięcie modala po kliknięciu poza jego zawartością
+    modals.forEach(modal => {
+        modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                closeModal(modal);
+            }
+        });
+    });
+});
+    document.getElementById("fileInput").addEventListener("change", function (event) {
+        let fileInput = event.target;
+        let filePreview = document.getElementById("filePreview");
+        let validationMessage = document.getElementById("fileValidationMessage");
+
+        // Reset komunikatów i listy plików
+        filePreview.innerHTML = "";
+        validationMessage.textContent = "";
+
+        const allowedExtensions = ["jpg", "jpeg", "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx"];
+        const maxFileSize = 20 * 1024 * 1024; // 20MB
+        const maxFiles = 10;
+
+        const files = fileInput.files;
+        let invalidFiles = [];
+        let totalFiles = files.length;
+
+        if (totalFiles > maxFiles) {
+            validationMessage.textContent = "Możesz przesłać maksymalnie 10 plików.";
+            alert("Możesz przesłać maksymalnie 10 plików.");
+            fileInput.value = ""; // Reset pola plików
+            return;
+        }
+
+        for (let file of files) {
+            let fileExtension = file.name.split('.').pop().toLowerCase();
+            if (!allowedExtensions.includes(fileExtension)) {
+                invalidFiles.push(`${file.name} (nieprawidłowy format) \n Skorzystaj z konwertera`);
+            } else if (file.size > maxFileSize) {
+                invalidFiles.push(`${file.name} (za duży plik)`);
+            } else {
+                let listItem = document.createElement("li");
+                listItem.textContent = file.name + ` (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
+                filePreview.appendChild(listItem);
+            }
+        }
+
+        if (invalidFiles.length > 0) {
+            validationMessage.textContent = "Nieobsługiwane pliki: " + invalidFiles.join(", ");
+            alert("Nieobsługiwane pliki:\n" + invalidFiles.join("\n Skorzystaj z konwertera"));
+            fileInput.value = ""; // Resetuje wybór plików
+        }
+    });
+
+
+  function openModalImage(imageUrl, modalId) {
+    var modal = document.getElementById(modalId);
+    var fullImage = modal.querySelector(".modalImage-content");
+
+    if (!modal || !fullImage) {
+        console.error("Modal lub element obrazu nie został znaleziony!");
+        return;
+    }
+
+    fullImage.src = imageUrl;
+    modal.style.display = "block";
+}
+
+
+  
+  const fileInput = document.getElementById('fileInput');
+  const filePreview = document.getElementById('filePreview');
+  const fileValidationMessage = document.getElementById('fileValidationMessage');
+
+  fileInput.addEventListener('change', () => {
+      const files = Array.from(fileInput.files);
+      filePreview.innerHTML = ''; // Wyczyść poprzedni podgląd
+      fileValidationMessage.textContent = '';
+
+      if (files.length > 10) {
+          fileValidationMessage.textContent = 'Możesz wybrać maksymalnie 10 plików.';
+          fileInput.value = ''; // Resetuj input
+          return;
+      }
+
+      let isValid = true;
+
+      files.forEach(file => {
+          if (file.size > 20 * 1024 * 1024) { // 20 MB
+              isValid = false;
+              fileValidationMessage.textContent = `Plik ${file.name} przekracza maksymalny rozmiar 20 MB.`;
+              return;
+          }
+
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<strong>${file.name}</strong> 
+                                <span class="file-size">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>`;
+          filePreview.appendChild(listItem);
+      });
+
+      if (!isValid) {
+          fileInput.value = ''; // Resetuj input
+          filePreview.innerHTML = ''; // Wyczyść podgląd
+      }
+  });
+  
+  document.querySelectorAll('.navbar-item a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelectorAll('.navbar-item a').forEach(item => item.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  // Pobierz wszystkie zakładki i sekcje
+  const tabs = document.querySelectorAll(".navbar-item a");
+  const tabContents = document.querySelectorAll(".tab-content");
+
+  // Ukryj wszystkie sekcje oprócz aktywnej
+  tabContents.forEach(content => (content.style.display = "none"));
+  const activeTab = document.querySelector(".navbar-item a.active");
+  if (activeTab) {
+    const activeTabContent = document.getElementById(activeTab.getAttribute("data-tab"));
+    if (activeTabContent) {
+      activeTabContent.style.display = "block";
+    }
+  }
+
+  // Obsługa kliknięcia zakładek
+  tabs.forEach(tab => {
+    tab.addEventListener("click", event => {
+      event.preventDefault(); // Zapobiegaj domyślnemu zachowaniu linku
+
+      // Usuń aktywną klasę ze wszystkich zakładek
+      tabs.forEach(t => t.classList.remove("active"));
+
+      // Dodaj aktywną klasę do klikniętej zakładki
+      tab.classList.add("active");
+
+      // Ukryj wszystkie sekcje zawartości
+      tabContents.forEach(content => (content.style.display = "none"));
+
+      // Pokaż sekcję powiązaną z klikniętą zakładką
+      const tabId = tab.getAttribute("data-tab");
+      const activeTabContent = document.getElementById(tabId);
+      if (activeTabContent) {
+        activeTabContent.style.display = "block";
+      }
+    });
+  });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  // Modal
+  const modal = document.getElementById("taskModal");
+  const openModalBtn = document.querySelector(".open-modal-btn");
+
+  openModalBtn.addEventListener("click", function () {
+      modal.style.display = "block";
+  });
+
+
+  window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+          modal.style.display = "none";
+      }
+  });
+
+
+});
+
+document.getElementById("openMeetingModal").onclick = function() {
+  document.getElementById("meetingModal").style.display = "block";
+};
+
+
+  document.getElementById("openNoteModal").addEventListener("click", function () {
+      document.getElementById("noteModal").style.display = "block";
+  });
+  
+
+  
+  window.onclick = function (event) {
+      if (event.target == document.getElementById("noteModal")) {
+          document.getElementById("noteModal").style.display = "none";
+      }
+  };
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const tabs = document.querySelectorAll(".category-tab");
+    const categories = document.querySelectorAll(".file-category");
+
+    // Funkcja do pokazywania wybranej kategorii i zmiany aktywnej zakładki
+    function showCategory(categoryId) {
+        categories.forEach(cat => cat.classList.add("hidden")); // Ukryj wszystko
+        document.getElementById(categoryId).classList.remove("hidden"); // Pokaż aktywną kategorię
+
+        // Aktualizuj aktywną zakładkę
+        tabs.forEach(tab => tab.classList.remove("active"));
+        document.querySelector(`[data-category="${categoryId}"]`).classList.add("active");
+    }
+
+
+
+    // Obsługa kliknięcia w zakładkę
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function(event) {
+            event.preventDefault();
+            showCategory(this.getAttribute("data-category"));
+        });
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("fileModal");
+  const openBtn = document.getElementById("openFileModal");
+
+
+  // Otwieranie modala
+  openBtn.addEventListener("click", function () {
+      modal.style.display = "flex";
+  });
+
+
+  // Zamknięcie po kliknięciu w tło
+  window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+          modal.style.display = "none";
+      }
+  });
+});
+
+document.getElementById("fileInput").addEventListener("change", function () {
+  let files = this.files;
+  let errorMessage = "";
+  const maxFiles = 10;
+  const maxSize = 20 * 1024 * 1024; // 20 MB
+
+  if (files.length > maxFiles) {
+      errorMessage = "Możesz przesłać maksymalnie 10 plików.";
+  } else {
+      for (let i = 0; i < files.length; i++) {
+          if (files[i].size > maxSize) {
+              errorMessage = `Plik ${files[i].name} przekracza 20 MB.`;
+              break;
+          }
+      }
+  }
+
+  document.getElementById("fileValidationMessage").textContent = errorMessage;
+
+  if (errorMessage) {
+      this.value = ""; // Resetowanie inputa jeśli pliki są niepoprawne
+  }
+});
+
+function showPaymentOptions() {
+    let paymentMethod = document.getElementById("payment-method").value;
+    document.querySelectorAll(".payment-section").forEach(section => {
+        section.classList.add("hidden");
+    });
+    if (paymentMethod) {
+        document.getElementById(paymentMethod).classList.remove("hidden");
+    }
+}
+
+//tooltip z wiekiem klienta
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".info-icon").forEach(icon => {
+        let birthdateStr = icon.getAttribute("data-birthdate").trim();
+
+        if (birthdateStr) {
+            let birthdate = null;
+
+            // Sprawdzenie czy data ma format DD.MM.YYYY
+            if (birthdateStr.match(/^\d{2}\.\d{2}\.\d{4}$/)) {
+                let parts = birthdateStr.split(".");
+                birthdateStr = `${parts[2]}-${parts[1]}-${parts[0]}`; // Zamiana na YYYY-MM-DD
+                birthdate = new Date(birthdateStr);
+            }
+            // Sprawdzenie czy data jest w formacie "D miesiąc RRRR" (np. 7 grudnia 1992)
+            else if (birthdateStr.match(/^\d{1,2} [a-zA-Z]+ \d{4}$/)) {
+                try {
+                    birthdate = new Date(birthdateStr);
+                } catch (e) {
+                    console.error("Błąd konwersji daty:", birthdateStr);
+                }
+            }
+            // Jeśli jest już w formacie YYYY-MM-DD
+            else {
+                birthdate = new Date(birthdateStr);
+            }
+
+            // Sprawdzamy czy data została poprawnie zinterpretowana
+            if (!isNaN(birthdate.getTime())) {
+                const now = new Date();
+                let years = now.getFullYear() - birthdate.getFullYear();
+                let months = now.getMonth() - birthdate.getMonth();
+
+                if (months < 0) {
+                    years--;
+                    months += 12;
+                }
+
+                const tooltip = icon.nextElementSibling;
+                tooltip.textContent = `Wiek: ${years} lat, ${months} mies.`;
+
+                icon.addEventListener("mouseenter", function () {
+                    tooltip.classList.remove("hidden");
+                });
+
+                icon.addEventListener("mouseleave", function () {
+                    tooltip.classList.add("hidden");
+                });
+            } else {
+                console.error("❌ Nieprawidłowa data urodzenia:", birthdateStr);
+            }
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const offerSelect = document.getElementById("offerSelect");
+    const paymentMethod = document.getElementById("payment-method");
+
+    const transferA1 = document.getElementById("transfer-a1");
+    const transferA2 = document.getElementById("transfer-a2");
+    const transferB1 = document.getElementById("transfer-b1");
+    const transferB2 = document.getElementById("transfer-b2");
+    const transferB3 = document.getElementById("transfer-b3");
+
+    function extractAmountFromOptionText(optionText) {
+        const regex = /Kwota do zapłaty:\s([\d,.]+)/;
+        const match = optionText.match(regex);
+        return match ? parseFloat(match[1].replace(",", ".")) : 0;
+    }
+
+    function updatePaymentFields() {
+        const selectedOption = offerSelect.options[offerSelect.selectedIndex];
+        if (!selectedOption) return;
+
+        // Pobranie kwoty do zapłaty ze stringa w `<option>`
+        const totalAmount = extractAmountFromOptionText(selectedOption.textContent);
+
+        if (paymentMethod.value === "transfer-a") {
+            // 50% / 50%
+            transferA1.value = (totalAmount * 0.5).toFixed(2);
+            transferA2.value = (totalAmount * 0.5).toFixed(2);
+        } else if (paymentMethod.value === "transfer-b") {
+            // 30% / 50% / 20%
+            transferB1.value = (totalAmount * 0.3).toFixed(2);
+            transferB2.value = (totalAmount * 0.5).toFixed(2);
+            transferB3.value = (totalAmount * 0.2).toFixed(2);
+        }
+    }
+
+    // Nasłuchiwanie zmiany metody płatności i oferty
+    paymentMethod.addEventListener("change", updatePaymentFields);
+    offerSelect.addEventListener("change", updatePaymentFields);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("offerModal");
+    const openModalBtn = document.getElementById("openOfferModal");
+    const closeModalBtn = document.getElementById("closeOfferModal");
+    const offerForm = document.getElementById("offerForm");
+
+    // Otwieranie modala
+    openModalBtn.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    // Zamknięcie modala
+    closeModalBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Wysłanie formularza AJAX-em
+    offerForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(offerForm);
+        fetch("/save-final-offer/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("🎉 Finalna oferta została zapisana!");
+                modal.style.display = "none"; // Zamknij modal po zapisie
+                location.reload(); // Odśwież stronę, aby zaktualizować dane
+            } else {
+                alert("❌ Wystąpił błąd: " + data.error);
+            }
+        })
+        .catch(error => console.error("Błąd:", error));
+    });
+});
+</script>
+
+{% endblock %}

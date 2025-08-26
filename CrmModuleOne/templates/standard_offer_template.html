@@ -1,0 +1,84 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta Systemu</title>
+    <link rel="stylesheet" href="http://127.0.0.1:8000/static/css/stylesOffer.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container page">
+        <img src="http://127.0.0.1:8000/static/images//HSZ_logo.png" alt="HSZ Group" class="logo">
+        <div class="content frontPage">
+            <h1 class="title">OFERTA SYSTEMU</h1>
+            <div class="solid-line-title"></div>
+            <div class="info-section">
+                <p><span class="info-label">PRZYGOTOWANA DLA:</span> <span class="info-value">{{ customer.first_name }} {{ customer.last_name }}</span></p>
+                <p><span class="info-label">LOKALIZACJA:</span> <span class="info-value">{{ customer.street }} {{ customer.house_number }}, {{ customer.city }}</span></p>
+                <p><span class="info-label">TELEFON:</span> <span class="info-value">{{ customer.phone }}</span></p>
+                <p><span class="info-label">EMAIL:</span> <span class="info-value">{{ customer.email }}</span></p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+            <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+            <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+        </div>
+    </div>
+
+    <div class="container page">
+        <h1 class="title">SZCZEGÓŁY OFERTY</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Cena Netto</th>
+                    <th>Cena Brutto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in subsidy_results.subsidy_distribution %}
+                <tr>
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.product_price|intcomma }} PLN</td>
+                    <td>{{ product.grossPrice|intcomma }} PLN</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="summary-container">
+            <table class="summary-table">
+                <tr>
+                    <td class="label">Suma netto</td>
+                    <td class="value">{{ total_price|intcomma }} PLN</td>
+                </tr>
+                <tr>
+                    <td class="label">Suma VAT</td>
+                    <td class="value">{{ totalVat|intcomma }} PLN</td>
+                </tr>
+                <tr>
+                    <td class="label">Suma brutto</td>
+                    <td class="value">{{ total_gross_price|intcomma }} PLN</td>
+                </tr>
+                {% if total_subsidy > 0 %} 
+                <tr>
+                    <td class="label"><b>Kwota dofinansowania</b></td>
+                    <td class="value"><b>{{ total_subsidy|intcomma }} PLN</b></td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td class="label">Cena całkowita</td>
+                    <td class="final-value">{{ total_payment|intcomma }} PLN</td>
+                </tr>
+            </table>
+        </div>
+        <div class="footer">
+            <p>HSZ Group Sp. z o.o. | www.hszgroup.pl</p>
+            <p>e-mail: info@hszgroup.pl | tel: 600 677 997</p>
+            <p>KRS: 0000997954 | REGON: 523434080 | NIP: 9681006094</p>
+        </div>
+    </div>
+</body>
+</html>

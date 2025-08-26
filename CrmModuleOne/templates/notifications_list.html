@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Wszystkie powiadomienia</h2>
+
+    <ul class="notifications-list">
+        {% for notification in page_obj %}
+            <li class="{% if not notification.is_read %}unread{% endif %}">
+                <strong>{{ notification.get_notification_type_display }}</strong>
+                <p>{{ notification.message }}</p>
+                <small>{{ notification.created_at }}</small>
+            </li>
+        {% empty %}
+            <li>Brak powiadomień.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Paginacja -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Pierwsza</a>
+            <a href="?page={{ page_obj.previous_page_number }}">‹ Poprzednia</a>
+        {% endif %}
+
+        <span>Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Następna ›</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Ostatnia &raquo;</a>
+        {% endif %}
+    </div>
+
+{% endblock %}
