@@ -215,6 +215,10 @@ def save_prelead(request):
                 lead.status = 'UM'
                 note_prefix = "Umowa wysłana"
                 log_updated = True
+            if status_action == 'dead_lead':
+                lead.status = 'NN2'
+                note_prefix = "Numer nieaktywny"
+                log_updated = True
 
         # Dodanie loga jeśli status się zmienił
         if log_updated and note_prefix:
