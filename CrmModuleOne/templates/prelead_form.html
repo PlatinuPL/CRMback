@@ -79,13 +79,12 @@
   <label style="margin-left: 1rem;"><input type="radio" name="lead_action" value="inactive_number" style="width:10%;"> Numer nieaktywny</label>
   <label style="margin-left: 1rem;"><input type="radio" name="lead_action" value="to_verify" style="width:10%;"> Do weryfikacji</label>
   <label style="margin-left: 1rem;"><input type="radio" name="lead_action" value="contract_sent" style="width:10%;"> Umowa wysłana</label>
+</div>
             <label style="margin-left: 1rem;">
   <input type="checkbox"
          onchange="this.closest('form').querySelector('input[name=status_update]').value = this.checked ? 'NN2' : ''">
   Nieaktywny (NN2)
 </label>
-</div>
-
 <!-- Ukryte pole do przechwycenia akcji w backendzie -->
 <input type="hidden" name="status_update" value="">
       </div>
