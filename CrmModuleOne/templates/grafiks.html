@@ -635,13 +635,20 @@ function updateUI(form, data) {
         tr.className = tr.className.replace(/potential-\w+/, 'potential-' + potential);
     }
 }
-document.querySelectorAll('input[name="lead_action"]').forEach(radio => {
-  radio.addEventListener('change', function () {
-    const form = this.closest('form');
+  document.addEventListener('change', function(e) {
+  if (e.target.name === 'lead_action') {
+    const form = e.target.closest('form');
     const hidden = form.querySelector('input[name="status_update"]');
-    if (hidden) hidden.value = this.value;
-  });
+    if (hidden) hidden.value = e.target.value;
+  }
 });
+// document.querySelectorAll('input[name="lead_action"]').forEach(radio => {
+//   radio.addEventListener('change', function () {
+//     const form = this.closest('form');
+//     const hidden = form.querySelector('input[name="status_update"]');
+//     if (hidden) hidden.value = this.value;
+//   });
+// });
 
 document.querySelectorAll('.log-toggle').forEach(textarea => {
     textarea.addEventListener('click', function () {
