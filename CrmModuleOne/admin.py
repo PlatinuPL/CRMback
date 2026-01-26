@@ -8,9 +8,10 @@ class ParcelAdmin(admin.ModelAdmin):
     list_display = ('id', 'lead', 'voivodeship', 'county', 'town', 'plot_number', 'area', 'created_at')
 
 class PreleadAdmin(admin.ModelAdmin):
-    list_display = ("first_name", "phone", "city", "postal_code")
-    search_fields = ("first_name", "phone", "city")
-    list_filter = ("city",)
+    list_display = ("first_name", "last_name", "phone", "email", "status")
+    search_fields = ("first_name", "last_name", "phone", "email")
+    list_filter = ("status", "potential")
+    list_per_page = 500  # Wyświetlanie 500 rekordów na stronie
 
 admin.site.register(Parcel, ParcelAdmin)
 admin.site.register(Prelead, PreleadAdmin)  # <-- TO DODAJ
