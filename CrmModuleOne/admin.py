@@ -1,9 +1,30 @@
 from django.contrib import admin
-from .models import InformationPost, Client, ProductCategory, Product, ProductAttribute, SubsidyProgram, SubsidyOption, ProductCategory, Product, SubsidyProductCriteria, ProductConfiguration, ClientFile, DocumentTemplate, ProductDocumentRequirement, Notification, Prelead, Parcel
+from .models import InformationPost, Client, ProductCategory, Product, ProductAttribute, SubsidyProgram, SubsidyOption, ProductCategory, Product, SubsidyProductCriteria, ProductConfiguration, ClientFile, DocumentTemplate, ProductDocumentRequirement, Notification, Prelead, Parcel, PreleadDailyStats
 from image_cropping import ImageCroppingMixin
 import json
 
+@admin.register(PreleadDailyStats)
+class PreleadDailyStatsAdmin(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "date",
+        "total_calls",
+        "num_count",
+        "um_count",
+        "nn_count",
+        "score",
+        "quality"
+    )
 
+    list_filter = ("date", "user")
+    ordering = ("-date", "-score")
+    readonly_fields = ("quality",)
+
+    def quality(self, obj):
+        if obj.total_calls == 0:
+            return "0%"
+        return f"{round((obj.num_count + obj.um_count) / obj.total_calls * 100, 2)}%"
+        
 class ParcelAdmin(admin.ModelAdmin):
     list_display = ('id', 'lead', 'voivodeship', 'county', 'town', 'plot_number', 'area', 'created_at')
 
