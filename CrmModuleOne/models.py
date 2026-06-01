@@ -1098,3 +1098,15 @@ class Prelead(models.Model):
 
         if self.user and self.status and old_status != self.status:
             update_daily_stats(self.user, self.status)
+
+class Parcel(models.Model):
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+    lead = models.ForeignKey(Prelead, related_name='parcels', on_delete=models.CASCADE)
+    voivodeship = models.CharField(max_length=100)
+    county = models.CharField(max_length=100)
+    town = models.CharField(max_length=100)
+    precinct = models.CharField(max_length=100)
+    plot_number = models.CharField(max_length=100)
+    area = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
