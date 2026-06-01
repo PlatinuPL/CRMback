@@ -284,16 +284,12 @@ def save_prelead(request):
 
         # =========================
         # STATYSTYKI (NAJWAŻNIEJSZE)
-        # =========================
-        stat_user = lead.user_id
+        # ========================
+        final_user = lead.user if lead.user else request.user
 
-        if stat_user and old_status != lead.status:
-            update_daily_stats(lead.user, lead.status)
-        print("DEBUG:")
-        print("old:", old_status)
-        print("new:", lead.status)
-        print("user:", lead.user)
-        print("changed:", status_changed)
+        if old_status != lead.status:
+            update_daily_stats(final_user, lead.status)
+
         # zapis
         lead.save()
 
