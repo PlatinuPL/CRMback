@@ -821,52 +821,251 @@ class Notification(models.Model):
     def __str__(self):
         return f"[{self.notification_type.upper()}] {self.message[:50]}"
 
+# from django.db import models
+# from django.core.validators import RegexValidator
+# from django.utils.timezone import now
+# from datetime import date
+# from datetime import date
+
+# today = date.today()
+
+# ranking = PreleadDailyStats.objects.filter(date=today).order_by("-score")
+
+# def update_daily_stats(user, status):
+#     today = date.today()
+
+#     stats, created = PreleadDailyStats.objects.get_or_create(
+#         user=user,
+#         date=today
+#     )
+
+#     stats.total_calls += 1
+
+#     if status == "ST":
+#         stats.st_count += 1
+#     elif status in ["NO1", "NO2", "NO3"]:
+#         stats.no_count += 1
+#     elif status in ["NN", "NN2"]:
+#         stats.nn_count += 1
+#     elif status == "NUM":
+#         stats.num_count += 1
+#     elif status == "UM":
+#         stats.um_count += 1
+
+#     stats.score += STATUS_SCORE.get(status, 0)
+
+#     stats.save()
+    
+# class Prelead(models.Model):
+#     # Dane podstawowe
+#     first_name = models.CharField(
+#         max_length=50,
+#         verbose_name="Imię",
+#         validators=[
+#             RegexValidator(r'^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]+$', "Imię może zawierać tylko litery.")
+#         ],
+#     )
+
+#     last_name = models.CharField(
+#         max_length=50,
+#         verbose_name="Nazwisko",
+#         validators=[
+#             RegexValidator(r'^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]+$', "Nazwisko może zawierać tylko litery.")
+#         ], blank=True, null=True)
+#     email = models.EmailField(verbose_name="Email", blank=True, null=True)
+
+#     phone = models.CharField(
+#         max_length=15,
+#         verbose_name="Telefon",
+#         validators=[
+#             RegexValidator(r'^\+?[0-9\s-]+$', "Numer telefonu może zawierać tylko cyfry, spacje, myślniki i opcjonalny znak '+'.")
+#         ],
+#     )
+
+#     city = models.CharField(max_length=100, verbose_name="Miejscowość", blank=True, null=True)
+#     postal_code = models.CharField(max_length=10, verbose_name="Kod pocztowy", blank=True, null=True)
+
+#     note = models.TextField(verbose_name="Notatka", blank=True, null=True)
+#     log = models.TextField(blank=True, null=True)  # nowe pole na logi
+#     POTENTIAL_CHOICES = [
+#         ('low', 'Niski'),
+#         ('medium', 'Średni'),
+#         ('high', 'Wysoki'),
+#         ('very_high', 'Bardzo wysoki'),
+#     ]
+#     potential = models.CharField(
+#         max_length=10,
+#         choices=POTENTIAL_CHOICES,
+#         default='medium',
+#         verbose_name="Potencjał"
+#     )
+#     STATUS_CHOICES = [
+#         ('ST', 'ST'),
+#         ('NO1', 'NO1'),
+#         ('NO2', 'NO2'),
+#         ('NO3', 'NO3'),
+#         ('NN', 'NN'),
+#         ('NN2', 'NN2'),
+#         ('NUM', 'NUM'),
+#         ('UM', 'UM'),
+#         ('PR', 'PR')
+#     ]
+#     status = models.CharField(
+#         max_length=4,
+#         choices=STATUS_CHOICES,
+#         blank=True,
+#         null=True,
+#         verbose_name="Status"
+#     )
+
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Handlowiec", related_name='preleads', blank=True, null=True)
+#     created_at = models.DateTimeField(default=timezone.now)
+#     def __str__(self):
+#         return f"{self.first_name} {self.last_name}"
+        
+#     if self.pk:
+#         old = Prelead.objects.get(pk=self.pk)
+#         old_status = old.status
+#     else:
+#         old_status = None
+    
+#     super().save(*args, **kwargs)
+    
+#     if self.user and self.status and old_status != self.status:
+#         update_daily_stats(self.user, self.status)
+        
+#     def get_daily_report(user, day):
+#         return PreleadDailyStats.objects.filter(user=user, date=day).first()
+        
+# class Parcel(models.Model):
+#     latitude = models.FloatField(null=True, blank=True)
+#     longitude = models.FloatField(null=True, blank=True)
+#     lead = models.ForeignKey(Prelead, related_name='parcels', on_delete=models.CASCADE)
+#     voivodeship = models.CharField(max_length=100)
+#     county = models.CharField(max_length=100)
+#     town = models.CharField(max_length=100)
+#     precinct = models.CharField(max_length=100)
+#     plot_number = models.CharField(max_length=100)
+#     area = models.DecimalField(max_digits=10, decimal_places=2)
+#     created_at = models.DateTimeField(auto_now_add=True)
+    
+# STATUS_SCORE = {
+#     "ST": 0,
+#     "NO1": 1,
+#     "NO2": 1,
+#     "NO3": 1,
+#     "NN": 1,
+#     "NN2": 1,
+#     "NUM": 5,
+#     "UM": 10,
+# }
+# class PreleadDailyStats(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="daily_stats")
+#     date = models.DateField()
+
+#     total_calls = models.IntegerField(default=0)
+
+#     st_count = models.IntegerField(default=0)
+#     no_count = models.IntegerField(default=0)
+#     nn_count = models.IntegerField(default=0)
+
+#     num_count = models.IntegerField(default=0)
+#     um_count = models.IntegerField(default=0)
+
+#     score = models.IntegerField(default=0)
+
+#     class Meta:
+#         unique_together = ("user", "date")
+
+
+# ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+from datetime import date
 from django.db import models
-from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
+from django.utils import timezone
+
+STATUS_SCORE = {
+    "ST": 0,
+    "NO1": 0,
+    "NO2": 0,
+    "NO3": 0,
+    "NN": -2,
+    "NN2": -2,
+    "NUM": 5,
+    "UM": 10,
+}
+
+class PreleadDailyStats(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="daily_stats")
+    date = models.DateField()
+
+    total_calls = models.IntegerField(default=0)
+
+    st_count = models.IntegerField(default=0)
+    no_count = models.IntegerField(default=0)
+    nn_count = models.IntegerField(default=0)
+
+    num_count = models.IntegerField(default=0)
+    um_count = models.IntegerField(default=0)
+
+    score = models.IntegerField(default=0)
+
+    class Meta:
+        unique_together = ("user", "date")
+
+    def __str__(self):
+        return f"{self.user} - {self.date} ({self.score})"
+
+
+def update_daily_stats(user, status):
+    if not user or not status:
+        return
+
+    today = date.today()
+
+    stats, created = PreleadDailyStats.objects.get_or_create(
+        user=user,
+        date=today
+    )
+
+    stats.total_calls += 1
+
+    if status == "ST":
+        stats.st_count += 1
+    elif status in ["NO1", "NO2", "NO3"]:
+        stats.no_count += 1
+    elif status in ["NN", "NN2"]:
+        stats.nn_count += 1
+    elif status == "NUM":
+        stats.num_count += 1
+    elif status == "UM":
+        stats.um_count += 1
+
+    stats.score += STATUS_SCORE.get(status, 0)
+
+    stats.save()
+
 
 class Prelead(models.Model):
-    # Dane podstawowe
-    first_name = models.CharField(
-        max_length=50,
-        verbose_name="Imię",
-        validators=[
-            RegexValidator(r'^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]+$', "Imię może zawierać tylko litery.")
-        ],
-    )
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=15)
 
-    last_name = models.CharField(
-        max_length=50,
-        verbose_name="Nazwisko",
-        validators=[
-            RegexValidator(r'^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s-]+$', "Nazwisko może zawierać tylko litery.")
-        ], blank=True, null=True)
-    email = models.EmailField(verbose_name="Email", blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    postal_code = models.CharField(max_length=10, blank=True, null=True)
 
-    phone = models.CharField(
-        max_length=15,
-        verbose_name="Telefon",
-        validators=[
-            RegexValidator(r'^\+?[0-9\s-]+$', "Numer telefonu może zawierać tylko cyfry, spacje, myślniki i opcjonalny znak '+'.")
-        ],
-    )
+    note = models.TextField(blank=True, null=True)
+    log = models.TextField(blank=True, null=True)
 
-    city = models.CharField(max_length=100, verbose_name="Miejscowość", blank=True, null=True)
-    postal_code = models.CharField(max_length=10, verbose_name="Kod pocztowy", blank=True, null=True)
-
-    note = models.TextField(verbose_name="Notatka", blank=True, null=True)
-    log = models.TextField(blank=True, null=True)  # nowe pole na logi
     POTENTIAL_CHOICES = [
         ('low', 'Niski'),
         ('medium', 'Średni'),
         ('high', 'Wysoki'),
         ('very_high', 'Bardzo wysoki'),
     ]
-    potential = models.CharField(
-        max_length=10,
-        choices=POTENTIAL_CHOICES,
-        default='medium',
-        verbose_name="Potencjał"
-    )
+    potential = models.CharField(max_length=10, choices=POTENTIAL_CHOICES, default='medium')
+
     STATUS_CHOICES = [
         ('ST', 'ST'),
         ('NO1', 'NO1'),
@@ -878,28 +1077,24 @@ class Prelead(models.Model):
         ('UM', 'UM'),
         ('PR', 'PR')
     ]
-    status = models.CharField(
-        max_length=4,
-        choices=STATUS_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name="Status"
-    )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Handlowiec", related_name='preleads', blank=True, null=True)
+    status = models.CharField(max_length=4, choices=STATUS_CHOICES, blank=True, null=True)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='preleads', blank=True, null=True)
+
     created_at = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-class Parcel(models.Model):
-    latitude = models.FloatField(null=True, blank=True)
-    longitude = models.FloatField(null=True, blank=True)
-    lead = models.ForeignKey(Prelead, related_name='parcels', on_delete=models.CASCADE)
-    voivodeship = models.CharField(max_length=100)
-    county = models.CharField(max_length=100)
-    town = models.CharField(max_length=100)
-    precinct = models.CharField(max_length=100)
-    plot_number = models.CharField(max_length=100)
-    area = models.DecimalField(max_digits=10, decimal_places=2)
-    created_at = models.DateTimeField(auto_now_add=True)
+    def save(self, *args, **kwargs):
+        old_status = None
 
+        if self.pk:
+            old = Prelead.objects.get(pk=self.pk)
+            old_status = old.status
+
+        super().save(*args, **kwargs)
+
+        if self.user and self.status and old_status != self.status:
+            update_daily_stats(self.user, self.status)
