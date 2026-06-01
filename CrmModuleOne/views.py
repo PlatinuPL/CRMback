@@ -6,7 +6,7 @@ from django.http import JsonResponse,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import ClientForm, TaskForm , MeetingForm, NoteForm, ClientFileForm, PaymentForm, DocumentTemplateForm, PreleadForm
 from docx import Document
-from .models import Client, ProductCategory, Product, ProductAttribute,SubsidyProgram, SubsidyOption, ProductConfiguration, SubsidyProductCriteria, ClientFile, Task, Meeting, Payment, Note, DocumentTemplate, Offer, OfferProduct, Profile, DocumentTemplate, ProductDocumentRequirement, ActivityLog, Notification, Prelead, Parcel 
+from .models import Client, ProductCategory, Product, ProductAttribute,SubsidyProgram, SubsidyOption, ProductConfiguration, SubsidyProductCriteria, ClientFile, Task, Meeting, Payment, Note, DocumentTemplate, Offer, OfferProduct, Profile, DocumentTemplate, ProductDocumentRequirement, ActivityLog, Notification, Prelead, Parcel, update_daily_stats
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ProductConfigurationForm
 import re,os, docx, locale, pdfkit, json
@@ -163,8 +163,6 @@ def add_parcel(request):
 
 
 
-
-
 @login_required
 @require_POST
 def save_prelead(request):
@@ -182,54 +180,71 @@ def save_prelead(request):
         if not request.user.is_staff and lead.user != request.user:
             return JsonResponse({'success': False, 'error': 'Brak uprawnień'}, status=403)
 
-        # Aktualizacja podstawowych pól
+        old_status = lead.status
+
+        # Aktualizacja pól
         lead.potential = request.POST.get('potential', lead.potential)
         lead.note = request.POST.get('note', lead.note)
 
         note_prefix = ""
-        log_updated = False
+        status_changed = False
+        client_created = False
 
-        # Obsługa statusu
+        # =========================
+        # STATUSY
+        # =========================
         status_action = request.POST.get('status_update')
+
         if status_action:
+
+            # blokada zmiany dla zakończonych
             if lead.status in ['NUM', 'UM'] and status_action in ['no_answer', 'inactive_number']:
-                pass  # Nie zmieniaj statusu
-            elif status_action == 'no_answer':
+                status_action = None
+
+            if status_action == 'no_answer':
                 if lead.status == 'NO1':
                     lead.status = 'NO2'
                 elif lead.status == 'NO2':
                     lead.status = 'NO3'
                 else:
                     lead.status = 'NO1'
+
                 note_prefix = "Nie odbiera"
-                log_updated = True
+                status_changed = True
+
             elif status_action == 'inactive_number':
                 lead.status = 'NN2' if lead.status == 'NN' else 'NN'
                 note_prefix = "Numer nieaktywny"
-                log_updated = True
+                status_changed = True
+
             elif status_action == 'to_verify':
                 lead.status = 'NUM'
                 note_prefix = "Do weryfikacji"
-                log_updated = True
+                status_changed = True
+
             elif status_action == 'contract_sent':
                 lead.status = 'UM'
                 note_prefix = "Umowa wysłana"
-                log_updated = True
-            if status_action == 'dead_lead':
-                lead.status = 'NN2'
-                note_prefix = "Numer nieaktywny"
-                log_updated = True
+                status_changed = True
 
-        # Dodanie loga jeśli status się zmienił
-        if log_updated and note_prefix:
+            elif status_action == 'dead_lead':
+                lead.status = 'NN2'
+                note_prefix = "Lead martwy"
+                status_changed = True
+
+        # =========================
+        # LOG
+        # =========================
+        if status_changed and note_prefix:
             timestamp = timezone.now().strftime("%Y-%m-%d %H:%M")
             user_info = request.user.get_full_name() or request.user.username
             log_entry = f"[{timestamp}] {user_info}: {note_prefix}"
             lead.log = f"{log_entry}\n{lead.log or ''}"
 
-        # Przypisanie użytkownika
+        # =========================
+        # PRZYPISANIE USERA + KONWERSJA NA CLIENT
+        # =========================
         assigned_to_id = request.POST.get('assigned_to')
-        client_created = False
 
         if assigned_to_id:
             try:
@@ -238,7 +253,6 @@ def save_prelead(request):
             except User.DoesNotExist:
                 return JsonResponse({'success': False, 'error': 'Nieprawidłowy użytkownik'}, status=400)
 
-            # Stworzenie klienta
             client = Client.objects.create(
                 first_name=lead.first_name,
                 last_name=lead.last_name or "",
@@ -250,33 +264,40 @@ def save_prelead(request):
                 modified_by=request.user,
                 potential=lead.potential,
             )
-            # Tworzenie notatki z danymi z preleada
+
             if lead.note:
                 Note.objects.create(
                     client=client,
                     text=lead.note,
                     author=request.user,
-                    is_important=False  # lub True, jeśli chcesz oznaczyć je jako ważne
+                    is_important=False
                 )
+
             lead.status = 'PR'
+            client_created = True
+            status_changed = True
+
             timestamp = timezone.now().strftime("%Y-%m-%d %H:%M")
             user_info = request.user.get_full_name() or request.user.username
             log_entry = f"[{timestamp}] {user_info}: Przekształcono na klienta"
             lead.log = f"{log_entry}\n{lead.log or ''}"
-            client_created = True
 
-        # Zapisz zmiany
+        # =========================
+        # STATYSTYKI (NAJWAŻNIEJSZE)
+        # =========================
+        if lead.user and status_changed and old_status != lead.status:
+            update_daily_stats(lead.user, lead.status)
+
+        # zapis
         lead.save()
 
         if client_created:
             messages.success(request, "Prelead został przypisany jako klient.")
 
-        # Przygotuj log do odpowiedzi
+        # log response
         full_log = lead.log or ''
-        logs = [log.strip() for log in full_log.split('\n') if log.strip()]
+        logs = [l.strip() for l in full_log.split('\n') if l.strip()]
         last_log = logs[-1] if logs else 'Brak logów'
-
-        show_modal = request.session.pop('show_import_modal', False)
 
         return JsonResponse({
             'success': True,
@@ -286,11 +307,137 @@ def save_prelead(request):
             'status': lead.status,
             'assigned_to': lead.user.id if lead.user else None,
             'assigned_to_name': lead.user.get_full_name() if lead.user else None,
-            'show_import_modal': show_modal
         })
 
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+# @login_required
+# @require_POST
+# def save_prelead(request):
+#     try:
+#         prelead_id = request.POST.get('prelead_id')
+#         if not prelead_id:
+#             return JsonResponse({'success': False, 'error': 'Brak ID preleada'}, status=400)
+
+#         try:
+#             lead = Prelead.objects.get(id=prelead_id)
+#         except Prelead.DoesNotExist:
+#             return JsonResponse({'success': False, 'error': 'Lead nie istnieje'}, status=404)
+        
+#         # Uprawnienia
+#         if not request.user.is_staff and lead.user != request.user:
+#             return JsonResponse({'success': False, 'error': 'Brak uprawnień'}, status=403)
+
+#         # Aktualizacja podstawowych pól
+#         lead.potential = request.POST.get('potential', lead.potential)
+#         lead.note = request.POST.get('note', lead.note)
+        
+#         note_prefix = ""
+#         log_updated = False
+
+#         # Obsługa statusu
+#         status_action = request.POST.get('status_update')
+#         if status_action:
+#             if lead.status in ['NUM', 'UM'] and status_action in ['no_answer', 'inactive_number']:
+#                 pass  # Nie zmieniaj statusu
+#             elif status_action == 'no_answer':
+#                 if lead.status == 'NO1':
+#                     lead.status = 'NO2'
+#                 elif lead.status == 'NO2':
+#                     lead.status = 'NO3'
+#                 else:
+#                     lead.status = 'NO1'
+#                 note_prefix = "Nie odbiera"
+#                 log_updated = True
+#             elif status_action == 'inactive_number':
+#                 lead.status = 'NN2' if lead.status == 'NN' else 'NN'
+#                 note_prefix = "Numer nieaktywny"
+#                 log_updated = True
+#             elif status_action == 'to_verify':
+#                 lead.status = 'NUM'
+#                 note_prefix = "Do weryfikacji"
+#                 log_updated = True
+#             elif status_action == 'contract_sent':
+#                 lead.status = 'UM'
+#                 note_prefix = "Umowa wysłana"
+#                 log_updated = True
+#             if status_action == 'dead_lead':
+#                 lead.status = 'NN2'
+#                 note_prefix = "Numer nieaktywny"
+#                 log_updated = True
+
+#         # Dodanie loga jeśli status się zmienił
+#         if log_updated and note_prefix:
+#             timestamp = timezone.now().strftime("%Y-%m-%d %H:%M")
+#             user_info = request.user.get_full_name() or request.user.username
+#             log_entry = f"[{timestamp}] {user_info}: {note_prefix}"
+#             lead.log = f"{log_entry}\n{lead.log or ''}"
+
+#         # Przypisanie użytkownika
+#         assigned_to_id = request.POST.get('assigned_to')
+#         client_created = False
+
+#         if assigned_to_id:
+#             try:
+#                 assigned_user = User.objects.get(id=assigned_to_id)
+#                 lead.user = assigned_user
+#             except User.DoesNotExist:
+#                 return JsonResponse({'success': False, 'error': 'Nieprawidłowy użytkownik'}, status=400)
+
+#             # Stworzenie klienta
+#             client = Client.objects.create(
+#                 first_name=lead.first_name,
+#                 last_name=lead.last_name or "",
+#                 phone=lead.phone,
+#                 city=lead.city,
+#                 email=lead.email,
+#                 user=assigned_user,
+#                 status='lead',
+#                 modified_by=request.user,
+#                 potential=lead.potential,
+#             )
+#             # Tworzenie notatki z danymi z preleada
+#             if lead.note:
+#                 Note.objects.create(
+#                     client=client,
+#                     text=lead.note,
+#                     author=request.user,
+#                     is_important=False  # lub True, jeśli chcesz oznaczyć je jako ważne
+#                 )
+#             lead.status = 'PR'
+#             timestamp = timezone.now().strftime("%Y-%m-%d %H:%M")
+#             user_info = request.user.get_full_name() or request.user.username
+#             log_entry = f"[{timestamp}] {user_info}: Przekształcono na klienta"
+#             lead.log = f"{log_entry}\n{lead.log or ''}"
+#             client_created = True
+
+#         # Zapisz zmiany
+#         lead.save()
+
+#         if client_created:
+#             messages.success(request, "Prelead został przypisany jako klient.")
+
+#         # Przygotuj log do odpowiedzi
+#         full_log = lead.log or ''
+#         logs = [log.strip() for log in full_log.split('\n') if log.strip()]
+#         last_log = logs[-1] if logs else 'Brak logów'
+
+#         show_modal = request.session.pop('show_import_modal', False)
+
+#         return JsonResponse({
+#             'success': True,
+#             'log': full_log,
+#             'last_log': last_log,
+#             'potential': lead.potential,
+#             'status': lead.status,
+#             'assigned_to': lead.user.id if lead.user else None,
+#             'assigned_to_name': lead.user.get_full_name() if lead.user else None,
+#             'show_import_modal': show_modal
+#         })
+
+#     except Exception as e:
+#         return JsonResponse({'success': False, 'error': str(e)}, status=500)
 
 @require_http_methods(["POST"])
 def import_leadsfb(request):
