@@ -289,7 +289,11 @@ def save_prelead(request):
 
         if stat_user and old_status != lead.status:
             update_daily_stats(lead.user, lead.status)
-
+        print("DEBUG:")
+        print("old:", old_status)
+        print("new:", lead.status)
+        print("user:", lead.user)
+        print("changed:", status_changed)
         # zapis
         lead.save()
 
