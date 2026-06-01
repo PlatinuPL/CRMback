@@ -285,7 +285,9 @@ def save_prelead(request):
         # =========================
         # STATYSTYKI (NAJWAŻNIEJSZE)
         # =========================
-        if lead.user and status_changed and old_status != lead.status:
+        stat_user = lead.user_id
+
+        if stat_user and old_status != lead.status:
             update_daily_stats(lead.user, lead.status)
 
         # zapis
