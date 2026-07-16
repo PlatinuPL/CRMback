@@ -176,9 +176,9 @@ def save_prelead(request):
         except Prelead.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'Lead nie istnieje'}, status=404)
 
-        # Uprawnienia
-        if not request.user.is_staff and lead.user != request.user:
-            return JsonResponse({'success': False, 'error': 'Brak uprawnień'}, status=403)
+        # # Uprawnienia
+        # if not request.user.is_staff and lead.user != request.user:
+        #     return JsonResponse({'success': False, 'error': 'Brak uprawnień'}, status=403)
 
         old_status = lead.status
 
